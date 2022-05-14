@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace CodeGenerator.Lib.DataAccess
 {
-    public class SqlDataAccess
+    public interface IDataAccess
+    {
+        public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
+        public IEnumerable<string> GetTableNames();
+    }
+
+    public class SqlDataAccess : IDataAccess
     {
         private readonly string server;
         private readonly string database;
@@ -30,10 +35,9 @@ namespace CodeGenerator.Lib.DataAccess
             return ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
         }
 
-
         #region private
 
-        private IEnumerable<T> ExecuteQuery<T>(string sql, Func<SqlDataReader, T> func)
+        private IEnumerable<T> ExecuteQuery<T>(string sql, Func<SqlDataReader, T> getDataFromReaderFunction)
         {
             using (var connection = GetSqlConnection())
             {
@@ -45,7 +49,7 @@ namespace CodeGenerator.Lib.DataAccess
                     {
                         while (reader.Read())
                         {
-                            yield return func(reader);
+                            yield return getDataFromReaderFunction(reader);
                         }
                     }
                 }
@@ -53,17 +57,18 @@ namespace CodeGenerator.Lib.DataAccess
             yield break;
         }
 
-        static string GetStringFromReader(SqlDataReader reader)
+        private static string GetStringFromReader(SqlDataReader reader)
         {
             return $"{reader.GetString(0)}";
         }
 
-        static Tuple<string, string> GetTupleFromReader(SqlDataReader reader)
+        private static Tuple<string, string> GetTupleFromReader(SqlDataReader reader)
         {
             string item1 = reader.GetString(0);
             string item2 = reader.GetString(1);
             return new Tuple<string, string>(item1, item2);
         }
+
         private SqlConnection GetSqlConnection()
         {
             var builder = GetSqlBuilder();
@@ -73,21 +78,28 @@ namespace CodeGenerator.Lib.DataAccess
 
         private SqlConnectionStringBuilder GetSqlBuilder()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-
-            builder.DataSource = server;
-            builder.InitialCatalog = database;
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(password))
+            var builder = new SqlConnectionStringBuilder
             {
-                builder.IntegratedSecurity = true;
+                DataSource = server,
+                InitialCatalog = database
+            };
+
+            if (UserIdAndPasswordIsSet())
+            {
+                builder.UserID = userId;
+                builder.Password = password;                
             }
             else
             {
-                builder.UserID = "<your_username>";
-                builder.Password = "<your_password>";
+                builder.IntegratedSecurity = true;
             }
 
             return builder;
+        }
+
+        private bool UserIdAndPasswordIsSet()
+        {
+            return !string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(password);
         }
 
         #endregion
