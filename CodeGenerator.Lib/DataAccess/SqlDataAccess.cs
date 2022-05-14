@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -19,24 +20,32 @@ namespace CodeGenerator.Lib.DataAccess
             this.password = password;
         }
 
-        public IEnumerable<string> ExecuteQuery()
+        public IEnumerable<string> GetTableNames()
         {
-            return ExecuteQuery("select distinct table_name from information_schema.columns");
+            return ExecuteQuery("select distinct table_name from information_schema.columns", GetStringFromReader);
         }
 
-        public IEnumerable<string> ExecuteQuery(string sql)
+        public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table)
+        {
+            return ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
+        }
+
+
+        #region private
+
+        private IEnumerable<T> ExecuteQuery<T>(string sql, Func<SqlDataReader, T> func)
         {
             using (var connection = GetSqlConnection())
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (var command = new SqlCommand(sql, connection))
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            yield return $"{reader.GetString(0)}";
+                            yield return func(reader);
                         }
                     }
                 }
@@ -44,8 +53,17 @@ namespace CodeGenerator.Lib.DataAccess
             yield break;
         }
 
-        #region private
+        static string GetStringFromReader(SqlDataReader reader)
+        {
+            return $"{reader.GetString(0)}";
+        }
 
+        static Tuple<string, string> GetTupleFromReader(SqlDataReader reader)
+        {
+            string item1 = reader.GetString(0);
+            string item2 = reader.GetString(1);
+            return new Tuple<string, string>(item1, item2);
+        }
         private SqlConnection GetSqlConnection()
         {
             var builder = GetSqlBuilder();
