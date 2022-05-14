@@ -22,14 +22,22 @@
     <Compile Update="TestFiles\SimpleTestTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SimpleTestTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="TestFiles\SimpleDataTestTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimpleDataTestTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\SimpleDataTestTemplate.tt">
+      <LastGenOutput>SimpleDataTestTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
     <None Update="TestFiles\SimpleTestTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>SimpleTestTemplate.cs</LastGenOutput>
+      <LastGenOutput>SimpleDataTestTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
