@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator.Test", "CodeGenerator.Test\CodeGenerator.Test.csproj", "{FABABA7C-D0BB-4E10-A524-43A2D4F8284F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator.Lib", "CodeGenerator.Lib\CodeGenerator.Lib.csproj", "{FE1ACF71-AD16-4FBB-9920-64B24E6D8A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FABABA7C-D0BB-4E10-A524-43A2D4F8284F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FABABA7C-D0BB-4E10-A524-43A2D4F8284F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FABABA7C-D0BB-4E10-A524-43A2D4F8284F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE1ACF71-AD16-4FBB-9920-64B24E6D8A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE1ACF71-AD16-4FBB-9920-64B24E6D8A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE1ACF71-AD16-4FBB-9920-64B24E6D8A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE1ACF71-AD16-4FBB-9920-64B24E6D8A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
