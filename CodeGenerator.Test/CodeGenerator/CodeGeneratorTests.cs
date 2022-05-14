@@ -22,7 +22,7 @@ namespace CodeGenerator.Test
         public void GenerateCodeFromDataUsingSimpleDataTemplate()
         {
             var data = new string[] { "Foo", "Bar" };
-            const string result = "public namespace CodeGenerator.TestTemplates\r\n{\r\n    public class SimpleDataTest\r\n    {\r\n        public string Foo { get; set; }\r\n        public string Bar { get; set; }\r\n    }\r\n}";
+            const string result = "public namespace CodeGenerator.TestTemplates\r\n{\r\n    public class SimpleDataTest\r\n    {\r\n        public string Foo {get;set;}public string Bar {get;set;}    }\r\n}\r\n";
             var code = new SimpleDataTestTemplate(data).TransformText();
             Assert.AreEqual(result, code);
         }

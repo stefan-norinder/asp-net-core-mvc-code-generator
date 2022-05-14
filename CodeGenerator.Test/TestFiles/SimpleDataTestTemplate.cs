@@ -29,8 +29,28 @@ namespace CodeGenerator.Test.TestFiles
         public virtual string TransformText()
         {
             this.Write("public namespace CodeGenerator.TestTemplates\r\n{\r\n    public class SimpleDataTest\r" +
-                    "\n    {\r\n        public string Foo { get; set; }\r\n        public string Bar { get" +
-                    "; set; }\r\n    }\r\n}");
+                    "\n    {\r\n        ");
+            
+            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Test\TestFiles\SimpleDataTestTemplate.tt"
+ foreach (string item in @params){ 
+            
+            #line default
+            #line hidden
+            this.Write("public string ");
+            
+            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Test\TestFiles\SimpleDataTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write(" {get;set;}");
+            
+            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Test\TestFiles\SimpleDataTestTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

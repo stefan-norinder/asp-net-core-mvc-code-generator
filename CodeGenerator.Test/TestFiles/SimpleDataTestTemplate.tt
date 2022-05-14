@@ -7,7 +7,6 @@ public namespace CodeGenerator.TestTemplates
 {
     public class SimpleDataTest
     {
-        public string Foo { get; set; }
-        public string Bar { get; set; }
+        <# foreach (string item in @params){ #>public string <#= item #> {get;set;}<# } #>
     }
 }
