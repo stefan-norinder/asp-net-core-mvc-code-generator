@@ -1,4 +1,5 @@
-﻿using CodeGenerator.Lib.Services;
+﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,24 @@ namespace CodeGenerator.Lib.Factories
 
     public class CodeGeneratorServiceFactory : ICodeGeneratorServiceFactory
     {
+        private readonly IDataAccess dataAccess;
+
+        public CodeGeneratorServiceFactory(string server, string database, string userId = "", string password = "")
+        {
+            dataAccess = new SqlDataAccess(server, database, userId, password);
+        }
+
+        public CodeGeneratorServiceFactory(IDataAccess dataAccess)
+        {
+            this.dataAccess = dataAccess;
+        }
+
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type)
         {
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGeneratorService();
+                    return new DataAccessGeneratorService(dataAccess);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:
