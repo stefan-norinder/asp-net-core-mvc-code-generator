@@ -32,16 +32,12 @@ namespace CodeGenerator.Lib.Factories
 
         public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types)
         {
-            var codeGenerators = new List<ICodeGenerator>();
-
-            foreach (var type in Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>())
+            var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
+            foreach (var type in allCodeGeneratorTypes.Where(type => types.HasFlag(type)))
             {
-                if (types.HasFlag(type))
-                {
-                    codeGenerators.Add(CreateInstance(type));
-                }
+                yield return CreateInstance(type);
             }
-            return codeGenerators;
+            yield break;
         }
     }
 }
