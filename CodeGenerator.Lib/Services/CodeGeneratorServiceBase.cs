@@ -1,4 +1,5 @@
 ﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Templates;
 
 namespace CodeGenerator.Lib.Services
 {
@@ -19,6 +20,7 @@ namespace CodeGenerator.Lib.Services
             var model = dataAccess.Get();
 
             //process data 
+            var template = new DataAccessTemplate(model).TransformText();
 
             //save data to disk
         }
