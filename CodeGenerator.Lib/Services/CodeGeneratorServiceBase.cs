@@ -20,7 +20,7 @@ namespace CodeGenerator.Lib.Services
             var model = dataAccess.Get();
 
             //process data 
-            var template = new DataAccessTemplate(model).TransformText();
+            var template = new DataAccessTemplate(dataAccess.Database, model).TransformText();
 
             //save data to disk
         }

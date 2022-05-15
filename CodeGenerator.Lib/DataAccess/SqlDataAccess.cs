@@ -10,19 +10,21 @@ namespace CodeGenerator.Lib.DataAccess
         DataModel Get();
         public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
         public IEnumerable<string> GetTableNames();
+        string Database { get; }
     }
 
     public class SqlDataAccess : IDataAccess
     {
         private readonly string server;
-        private readonly string database;
         private readonly string userId;
         private readonly string password;
+
+        public string Database { get; private set; }
 
         public SqlDataAccess(string server, string database, string userId = "", string password = "")
         {
             this.server = server;
-            this.database = database;
+            Database = database;
             this.userId = userId;
             this.password = password;
         }
@@ -110,7 +112,7 @@ namespace CodeGenerator.Lib.DataAccess
             var builder = new SqlConnectionStringBuilder
             {
                 DataSource = server,
-                InitialCatalog = database
+                InitialCatalog = Database
             };
 
             if (UserIdAndPasswordIsSet())

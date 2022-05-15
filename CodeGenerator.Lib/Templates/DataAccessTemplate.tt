@@ -4,10 +4,12 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
-namespace CodeGenerator.Lib.Templates
+namespace <#= Namespace #>.Lib.DataAccess
 {
-    public class DataAccessTemplate 
+<# foreach (var item in Model.Tables){ #>
+    public class <#= item.Name #>DataAccess 
     {
-        <# foreach (var item in Model.Tables){ #>public string <#= item.Name #> {get;set;}<# } #> 
+        public string <#= item.Name #> {get;set;}
     }
+<# } #>  
 } 

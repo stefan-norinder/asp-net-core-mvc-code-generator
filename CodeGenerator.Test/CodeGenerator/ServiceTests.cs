@@ -37,7 +37,13 @@ namespace CodeGenerator.Test
         public void Run()
         {
             this.service.Invoke();
+        }
 
+        [Test]
+        public void RunWithDatabase()
+        {
+            var databaseService = new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, new SqlDataAccess(".\\sqlexpress", "Databases"));
+            databaseService.Invoke();
         }
 
     }

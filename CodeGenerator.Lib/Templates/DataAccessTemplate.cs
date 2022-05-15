@@ -28,29 +28,42 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("namespace CodeGenerator.Lib.Templates\r\n{\r\n    public class DataAccessTemplate \r\n " +
-                    "   {\r\n        ");
+            this.Write("namespace ");
             
-            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 7 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.DataAccess\r\n{\r\n");
+            
+            #line 9 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
  foreach (var item in Model.Tables){ 
             
             #line default
             #line hidden
-            this.Write("public string ");
+            this.Write("    public class ");
             
-            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(" {get;set;}");
+            this.Write("DataAccess \r\n    {\r\n        public string ");
             
-            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" {get;set;}\r\n    }\r\n");
+            
+            #line 14 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(" \r\n    }\r\n} ");
+            this.Write("  \r\n} ");
             return this.GenerationEnvironment.ToString();
         }
     }
