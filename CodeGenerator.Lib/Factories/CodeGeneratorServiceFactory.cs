@@ -31,7 +31,7 @@ namespace CodeGenerator.Lib.Factories
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGeneratorService(dataAccess);
+                    return new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, dataAccess);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:

@@ -6,11 +6,12 @@ namespace CodeGenerator.Lib.Services
 
     public class DataAccessGeneratorService : CodeGeneratorServiceBase
     {
-        public DataAccessGeneratorService(IDataAccess dataAccess) :base (dataAccess)
+        public DataAccessGeneratorService(CodeGeneratorTypes type, IDataAccess dataAccess) :base (type,dataAccess)
         { }
 
-        public override void Invoke()
+        public override void Process()
         {
+            // generate files from temaplates
             throw new NotImplementedException();
         }
     }

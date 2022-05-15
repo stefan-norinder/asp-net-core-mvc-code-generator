@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace CodeGenerator.Lib.DataAccess
 {
     public interface IDataAccess
     {
+        DataModel Get();
         public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
         public IEnumerable<string> GetTableNames();
     }
@@ -25,6 +27,13 @@ namespace CodeGenerator.Lib.DataAccess
             this.password = password;
         }
 
+        public DataModel Get()
+        {
+            var dataModel = GetDataModel();
+
+            return GetDataModelPopulatedWithColumns(dataModel);
+        }
+
         public IEnumerable<string> GetTableNames()
         {
             return ExecuteQuery("select distinct table_name from information_schema.columns", GetStringFromReader);
@@ -36,6 +45,26 @@ namespace CodeGenerator.Lib.DataAccess
         }
 
         #region private
+
+        private DataModel GetDataModelPopulatedWithColumns(DataModel dataModel)
+        {
+            var newDataModel = new DataModel();
+            foreach (var item in dataModel.Tables)
+            {
+                var tuples = GetColumnsWithDatatypes(item.Name);
+                var columns = tuples.Select(x => new Column { Name = x.Item1, SqlDataType = x.Item2 });
+                newDataModel.Tables.Add(new Table { Name = item.Name, Columns = new List<Column>(columns)});
+            }
+            return newDataModel;
+        }
+
+        private DataModel GetDataModel()
+        {
+            return new DataModel
+            {
+                Tables = GetTableNames().Select(tableName => new Table { Name = tableName }).ToList()
+            };
+        }
 
         private IEnumerable<T> ExecuteQuery<T>(string sql, Func<SqlDataReader, T> getDataFromReaderFunction)
         {
@@ -87,7 +116,7 @@ namespace CodeGenerator.Lib.DataAccess
             if (UserIdAndPasswordIsSet())
             {
                 builder.UserID = userId;
-                builder.Password = password;                
+                builder.Password = password;
             }
             else
             {

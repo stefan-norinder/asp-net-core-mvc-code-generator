@@ -4,13 +4,24 @@ namespace CodeGenerator.Lib.Services
 {
     public abstract class CodeGeneratorServiceBase : ICodeGenerator
     {
+        private readonly CodeGeneratorTypes type;
         protected readonly IDataAccess dataAccess;
 
-        public CodeGeneratorServiceBase(IDataAccess dataAccess)
+        public CodeGeneratorServiceBase(CodeGeneratorTypes type, IDataAccess dataAccess)
         {
+            this.type = type;
             this.dataAccess = dataAccess;
         }
 
-        public abstract void Invoke();
+        public virtual void Invoke()
+        { 
+            //fetch data 
+
+            //process data 
+
+            //save data to disk
+        }
+
+        public abstract void Process();
     }
 }
