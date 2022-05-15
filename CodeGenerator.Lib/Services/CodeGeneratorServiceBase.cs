@@ -14,8 +14,9 @@ namespace CodeGenerator.Lib.Services
         }
 
         public virtual void Invoke()
-        { 
+        {
             //fetch data 
+            var model = dataAccess.Get();
 
             //process data 
 
