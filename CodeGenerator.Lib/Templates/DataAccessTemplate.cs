@@ -31,7 +31,7 @@ namespace CodeGenerator.Lib.Templates
             this.Write("namespace ");
             
             #line 7 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Namespace));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NamespaceName));
             
             #line default
             #line hidden

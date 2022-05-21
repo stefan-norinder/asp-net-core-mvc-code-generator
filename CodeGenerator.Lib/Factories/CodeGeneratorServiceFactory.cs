@@ -13,6 +13,12 @@ namespace CodeGenerator.Lib.Factories
 
     public class CodeGeneratorServiceFactory : ICodeGeneratorServiceFactory
     {
+        private readonly IOutputAdapter output;
+
+        public CodeGeneratorServiceFactory(IOutputAdapter output)
+        {
+            this.output = output;
+        }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type, 
             CodeGeneratorFetcherTypes fetcherType, 
@@ -24,7 +30,7 @@ namespace CodeGenerator.Lib.Factories
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGeneratorService(generationModelFetcher);
+                    return new DataAccessGeneratorService(generationModelFetcher, output);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:

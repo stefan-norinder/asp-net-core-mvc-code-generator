@@ -1,18 +1,20 @@
 ﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Templates;
 using System;
 
 namespace CodeGenerator.Lib.Services
 {
 
-    public class DataAccessGeneratorService : CodeGeneratorServiceBase
+    public class DataAccessGeneratorService : CodeGenerator
     {
-        public DataAccessGeneratorService(ICodeGenerationModelFetcher codeGenerationModelFetcher) : base(codeGenerationModelFetcher)
+        public DataAccessGeneratorService(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        public override void Process()
+        public override string[] GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            // generate files from temaplates
-            throw new NotImplementedException();
+            var template = new DataAccessTemplate(model);
+            return new [] { template.TransformText() };
         }
     }
 }

@@ -12,8 +12,9 @@ namespace CodeGenerator.Test
         [SetUp]
         public void Setup()
         {
-            var mock = new Mock<ICodeGeneratorServiceFactory>();
-            controller = new Controller(mock.Object);
+            var outputMock = new Mock<IOutputAdapter>();
+            var factory = new CodeGeneratorServiceFactory(outputMock.Object);
+            controller = new Controller(factory);
         }
 
         [Test]

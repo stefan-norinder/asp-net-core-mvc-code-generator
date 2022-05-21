@@ -4,9 +4,9 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".txt" #>
-namespace <#= Namespace #>.Lib.DataAccess
+namespace <#= Model.NamespaceName #>.Lib.DataAccess
 {
-<# foreach (var item in Model.Tables){ #>
+<# foreach (var item in Model.Classes){ #>
     public class <#= item.Name #>DataAccess 
     {
         public string <#= item.Name #> {get;set;}
