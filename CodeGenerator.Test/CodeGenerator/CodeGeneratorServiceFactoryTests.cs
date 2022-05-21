@@ -16,13 +16,13 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             var mock = new Mock<ICodeGenerationModelFetcherFactory>();
-            factory = new CodeGeneratorServiceFactory(mock.Object);
+            factory = new CodeGeneratorServiceFactory();
         }
 
         [Test]
         public void CreateInstance_ShouldBeOfCorrectType()
         {
-            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString);
+            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             var type = instance.GetType();
             Assert.AreEqual(typeof(DataAccessGeneratorService), type);
         }
@@ -30,7 +30,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateInstances_ShouldBeOfCorrectType()
         {
-            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString);
+            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             var type = instances.First().GetType();
             Assert.AreEqual(typeof(DataAccessGeneratorService), type);
         }
@@ -40,7 +40,7 @@ namespace CodeGenerator.Test
         {
             throw new NotImplementedException();
             //factory = new CodeGeneratorServiceFactory("namespaceName","ClassName");
-            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString);
+            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             var type = instances.First().GetType();
             //Assert.AreEqual(typeof(GeneratorService), type);
         }

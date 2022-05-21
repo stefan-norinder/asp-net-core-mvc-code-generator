@@ -1,5 +1,4 @@
-﻿using CodeGenerator.Lib.DataAccess;
-using CodeGenerator.Lib.Services;
+﻿using CodeGenerator.Lib.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +7,19 @@ namespace CodeGenerator.Lib.Factories
 {
     public interface ICodeGeneratorServiceFactory
     {
-        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType);
-        ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType);
+        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName,string className);
+        ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, string className);
     }
 
     public class CodeGeneratorServiceFactory : ICodeGeneratorServiceFactory
     {
-        private readonly ICodeGenerationModelFetcherFactory generationFactory;
 
-        public CodeGeneratorServiceFactory(ICodeGenerationModelFetcherFactory generationFactory)
+        public ICodeGenerator CreateInstance(CodeGeneratorTypes type, 
+            CodeGeneratorFetcherTypes fetcherType, 
+            string namespaceName, 
+            string className)
         {
-            this.generationFactory = generationFactory;
-        }
-
-        public ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType)
-        {
+            var generationFactory = new GenerationModelFetcherFactory(namespaceName,className);
             var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
             switch (type)
             {
@@ -39,12 +36,15 @@ namespace CodeGenerator.Lib.Factories
 
         }
 
-        public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherType)
+        public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types, 
+            CodeGeneratorFetcherTypes fetcherType, 
+            string namespaceName,
+            string className)
         {
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
             foreach (var type in allCodeGeneratorTypes.Where(type => types.HasFlag(type)))
             {
-                yield return CreateInstance(type, fetcherType);
+                yield return CreateInstance(type, fetcherType, namespaceName, className);
             }
             yield break;
         }
