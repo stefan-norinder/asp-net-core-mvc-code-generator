@@ -3,13 +3,13 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ output extension=".txt" #>
+<#@ output extension=".cs" #>
 namespace <#= namespaceName #>.Lib.Model
 {
     public class <#= Model.Name #>Entity : Entity
     {
     <# foreach (var item in Model.Properties){ #>
-        public <#= item.SqlDataType #> <#= item.Name #> {get;set;}
+        public <#= item.DataType #> <#= item.Name #> {get;set;}
     <# } #>  
     }
 } 
