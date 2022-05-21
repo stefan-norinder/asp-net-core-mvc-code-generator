@@ -1,10 +1,10 @@
-﻿using Example.Logic.Models;
+﻿using CodeGeneratorExample.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Example.Logic.DataAccess
+namespace CodeGeneratorExample.Logic.DataAccess
 {
     public class SqlStringBuilder<T>
     {

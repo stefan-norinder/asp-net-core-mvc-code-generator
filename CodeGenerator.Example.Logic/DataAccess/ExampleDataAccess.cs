@@ -1,13 +1,13 @@
-﻿using Example.Models;
+﻿using CodeGeneratorExample.Models;
 
-namespace Example.Logic.DataAccess
+namespace CodeGeneratorExample.Logic.DataAccess
 {
-    public interface IExampleEntityDataAccess : IDataAccess<ExampleEntity>
+    public interface IExampleDataAccess : IDataAccess<Example>
     {    }
 
-    public class ExampleEntityDataAccess : DataAccessBase<ExampleEntity>, IExampleEntityDataAccess
+    public class ExampleDataAccess : DataAccessBase<Example>, IExampleDataAccess
     {
-        public ExampleEntityDataAccess(ISqlDataAccess db, SqlStringBuilder<ExampleEntity> sqlStringBuilder)
+        public ExampleDataAccess(ISqlDataAccess db, SqlStringBuilder<Example> sqlStringBuilder)
             : base(db, sqlStringBuilder)
         { }
      }

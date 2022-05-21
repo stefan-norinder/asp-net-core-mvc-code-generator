@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using Dapper;
 
-namespace Example.Logic.DataAccess
+namespace CodeGeneratorExample.Logic.DataAccess
 {
 
     public interface ISqlDataAccess

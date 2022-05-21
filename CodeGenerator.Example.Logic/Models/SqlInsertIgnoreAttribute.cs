@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Example.Logic.Models
+namespace CodeGeneratorExample.Logic.Models
 {
     public class SqlInsertIgnoreAttribute : Attribute
     {    }

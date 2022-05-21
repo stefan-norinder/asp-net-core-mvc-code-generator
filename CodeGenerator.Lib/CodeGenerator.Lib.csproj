@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Templates\DataAccessTemplate - Copy.cs">
-      <DependentUpon>DataAccessTemplate.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </None>
     <None Include="Templates\DataAccessTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

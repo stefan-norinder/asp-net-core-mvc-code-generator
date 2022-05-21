@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Example.Models
+namespace CodeGeneratorExample.Models
 {
     public class Entity
     {

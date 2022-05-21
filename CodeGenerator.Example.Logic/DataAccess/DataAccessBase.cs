@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Example.Logic.DataAccess
+namespace CodeGeneratorExample.Logic.DataAccess
 {
     public interface IDataAccess<T>
     {
