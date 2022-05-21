@@ -31,6 +31,6 @@ namespace CodeGenerator.Lib.DataAccess
     public class Proprety
     {
         public string Name { get; set; }
-        public string SqlDataType { get; set; }
+        public string DataType { get; set; }
     }
 }

@@ -2,6 +2,7 @@ using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Services;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             outputMock = new Mock<IOutputAdapter>();
-            var factory = new CodeGeneratorServiceFactory(outputMock.Object);
+            var factory = new CodeGeneratorFactory(outputMock.Object);
             controller = new Controller(factory);
         }
 
@@ -42,10 +43,17 @@ namespace CodeGenerator.Test
                         {
                             public class PersonEntity : Entity
                             {
-
+                                public string Name {get;set;}
+                                public int Age {get;set;}
                             }
                         } ";
-            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", "Person");
+            var list = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("Name", "string"),
+                new KeyValuePair<string, string>("Age", "int"),
+            };
+
+            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", "Person", list);
             outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual, templates.First()))));
         }
 

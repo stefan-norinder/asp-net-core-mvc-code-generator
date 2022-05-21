@@ -52,7 +52,7 @@ namespace CodeGenerator.Lib.Templates
             this.Write("        public ");
             
             #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.SqlDataType));
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.DataType));
             
             #line default
             #line hidden

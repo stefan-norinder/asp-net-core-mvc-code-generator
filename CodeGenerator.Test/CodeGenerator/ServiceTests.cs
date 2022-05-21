@@ -24,7 +24,7 @@ namespace CodeGenerator.Test
                         Name = "Foo",
                         Properties = new List<Proprety>
                         {
-                            new Proprety {Name = "bar", SqlDataType = "int" }
+                            new Proprety {Name = "bar", DataType = "int" }
                         }
                     }
                 }

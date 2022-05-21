@@ -8,13 +8,13 @@ namespace CodeGenerator.Test
 {
     public class CodeGeneratorServiceFactoryTests
     {
-        private CodeGeneratorServiceFactory factory;
+        private CodeGeneratorFactory factory;
 
         [SetUp]
         public void Setup()
         {
             var outputMock = new Mock<IOutputAdapter>();
-            factory = new CodeGeneratorServiceFactory(outputMock.Object);
+            factory = new CodeGeneratorFactory(outputMock.Object);
         }
 
         [Test]

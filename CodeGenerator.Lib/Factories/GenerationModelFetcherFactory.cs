@@ -1,6 +1,7 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Services;
 using System;
+using System.Collections.Generic;
 
 namespace CodeGenerator.Lib.Factories
 {
@@ -15,6 +16,14 @@ namespace CodeGenerator.Lib.Factories
         private readonly string className;
         private readonly string databaseUserId;
         private readonly string databasePassword;
+        private readonly IEnumerable<KeyValuePair<string, string>> properties;
+
+        public GenerationModelFetcherFactory(string namespaceName, string className, IEnumerable<KeyValuePair<string,string>> properties)
+        {
+            this.namespaceName = namespaceName;
+            this.className = className;
+            this.properties = properties;
+        }
 
         public GenerationModelFetcherFactory(string namespaceName, string className, string databaseUserId = "", string databasePassword = "")
         {
@@ -29,7 +38,7 @@ namespace CodeGenerator.Lib.Factories
             switch (type)
             {
                 case CodeGeneratorFetcherTypes.FromString:
-                    return new GenerationModelFetcher(namespaceName, className);
+                    return new GenerationModelFetcher(namespaceName, className, properties);
                 case CodeGeneratorFetcherTypes.FromDatabase:
                     return new GenerationModelFromDatabaseFetcher(namespaceName, className,databaseUserId, databasePassword);
                 default:

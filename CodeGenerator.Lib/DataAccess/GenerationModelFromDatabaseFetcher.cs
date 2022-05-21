@@ -47,7 +47,7 @@ namespace CodeGenerator.Lib.DataAccess
             foreach (var item in dataModel.Classes)
             {
                 var tuples = GetColumnsWithDatatypes(item.Name);
-                var columns = tuples.Select(x => new Proprety { Name = x.Item1, SqlDataType = x.Item2 });
+                var columns = tuples.Select(x => new Proprety { Name = x.Item1, DataType = x.Item2 });
                 newDataModel.Classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns)});
             }
             return newDataModel;
