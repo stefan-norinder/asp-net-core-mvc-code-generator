@@ -17,14 +17,14 @@ namespace CodeGenerator.Lib.DataAccess
     public class Class
     {
         public string Name { get; set; }
-        public IEnumerable<Proprety> Properies { get; set; } = new List<Proprety>();
+        public IEnumerable<Proprety> Properties { get; set; } = new List<Proprety>();
 
         public void AddProperties(IEnumerable<Proprety> columns)
         {
-            var initialList = Properies.ToList();
+            var initialList = Properties.ToList();
             var newColumns = columns.ToList();
             initialList.AddRange(newColumns);
-            Properies = initialList;
+            Properties = initialList;
         }
     }
 

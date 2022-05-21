@@ -22,7 +22,7 @@ namespace CodeGenerator.Test
         {
             var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             var type = instance.GetType();
-            Assert.AreEqual(typeof(DataAccessGeneratorService), type);
+            Assert.AreEqual(typeof(DataAccessGenerator), type);
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace CodeGenerator.Test
         {
             var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             var type = instances.First().GetType();
-            Assert.AreEqual(typeof(DataAccessGeneratorService), type);
+            Assert.AreEqual(typeof(DataAccessGenerator), type);
         }
 
     }

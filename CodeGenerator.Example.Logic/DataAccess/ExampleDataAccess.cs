@@ -1,6 +1,6 @@
-﻿using CodeGenerator.Example.Models;
+﻿using Example.Models;
 
-namespace CodeGenerator.Example.Logic.DataAccess
+namespace Example.Logic.DataAccess
 {
     public interface IExampleEntityDataAccess : IDataAccess<ExampleEntity>
     {    }

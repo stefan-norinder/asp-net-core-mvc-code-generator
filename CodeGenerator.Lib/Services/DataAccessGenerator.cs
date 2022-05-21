@@ -5,9 +5,9 @@ using System;
 namespace CodeGenerator.Lib.Services
 {
 
-    public class DataAccessGeneratorService : CodeGenerator
+    public class DataAccessGenerator : CodeGenerator
     {
-        public DataAccessGeneratorService(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+        public DataAccessGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 

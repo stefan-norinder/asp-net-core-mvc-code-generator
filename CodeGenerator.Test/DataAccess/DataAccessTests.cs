@@ -36,7 +36,7 @@ namespace CodeGenerator.Test
         {
             var result = fetcher.Get();
             Assert.AreEqual(11, result.Classes.Count());
-            Assert.AreEqual(2, result.Classes.Single(x => x.Name == "Admins").Properies.Count());
+            Assert.AreEqual(2, result.Classes.Single(x => x.Name == "Admins").Properties.Count());
         }
     }
 }

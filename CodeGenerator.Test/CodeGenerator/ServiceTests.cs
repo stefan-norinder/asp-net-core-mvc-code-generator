@@ -8,7 +8,7 @@ namespace CodeGenerator.Test
 {
     public class ServiceTests
     {
-        private DataAccessGeneratorService service;
+        private DataAccessGenerator service;
         private Mock<IOutputAdapter> outputMock;
 
         [SetUp]
@@ -22,7 +22,7 @@ namespace CodeGenerator.Test
                     new Class
                     {
                         Name = "Foo",
-                        Properies = new List<Proprety>
+                        Properties = new List<Proprety>
                         {
                             new Proprety {Name = "bar", SqlDataType = "int" }
                         }
@@ -31,7 +31,7 @@ namespace CodeGenerator.Test
 
             });
             outputMock = new Mock<IOutputAdapter>();
-            service = new DataAccessGeneratorService(mock.Object, outputMock.Object);
+            service = new DataAccessGenerator(mock.Object, outputMock.Object);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace CodeGenerator.Test
         [Test]
         public void RunWithDatabase()
         {
-            var databaseService = new DataAccessGeneratorService(new GenerationModelFromDatabaseFetcher(".\\sqlexpress", "Databases"), outputMock.Object);
+            var databaseService = new DataAccessGenerator(new GenerationModelFromDatabaseFetcher(".\\sqlexpress", "Databases"), outputMock.Object);
             databaseService.Invoke();
         }
 

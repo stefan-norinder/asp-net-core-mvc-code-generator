@@ -1,4 +1,4 @@
-﻿namespace CodeGenerator.Example.Models
+﻿namespace Example.Models
 {
     public class ExampleEntity : Entity
     {

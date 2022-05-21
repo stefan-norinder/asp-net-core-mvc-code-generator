@@ -7,7 +7,7 @@ namespace CodeGenerator.Lib.Factories
 {
     public interface ICodeGeneratorServiceFactory
     {
-        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName,string className);
+        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, string className);
         ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, string className);
     }
 
@@ -20,17 +20,19 @@ namespace CodeGenerator.Lib.Factories
             this.output = output;
         }
 
-        public ICodeGenerator CreateInstance(CodeGeneratorTypes type, 
-            CodeGeneratorFetcherTypes fetcherType, 
-            string namespaceName, 
+        public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
+            CodeGeneratorFetcherTypes fetcherType,
+            string namespaceName,
             string className)
         {
-            var generationFactory = new GenerationModelFetcherFactory(namespaceName,className);
+            var generationFactory = new GenerationModelFetcherFactory(namespaceName, className);
             var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGeneratorService(generationModelFetcher, output);
+                    return new DataAccessGenerator(generationModelFetcher, output);
+                case CodeGeneratorTypes.Models:
+                    return new ModelGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:
@@ -42,8 +44,8 @@ namespace CodeGenerator.Lib.Factories
 
         }
 
-        public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types, 
-            CodeGeneratorFetcherTypes fetcherType, 
+        public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types,
+            CodeGeneratorFetcherTypes fetcherType,
             string namespaceName,
             string className)
         {

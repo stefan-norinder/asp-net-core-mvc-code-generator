@@ -10,6 +10,7 @@ namespace CodeGenerator.Lib.Services
         DataAccess = 4,
         Factories = 8,
         Services = 16,
+        Models = 32,
         All = Api + Controllers + DataAccess + Factories + Services
     }
     public static class CodeGeneratorTypesExtensions

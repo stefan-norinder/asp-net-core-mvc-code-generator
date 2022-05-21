@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Templates\DataAccessTemplate - Copy.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
@@ -18,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Templates\DataAccessTemplate - Copy.cs">
+      <DependentUpon>DataAccessTemplate.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </None>
     <None Include="Templates\DataAccessTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -26,17 +35,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Templates\DataAccessTemplate.cs">
+    <Compile Update="Templates\ModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>DataAccessTemplate.tt</DependentUpon>
+      <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\ModelTemplate.tt">
+      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
     <None Update="Templates\DataAccessTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>DataAccessTemplate.cs</LastGenOutput>
+      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

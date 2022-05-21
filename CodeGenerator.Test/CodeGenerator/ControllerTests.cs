@@ -21,7 +21,7 @@ namespace CodeGenerator.Test
         }
 
         [Test]
-        public void Run()
+        public void CreateDataAccessFromTemplate_ShouldBeCorrectContent()
         {
             var actual = @"namespace Foo.Lib.DataAccess
                         {
@@ -33,6 +33,20 @@ namespace CodeGenerator.Test
                         } ";
             controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual,templates.First()))));
+        }
+
+        [Test]
+        public void CreateModelFromTemplate_ShouldBeCorrectContent()
+        {
+            var actual = @"namespace Example.Lib.Model
+                        {
+                            public class PersonEntity : Entity
+                            {
+
+                            }
+                        } ";
+            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", "Person");
+            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual, templates.First()))));
         }
 
         private static bool AssertAreEqual(string actual, string expected)
