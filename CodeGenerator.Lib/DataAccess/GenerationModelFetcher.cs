@@ -7,17 +7,17 @@ namespace CodeGenerator.Lib.DataAccess
     {
         private CodeGenerationModel codeGenerationModel {get;set;}
 
-        public GenerationModelFetcher(string className)
+        public GenerationModelFetcher(string namespaceName, string className)
         {
-            CreateCodeGenerationModel(className);
+            CreateCodeGenerationModel(namespaceName, className);
         }
 
-        private void CreateCodeGenerationModel(string className)
+        private void CreateCodeGenerationModel(string namespaceName, string className)
         {
-            codeGenerationModel = new CodeGenerationModel { Classes = new List<Class> { new Class { Name = className } } };
+            codeGenerationModel = new CodeGenerationModel (namespaceName) { Classes = new List<Class> { new Class { Name = className } } };
         }
 
-        public string Database => throw new NotImplementedException();
+        public string Namespace => throw new NotImplementedException();
 
         public CodeGenerationModel Get()
         {

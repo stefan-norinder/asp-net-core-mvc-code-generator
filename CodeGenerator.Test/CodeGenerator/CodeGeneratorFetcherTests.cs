@@ -14,7 +14,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CunstructCodeGenerationModel()
         {
-            var generator = new GenerationModelFetcher("Foo");
+            var generator = new GenerationModelFetcher("Bar","Foo");
             var model = generator.Get();
             Assert.AreEqual("Foo",model.Classes.First().Name);
         }

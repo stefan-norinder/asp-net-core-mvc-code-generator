@@ -5,6 +5,12 @@ namespace CodeGenerator.Lib.DataAccess
 {
     public class CodeGenerationModel
     {
+        public CodeGenerationModel(string namespaceName)
+        {
+            NamespaceName = namespaceName;
+        }
+
+        public string NamespaceName { get; private set; }
         public List<Class> Classes { get; set; } = new List<Class>();
     }
 

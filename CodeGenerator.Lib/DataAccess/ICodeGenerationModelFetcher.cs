@@ -6,8 +6,10 @@ namespace CodeGenerator.Lib.DataAccess
     public interface ICodeGenerationModelFetcher
     {
         CodeGenerationModel Get();
+        string Namespace { get; }
+        #region for test
         public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
         public IEnumerable<string> GetTableNames();
-        string Database { get; }
+        #endregion
     }
 }

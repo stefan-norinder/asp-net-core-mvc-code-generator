@@ -4,26 +4,22 @@ namespace CodeGenerator.Lib.Services
 {
     public interface IController
     {
-        void Run(CodeGeneratorTypes types);    
+        void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes);
     }
 
     public class Controller : IController
     {
         private readonly ICodeGeneratorServiceFactory factory;
 
-        public Controller(string server, string database, string userId = "", string password = "")
-        {
-            factory = new CodeGeneratorServiceFactory(server, database, userId, password);
-        }
-
+       
         public Controller(ICodeGeneratorServiceFactory factory)
         {
             this.factory = factory;
         }
 
-        public void Run(CodeGeneratorTypes types)
+        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes)
         {
-            foreach (var codeGenerator in factory.CreateInstances(types))
+            foreach (var codeGenerator in factory.CreateInstances(types, fetcherTypes))
             {
                 codeGenerator.Invoke();
             }

@@ -20,7 +20,7 @@ namespace CodeGenerator.Test
         public void Run()
         {
 
-            controller.Run(CodeGeneratorTypes.DataAccess);
+            controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString);
             
         }
 

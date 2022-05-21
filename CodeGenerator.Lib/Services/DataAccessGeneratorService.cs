@@ -6,7 +6,7 @@ namespace CodeGenerator.Lib.Services
 
     public class DataAccessGeneratorService : CodeGeneratorServiceBase
     {
-        public DataAccessGeneratorService(CodeGeneratorTypes type, ICodeGenerationModelFetcher dataAccess) :base (type,dataAccess)
+        public DataAccessGeneratorService(ICodeGenerationModelFetcher codeGenerationModelFetcher) : base(codeGenerationModelFetcher)
         { }
 
         public override void Process()

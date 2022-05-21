@@ -5,22 +5,20 @@ namespace CodeGenerator.Lib.Services
 {
     public abstract class CodeGeneratorServiceBase : ICodeGenerator
     {
-        private readonly CodeGeneratorTypes type;
-        protected readonly ICodeGenerationModelFetcher dataAccess;
+        protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
 
-        public CodeGeneratorServiceBase(CodeGeneratorTypes type, ICodeGenerationModelFetcher dataAccess)
+        public CodeGeneratorServiceBase(ICodeGenerationModelFetcher codeGeneratorFetcher)
         {
-            this.type = type;
-            this.dataAccess = dataAccess;
+            this.codeGeneratorFetcher = codeGeneratorFetcher;
         }
 
         public virtual void Invoke()
         {
             //fetch data 
-            var model = dataAccess.Get();
+            var model = codeGeneratorFetcher.Get();
 
             //process data 
-            var template = new DataAccessTemplate(dataAccess.Database, model).TransformText();
+            var template = new DataAccessTemplate(codeGeneratorFetcher.Namespace, model).TransformText();
 
             //save data to disk
         }

@@ -15,7 +15,7 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             var mock = new Mock<ICodeGenerationModelFetcher>();
-            mock.Setup(x => x.Get()).Returns(new CodeGenerationModel
+            mock.Setup(x => x.Get()).Returns(new CodeGenerationModel("Foo")
             {
                 Classes = new List<Class>
                 {
@@ -30,7 +30,7 @@ namespace CodeGenerator.Test
                 }
 
             });
-            service = new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, mock.Object);
+            service = new DataAccessGeneratorService(mock.Object);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace CodeGenerator.Test
         [Test]
         public void RunWithDatabase()
         {
-            var databaseService = new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, new GenerationModelFromDatabase(".\\sqlexpress", "Databases"));
+            var databaseService = new DataAccessGeneratorService(new GenerationModelFromDatabaseFetcher(".\\sqlexpress", "Databases"));
             databaseService.Invoke();
         }
 

@@ -8,33 +8,33 @@ namespace CodeGenerator.Test
 {
     public class DataAccessTests
     {
-        private GenerationModelFromDatabase dataAccess;
+        private ICodeGenerationModelFetcher fetcher;
 
         [SetUp]
         public void Setup()
         {
-            dataAccess = new GenerationModelFromDatabase(".\\SQLEXPRESS", "Databases");
+            fetcher = new GenerationModelFromDatabaseFetcher(".\\SQLEXPRESS", "Databases");
         }
 
         [Test]
         public void GetTablesInDatabase()
         {
             
-            var result = dataAccess.GetTableNames();
+            var result = fetcher.GetTableNames();
             Assert.AreEqual(11, result.Count() );
         }
 
         [Test]
         public void GetColumnNamesAndDatatypesForTable()
         {
-            var result = dataAccess.GetColumnsWithDatatypes("Admins");
+            var result = fetcher.GetColumnsWithDatatypes("Admins");
             Assert.AreEqual(2, result.Count());
         }
 
         [Test]
         public void GetDataModel()
         {
-            var result = dataAccess.Get();
+            var result = fetcher.Get();
             Assert.AreEqual(11, result.Classes.Count());
             Assert.AreEqual(2, result.Classes.Single(x => x.Name == "Admins").Properies.Count());
         }

@@ -6,18 +6,18 @@ using System.Linq;
 namespace CodeGenerator.Lib.DataAccess
 {
 
-    public class GenerationModelFromDatabase : ICodeGenerationModelFetcher
+    public class GenerationModelFromDatabaseFetcher : ICodeGenerationModelFetcher
     {
         private readonly string server;
         private readonly string userId;
         private readonly string password;
 
-        public string Database { get; private set; }
+        public string Namespace { get; private set; }
 
-        public GenerationModelFromDatabase(string server, string database, string userId = "", string password = "")
+        public GenerationModelFromDatabaseFetcher(string server, string database, string userId = "", string password = "")
         {
             this.server = server;
-            Database = database;
+            Namespace = database;
             this.userId = userId;
             this.password = password;
         }
@@ -43,7 +43,7 @@ namespace CodeGenerator.Lib.DataAccess
 
         private CodeGenerationModel GetDataModelPopulatedWithColumns(CodeGenerationModel dataModel)
         {
-            var newDataModel = new CodeGenerationModel();
+            var newDataModel = new CodeGenerationModel("Foo");
             foreach (var item in dataModel.Classes)
             {
                 var tuples = GetColumnsWithDatatypes(item.Name);
@@ -55,7 +55,7 @@ namespace CodeGenerator.Lib.DataAccess
 
         private CodeGenerationModel GetDataModel()
         {
-            return new CodeGenerationModel
+            return new CodeGenerationModel("Foo")
             {
                 Classes = GetTableNames().Select(tableName => new Class { Name = tableName }).ToList()
             };
@@ -105,7 +105,7 @@ namespace CodeGenerator.Lib.DataAccess
             var builder = new SqlConnectionStringBuilder
             {
                 DataSource = server,
-                InitialCatalog = Database
+                InitialCatalog = Namespace
             };
 
             if (UserIdAndPasswordIsSet())
