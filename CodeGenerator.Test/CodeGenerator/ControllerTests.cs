@@ -24,7 +24,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateDataAccessFromTemplate_ShouldBeCorrectContent()
         {
-            var actual = @"//---------------------------------------------------------------------------------------
+            var expected = @"//---------------------------------------------------------------------------------------
                             // This is an auto generated file. Don't make any changes because they may be overwritten
                             //---------------------------------------------------------------------------------------
                 
@@ -41,13 +41,13 @@ namespace CodeGenerator.Test
                              }
                         } ";
             controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
-            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual,templates.First()))));
+            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected,templates.First()))));
         }
 
         [Test]
         public void CreateModelFromTemplate_ShouldBeCorrectContent()
         {
-            var actual = @"//---------------------------------------------------------------------------------------
+            var expected = @"//---------------------------------------------------------------------------------------
                             // This is an auto generated file. Don't make any changes because they may be overwritten
                             //---------------------------------------------------------------------------------------
 
@@ -66,10 +66,47 @@ namespace CodeGenerator.Test
             };
 
             controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", "Person", list);
-            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual, templates.First()))));
+            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected, templates.First()))));
         }
 
-        private static bool AssertAreEqual(string actual, string expected)
+
+        [Test]
+        public void CreateServiceFromTemplate_ShouldBeCorrectContent()
+        {
+            var expected = @"//---------------------------------------------------------------------------------------
+                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            //---------------------------------------------------------------------------------------
+
+                            using Example.Logic.DataAccess;
+                            using Example.Models;
+                            using Microsoft.Extensions.Logging;
+
+                            namespace Example.Services
+                            {
+                                public interface IPersonService : IService<Person>
+                                {
+                                }
+
+                                public class PersonService : Service<Person>, IPersonService
+                                {
+                                    public PersonService(ILogger<PersonService> logger,
+                                        IPersonDataAccess dataAccess)
+                                        : base(logger, dataAccess)
+                                    { }
+                                }
+                            }
+                            ";
+            var list = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("Name", "string"),
+                new KeyValuePair<string, string>("Age", "int"),
+            };
+
+            controller.Run(CodeGeneratorTypes.Services, CodeGeneratorFetcherTypes.FromString, "Example", "Person", list);
+            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected, templates.First()))));
+        }
+
+        private static bool AssertAreEqual(string expected, string actual)
         {
             return string.Compare(expected, actual, CultureInfo.CurrentCulture, CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols) == 0;
         }

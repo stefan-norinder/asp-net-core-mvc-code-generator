@@ -24,6 +24,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ServiceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +39,10 @@
     <None Update="Templates\DataAccessTemplate.tt">
       <LastGenOutput>DataAccessTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\ServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

@@ -34,10 +34,11 @@ namespace CodeGenerator.Lib.Factories
                     return new DataAccessGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Models:
                     return new ModelGenerator(generationModelFetcher, output);
+                case CodeGeneratorTypes.Services:
+                    return new ServiceGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:
-                case CodeGeneratorTypes.Services:
                     throw new NotImplementedException();
                 default:
                     throw new ArgumentException();
