@@ -4,6 +4,10 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+//---------------------------------------------------------------------------------------
+// This is an auto genereated file. Don't make any changes because it may be overwritten
+//---------------------------------------------------------------------------------------
+
 namespace <#= namespaceName #>.Lib.Model
 {
     public class <#= Model.Name #>Entity : Entity

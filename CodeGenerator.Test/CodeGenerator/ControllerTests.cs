@@ -39,7 +39,11 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateModelFromTemplate_ShouldBeCorrectContent()
         {
-            var actual = @"namespace Example.Lib.Model
+            var actual = @"//---------------------------------------------------------------------------------------
+                            // This is an auto genereated file. Don't make any changes because it may be overwritten
+                            //---------------------------------------------------------------------------------------
+
+                        namespace Example.Lib.Model
                         {
                             public class PersonEntity : Entity
                             {

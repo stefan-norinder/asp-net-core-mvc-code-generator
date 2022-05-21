@@ -28,44 +28,48 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("namespace ");
+            this.Write(@"//---------------------------------------------------------------------------------------
+// This is an auto genereated file. Don't make any changes because it may be overwritten
+//---------------------------------------------------------------------------------------
+
+namespace ");
             
-            #line 7 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Lib.Model\r\n{\r\n    public class ");
             
-            #line 9 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Entity : Entity\r\n    {\r\n    ");
             
-            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
  foreach (var item in Model.Properties){ 
             
             #line default
             #line hidden
             this.Write("        public ");
             
-            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.DataType));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" {get;set;}\r\n    ");
             
-            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
+            #line 17 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
  } 
             
             #line default
