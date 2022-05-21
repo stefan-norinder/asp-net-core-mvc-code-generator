@@ -1,5 +1,4 @@
 using CodeGenerator.Lib.DataAccess;
-using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Services;
 using Moq;
 using NUnit.Framework;
