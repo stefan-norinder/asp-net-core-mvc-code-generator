@@ -24,13 +24,21 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateDataAccessFromTemplate_ShouldBeCorrectContent()
         {
-            var actual = @"namespace Foo.Lib.DataAccess
+            var actual = @"//---------------------------------------------------------------------------------------
+                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            //---------------------------------------------------------------------------------------
+                
+                        namespace Foo.Logic.DataAccess
                         {
-                            public class BarDataAccess 
+                            public interface IBarEntityDataAccess : IDataAccess<BarEntity>
+                            {    }
+
+                            public class BarEntityDataAccess : DataAccessBase<BarEntity>, IBarEntityDataAccess
                             {
-                                public string Bar {get;set;}
-                            }
-  
+                                public BarEntityDataAccess(ISqlDataAccess db, SqlStringBuilder<BarEntity> sqlStringBuilder)
+                                    : base(db, sqlStringBuilder)
+                                { }
+                             }
                         } ";
             controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(actual,templates.First()))));
@@ -40,7 +48,7 @@ namespace CodeGenerator.Test
         public void CreateModelFromTemplate_ShouldBeCorrectContent()
         {
             var actual = @"//---------------------------------------------------------------------------------------
-                            // This is an auto genereated file. Don't make any changes because it may be overwritten
+                            // This is an auto generated file. Don't make any changes because they may be overwritten
                             //---------------------------------------------------------------------------------------
 
                         namespace Example.Lib.Model

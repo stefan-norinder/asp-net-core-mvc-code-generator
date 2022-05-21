@@ -28,42 +28,68 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("namespace ");
+            this.Write(@"//---------------------------------------------------------------------------------------
+// This is an auto generated file. Don't make any changes because they may be overwritten
+//---------------------------------------------------------------------------------------
+
+namespace ");
             
-            #line 7 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.NamespaceName));
-            
-            #line default
-            #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n");
-            
-            #line 9 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
- foreach (var item in Model.Classes){ 
+            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write("    public class ");
+            this.Write(".Logic.DataAccess\r\n{\r\n    public interface I");
             
-            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("DataAccess \r\n    {\r\n        public string ");
-            
-            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(" {get;set;}\r\n    }\r\n");
+            this.Write("EntityDataAccess : IDataAccess<");
             
-            #line 14 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
- } 
+            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("  \r\n} ");
+            this.Write("Entity>\r\n    {    }\r\n\r\n    public class ");
+            
+            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("EntityDataAccess : DataAccessBase<");
+            
+            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Entity>, I");
+            
+            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("EntityDataAccess\r\n    {\r\n        public ");
+            
+            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<");
+            
+            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Entity> sqlStringBuilder)\r\n            : base(db, sqlStringBuilder)\r\n        { }\r" +
+                    "\n     }\r\n} ");
             return this.GenerationEnvironment.ToString();
         }
     }

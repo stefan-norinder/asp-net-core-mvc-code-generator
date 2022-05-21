@@ -4,12 +4,19 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-namespace <#= Model.NamespaceName #>.Lib.DataAccess
+//---------------------------------------------------------------------------------------
+// This is an auto generated file. Don't make any changes because they may be overwritten
+//---------------------------------------------------------------------------------------
+
+namespace <#= namespaceName #>.Logic.DataAccess
 {
-<# foreach (var item in Model.Classes){ #>
-    public class <#= item.Name #>DataAccess 
+    public interface I<#= Model.Name #>EntityDataAccess : IDataAccess<<#= Model.Name #>Entity>
+    {    }
+
+    public class <#= Model.Name #>EntityDataAccess : DataAccessBase<<#= Model.Name #>Entity>, I<#= Model.Name #>EntityDataAccess
     {
-        public string <#= item.Name #> {get;set;}
-    }
-<# } #>  
+        public <#= Model.Name #>EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<<#= Model.Name #>Entity> sqlStringBuilder)
+            : base(db, sqlStringBuilder)
+        { }
+     }
 } 

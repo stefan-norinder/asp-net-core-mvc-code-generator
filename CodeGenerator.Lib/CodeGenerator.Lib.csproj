@@ -22,14 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Templates\DataAccessTemplate.cs">
+    <Compile Update="Templates\DataAccessTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataAccessTemplate.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
+    </Compile>
     <Compile Update="Templates\ModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -43,8 +40,8 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
     </None>
     <None Update="Templates\DataAccessTemplate.tt">
+      <LastGenOutput>DataAccessTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>ModelTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

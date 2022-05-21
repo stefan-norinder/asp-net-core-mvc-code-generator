@@ -4,7 +4,7 @@ namespace CodeGenerator.Lib.Templates
 {
     partial class ModelTemplate
     {
-        private readonly string namespaceName;
+        public readonly string namespaceName;
 
         public ModelTemplate(string namespaceName, Class @class)
         {

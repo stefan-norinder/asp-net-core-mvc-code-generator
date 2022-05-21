@@ -29,7 +29,7 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             this.Write(@"//---------------------------------------------------------------------------------------
-// This is an auto genereated file. Don't make any changes because it may be overwritten
+// This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
 namespace ");
