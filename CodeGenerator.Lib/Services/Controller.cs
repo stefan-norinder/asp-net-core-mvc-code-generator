@@ -11,9 +11,9 @@ namespace CodeGenerator.Lib.Services
 
     public class Controller : IController
     {
-        private readonly ICodeGeneratorServiceFactory factory;
+        private readonly ICodeGeneratorFactory factory;
        
-        public Controller(ICodeGeneratorServiceFactory factory)
+        public Controller(ICodeGeneratorFactory factory)
         {
             this.factory = factory;
         }

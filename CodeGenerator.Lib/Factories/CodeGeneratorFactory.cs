@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace CodeGenerator.Lib.Factories
 {
-    public interface ICodeGeneratorServiceFactory
+    public interface ICodeGeneratorFactory
     {
         IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes);
         ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes);
     }
 
-    public class CodeGeneratorFactory : ICodeGeneratorServiceFactory
+    public class CodeGeneratorFactory : ICodeGeneratorFactory
     {
         private readonly IOutputAdapter output;
 

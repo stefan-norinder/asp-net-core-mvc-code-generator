@@ -1,4 +1,5 @@
-﻿using CodeGenerator.Lib.Services;
+﻿using CodeGenerator.Lib.Factories;
+using CodeGenerator.Lib.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,8 +25,9 @@ namespace CodeGenerator.Console
 
             try
             {
+                var paramsModel = new ParamsModel(args);
                 var controller = serviceProvider.GetService<IController>();
-                //controller.Run();
+                controller.Run(CodeGeneratorTypes.Models,CodeGeneratorFetcherTypes.FromString, paramsModel.Namespace, paramsModel.ClassName, paramsModel.Properties);
             }
             catch (Exception ex)
             {
@@ -40,11 +42,13 @@ namespace CodeGenerator.Console
             System.Console.WriteLine("Initiating with ASPNETCORE_ENVIRONMENT " + environment);
             configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-                .AddJsonFile($"appsettings.{environment}.json", false)
+                //.AddJsonFile($"appsettings.{environment}.json", false)
                 .Build();
 
             serviceCollection.AddSingleton(configuration);
             serviceCollection.AddTransient<IController, Controller>();
+            serviceCollection.AddTransient<ICodeGeneratorFactory, CodeGeneratorFactory>();
+            serviceCollection.AddTransient<IOutputAdapter, FileWriterOutputAdapter>();
         }
     }
 
