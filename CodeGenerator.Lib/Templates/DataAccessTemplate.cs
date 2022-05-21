@@ -38,7 +38,7 @@ namespace CodeGenerator.Lib.Templates
             this.Write(".Lib.DataAccess\r\n{\r\n");
             
             #line 9 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
- foreach (var item in Model.Tables){ 
+ foreach (var item in Model.Classes){ 
             
             #line default
             #line hidden

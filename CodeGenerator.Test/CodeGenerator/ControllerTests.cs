@@ -20,7 +20,7 @@ namespace CodeGenerator.Test
         public void Run()
         {
 
-            var foo = controller;
+            controller.Run(CodeGeneratorTypes.DataAccess);
             
         }
 

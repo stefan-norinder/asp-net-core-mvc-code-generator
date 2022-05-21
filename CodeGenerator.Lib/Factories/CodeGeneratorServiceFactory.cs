@@ -14,16 +14,21 @@ namespace CodeGenerator.Lib.Factories
 
     public class CodeGeneratorServiceFactory : ICodeGeneratorServiceFactory
     {
-        private readonly IDataAccess dataAccess;
+        private readonly ICodeGenerationModelFetcher generationModelFetcher;
+
+        public CodeGeneratorServiceFactory(string className)
+        {
+            generationModelFetcher = new GenerationModelFetcher(className);
+        }
 
         public CodeGeneratorServiceFactory(string server, string database, string userId = "", string password = "")
         {
-            dataAccess = new SqlDataAccess(server, database, userId, password);
+            generationModelFetcher = new GenerationModelFromDatabase(server, database, userId, password);
         }
 
-        public CodeGeneratorServiceFactory(IDataAccess dataAccess)
+        public CodeGeneratorServiceFactory(ICodeGenerationModelFetcher dataAccess)
         {
-            this.dataAccess = dataAccess;
+            this.generationModelFetcher = dataAccess;
         }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type)
@@ -31,7 +36,7 @@ namespace CodeGenerator.Lib.Factories
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, dataAccess);
+                    return new DataAccessGeneratorService(CodeGeneratorTypes.DataAccess, generationModelFetcher);
                 case CodeGeneratorTypes.Api:
                 case CodeGeneratorTypes.Controllers:
                 case CodeGeneratorTypes.Factories:

@@ -5,13 +5,13 @@ namespace CodeGenerator.Lib.Templates
     partial class DataAccessTemplate
     {
 
-        public DataAccessTemplate(string @namespace,DataModel model)
+        public DataAccessTemplate(string @namespace,CodeGenerationModel model)
         {
             Namespace = @namespace;
             Model = model;
         }
 
         public string Namespace { get; }
-        public DataModel Model { get; }
+        public CodeGenerationModel Model { get; }
     }
 }

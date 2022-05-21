@@ -5,15 +5,8 @@ using System.Linq;
 
 namespace CodeGenerator.Lib.DataAccess
 {
-    public interface IDataAccess
-    {
-        DataModel Get();
-        public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
-        public IEnumerable<string> GetTableNames();
-        string Database { get; }
-    }
 
-    public class SqlDataAccess : IDataAccess
+    public class GenerationModelFromDatabase : ICodeGenerationModelFetcher
     {
         private readonly string server;
         private readonly string userId;
@@ -21,7 +14,7 @@ namespace CodeGenerator.Lib.DataAccess
 
         public string Database { get; private set; }
 
-        public SqlDataAccess(string server, string database, string userId = "", string password = "")
+        public GenerationModelFromDatabase(string server, string database, string userId = "", string password = "")
         {
             this.server = server;
             Database = database;
@@ -29,7 +22,7 @@ namespace CodeGenerator.Lib.DataAccess
             this.password = password;
         }
 
-        public DataModel Get()
+        public CodeGenerationModel Get()
         {
             var dataModel = GetDataModel();
 
@@ -48,23 +41,23 @@ namespace CodeGenerator.Lib.DataAccess
 
         #region private
 
-        private DataModel GetDataModelPopulatedWithColumns(DataModel dataModel)
+        private CodeGenerationModel GetDataModelPopulatedWithColumns(CodeGenerationModel dataModel)
         {
-            var newDataModel = new DataModel();
-            foreach (var item in dataModel.Tables)
+            var newDataModel = new CodeGenerationModel();
+            foreach (var item in dataModel.Classes)
             {
                 var tuples = GetColumnsWithDatatypes(item.Name);
-                var columns = tuples.Select(x => new Column { Name = x.Item1, SqlDataType = x.Item2 });
-                newDataModel.Tables.Add(new Table { Name = item.Name, Columns = new List<Column>(columns)});
+                var columns = tuples.Select(x => new Proprety { Name = x.Item1, SqlDataType = x.Item2 });
+                newDataModel.Classes.Add(new Class { Name = item.Name, Properies = new List<Proprety>(columns)});
             }
             return newDataModel;
         }
 
-        private DataModel GetDataModel()
+        private CodeGenerationModel GetDataModel()
         {
-            return new DataModel
+            return new CodeGenerationModel
             {
-                Tables = GetTableNames().Select(tableName => new Table { Name = tableName }).ToList()
+                Classes = GetTableNames().Select(tableName => new Class { Name = tableName }).ToList()
             };
         }
 

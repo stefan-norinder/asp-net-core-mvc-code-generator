@@ -8,12 +8,12 @@ namespace CodeGenerator.Test
 {
     public class DataAccessTests
     {
-        private SqlDataAccess dataAccess;
+        private GenerationModelFromDatabase dataAccess;
 
         [SetUp]
         public void Setup()
         {
-            dataAccess = new SqlDataAccess(".\\SQLEXPRESS", "Databases");
+            dataAccess = new GenerationModelFromDatabase(".\\SQLEXPRESS", "Databases");
         }
 
         [Test]
@@ -35,8 +35,8 @@ namespace CodeGenerator.Test
         public void GetDataModel()
         {
             var result = dataAccess.Get();
-            Assert.AreEqual(11, result.Tables.Count());
-            Assert.AreEqual(2, result.Tables.Single(x => x.Name == "Admins").Columns.Count());
+            Assert.AreEqual(11, result.Classes.Count());
+            Assert.AreEqual(2, result.Classes.Single(x => x.Name == "Admins").Properies.Count());
         }
     }
 }

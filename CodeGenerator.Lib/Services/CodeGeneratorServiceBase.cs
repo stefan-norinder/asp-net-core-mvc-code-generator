@@ -6,9 +6,9 @@ namespace CodeGenerator.Lib.Services
     public abstract class CodeGeneratorServiceBase : ICodeGenerator
     {
         private readonly CodeGeneratorTypes type;
-        protected readonly IDataAccess dataAccess;
+        protected readonly ICodeGenerationModelFetcher dataAccess;
 
-        public CodeGeneratorServiceBase(CodeGeneratorTypes type, IDataAccess dataAccess)
+        public CodeGeneratorServiceBase(CodeGeneratorTypes type, ICodeGenerationModelFetcher dataAccess)
         {
             this.type = type;
             this.dataAccess = dataAccess;
