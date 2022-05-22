@@ -6,7 +6,7 @@ namespace CodeGeneratorExample.Logic.DataAccess
     public interface IDataAccess<T>
     {
         Task<T> Get(int id);
-        Task<List<T>> GetAll();
+        Task<IEnumerable<T>> GetAll();
         Task Insert(T model);
         Task Update(T model);
         Task Delete(int id);
@@ -42,7 +42,7 @@ namespace CodeGeneratorExample.Logic.DataAccess
             await db.SaveData(sql, model);
         }
 
-        public virtual async Task<List<T>> GetAll()
+        public virtual async Task<IEnumerable<T>> GetAll()
         {
             string sql = $"SELECT * FROM {Table} ";
             return await ExecuteSelectMany(sql);

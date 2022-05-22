@@ -46,19 +46,23 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Threading.Tas" +
-                    "ks;\r\n\r\nnamespace ");
+            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections.G" +
+                    "eneric;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
             
-            #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 17 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(@".Lib.Model
 {
-    public interface IService<TModel>
-    {
+     public interface IService<TModel>
+    {  
         Task<TModel> Get(int id);
+        Task<IEnumerable<TModel>> GetAll();
+        Task Insert(TModel model);
+        Task Update(TModel model);
+        Task Delete(int id);
     }
 
     public class Service<TModel> : IService<TModel> where TModel : Entity
@@ -78,6 +82,25 @@ using ");
             return await dataAccess.Get(id);
         }
 
+        public async Task<IEnumerable<TModel>> GetAll()
+        {
+            return await dataAccess.GetAll();
+        }
+
+        public async virtual Task Insert(TModel model)
+        {
+            await dataAccess.Insert(model);
+        }
+
+        public async virtual Task Update(TModel model)
+        {
+            await dataAccess.Update(model);
+        }
+
+        public async Task Delete(int id)
+        {
+            await dataAccess.Delete(id);
+        }
     }
 }
 ");
