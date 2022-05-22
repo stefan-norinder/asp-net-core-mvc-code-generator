@@ -23,10 +23,10 @@ namespace <#= namespaceName #>.Logic.DataAccess
     public class BaseDataAccess<T> : IDataAccess<T>
     {
         protected readonly ISqlDataAccess db;
-        private readonly SqlStringBuilder<T> sqlStringBuilder;
+        private readonly SqlStringBuilderDataAccess<T> sqlStringBuilder;
 
         public BaseDataAccess(ISqlDataAccess db,
-            SqlStringBuilder<T> sqlStringBuilder)
+            SqlStringBuilderDataAccess<T> sqlStringBuilder)
         {
             this.db = db;
             this.sqlStringBuilder = sqlStringBuilder;

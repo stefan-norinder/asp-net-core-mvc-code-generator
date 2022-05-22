@@ -8,7 +8,7 @@ namespace CodeGenerator.Lib.Services
 {
     public class DataAccessGenerator : CodeGenerator
     {
-        public DataAccessGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+        public DataAccessGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
@@ -16,9 +16,10 @@ namespace CodeGenerator.Lib.Services
 
         protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
         {
-            var name = "Base";
-            var template = new DataAccessBase(namespaceName).TransformText();
-            return new List<Tuple<string, string>> { new Tuple<string, string>(name, template) };
+            return new List<Tuple<string, string>> {
+                new Tuple<string, string>("Base", new DataAccessBase(namespaceName).TransformText()),
+                new Tuple<string, string>("SqlStringBuilder", new SqlStringBuilderTemplate(namespaceName).TransformText())
+            };
         }
 
         protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)

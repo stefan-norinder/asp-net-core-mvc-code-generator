@@ -35,6 +35,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\SqlStringBuilderTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SqlStringBuilderTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +58,10 @@
     <None Update="Templates\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\SqlStringBuilderTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SqlStringBuilderTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
