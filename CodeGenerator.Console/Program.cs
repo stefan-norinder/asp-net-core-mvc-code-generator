@@ -1,6 +1,7 @@
 ﻿using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
+using CodeGenerator.Lib.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -51,7 +52,7 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
             {
                 var paramsModel = new ParamsModel(args);
                 var controller = serviceProvider.GetService<IController>();
-                controller.Run(CodeGeneratorTypes.All,CodeGeneratorFetcherTypes.FromString, paramsModel);
+                controller.Run(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, paramsModel);
             }
             catch (Exception ex)
             {

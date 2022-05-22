@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace CodeGenerator.Lib.Services
-{    
+namespace CodeGenerator.Lib.Utils
+{
     public enum CodeGeneratorFetcherTypes
-    { 
+    {
         FromString = 1,
         FromDatabase = 2
     }

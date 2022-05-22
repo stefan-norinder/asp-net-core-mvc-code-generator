@@ -1,5 +1,6 @@
 using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Services;
+using CodeGenerator.Lib.Utils;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;

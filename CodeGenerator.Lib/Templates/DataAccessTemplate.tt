@@ -13,7 +13,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
     public interface I<#= Model.Name #>EntityDataAccess : IDataAccess<<#= Model.Name #>Entity>
     {    }
 
-    public class <#= Model.Name #>EntityDataAccess : DataAccessBase<<#= Model.Name #>Entity>, I<#= Model.Name #>EntityDataAccess
+    public class <#= Model.Name #>EntityDataAccess : BaseDataAccess<<#= Model.Name #>Entity>, I<#= Model.Name #>EntityDataAccess
     {
         public <#= Model.Name #>EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<<#= Model.Name #>Entity> sqlStringBuilder)
             : base(db, sqlStringBuilder)

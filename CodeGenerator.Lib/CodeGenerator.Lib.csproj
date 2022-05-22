@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\DataAccessBase.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataAccessBase.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\DataAccessTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -33,6 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\DataAccessBase.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DataAccessBase.cs</LastGenOutput>
+    </None>
     <None Update="Templates\ModelTemplate.tt">
       <LastGenOutput>ModelTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>

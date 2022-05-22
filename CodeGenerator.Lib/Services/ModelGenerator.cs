@@ -1,7 +1,9 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeGenerator.Lib.Services
 {
@@ -13,6 +15,11 @@ namespace CodeGenerator.Lib.Services
         { }
 
         protected override string ClassTypeDescription => "Model";
+
+        protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
+        {
+            return Enumerable.Empty<Tuple<string, string>>();
+        }
 
         protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
         {

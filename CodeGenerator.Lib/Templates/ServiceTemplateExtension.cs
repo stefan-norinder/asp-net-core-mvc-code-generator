@@ -1,4 +1,4 @@
-﻿using CodeGenerator.Lib.DataAccess;
+﻿using CodeGenerator.Lib.Models;
 
 namespace CodeGenerator.Lib.Templates
 {

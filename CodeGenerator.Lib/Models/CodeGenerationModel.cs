@@ -1,5 +1,4 @@
-﻿using CodeGenerator.Lib.DataAccess;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeGenerator.Lib.Models
@@ -16,10 +15,7 @@ namespace CodeGenerator.Lib.Models
 
         public override string ToString() => NamespaceName;
     }
-}
 
-namespace CodeGenerator.Lib.DataAccess
-{
     public class Class
     {
         public string Name { get; set; }

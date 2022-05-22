@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessBase.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class DataAccessTemplate : DataAccessTemplateBase
+    public partial class DataAccessBase : DataAccessBaseBase
     {
 #line hidden
         /// <summary>
@@ -34,62 +34,41 @@ namespace CodeGenerator.Lib.Templates
 
 namespace ");
             
-            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessBase.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Logic.DataAccess\r\n{\r\n    public interface I");
-            
-            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("EntityDataAccess : IDataAccess<");
-            
-            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Entity>\r\n    {    }\r\n\r\n    public class ");
-            
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("EntityDataAccess : BaseDataAccess<");
-            
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Entity>, I");
-            
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("EntityDataAccess\r\n    {\r\n        public ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<");
-            
-            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Entity> sqlStringBuilder)\r\n            : base(db, sqlStringBuilder)\r\n        { }\r" +
-                    "\n     }\r\n} ");
+            this.Write(".Logic.DataAccess\r\n{\r\n    public interface IDataAccess<T>\r\n    {\r\n        Task<T>" +
+                    " Get(int id);\r\n        Task<List<T>> GetAll();\r\n        Task Insert(T model);\r\n " +
+                    "       Task Update(T model);\r\n        Task Delete(int id);\r\n        Task DeleteA" +
+                    "ll();\r\n    }\r\n\r\n    public class BaseDataAccess<T> : IDataAccess<T>\r\n    {\r\n    " +
+                    "    protected readonly ISqlDataAccess db;\r\n        private readonly SqlStringBui" +
+                    "lder<T> sqlStringBuilder;\r\n\r\n        public BaseDataAccess(ISqlDataAccess db,\r\n " +
+                    "           SqlStringBuilder<T> sqlStringBuilder)\r\n        {\r\n            this.db" +
+                    " = db;\r\n            this.sqlStringBuilder = sqlStringBuilder;\r\n            Table" +
+                    " = typeof(T).Name;\r\n        }\r\n\r\n        protected string Table { get; }\r\n\r\n    " +
+                    "    public async virtual Task Insert(T model)\r\n        {\r\n            string sql" +
+                    " = sqlStringBuilder.GetInsertString(model);\r\n\r\n            await db.SaveData(sql" +
+                    ", model);\r\n        }\r\n\r\n        public async virtual Task Update(T model)\r\n     " +
+                    "   {\r\n            string sql = sqlStringBuilder.GetUpdateString(model);\r\n\r\n     " +
+                    "       await db.SaveData(sql, model);\r\n        }\r\n\r\n        public virtual async" +
+                    " Task<List<T>> GetAll()\r\n        {\r\n            string sql = $\"SELECT * FROM {Ta" +
+                    "ble} \";\r\n            return await ExecuteSelectMany(sql);\r\n        }\r\n        \r\n" +
+                    "        public virtual async Task<T> Get(int id)\r\n        {\r\n            string " +
+                    "sql = $\"SELECT * FROM {Table} Where Id = @id\";\r\n            return await db.Load" +
+                    "SingularData<T, dynamic>(sql, new { Id = id });\r\n        }\r\n\r\n        public asy" +
+                    "nc Task DeleteAll()\r\n        {\r\n            string sql = $\"DELETE FROM {Table} \"" +
+                    ";\r\n            await db.SaveData(sql, new { });\r\n        }\r\n\r\n        public asy" +
+                    "nc Task Delete(int id)\r\n        {\r\n            string sql = $\"DELETE FROM {Table" +
+                    "} WHERE Id = @id\";\r\n            await db.SaveData(sql, new { Id = id });\r\n      " +
+                    "  }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(string sql, int id)\r\n" +
+                    "        {\r\n            return await db.LoadSingularData<T, dynamic>(sql, new { I" +
+                    "d = id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(str" +
+                    "ing sql)\r\n        {\r\n            return await db.LoadSingularData<T, dynamic>(sq" +
+                    "l, new { });\r\n        }\r\n\r\n        protected async Task<List<T>> ExecuteSelectMa" +
+                    "ny(string sql)\r\n        {\r\n            return await db.LoadData<T, dynamic>(sql," +
+                    " new { });\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -101,7 +80,7 @@ namespace ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class DataAccessTemplateBase
+    public class DataAccessBaseBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

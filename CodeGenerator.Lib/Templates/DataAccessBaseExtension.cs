@@ -2,14 +2,14 @@
 
 namespace CodeGenerator.Lib.Templates
 {
-    partial class ModelTemplate
+    partial class DataAccessBase
     {
         public readonly string namespaceName;
 
-        public ModelTemplate(string namespaceName, Class @class)
+        public DataAccessBase(string namespaceName)
         {
             this.namespaceName = namespaceName;
-            Model = @class;
+            Model = new Class { Name = "Base" };
         }
 
         public Class Model { get; }
