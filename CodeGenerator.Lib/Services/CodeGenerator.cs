@@ -1,5 +1,6 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,21 +21,31 @@ namespace CodeGenerator.Lib.Services
 
         public virtual void Invoke()
         {
+
             var model = codeGeneratorFetcher.Get();
 
             var templates = GenerateTemplatesFromModel(model);
 
             OutputTemplate(model.Classes, templates);
+            
+            GenerateProjectFileFromTemplate(model.NamespaceName);
 
             var staticNameAndTemplates = GenerateStaticTemplates(model.NamespaceName);
 
             OutputTemplate(staticNameAndTemplates);
         }
 
-        protected virtual string BasePath { get { return $"./src/{ClassTypeDescription}"; } }
+        private void GenerateProjectFileFromTemplate(string name)
+        {
+            var template = new ProjectFileTemplate().TransformText();
+            output.Write(baseFolder,$"{name}.csproj",template);
+        }
 
+        private string baseFolder { get { return "./src/"; } }
+        protected virtual string BasePath { get { return $"{baseFolder}{ClassTypeDescription}"; } }
+        
         protected abstract string ClassTypeDescription { get; }
-
+        
         protected abstract IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model);
 
         protected abstract IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName);
@@ -60,13 +71,13 @@ namespace CodeGenerator.Lib.Services
                 var @class = classes.ElementAt(i);
                 var file = $"{@class}{ClassTypeDescription}.cs";
                 var content = templates.ToList().ElementAt(i);
-                Output(file, content);
+                Output(BasePath,file, content);
             }
         }
 
-        private void Output(string file, string content)
+        private void Output(string basePath,string file, string content)
         {
-            output.Write(BasePath, file, content);
+            output.Write(basePath, file, content);
         }
 
         #endregion
