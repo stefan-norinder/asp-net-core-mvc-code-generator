@@ -28,19 +28,22 @@ namespace CodeGenerator.Test
             var expected = @"//---------------------------------------------------------------------------------------
                             // This is an auto generated file. Don't make any changes because they may be overwritten
                             //---------------------------------------------------------------------------------------
-                
-                        namespace Foo.Logic.DataAccess
-                        {
-                            public interface IBarEntityDataAccess : IDataAccess<BarEntity>
-                            {    }
 
-                            public class BarEntityDataAccess : DataAccessBase<BarEntity>, IBarEntityDataAccess
+                            using Foo.Lib.Model;
+                            using Foo.Lib.DataAccess;
+
+                            namespace Foo.Lib.DataAccess
                             {
-                                public BarEntityDataAccess(ISqlDataAccess db, SqlStringBuilder<BarEntity> sqlStringBuilder)
-                                    : base(db, sqlStringBuilder)
-                                { }
-                             }
-                        } ";
+                                public interface IBarEntityDataAccess : IDataAccess<BarEntity>
+                                {    }
+
+                                public class BarEntityDataAccess : BaseDataAccess<BarEntity>, IBarEntityDataAccess
+                                {
+                                    public BarEntityDataAccess(ISqlDataAccess db, SqlStringBuilder<BarEntity> sqlStringBuilder)
+                                        : base(db, sqlStringBuilder)
+                                    { }
+                                 }
+                            }  ";
             controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
 
@@ -79,24 +82,24 @@ namespace CodeGenerator.Test
                             // This is an auto generated file. Don't make any changes because they may be overwritten
                             //---------------------------------------------------------------------------------------
 
-                            using Example.Logic.DataAccess;
-                            using Example.Models;
-                            using Microsoft.Extensions.Logging;
+                       using Example.Lib.DataAccess;
+                        using Example.Lib.Model;
+                        using Microsoft.Extensions.Logging;
 
-                            namespace Example.Services
+                        namespace Example.Lib.Services
+                        {
+                            public interface IPersonService : IService<PersonEntity>
                             {
-                                public interface IPersonService : IService<Person>
-                                {
-                                }
-
-                                public class PersonService : Service<Person>, IPersonService
-                                {
-                                    public PersonService(ILogger<PersonService> logger,
-                                        IPersonDataAccess dataAccess)
-                                        : base(logger, dataAccess)
-                                    { }
-                                }
                             }
+
+                            public class PersonService : Service<PersonEntity>, IPersonService
+                            {
+                                public PersonService(ILogger<PersonService> logger,
+                                   IPersonEntityDataAccess dataAccess)
+                                   : base(logger, dataAccess)
+                                { }
+                            }
+                        }
                             ";
             var list = new List<KeyValuePair<string, string>>
             {
