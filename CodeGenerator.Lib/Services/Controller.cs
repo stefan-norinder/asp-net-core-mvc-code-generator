@@ -1,5 +1,5 @@
 ﻿using CodeGenerator.Lib.Factories;
-using System.Collections;
+using CodeGenerator.Lib.Models;
 using System.Collections.Generic;
 
 namespace CodeGenerator.Lib.Services
@@ -7,6 +7,7 @@ namespace CodeGenerator.Lib.Services
     public interface IController
     {
         void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes);
+        void Run(CodeGeneratorTypes alltypes, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel);
     }
 
     public class Controller : IController
@@ -23,6 +24,14 @@ namespace CodeGenerator.Lib.Services
             foreach (var codeGenerator in factory.CreateInstances(types, fetcherTypes, namespaceName, className, propertiesAndDataTypes))
             {
                 codeGenerator.Invoke();
+            }
+        }
+
+        public void Run(CodeGeneratorTypes alltypes, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel)
+        {
+            foreach (var @class in paramsModel.Classes)
+            {
+                Run(CodeGeneratorTypes.All, fetcherTypes, paramsModel.Namespace, @class.ClassName, @class.Properties);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
 using System.Collections.Generic;
 

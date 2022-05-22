@@ -1,15 +1,21 @@
 ﻿using System.Collections.Generic;
 
-namespace CodeGenerator.Console
+namespace CodeGenerator.Lib.Models
 {
     public class ParamsModel
     {
         public ParamsModel(string[] args)
         {
+            var classes = new List<ParamClass>();
+            ParamClass @class = null;
             for (var i = 0; i < args.Length; i++)
             {
                 if (args[i] == ParamsConstants.Namespace) Namespace = args[++i];
-                if (args[i] == ParamsConstants.Class) ClassName = args[++i];
+                if (args[i] == ParamsConstants.Class)
+                {
+                    if (@class != null) classes.Add(@class);
+                    @class = new ParamClass(args[++i]);
+                }
                 if (args[i] == ParamsConstants.Properies)
                 {
                     i++;
@@ -18,15 +24,27 @@ namespace CodeGenerator.Console
                     {
                         list.Add(new KeyValuePair<string, string>(args[i++], args[i++]));
                     }
-                    Properties = list;
+                    @class.Properties = list;
                 }
             }
+            if (@class != null) classes.Add(@class);
+            Classes = classes;
         }
 
         public string Namespace { get; set; }
+        public IEnumerable<ParamClass> Classes = new List<ParamClass>();
+
+    }
+
+    public class ParamClass
+    {
+        public ParamClass(string name)
+        {
+            ClassName = name;
+        }
+
         public string ClassName { get; set; }
         public IEnumerable<KeyValuePair<string, string>> Properties { get; set; }
-
     }
 
     public static class ParamsConstants

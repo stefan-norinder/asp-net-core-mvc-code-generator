@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": "--namespace Foo --class Bar --properties Inc string Age int"
+      "commandLineArgs": "--namespace Foo --class Bar --properties Inc string Age int --class Car --properties Model string ProductionYear int"
     }
   }
 }
