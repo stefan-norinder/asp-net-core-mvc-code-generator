@@ -1,0 +1,35 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+//---------------------------------------------------------------------------------------
+// This is an auto generated file. Don't make any changes because they may be overwritten
+//---------------------------------------------------------------------------------------
+
+namespace <#= namespaceName #>.Lib.Model
+{
+    public interface IService<TModel>
+    {
+        Task<TModel> Get(int id);
+    }
+
+    public class Service<TModel> : IService<TModel> where TModel : Entity
+    {
+        protected readonly ILogger<Service<TModel>> logger;
+        protected readonly IDataAccess<TModel> dataAccess;
+
+        public Service(ILogger<Service<TModel>> logger,
+            IDataAccess<TModel> dataAccess)
+        {
+            this.logger = logger;
+            this.dataAccess = dataAccess;
+        }
+
+        public async Task<TModel> Get(int id)
+        {
+            return await dataAccess.Get(id);
+        }
+
+    }
+}

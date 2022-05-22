@@ -20,6 +20,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BaseEntityTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\BaseServiceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BaseServiceTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\DataAccessBase.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -56,6 +61,10 @@
     <None Update="Templates\BaseEntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BaseEntityTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\BaseServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BaseServiceTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\DataAccessBase.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
