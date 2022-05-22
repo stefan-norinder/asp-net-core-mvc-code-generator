@@ -8,9 +8,9 @@ namespace CodeGenerator.Console
         {
             for (var i = 0; i < args.Length; i++)
             {
-                if (args[i] == "--namespace") Namespace = args[++i];
-                if (args[i] == "--class") ClassName = args[++i];
-                if (args[i] == "--properties")
+                if (args[i] == ParamsConstants.Namespace) Namespace = args[++i];
+                if (args[i] == ParamsConstants.Class) ClassName = args[++i];
+                if (args[i] == ParamsConstants.Properies)
                 {
                     i++;
                     var list = new List<KeyValuePair<string, string>>();
@@ -27,5 +27,13 @@ namespace CodeGenerator.Console
         public string ClassName { get; set; }
         public IEnumerable<KeyValuePair<string, string>> Properties { get; set; }
 
+    }
+
+    public static class ParamsConstants
+    {
+        public static string Help = "--help";
+        public static string Namespace = "--namespace";
+        public static string Class = "--class";
+        public static string Properies = "--properties";
     }
 }
