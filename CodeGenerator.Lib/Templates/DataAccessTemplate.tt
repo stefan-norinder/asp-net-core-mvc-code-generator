@@ -8,7 +8,9 @@
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-namespace <#= namespaceName #>.Logic.DataAccess
+using <#= namespaceName #>.Lib.Model;
+
+namespace <#= namespaceName #>.Lib.DataAccess
 {
     public interface I<#= Model.Name #>EntityDataAccess : IDataAccess<<#= Model.Name #>Entity>
     {    }

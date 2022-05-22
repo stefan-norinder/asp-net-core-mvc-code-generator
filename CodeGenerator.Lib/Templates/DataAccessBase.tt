@@ -8,7 +8,7 @@
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-namespace <#= namespaceName #>.Logic.DataAccess
+namespace <#= namespaceName #>.Lib.DataAccess
 {
     public interface IDataAccess<T>
     {

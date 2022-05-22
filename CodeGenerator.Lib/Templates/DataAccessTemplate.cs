@@ -32,58 +32,65 @@ namespace CodeGenerator.Lib.Templates
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-namespace ");
+using ");
             
             #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Logic.DataAccess\r\n{\r\n    public interface I");
+            this.Write(".Lib.Model;\r\n\r\nnamespace ");
             
             #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.DataAccess\r\n{\r\n    public interface I");
+            
+            #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("EntityDataAccess : IDataAccess<");
             
-            #line 13 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Entity>\r\n    {    }\r\n\r\n    public class ");
             
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("EntityDataAccess : BaseDataAccess<");
             
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Entity>, I");
             
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("EntityDataAccess\r\n    {\r\n        public ");
             
-            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<");
             
-            #line 18 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default

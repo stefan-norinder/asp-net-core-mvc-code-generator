@@ -39,21 +39,21 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Logic.DataAccess;\r\nusing ");
+            this.Write(".Lib.DataAccess;\r\nusing ");
             
             #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Models;\r\nusing Microsoft.Extensions.Logging;\r\n\r\nnamespace ");
+            this.Write(".Lib.Model;\r\nusing Microsoft.Extensions.Logging;\r\n\r\nnamespace ");
             
             #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Services\r\n{\r\n    public interface I");
+            this.Write(".Lib.Services\r\n{\r\n    public interface I");
             
             #line 17 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

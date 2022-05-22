@@ -8,11 +8,11 @@
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-using <#= namespaceName #>.Logic.DataAccess;
-using <#= namespaceName #>.Models;
+using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Lib.Model;
 using Microsoft.Extensions.Logging;
 
-namespace <#= namespaceName #>.Services
+namespace <#= namespaceName #>.Lib.Services
 {
     public interface I<#= Model.Name #>Service : IService<<#= Model.Name #>>
     {
