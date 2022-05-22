@@ -10,8 +10,8 @@ namespace CodeGenerator.Lib.Services
         DataAccess = 4,
         Factories = 8,
         Services = 16,
-        Models = 32,
-        All = Api + Controllers + DataAccess + Factories + Services
+        Models = 32, 
+        All = DataAccess | Services | Models
     }
     public static class CodeGeneratorTypesExtensions
     {
@@ -19,5 +19,12 @@ namespace CodeGenerator.Lib.Services
         {
             return (type & checkflag) == checkflag;
         }
+
+        //public static CodeGeneratorTypes All()
+        //{
+
+        //    return (int) CodeGeneratorTypes.DataAccess + (int)CodeGeneratorTypes.Models + (int) CodeGeneratorTypes.Services;
+        //// All = Api + Controllers + DataAccess + Factories + Services + Models
+        //}
     }
 }

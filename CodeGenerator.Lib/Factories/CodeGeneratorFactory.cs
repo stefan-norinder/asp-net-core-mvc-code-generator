@@ -36,9 +36,9 @@ namespace CodeGenerator.Lib.Factories
                     return new ModelGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Services:
                     return new ServiceGenerator(generationModelFetcher, output);
-                case CodeGeneratorTypes.Api:
-                case CodeGeneratorTypes.Controllers:
-                case CodeGeneratorTypes.Factories:
+                    // case CodeGeneratorTypes.Api:
+                    //  case CodeGeneratorTypes.Controllers:
+                    // case CodeGeneratorTypes.Factories:
                     throw new NotImplementedException();
                 default:
                     throw new ArgumentException();
@@ -53,7 +53,7 @@ namespace CodeGenerator.Lib.Factories
             IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes = null)
         {
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
-            foreach (var type in allCodeGeneratorTypes.Where(type => types.HasFlag(type)))
+            foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && types.HasFlag(type)))
             {
                 yield return CreateInstance(type, fetcherType, namespaceName, className, propertiesAndDataTypes);
             }
