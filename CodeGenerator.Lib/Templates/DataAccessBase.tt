@@ -7,6 +7,9 @@
 //---------------------------------------------------------------------------------------
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
+using <#= namespaceName #>.Lib.DataAccess;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace <#= namespaceName #>.Lib.DataAccess
 {
@@ -23,10 +26,10 @@ namespace <#= namespaceName #>.Lib.DataAccess
     public class BaseDataAccess<T> : IDataAccess<T>
     {
         protected readonly ISqlDataAccess db;
-        private readonly SqlStringBuilderDataAccess<T> sqlStringBuilder;
+        private readonly SqlStringBuilder<T> sqlStringBuilder;
 
         public BaseDataAccess(ISqlDataAccess db,
-            SqlStringBuilderDataAccess<T> sqlStringBuilder)
+            SqlStringBuilder<T> sqlStringBuilder)
         {
             this.db = db;
             this.sqlStringBuilder = sqlStringBuilder;

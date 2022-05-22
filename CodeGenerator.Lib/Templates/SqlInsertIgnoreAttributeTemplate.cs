@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class SqlStringBuilderTemplate : SqlStringBuilderTemplateBase
+    public partial class SqlInsertIgnoreAttributeTemplate : SqlInsertIgnoreAttributeTemplateBase
     {
 #line hidden
         /// <summary>
@@ -32,74 +32,17 @@ namespace CodeGenerator.Lib.Templates
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-using ");
+using System;
+
+namespace ");
             
-            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.Model;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;" +
-                    "\r\nusing System.Reflection;\r\n\r\nnamespace ");
-            
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
-            
-            #line default
-            #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n    public class SqlStringBuilder<T>\r\n    {\r\n        private " +
-                    "BuilderType type;\r\n\r\n        private enum BuilderType\r\n        {\r\n            In" +
-                    "sert = 1,\r\n            Update = 2\r\n        }\r\n\r\n        public string GetInsertS" +
-                    "tring(T entity)\r\n        {\r\n            type = BuilderType.Insert;\r\n            " +
-                    "var dictionary = GetDictionary(entity);\r\n            return dictionary.CreateIns" +
-                    "ertString<T>();\r\n        }\r\n\r\n        public string GetUpdateString(T entity)\r\n " +
-                    "       {\r\n            type = BuilderType.Update;\r\n            var dictionary = G" +
-                    "etDictionary(entity);\r\n            return dictionary.CreateUpdateString<T>();\r\n " +
-                    "       }\r\n\r\n        #region private\r\n\r\n        private Dictionary<string, string" +
-                    "> GetDictionary(T entity)\r\n        {\r\n            var dictionary = new Dictionar" +
-                    "y<string, string>();\r\n            foreach (PropertyInfo pi in typeof(T).GetPrope" +
-                    "rties(BindingFlags.Public | BindingFlags.Instance))\r\n            {\r\n            " +
-                    "    if ((type == BuilderType.Insert || type == BuilderType.Update) && pi.GetCust" +
-                    "omAttribute(typeof(SqlInsertIgnoreAttribute)) != null) continue;\r\n              " +
-                    "  string value;\r\n                if (pi.PropertyType == typeof(DateTime) && (Pro" +
-                    "pertyIsNull(entity, pi) || PropertyIsDateTimeNullRepresentation(entity, pi)))\r\n " +
-                    "               {\r\n                    value = null;\r\n                }\r\n        " +
-                    "        else if (PropertyIsNull(entity, pi))\r\n                {\r\n               " +
-                    "     value = null;\r\n                }\r\n                else if (pi.PropertyType " +
-                    "== typeof(string))\r\n                {\r\n                    var str = pi.GetValue" +
-                    "(entity).ToString();\r\n                    value = str.Replace(\"\'\", \"\'\'\");\r\n     " +
-                    "           }\r\n                else\r\n                {\r\n                    value" +
-                    " = pi.GetValue(entity).ToString();\r\n                }\r\n                dictionar" +
-                    "y.Add(pi.Name, value);\r\n            }\r\n\r\n            return dictionary;\r\n       " +
-                    " }\r\n\r\n        private static bool PropertyIsDateTimeNullRepresentation(T entity," +
-                    " PropertyInfo pi)\r\n        {\r\n            DateTime dateTime;\r\n            var en" +
-                    "tityAsString = pi.GetValue(entity).ToString();\r\n            if (!DateTime.TryPar" +
-                    "se(entityAsString, out dateTime))\r\n            {\r\n                return false;\r" +
-                    "\n            }\r\n            return dateTime == DateTime.MinValue;\r\n        }\r\n\r\n" +
-                    "        private static bool PropertyIsNull(T entity, PropertyInfo pi)\r\n        {" +
-                    "\r\n            return pi.GetValue(entity) == null;\r\n        }\r\n\r\n        #endregi" +
-                    "on\r\n    }\r\n\r\n    public static partial class StringExtentions\r\n    {\r\n        pu" +
-                    "blic static string RemoveLast(this string str, int numberOfCharactersToRemove)\r\n" +
-                    "        {\r\n            return str.Remove(str.Length - numberOfCharactersToRemove" +
-                    ");\r\n        }\r\n    }\r\n\r\n    public static partial class DictionaryExtentions\r\n  " +
-                    "  {\r\n        public static string CreateInsertString<T>(this Dictionary<string, " +
-                    "string> dictionary)\r\n        {\r\n            var insertStringHead = $\"insert into" +
-                    " {typeof(T).Name} (\";\r\n            var insertStringTail = \"values (\";\r\n         " +
-                    "   foreach (var item in dictionary)\r\n            {\r\n                insertString" +
-                    "Head += $\"[{item.Key}], \";\r\n                var value = dictionary[item.Key];\r\n " +
-                    "               insertStringTail += value == null ? \"NULL, \" : \"\'\" + value + \"\', " +
-                    "\";\r\n            }\r\n            insertStringHead = insertStringHead.RemoveLast(2)" +
-                    ";\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n           " +
-                    " return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r\n        " +
-                    "public static string CreateUpdateString<T>(this Dictionary<string, string> dicti" +
-                    "onary)\r\n        {\r\n            var updateString = $\"update {typeof(T).Name} set " +
-                    "\";\r\n            foreach (var item in dictionary.Where(x => x.Key != \"Id\"))\r\n    " +
-                    "        {\r\n                var value = dictionary[item.Key];\r\n\r\n                " +
-                    "var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\', \";\r\n\r\n           " +
-                    "     updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n            }\r\n        " +
-                    "    updateString = updateString.RemoveLast(2);\r\n\r\n            updateString += \" " +
-                    "where Id = \" + dictionary[\"Id\"];\r\n\r\n            return updateString;\r\n        }\r" +
-                    "\n    }\r\n}\r\n");
+            this.Write(".Lib.DataAccess\r\n{\r\n    public class SqlInsertIgnoreAttribute : Attribute\r\n    { " +
+                    "   }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -111,7 +54,7 @@ using ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class SqlStringBuilderTemplateBase
+    public class SqlInsertIgnoreAttributeTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

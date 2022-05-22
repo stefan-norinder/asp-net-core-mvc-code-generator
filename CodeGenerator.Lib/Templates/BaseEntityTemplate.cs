@@ -32,9 +32,11 @@ namespace CodeGenerator.Lib.Templates
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
+using System;
+
 namespace ");
             
-            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -56,6 +58,11 @@ namespace ");
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);
+        }
+
+        private bool BothEntitiesAreNew(Entity castedObj)
+        {
+            return Id == 0 && castedObj.Id == 0;
         }
     }
 }");

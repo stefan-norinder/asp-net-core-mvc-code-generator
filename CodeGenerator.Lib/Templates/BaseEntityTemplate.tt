@@ -7,6 +7,8 @@
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
+using System;
+
 namespace <#= namespaceName #>.Lib.Model
 {
     public class Entity
@@ -24,6 +26,11 @@ namespace <#= namespaceName #>.Lib.Model
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);
+        }
+
+        private bool BothEntitiesAreNew(Entity castedObj)
+        {
+            return Id == 0 && castedObj.Id == 0;
         }
     }
 }

@@ -50,6 +50,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\SqlDataAccessTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SqlDataAccessTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\SqlInsertIgnoreAttributeTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SqlInsertIgnoreAttributeTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\SqlStringBuilderTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -85,6 +95,14 @@
     <None Update="Templates\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\SqlDataAccessTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SqlDataAccessTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\SqlInsertIgnoreAttributeTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SqlInsertIgnoreAttributeTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\SqlStringBuilderTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

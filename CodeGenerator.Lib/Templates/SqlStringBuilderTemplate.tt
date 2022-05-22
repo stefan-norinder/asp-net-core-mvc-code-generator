@@ -7,6 +7,12 @@
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
+using <#= namespaceName #>.Lib.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
 namespace <#= namespaceName #>.Lib.DataAccess
 {
     public class SqlStringBuilder<T>

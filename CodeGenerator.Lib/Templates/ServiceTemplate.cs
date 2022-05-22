@@ -67,7 +67,7 @@ using ");
             
             #line default
             #line hidden
-            this.Write(">\r\n    {\r\n    }\r\n\r\n    public class ");
+            this.Write("Entity>\r\n    {\r\n    }\r\n\r\n    public class ");
             
             #line 21 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -81,7 +81,7 @@ using ");
             
             #line default
             #line hidden
-            this.Write(">, I");
+            this.Write("Entity>, I");
             
             #line 21 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -109,8 +109,8 @@ using ");
             
             #line default
             #line hidden
-            this.Write("DataAccess dataAccess)\r\n           : base(logger, dataAccess)\r\n        { }\r\n    }" +
-                    "\r\n}\r\n");
+            this.Write("EntityDataAccess dataAccess)\r\n           : base(logger, dataAccess)\r\n        { }\r" +
+                    "\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

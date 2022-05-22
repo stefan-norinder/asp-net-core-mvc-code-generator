@@ -18,7 +18,9 @@ namespace CodeGenerator.Lib.Services
         {
             return new List<Tuple<string, string>> {
                 new Tuple<string, string>("Base", new DataAccessBase(namespaceName).TransformText()),
-                new Tuple<string, string>("SqlStringBuilder", new SqlStringBuilderTemplate(namespaceName).TransformText())
+                new Tuple<string, string>("SqlStringBuilder", new SqlStringBuilderTemplate(namespaceName).TransformText()),
+                new Tuple<string, string>("SqlDataAccess", new SqlDataAccessTemplate(namespaceName).TransformText()),
+                new Tuple<string, string>("SqlInsertIgnoreAttribute", new SqlInsertIgnoreAttributeTemplate(namespaceName).TransformText())
             };
         }
 

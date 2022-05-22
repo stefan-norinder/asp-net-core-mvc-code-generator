@@ -14,14 +14,14 @@ using Microsoft.Extensions.Logging;
 
 namespace <#= namespaceName #>.Lib.Services
 {
-    public interface I<#= Model.Name #>Service : IService<<#= Model.Name #>>
+    public interface I<#= Model.Name #>Service : IService<<#= Model.Name #>Entity>
     {
     }
 
-    public class <#= Model.Name #>Service : Service<<#= Model.Name #>>, I<#= Model.Name #>Service
+    public class <#= Model.Name #>Service : Service<<#= Model.Name #>Entity>, I<#= Model.Name #>Service
     {
         public <#= Model.Name #>Service(ILogger<<#= Model.Name #>Service> logger,
-           I<#= Model.Name #>DataAccess dataAccess)
+           I<#= Model.Name #>EntityDataAccess dataAccess)
            : base(logger, dataAccess)
         { }
     }

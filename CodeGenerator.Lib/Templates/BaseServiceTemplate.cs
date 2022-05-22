@@ -32,9 +32,24 @@ namespace CodeGenerator.Lib.Templates
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
 
-namespace ");
+using ");
             
             #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.Model;\r\nusing ");
+            
+            #line 11 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Threading.Tas" +
+                    "ks;\r\n\r\nnamespace ");
+            
+            #line 15 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
