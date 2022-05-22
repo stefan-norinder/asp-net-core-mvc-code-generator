@@ -4,14 +4,16 @@ namespace CodeGenerator.Lib.Services
 {
     public interface IOutputAdapter
     {
-        void Write(string[] strings);
+        void Write(string basePath, string filename, string content);
     }
 
     public class FileWriterOutputAdapter : IOutputAdapter
     {
-        public void Write(string[] strings)
+        public void Write(string basePath, string filename, string content)
         {
-            foreach(var str in strings) File.WriteAllText("output.cs", str);
+            Directory.CreateDirectory(basePath);
+            var path = Path.Combine(basePath, filename);
+            File.WriteAllText(path, content);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Templates;
-using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace CodeGenerator.Lib.Services
 {
@@ -12,10 +11,15 @@ namespace CodeGenerator.Lib.Services
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        public override string[] GenerateTemplatesFromModel(CodeGenerationModel model)
+        protected override string ClassTypeDescription => "DataAccess";
+
+        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            var template = new DataAccessTemplate(model.NamespaceName, model.Classes.First());
-            return new [] { template.TransformText() };
+            foreach (var @class in model.Classes)
+            {
+                var template = new DataAccessTemplate(model.NamespaceName, @class);
+                yield return template.TransformText();
+            }
         }
     }
 }

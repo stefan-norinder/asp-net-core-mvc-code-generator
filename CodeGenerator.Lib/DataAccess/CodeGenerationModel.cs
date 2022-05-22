@@ -12,6 +12,8 @@ namespace CodeGenerator.Lib.DataAccess
 
         public string NamespaceName { get; private set; }
         public List<Class> Classes { get; set; } = new List<Class>();
+
+        public override string ToString() => NamespaceName;
     }
 
     public class Class
@@ -26,6 +28,8 @@ namespace CodeGenerator.Lib.DataAccess
             initialList.AddRange(newColumns);
             Properties = initialList;
         }
+
+        public override string ToString() => Name;
     }
 
     public class Proprety

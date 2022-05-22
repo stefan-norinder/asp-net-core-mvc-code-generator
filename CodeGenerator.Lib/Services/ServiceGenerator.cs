@@ -11,7 +11,9 @@ namespace CodeGenerator.Lib.Services
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        public override string[] GenerateTemplatesFromModel(CodeGenerationModel model)
+        protected override string ClassTypeDescription => "Service";
+
+        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
             var list = new List<string>();
             foreach (var @class in model.Classes)

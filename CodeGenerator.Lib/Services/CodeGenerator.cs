@@ -1,4 +1,6 @@
 ﻿using CodeGenerator.Lib.DataAccess;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeGenerator.Lib.Services
 {
@@ -7,7 +9,7 @@ namespace CodeGenerator.Lib.Services
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
         private readonly IOutputAdapter output;
 
-        public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher, 
+        public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,
             IOutputAdapter output)
         {
             this.codeGeneratorFetcher = codeGeneratorFetcher;
@@ -20,9 +22,23 @@ namespace CodeGenerator.Lib.Services
 
             var templates = GenerateTemplatesFromModel(model);
 
-            output.Write(templates);
+            OutputTemplate(model.Classes, templates);
         }
 
-        public abstract string[] GenerateTemplatesFromModel(CodeGenerationModel model);
+        private void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates)
+        {
+            for (int i = 0; i < classes.Count(); i++)
+            {
+                var @class = classes.ElementAt(i);
+                var file = $"{@class}{ClassTypeDescription}.cs";
+                output.Write(BasePath, file, templates.ToList().ElementAt(i));
+            }
+        }
+
+        protected virtual string BasePath { get { return $"./src/{ClassTypeDescription}"; } }
+
+        protected abstract string ClassTypeDescription { get; }
+
+        protected abstract IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model);
     }
 }

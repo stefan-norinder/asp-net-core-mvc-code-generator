@@ -41,7 +41,8 @@ namespace CodeGenerator.Test
                              }
                         } ";
             controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
-            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected,templates.First()))));
+            outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
+
         }
 
         [Test]
@@ -66,7 +67,7 @@ namespace CodeGenerator.Test
             };
 
             controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", "Person", list);
-            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected, templates.First()))));
+            outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
 
@@ -103,7 +104,7 @@ namespace CodeGenerator.Test
             };
 
             controller.Run(CodeGeneratorTypes.Services, CodeGeneratorFetcherTypes.FromString, "Example", "Person", list);
-            outputMock.Verify(x => x.Write(It.Is<string[]>(templates => AssertAreEqual(expected, templates.First()))));
+            outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
         private static bool AssertAreEqual(string expected, string actual)
