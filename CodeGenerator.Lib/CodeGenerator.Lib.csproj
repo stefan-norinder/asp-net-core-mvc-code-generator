@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\BaseEntityTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BaseEntityTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\DataAccessBase.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -48,6 +53,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\BaseEntityTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>BaseEntityTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\DataAccessBase.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataAccessBase.cs</LastGenOutput>

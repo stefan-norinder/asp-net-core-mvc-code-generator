@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Services
 
         protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
         {
-            return Enumerable.Empty<Tuple<string, string>>();
+            return new List<Tuple<string, string>> { new Tuple<string, string>("Entity",new BaseEntityTemplate(namespaceName).TransformText()) };
         }
 
         protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
