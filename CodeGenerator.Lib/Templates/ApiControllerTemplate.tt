@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------------------
 
 using <#= namespaceName #>.Lib.Model;
-using <#= namespaceName #>.Lib.Service;
+using <#= namespaceName #>.Lib.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -31,7 +31,7 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<string> Get()
         {
             var items = await service.GetAll();
             return JsonConvert.SerializeObject(items);
@@ -47,15 +47,15 @@ namespace <#= namespaceName #>.Web.ApiController
         [HttpPost]
         public async Task Post([FromBody] string value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>Entity>(value);
            await service.Insert(item);
         }
 
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] string value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
-           await service.Update(id, item);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>Entity>(value);
+           await service.Update(item);
         }
 
         [HttpDelete("{id}")]

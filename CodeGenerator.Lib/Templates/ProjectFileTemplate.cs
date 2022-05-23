@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProjectFileTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProjectFileTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ProjectFileTemplate : ProjectFileTemplateBase
     {
@@ -38,6 +38,7 @@ namespace CodeGenerator.Lib.Templates
 
   <ItemGroup>
     <PackageReference Include=""Dapper"" Version=""2.0.123"" />
+    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Core"" Version=""2.2.5"" />
     <PackageReference Include=""Microsoft.Extensions.Configuration.Abstractions"" Version=""5.0.0"" />
     <PackageReference Include=""Microsoft.Extensions.Logging.Abstractions"" Version=""5.0.0"" />
     <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.3"" />

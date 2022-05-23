@@ -28,11 +28,11 @@ namespace CodeGenerator.Lib.Services
             }
         }
 
-        public void Run(CodeGeneratorTypes alltypes, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel)
+        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel)
         {
             foreach (var @class in paramsModel.Classes)
             {
-                Run(CodeGeneratorTypes.All, fetcherTypes, paramsModel.Namespace, @class.ClassName, @class.Properties);
+                Run(types, fetcherTypes, paramsModel.Namespace, @class.ClassName, @class.Properties);
             }
         }
     }

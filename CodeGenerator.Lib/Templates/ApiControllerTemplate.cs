@@ -46,9 +46,9 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Service;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore.Mv" +
-                    "c;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
-                    "ading.Tasks;\r\n\r\nnamespace ");
+            this.Write(".Lib.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore.M" +
+                    "vc;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.Thr" +
+                    "eading.Tasks;\r\n\r\nnamespace ");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
@@ -105,7 +105,7 @@ using ");
         }
 
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<string> Get()
         {
             var items = await service.GetAll();
             return JsonConvert.SerializeObject(items);
@@ -128,18 +128,18 @@ using ");
             
             #line default
             #line hidden
-            this.Write(">(value);\r\n           await service.Insert(item);\r\n        }\r\n\r\n        [HttpPut(" +
-                    "\"{id}\")]\r\n        public async Task Put(int id, [FromBody] string value)\r\n      " +
-                    "  {\r\n           var item = JsonConvert.DeserializeObject<");
+            this.Write("Entity>(value);\r\n           await service.Insert(item);\r\n        }\r\n\r\n        [Ht" +
+                    "tpPut(\"{id}\")]\r\n        public async Task Put(int id, [FromBody] string value)\r\n" +
+                    "        {\r\n           var item = JsonConvert.DeserializeObject<");
             
             #line 57 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">(value);\r\n           await service.Update(id, item);\r\n        }\r\n\r\n        [Http" +
-                    "Delete(\"{id}\")]\r\n        public async Task Delete(int id)\r\n        {\r\n          " +
-                    "     await service.Delete(id);\r\n        }\r\n    }\r\n}");
+            this.Write("Entity>(value);\r\n           await service.Update(item);\r\n        }\r\n\r\n        [Ht" +
+                    "tpDelete(\"{id}\")]\r\n        public async Task Delete(int id)\r\n        {\r\n        " +
+                    "       await service.Delete(id);\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
