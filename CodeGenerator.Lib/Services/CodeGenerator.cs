@@ -11,6 +11,7 @@ namespace CodeGenerator.Lib.Services
     {
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
         private readonly IOutputAdapter output;
+        private string namespaceName;
 
         public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,
             IOutputAdapter output)
@@ -23,29 +24,31 @@ namespace CodeGenerator.Lib.Services
         {
 
             var model = codeGeneratorFetcher.Get();
+            namespaceName = model.NamespaceName;
 
             var templates = GenerateTemplatesFromModel(model);
 
             OutputTemplate(model.Classes, templates);
-            
-            GenerateProjectFileFromTemplate(model.NamespaceName);
 
-            var staticNameAndTemplates = GenerateStaticTemplates(model.NamespaceName);
+            GenerateProjectFileFromTemplate();
+
+            var staticNameAndTemplates = GenerateStaticTemplates(namespaceName);
 
             OutputTemplate(staticNameAndTemplates);
         }
 
-        private void GenerateProjectFileFromTemplate(string name)
+        private void GenerateProjectFileFromTemplate()
         {
             var template = new ProjectFileTemplate().TransformText();
-            output.Write(baseFolder,$"{name}.csproj",template);
+            output.Write(baseFolder, $"{namespaceName}.csproj", template);
         }
 
         private string baseFolder { get { return "./src/"; } }
-        protected virtual string BasePath { get { return $"{baseFolder}{ClassTypeDescription}"; } }
-        
+
+        protected virtual string BasePath => $"{baseFolder}{namespaceName}.Lib/{namespaceName}.Lib.{ClassTypeDescription}";
+
         protected abstract string ClassTypeDescription { get; }
-        
+
         protected abstract IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model);
 
         protected abstract IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName);
@@ -71,11 +74,11 @@ namespace CodeGenerator.Lib.Services
                 var @class = classes.ElementAt(i);
                 var file = $"{@class}{ClassTypeDescription}.cs";
                 var content = templates.ToList().ElementAt(i);
-                Output(BasePath,file, content);
+                Output(BasePath, file, content);
             }
         }
 
-        private void Output(string basePath,string file, string content)
+        private void Output(string basePath, string file, string content)
         {
             output.Write(basePath, file, content);
         }
