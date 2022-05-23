@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class BaseServiceTemplate : BaseServiceTemplateBase
+    public partial class ControllerTemplate : ControllerTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,76 +34,71 @@ namespace CodeGenerator.Lib.Templates
 
 using ");
             
-            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Lib.Model;\r\nusing ");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections.G" +
-                    "eneric;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
+            this.Write(".Lib.Service;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Loggin" +
+                    "g;\r\nusing System.Diagnostics;\r\n\r\nnamespace ");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(@".Lib.Model
-{
-     public interface IService<TModel>
-    {  
-        Task<TModel> Get(int id);
-        Task<IEnumerable<TModel>> GetAll();
-        Task Insert(TModel model);
-        Task Update(TModel model);
-        Task Delete(int id);
-    }
-
-    public class Service<TModel> : IService<TModel> where TModel : Entity
-    {
-        protected readonly ILogger<Service<TModel>> logger;
-        protected readonly IDataAccess<TModel> dataAccess;
-
-        public Service(ILogger<Service<TModel>> logger,
-            IDataAccess<TModel> dataAccess)
-        {
-            this.logger = logger;
-            this.dataAccess = dataAccess;
-        }
-
-        public async Task<TModel> Get(int id)
-        {
-            return await dataAccess.Get(id);
-        }
-
-        public async Task<IEnumerable<TModel>> GetAll()
-        {
-            return await dataAccess.GetAll();
-        }
-
-        public async virtual Task Insert(TModel model)
-        {
-            await dataAccess.Insert(model);
-        }
-
-        public async virtual Task Update(TModel model)
-        {
-            await dataAccess.Update(model);
-        }
-
-        public async Task Delete(int id)
-        {
-            await dataAccess.Delete(id);
-        }
-    }
-}
-");
+            this.Write(".Web.Controller\r\n{\r\n    public class ");
+            
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller : Controller\r\n    {\r\n        private readonly ILogger<");
+            
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller> logger;\r\n        private readonly I");
+            
+            #line 21 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service service;\r\n\r\n        public ");
+            
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller(ILogger<");
+            
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller> logger, I");
+            
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service service)\r\n        {\r\n            this.logger = logger;\r\n            this." +
+                    "service = service;\r\n        }\r\n\r\n        public IActionResult Index()\r\n        {" +
+                    "\r\n            return View();\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -115,7 +110,7 @@ using ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class BaseServiceTemplateBase
+    public class ControllerTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

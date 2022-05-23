@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class BaseServiceTemplate : BaseServiceTemplateBase
+    public partial class ApiControllerTemplate : ApiControllerTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,76 +34,112 @@ namespace CodeGenerator.Lib.Templates
 
 using ");
             
-            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Lib.Model;\r\nusing ");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections.G" +
-                    "eneric;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
+            this.Write(".Lib.Service;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore.Mv" +
+                    "c;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.Thre" +
+                    "ading.Tasks;\r\n\r\nnamespace ");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(@".Lib.Model
-{
-     public interface IService<TModel>
-    {  
-        Task<TModel> Get(int id);
-        Task<IEnumerable<TModel>> GetAll();
-        Task Insert(TModel model);
-        Task Update(TModel model);
-        Task Delete(int id);
-    }
-
-    public class Service<TModel> : IService<TModel> where TModel : Entity
-    {
-        protected readonly ILogger<Service<TModel>> logger;
-        protected readonly IDataAccess<TModel> dataAccess;
-
-        public Service(ILogger<Service<TModel>> logger,
-            IDataAccess<TModel> dataAccess)
+            this.Write(".Web.ApiController\r\n{ \r\n    [Route(\"api/v1/[controller]\")]\r\n    [ApiController]\r\n" +
+                    "    public class ");
+            
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller: ControllerBase\r\n    {\r\n        private readonly ILogger<");
+            
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller> logger;\r\n        private readonly I");
+            
+            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service service;\r\n\r\n        public ");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller(ILogger<");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Controller> logger, I");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@"Service service)
         {
             this.logger = logger;
-            this.dataAccess = dataAccess;
+            this.service = service;
         }
 
-        public async Task<TModel> Get(int id)
+        [HttpGet]
+        public async Task<IEnumerable<string>> Get()
         {
-            return await dataAccess.Get(id);
+            var items = await service.GetAll();
+            return JsonConvert.SerializeObject(items);
         }
 
-        public async Task<IEnumerable<TModel>> GetAll()
+        [HttpGet(""{id}"")]
+        public async Task<string> Get(int id)
         {
-            return await dataAccess.GetAll();
+            var item = await service.Get(id);
+            return JsonConvert.SerializeObject(item);
         }
 
-        public async virtual Task Insert(TModel model)
+        [HttpPost]
+        public async Task Post([FromBody] string value)
         {
-            await dataAccess.Insert(model);
-        }
-
-        public async virtual Task Update(TModel model)
-        {
-            await dataAccess.Update(model);
-        }
-
-        public async Task Delete(int id)
-        {
-            await dataAccess.Delete(id);
-        }
-    }
-}
-");
+           var item = JsonConvert.DeserializeObject<");
+            
+            #line 50 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(value);\r\n           await service.Insert(item);\r\n        }\r\n\r\n        [HttpPut(" +
+                    "\"{id}\")]\r\n        public async Task Put(int id, [FromBody] string value)\r\n      " +
+                    "  {\r\n           var item = JsonConvert.DeserializeObject<");
+            
+            #line 57 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(value);\r\n           await service.Update(id, item);\r\n        }\r\n\r\n        [Http" +
+                    "Delete(\"{id}\")]\r\n        public async Task Delete(int id)\r\n        {\r\n          " +
+                    "     await service.Delete(id);\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -115,7 +151,7 @@ using ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class BaseServiceTemplateBase
+    public class ApiControllerTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

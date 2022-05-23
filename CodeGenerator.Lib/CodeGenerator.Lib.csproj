@@ -15,6 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Templates\ApiControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\BaseEntityTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -24,6 +29,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>BaseServiceTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\ControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ControllerTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\DataAccessBase.cs">
       <DesignTime>True</DesignTime>
@@ -68,6 +78,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\ApiControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ApiControllerTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\BaseEntityTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BaseEntityTemplate.cs</LastGenOutput>
@@ -75,6 +89,10 @@
     <None Update="Templates\BaseServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>BaseServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\ControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ControllerTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\DataAccessBase.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

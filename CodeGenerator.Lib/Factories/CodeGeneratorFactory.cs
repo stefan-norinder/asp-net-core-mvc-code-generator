@@ -24,8 +24,8 @@ namespace CodeGenerator.Lib.Factories
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
             CodeGeneratorFetcherTypes fetcherType,
             string namespaceName,
-            string className, 
-            IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes=null)
+            string className,
+            IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes = null)
         {
             var generationFactory = new GenerationModelFetcherFactory(namespaceName, className, propertiesAndDataTypes);
             var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
@@ -37,10 +37,10 @@ namespace CodeGenerator.Lib.Factories
                     return new ModelGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Services:
                     return new ServiceGenerator(generationModelFetcher, output);
-                    // case CodeGeneratorTypes.Api:
-                    //  case CodeGeneratorTypes.Controllers:
-                    // case CodeGeneratorTypes.Factories:
-                    throw new NotImplementedException();
+                case CodeGeneratorTypes.Api:
+                    return new ApiControllerGenerator(generationModelFetcher, output);
+                case CodeGeneratorTypes.Controllers:
+                    return new ControllerGenerator(generationModelFetcher, output);
                 default:
                     throw new ArgumentException();
             }

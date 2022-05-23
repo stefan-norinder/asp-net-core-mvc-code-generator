@@ -8,7 +8,6 @@ namespace CodeGenerator.Lib.Utils
         Api = 1,
         Controllers = 2,
         DataAccess = 4,
-        Factories = 8,
         Services = 16,
         Models = 32,
         All = DataAccess | Services | Models
