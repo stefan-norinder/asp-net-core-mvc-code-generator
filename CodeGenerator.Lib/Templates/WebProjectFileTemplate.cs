@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProjectFileTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ProjectFileTemplate : ProjectFileTemplateBase
+    public partial class WebProjectFileTemplate : WebProjectFileTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,23 +28,24 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<!-- This is an auto generated file. Don't make any changes because they may be overwritten -->
-<Project Sdk=""Microsoft.NET.Sdk"">
-
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <Version>0.0.1</Version>
-    <Description>Auto generated project</Description>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""Dapper"" Version=""2.0.123"" />
-    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Core"" Version=""2.2.5"" />
-    <PackageReference Include=""Microsoft.Extensions.Configuration.Abstractions"" Version=""5.0.0"" />
-    <PackageReference Include=""Microsoft.Extensions.Logging.Abstractions"" Version=""5.0.0"" />
-    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.3"" />
-  </ItemGroup>
-</Project>");
+            this.Write("<!-- This is an auto generated file. Don\'t make any changes because they may be o" +
+                    "verwritten -->\r\n<Project Sdk=\"Microsoft.NET.Sdk.Web\">\r\n\r\n  <PropertyGroup>\r\n    " +
+                    "<TargetFramework>net5.0</TargetFramework>\r\n  </PropertyGroup>\r\n  \r\n  <ItemGroup>" +
+                    "\r\n    ");
+            
+            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+ var projectRef = $"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />"; 
+            
+            #line default
+            #line hidden
+            this.Write("    ");
+            
+            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(projectRef));
+            
+            #line default
+            #line hidden
+            this.Write("    \r\n  </ItemGroup>\r\n\r\n</Project>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -56,7 +57,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ProjectFileTemplateBase
+    public class WebProjectFileTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

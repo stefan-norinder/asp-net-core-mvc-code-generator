@@ -75,6 +75,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SqlStringBuilderTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\WebProjectFileTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WebProjectFileTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -125,6 +130,10 @@
     <None Update="Templates\SqlStringBuilderTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>SqlStringBuilderTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\WebProjectFileTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>WebProjectFileTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

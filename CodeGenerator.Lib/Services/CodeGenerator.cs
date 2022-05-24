@@ -11,7 +11,7 @@ namespace CodeGenerator.Lib.Services
     {
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
         private readonly IOutputAdapter output;
-        private string namespaceName;
+        protected string namespaceName;
 
         public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,
             IOutputAdapter output)
@@ -22,8 +22,8 @@ namespace CodeGenerator.Lib.Services
 
         public virtual void Invoke()
         {
-
             var model = codeGeneratorFetcher.Get();
+
             namespaceName = model.NamespaceName;
 
             var templates = GenerateTemplatesFromModel(model);
@@ -39,13 +39,17 @@ namespace CodeGenerator.Lib.Services
 
         private void GenerateProjectFileFromTemplate()
         {
-            var template = new ProjectFileTemplate().TransformText();
-            output.Write(baseFolder, $"{namespaceName}.csproj", template);
+            output.Write(BaseFolderPath, $"{ProjectType}.csproj", ProjectTemplate);
         }
+
+        protected abstract string ProjectTemplate { get; }
 
         private string baseFolder { get { return "./src/"; } }
 
-        protected virtual string BasePath => $"{baseFolder}{namespaceName}.Lib/{namespaceName}.Lib.{ClassTypeDescription}";
+        protected virtual string BaseFolderPath => $"{baseFolder}{namespaceName}.{ProjectType}";
+        protected virtual string FolderPath => $"{BaseFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
+
+        protected abstract string ProjectType { get; }
 
         protected abstract string ClassTypeDescription { get; }
 
@@ -74,7 +78,7 @@ namespace CodeGenerator.Lib.Services
                 var @class = classes.ElementAt(i);
                 var file = $"{@class}{ClassTypeDescription}.cs";
                 var content = templates.ToList().ElementAt(i);
-                Output(BasePath, file, content);
+                Output(FolderPath, file, content);
             }
         }
 
@@ -84,5 +88,11 @@ namespace CodeGenerator.Lib.Services
         }
 
         #endregion
+
+        protected static class ProjectTypeConstant
+        {
+            public static string Logic = "Lib";
+            public static string Web = "Web";
+        }
     }
 }

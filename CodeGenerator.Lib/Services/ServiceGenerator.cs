@@ -14,6 +14,7 @@ namespace CodeGenerator.Lib.Services
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
+        protected override string ProjectType => ProjectTypeConstant.Logic;
         protected override string ClassTypeDescription => "Service";
 
         protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
@@ -33,5 +34,7 @@ namespace CodeGenerator.Lib.Services
 
             return list.ToArray();
         }
+
+        protected override string ProjectTemplate => new ProjectFileTemplate().TransformText();
     }
 }

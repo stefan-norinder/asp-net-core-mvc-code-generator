@@ -3,6 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<!-- This is an auto generated file. Don't make any changes because they may be overwritten -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>

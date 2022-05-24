@@ -12,6 +12,7 @@ namespace CodeGenerator.Lib.Services
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
+        protected override string ProjectType => ProjectTypeConstant.Logic;
         protected override string ClassTypeDescription => "DataAccess";
 
         protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
@@ -28,9 +29,11 @@ namespace CodeGenerator.Lib.Services
         {
             foreach (var @class in model.Classes)
             {
-                var template = new DataAccessTemplate(model.NamespaceName, @class);
+                var template = new DataAccessTemplate(namespaceName, @class);
                 yield return template.TransformText();
             }
         }
+
+        protected override string ProjectTemplate => new ProjectFileTemplate().TransformText();
     }
 }
