@@ -8,30 +8,27 @@ using System.Linq;
 namespace CodeGenerator.Lib.Services
 {
 
-    public class ApiControllerGenerator : CodeGenerator
+    public class WebRootGenerator : CodeGenerator
     {
-        public ApiControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
+        public WebRootGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Web;
-        protected override string ClassTypeDescription => "ApiController";
+        protected override string ClassTypeDescription => "";
+        protected override string StaticFolderPath => base.ProjectFolderPath;
 
         protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
         {
-            return Enumerable.Empty<Tuple<string, string>>();
+            return new List<Tuple<string, string>>
+            {
+                new Tuple<string, string>("Program", new ProgramTemplate(namespaceName).TransformText())
+            };
         }
 
         protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            var list = new List<string>();
-            foreach (var @class in model.Classes)
-            {
-                var template = new ApiControllerTemplate(model.NamespaceName, @class);
-                var generatedCodeFile = template.TransformText();
-                list.Add(generatedCodeFile);
-            }
-            return list.ToArray();
+            return Enumerable.Empty<string>();
         }
 
         protected override string ProjectTemplate => new WebProjectFileTemplate(base.namespaceName).TransformText();

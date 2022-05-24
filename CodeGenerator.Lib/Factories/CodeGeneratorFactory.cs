@@ -41,6 +41,8 @@ namespace CodeGenerator.Lib.Factories
                     return new ApiControllerGenerator(generationModelFetcher, output);
                 case CodeGeneratorTypes.Controllers:
                     return new ControllerGenerator(generationModelFetcher, output);
+                case CodeGeneratorTypes.WebRoot:
+                    return new WebRootGenerator(generationModelFetcher, output);
                 default:
                     throw new ArgumentException();
             }

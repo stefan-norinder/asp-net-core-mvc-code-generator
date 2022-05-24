@@ -28,26 +28,27 @@ namespace CodeGenerator.Lib.Services
 
             var templates = GenerateTemplatesFromModel(model);
 
-            OutputTemplate(model.Classes, templates);
+            OutputTemplate(model.Classes, templates, FolderPath);
 
             GenerateProjectFileFromTemplate();
 
             var staticNameAndTemplates = GenerateStaticTemplates(namespaceName);
 
-            OutputTemplate(staticNameAndTemplates);
+            OutputTemplate(staticNameAndTemplates, StaticFolderPath);
         }
 
         private void GenerateProjectFileFromTemplate()
         {
-            output.Write(BaseFolderPath, $"{ProjectType}.csproj", ProjectTemplate);
+            output.Write(ProjectFolderPath, $"{ProjectType}.csproj", ProjectTemplate);
         }
 
         protected abstract string ProjectTemplate { get; }
 
         private string baseFolder { get { return "./src/"; } }
 
-        protected virtual string BaseFolderPath => $"{baseFolder}{namespaceName}.{ProjectType}";
-        protected virtual string FolderPath => $"{BaseFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
+        protected virtual string ProjectFolderPath => $"{baseFolder}{namespaceName}.{ProjectType}";
+        protected virtual string FolderPath => $"{ProjectFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
+        protected virtual string StaticFolderPath => $"{ProjectFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
 
         protected abstract string ProjectType { get; }
 
@@ -59,26 +60,26 @@ namespace CodeGenerator.Lib.Services
 
         #region private
 
-        private void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates)
+        private void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
         {
-            OutputTemplate(classes.Select(x => x.ToString()), templates);
+            OutputTemplate(classes.Select(x => x.ToString()), templates, folderPath);
         }
 
-        private void OutputTemplate(IEnumerable<Tuple<string, string>> nameAndTemplatesList)
+        private void OutputTemplate(IEnumerable<Tuple<string, string>> nameAndTemplatesList, string folderPath)
         {
             var names = nameAndTemplatesList.Select(x => x.Item1);
             var templates = nameAndTemplatesList.Select(x => x.Item2);
-            OutputTemplate(names, templates);
+            OutputTemplate(names, templates, folderPath);
         }
 
-        private void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates)
+        private void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
         {
             for (int i = 0; i < templates.Count(); i++)
             {
                 var @class = classes.ElementAt(i);
                 var file = $"{@class}{ClassTypeDescription}.cs";
                 var content = templates.ToList().ElementAt(i);
-                Output(FolderPath, file, content);
+                Output(folderPath, file, content);
             }
         }
 

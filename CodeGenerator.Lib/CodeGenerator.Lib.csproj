@@ -50,6 +50,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ProgramTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProgramTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ProjectFileTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -110,6 +115,10 @@
     <None Update="Templates\DataAccessTemplate.tt">
       <LastGenOutput>DataAccessTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\ProgramTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ProgramTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ProjectFileTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

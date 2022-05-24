@@ -10,7 +10,8 @@ namespace CodeGenerator.Lib.Utils
         DataAccess = 4,
         Services = 16,
         Models = 32,
-        All = Api | DataAccess | Services | Models
+        WebRoot = 64,
+        All = Api | DataAccess | Services | Models | WebRoot
     }
 
     public static class CodeGeneratorTypesExtensions
