@@ -11,8 +11,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <# var projectRef = $"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />"; #>
-    <#= projectRef #>    
+    <#= $"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />" #>    
   </ItemGroup>
 
 </Project>

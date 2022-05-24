@@ -34,14 +34,7 @@ namespace CodeGenerator.Lib.Templates
                     "\r\n    ");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
- var projectRef = $"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />"; 
-            
-            #line default
-            #line hidden
-            this.Write("    ");
-            
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(projectRef));
+            this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />"));
             
             #line default
             #line hidden
