@@ -9,20 +9,17 @@ namespace CodeGenerator.Lib.DataAccess
     {
         private CodeGenerationModel codeGenerationModel { get; set; }
 
-        public GenerationModelFetcher(string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes = null)
+        public GenerationModelFetcher(string namespaceName, IEnumerable<ParamClass> classes)
         {
-            CreateCodeGenerationModel(namespaceName, className, propertiesAndDataTypes);
+            CreateCodeGenerationModel(namespaceName, classes);
         }
 
-        private void CreateCodeGenerationModel(string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes)
+        private void CreateCodeGenerationModel(string namespaceName, IEnumerable<ParamClass> classes)
         {
 
             codeGenerationModel = new CodeGenerationModel(namespaceName)
             {
-                Classes = new List<Class>
-                {
-                    new Class { Name = className, Properties = propertiesAndDataTypes.ToProperties() }
-                }
+                Classes = classes.Select(x => new Class { Name = x.ClassName, Properties = x.Properties.ToProperties() })
             };
         }
         public string Namespace => throw new NotImplementedException();

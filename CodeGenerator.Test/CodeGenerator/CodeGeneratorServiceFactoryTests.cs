@@ -1,8 +1,10 @@
 using CodeGenerator.Lib.Factories;
+using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeGenerator.Test
@@ -21,7 +23,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateInstance_ShouldBeOfCorrectType()
         {
-            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
+            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"));
             var type = instance.GetType();
             Assert.AreEqual(typeof(DataAccessGenerator), type);
         }
@@ -29,9 +31,18 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateInstances_ShouldBeOfCorrectType()
         {
-            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", "Bar");
+            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"));
             var type = instances.First().GetType();
             Assert.AreEqual(typeof(DataAccessGenerator), type);
+        }
+
+
+        private IEnumerable<ParamClass> CreateClasses(params string[] names)
+        {
+            foreach (var name in names)
+            {
+                yield return new ParamClass(name);
+            }
         }
 
     }

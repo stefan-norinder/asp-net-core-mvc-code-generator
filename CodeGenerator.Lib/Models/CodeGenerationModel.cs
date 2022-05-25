@@ -11,7 +11,7 @@ namespace CodeGenerator.Lib.Models
         }
 
         public string NamespaceName { get; private set; }
-        public List<Class> Classes { get; set; } = new List<Class>();
+        public IEnumerable<Class> Classes { get; set; } = new List<Class>();
 
         public override string ToString() => NamespaceName;
     }

@@ -7,22 +7,22 @@ namespace CodeGenerator.Lib.Services
 {
     public interface IController
     {
-        void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes);
+        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string @namespace, IEnumerable<ParamClass> classes);
         void Run(CodeGeneratorTypes alltypes, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel);
     }
 
     public class Controller : IController
     {
         private readonly ICodeGeneratorFactory factory;
-       
+
         public Controller(ICodeGeneratorFactory factory)
         {
             this.factory = factory;
         }
 
-        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string namespaceName, string className, IEnumerable<KeyValuePair<string, string>> propertiesAndDataTypes = null)
+        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string @namespace, IEnumerable<ParamClass> classes)
         {
-            foreach (var codeGenerator in factory.CreateInstances(types, fetcherTypes, namespaceName, className, propertiesAndDataTypes))
+            foreach (var codeGenerator in factory.CreateInstances(types, fetcherTypes, @namespace, classes))
             {
                 codeGenerator.Invoke();
             }
@@ -30,10 +30,7 @@ namespace CodeGenerator.Lib.Services
 
         public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, ParamsModel paramsModel)
         {
-            foreach (var @class in paramsModel.Classes)
-            {
-                Run(types, fetcherTypes, paramsModel.Namespace, @class.ClassName, @class.Properties);
-            }
+            Run(types, fetcherTypes, paramsModel.Namespace, paramsModel.Classes);
         }
     }
 }

@@ -44,14 +44,14 @@ namespace CodeGenerator.Lib.DataAccess
 
         private CodeGenerationModel GetDataModelPopulatedWithColumns(CodeGenerationModel dataModel)
         {
-            var newDataModel = new CodeGenerationModel("Foo");
+            var classes = new List<Class>();
             foreach (var item in dataModel.Classes)
             {
                 var tuples = GetColumnsWithDatatypes(item.Name);
                 var columns = tuples.Select(x => new Proprety { Name = x.Item1, DataType = x.Item2 });
-                newDataModel.Classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns)});
+                classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns)});
             }
-            return newDataModel;
+            return new CodeGenerationModel("Foo") { Classes = classes};
         }
 
         private CodeGenerationModel GetDataModel()
