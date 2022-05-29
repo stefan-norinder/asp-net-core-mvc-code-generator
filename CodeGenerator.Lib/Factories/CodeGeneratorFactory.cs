@@ -16,9 +16,9 @@ namespace CodeGenerator.Lib.Factories
 
     public class CodeGeneratorFactory : ICodeGeneratorFactory
     {
-        private readonly FileWriterOutputAdapter output;
+        private readonly IOutputAdapter output;
 
-        public CodeGeneratorFactory(FileWriterOutputAdapter output)
+        public CodeGeneratorFactory(IOutputAdapter output)
         {
             this.output = output;
         }

@@ -11,7 +11,7 @@ namespace CodeGenerator.Lib.Services
     public class ApiControllerGenerator : CodeGenerators.CodeGenerator
     {
         public ApiControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            FileWriterOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Web;

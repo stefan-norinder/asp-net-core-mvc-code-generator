@@ -10,7 +10,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class DataAccessGenerator : CodeGenerator
     {
         public DataAccessGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            FileWriterOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Logic;

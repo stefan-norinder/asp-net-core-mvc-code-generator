@@ -11,7 +11,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ModelGenerator : CodeGenerator
     {
         public ModelGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
-            FileWriterOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Logic;

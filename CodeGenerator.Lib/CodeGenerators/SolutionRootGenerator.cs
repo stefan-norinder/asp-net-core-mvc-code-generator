@@ -12,7 +12,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class SolutionRootGenerator : CodeGenerator
     {
         public SolutionRootGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            FileWriterOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Solution;

@@ -12,7 +12,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ControllerGenerator : CodeGenerator
     {
         public ControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
-            FileWriterOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
         protected override string ProjectType => ProjectTypeConstant.Web;
