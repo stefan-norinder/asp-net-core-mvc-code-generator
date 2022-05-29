@@ -11,7 +11,7 @@ namespace CodeGenerator.Test
     public class ServiceTests
     {
         private DataAccessGenerator service;
-        private Mock<IOutputAdapter> outputMock;
+        private Mock<FileWriterOutputAdapter> outputMock;
 
         [SetUp]
         public void Setup()
@@ -32,7 +32,7 @@ namespace CodeGenerator.Test
                 }
 
             });
-            outputMock = new Mock<IOutputAdapter>();
+            outputMock = new Mock<FileWriterOutputAdapter>();
             service = new DataAccessGenerator(mock.Object, outputMock.Object);
         }
 

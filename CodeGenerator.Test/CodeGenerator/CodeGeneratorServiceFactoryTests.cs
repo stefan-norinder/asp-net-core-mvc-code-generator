@@ -17,7 +17,7 @@ namespace CodeGenerator.Test
         [SetUp]
         public void Setup()
         {
-            var outputMock = new Mock<IOutputAdapter>();
+            var outputMock = new Mock<FileWriterOutputAdapter>();
             factory = new CodeGeneratorFactory(outputMock.Object);
         }
 

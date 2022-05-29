@@ -13,12 +13,12 @@ namespace CodeGenerator.Test
     public class ControllerTests
     {
         private Controller controller;
-        private Mock<IOutputAdapter> outputMock;
+        private Mock<FileWriterOutputAdapter> outputMock;
 
         [SetUp]
         public void Setup()
         {
-            outputMock = new Mock<IOutputAdapter>();
+            outputMock = new Mock<FileWriterOutputAdapter>();
             var factory = new CodeGeneratorFactory(outputMock.Object);
             controller = new Controller(factory);
         }

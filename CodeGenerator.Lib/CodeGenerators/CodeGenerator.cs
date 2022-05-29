@@ -10,11 +10,11 @@ namespace CodeGenerator.Lib.CodeGenerators
     public abstract class CodeGenerator : ICodeGenerator
     {
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
-        private readonly IOutputAdapter output;
+        private readonly FileWriterOutputAdapter output;
         protected string namespaceName;
 
         public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,
-            IOutputAdapter output)
+            FileWriterOutputAdapter output)
         {
             this.codeGeneratorFetcher = codeGeneratorFetcher;
             this.output = output;

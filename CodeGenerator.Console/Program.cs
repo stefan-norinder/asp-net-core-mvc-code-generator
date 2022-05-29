@@ -72,7 +72,7 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
             serviceCollection.AddSingleton(configuration);
             serviceCollection.AddTransient<IController, Controller>();
             serviceCollection.AddTransient<ICodeGeneratorFactory, CodeGeneratorFactory>();
-            serviceCollection.AddTransient<IOutputAdapter, FileWriterOutputAdapter>();
+            serviceCollection.AddTransient<FileWriterOutputAdapter, FileWriterOutputAdapter>();
         }
     }
 
