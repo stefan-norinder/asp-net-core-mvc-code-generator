@@ -119,7 +119,7 @@ using ");
         }
 
         [HttpPost]
-        public async Task Post([FromBody] string value)
+        public async Task Post([FromBody] dynamic value)
         {
            var item = JsonConvert.DeserializeObject<");
             
@@ -128,18 +128,19 @@ using ");
             
             #line default
             #line hidden
-            this.Write(">(value);\r\n           await service.Insert(item);\r\n        }\r\n\r\n        [HttpPut(" +
-                    "\"{id}\")]\r\n        public async Task Put(int id, [FromBody] string value)\r\n      " +
-                    "  {\r\n           var item = JsonConvert.DeserializeObject<");
+            this.Write(">(value.ToString());\r\n           await service.Insert(item);\r\n        }\r\n\r\n      " +
+                    "  [HttpPut(\"{id}\")]\r\n        public async Task Put(int id, [FromBody] dynamic va" +
+                    "lue)\r\n        {\r\n           var item = JsonConvert.DeserializeObject<");
             
             #line 57 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">(value);\r\n           await service.Update(item);\r\n        }\r\n\r\n        [HttpDele" +
-                    "te(\"{id}\")]\r\n        public async Task Delete(int id)\r\n        {\r\n              " +
-                    " await service.Delete(id);\r\n        }\r\n    }\r\n}");
+            this.Write(">(value.ToString());\r\n           item.Id = id;\r\n           await service.Update(i" +
+                    "tem);\r\n        }\r\n\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task Dele" +
+                    "te(int id)\r\n        {\r\n               await service.Delete(id);\r\n        }\r\n    " +
+                    "}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

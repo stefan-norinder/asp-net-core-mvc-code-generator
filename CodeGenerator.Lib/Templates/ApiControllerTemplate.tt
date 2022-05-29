@@ -45,16 +45,17 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpPost]
-        public async Task Post([FromBody] string value)
+        public async Task Post([FromBody] dynamic value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
            await service.Insert(item);
         }
 
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] string value)
+        public async Task Put(int id, [FromBody] dynamic value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
+           item.Id = id;
            await service.Update(item);
         }
 
