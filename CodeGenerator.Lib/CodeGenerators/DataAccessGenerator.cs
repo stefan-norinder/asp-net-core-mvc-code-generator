@@ -1,10 +1,11 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
+using CodeGenerator.Lib.Services;
 using System;
 using System.Collections.Generic;
 
-namespace CodeGenerator.Lib.Services
+namespace CodeGenerator.Lib.CodeGenerators
 {
     public class DataAccessGenerator : CodeGenerator
     {

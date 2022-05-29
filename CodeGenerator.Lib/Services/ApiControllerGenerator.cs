@@ -8,7 +8,7 @@ using System.Linq;
 namespace CodeGenerator.Lib.Services
 {
 
-    public class ApiControllerGenerator : CodeGenerator
+    public class ApiControllerGenerator : CodeGenerators.CodeGenerator
     {
         public ApiControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)

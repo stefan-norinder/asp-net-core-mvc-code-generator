@@ -1,4 +1,4 @@
-﻿namespace CodeGenerator.Lib.Services
+﻿namespace CodeGenerator.Lib.CodeGenerators
 {
     public interface ICodeGenerator
     {
