@@ -48,7 +48,14 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("}\") = \"Web\", \"Foo.Web\\Web.csproj\", \"{");
+            this.Write("}\") = \"Web\", \"");
+            
+            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
+            
+            #line default
+            #line hidden
+            this.Write(".Web\\Web.csproj\", \"{");
             
             #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(webProjectGuid));
@@ -62,7 +69,14 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("}\") = \"Lib\", \"Foo.Lib\\Lib.csproj\", \"{");
+            this.Write("}\") = \"Lib\", \"");
+            
+            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
+            
+            #line default
+            #line hidden
+            this.Write(".Lib\\Lib.csproj\", \"{");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(libProjectGuid));

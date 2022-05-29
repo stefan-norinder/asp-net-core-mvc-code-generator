@@ -17,19 +17,14 @@ namespace CodeGenerator.Lib.Factories
     public class CodeGeneratorFactory : ICodeGeneratorFactory
     {
         private readonly IOutputAdapter output;
-        private readonly GenerationModelFetcher generationFetcher;
 
-        public CodeGeneratorFactory(IOutputAdapter output):this(output,null) { }
-
-        public CodeGeneratorFactory(IOutputAdapter output, 
-            GenerationModelFetcher generatorFetcher)
+        public CodeGeneratorFactory(IOutputAdapter output)
         {
             this.output = output;
-            this.generationFetcher = generatorFetcher;
         }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
-            ICodeGenerationModelFetcher generationModelFetcher)
+            ICodeGenerationModelFetcher generationFetcher)
         {
             switch (type)
             {

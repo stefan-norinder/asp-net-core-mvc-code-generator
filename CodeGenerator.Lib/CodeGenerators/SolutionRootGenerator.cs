@@ -25,7 +25,7 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             return new List<Tuple<string, string>>
             {
-                new Tuple<string, string>(string.Empty, new SolutionTempate().TransformText()),
+                new Tuple<string, string>(string.Empty, new SolutionTempate(base.namespaceName).TransformText()),
             };
         }
 
