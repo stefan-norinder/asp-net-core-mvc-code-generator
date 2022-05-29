@@ -56,7 +56,7 @@ namespace ");
             this.Write("        public ");
             
             #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.DataType));
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));
             
             #line default
             #line hidden

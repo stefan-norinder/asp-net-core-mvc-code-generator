@@ -50,5 +50,16 @@ namespace CodeGenerator.Lib.Models
     {
         public string Name { get; set; }
         public string DataType { get; set; }
+        public string ConventionalDatatype
+        {
+            get
+            {
+                if (DataType.ToLower().Trim().StartsWith("nvarchar")) return "string";
+                if (DataType.ToLower().Trim().StartsWith("varchar")) return "string";
+                if (DataType.ToLower().Trim() == "bit") return "bool";
+                if (DataType.ToLower().Trim() == "date") return "DateTime";
+                return DataType;
+            }
+        }
     }
 }
