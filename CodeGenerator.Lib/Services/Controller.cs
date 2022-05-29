@@ -20,9 +20,13 @@ namespace CodeGenerator.Lib.Services
             this.factory = factory;
         }
 
-        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string @namespace, IEnumerable<ParamClass> classes)
+        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherType, string @namespace, IEnumerable<ParamClass> classes)
         {
-            foreach (var codeGenerator in factory.CreateInstances(types, fetcherTypes, @namespace, classes))
+
+            var generationFactory = new GenerationModelFetcherFactory(@namespace, classes);
+            var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
+
+            foreach (var codeGenerator in factory.CreateInstances(types, fetcherType, @namespace, classes, generationModelFetcher))
             {
                 codeGenerator.Invoke();
             }

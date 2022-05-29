@@ -1,4 +1,5 @@
 ﻿using CodeGenerator.Lib.CodeGenerators;
+using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
@@ -10,42 +11,46 @@ namespace CodeGenerator.Lib.Factories
 {
     public interface ICodeGeneratorFactory
     {
-        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, IEnumerable<ParamClass> classes);
-        ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, IEnumerable<ParamClass> classes);
+        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, IEnumerable<ParamClass> classes, ICodeGenerationModelFetcher generationModelFetcher);
+        ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, string namespaceName, IEnumerable<ParamClass> classes, ICodeGenerationModelFetcher generationModelFetcher);
     }
 
     public class CodeGeneratorFactory : ICodeGeneratorFactory
     {
         private readonly IOutputAdapter output;
+        private readonly GenerationModelFetcher generationFetcher;
 
-        public CodeGeneratorFactory(IOutputAdapter output)
+        public CodeGeneratorFactory(IOutputAdapter output):this(output,null) { }
+
+        public CodeGeneratorFactory(IOutputAdapter output, 
+            GenerationModelFetcher generatorFetcher)
         {
             this.output = output;
+            this.generationFetcher = generatorFetcher;
         }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
             CodeGeneratorFetcherTypes fetcherType,
             string namespaceName,
-            IEnumerable<ParamClass> classes)
+            IEnumerable<ParamClass> classes, 
+            ICodeGenerationModelFetcher generationModelFetcher)
         {
-            var generationFactory = new GenerationModelFetcherFactory(namespaceName, classes);
-            var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGenerator(generationModelFetcher, output);
+                    return new DataAccessGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Models:
-                    return new ModelGenerator(generationModelFetcher, output);
+                    return new ModelGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Services:
-                    return new ServiceGenerator(generationModelFetcher, output);
+                    return new ServiceGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Api:
-                    return new ApiControllerGenerator(generationModelFetcher, output);
+                    return new ApiControllerGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Controllers:
-                    return new ControllerGenerator(generationModelFetcher, output);
+                    return new ControllerGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.WebRoot:
-                    return new WebRootGenerator(generationModelFetcher, output);
+                    return new WebRootGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.SolutionRoot:
-                    return new SolutionRootGenerator(generationModelFetcher, output);
+                    return new SolutionRootGenerator(generationFetcher, output);
                 default:
                     throw new ArgumentException();
             }
@@ -55,12 +60,13 @@ namespace CodeGenerator.Lib.Factories
         public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types,
             CodeGeneratorFetcherTypes fetcherType,
             string namespaceName,
-            IEnumerable<ParamClass> classes)
+            IEnumerable<ParamClass> classes,
+            ICodeGenerationModelFetcher generationModelFetcher)
         {
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
             foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && types.HasFlag(type)))
             {
-                yield return CreateInstance(type, fetcherType, namespaceName, classes);
+                yield return CreateInstance(type, fetcherType, namespaceName, classes, generationModelFetcher);
             }
             yield break;
         }

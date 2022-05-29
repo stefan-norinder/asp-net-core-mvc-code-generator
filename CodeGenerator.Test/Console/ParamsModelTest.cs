@@ -31,7 +31,7 @@ namespace CodeGenerator.Test
                     "int"
             };
 
-            var sut = new ParamsModel(args);
+            var sut = new ManualParamsModel(args);
 
             Assert.AreEqual("Foo", sut.Namespace);
             Assert.AreEqual("Bar", sut.Classes.First().ClassName);
@@ -64,7 +64,7 @@ namespace CodeGenerator.Test
                     "int"
             };
 
-            var sut = new ParamsModel(args);
+            var sut = new ManualParamsModel(args);
 
             Assert.AreEqual("Foo", sut.Namespace);
             Assert.AreEqual("Bar", sut.Classes.First().ClassName);
@@ -80,6 +80,33 @@ namespace CodeGenerator.Test
             Assert.AreEqual("Year", propCollection[1].Key);
             Assert.AreEqual("int", propCollection[1].Value);
         }
+
+        [Test]
+        [Ignore("Not done")]
+        public void ConstructParamsModelFromDatasourceParams()
+        {
+            // --namespace DatabaseTest --server .\sqlexpress --datasource test
+            var args = new[] {
+                    "--namespace",
+                    "DatabaseTest",
+                    "--server",
+                    ".\\sqlexpress",
+                    "--datasource",
+                    "test"
+            };
+
+            var sut = new ParamsModelFromDatasource(args);
+
+            Assert.AreEqual("DatabaseTest", sut.Namespace);
+            //Assert.AreEqual("DatabaseTest", sut.D);
+            Assert.AreEqual("Bar", sut.Classes.First().ClassName);
+            var propCollection = sut.Classes.First().Properties.ToList();
+            Assert.AreEqual("Inc", propCollection[0].Key);
+            Assert.AreEqual("string", propCollection[0].Value);
+            Assert.AreEqual("Age", propCollection[1].Key);
+            Assert.AreEqual("int", propCollection[1].Value);
+        }
+
 
     }
 }

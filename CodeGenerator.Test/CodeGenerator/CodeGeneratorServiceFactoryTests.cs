@@ -24,7 +24,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateInstance_ShouldBeOfCorrectType()
         {
-            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"));
+            var instance = factory.CreateInstance(CodeGeneratorTypes.DataAccess,CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"), null);
             var type = instance.GetType();
             Assert.AreEqual(typeof(DataAccessGenerator), type);
         }
@@ -32,7 +32,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CreateInstances_ShouldBeOfCorrectType()
         {
-            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"));
+            var instances = factory.CreateInstances(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"), null);
             var type = instances.First().GetType();
             Assert.AreEqual(typeof(DataAccessGenerator), type);
         }

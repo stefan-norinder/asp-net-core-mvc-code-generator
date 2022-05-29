@@ -1,17 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeGenerator.Lib.Models
 {
+    public class ParamsModelFactory
+    {
+        public ParamsModel CreateInstance(string[] args)
+        {
+            if (args.Contains(ParamsConstants.Server) && args.Contains(ParamsConstants.DataSource)) return new ParamsModelFromDatasource(args);
+            if (args.Contains(ParamsConstants.Namespace) && args.Contains(ParamsConstants.Class)) return new ManualParamsModel(args);
+            throw new ArgumentException(string.Join(",",args));
+        }
+    }
+
     public class ParamsModel
     {
-        public ParamsModel(string[] args)
-        {
-            PopulateModelFromPassedArguments(args);
-        }
-        
         public string Namespace { get; set; }
         public IEnumerable<ParamClass> Classes = new List<ParamClass>();
+    }
+
+    public class ParamsModelFromDatasource : ParamsModel
+    {
+        public ParamsModelFromDatasource(string[] args)
+        {
+
+        }
+    }
+
+    public class ManualParamsModel : ParamsModel
+        {
+            public ManualParamsModel(string[] args)
+            {
+                PopulateModelFromPassedArguments(args);
+        }
 
         #region private 
 
@@ -71,5 +93,7 @@ namespace CodeGenerator.Lib.Models
         public static string Namespace = "--namespace";
         public static string Class = "--class";
         public static string Properies = "--properties";
+        public static string Server = "--server";
+        public static string DataSource = "--datasource";
     }
 }
