@@ -37,14 +37,14 @@ namespace CodeGenerator.Lib.Services
             OutputTemplate(staticNameAndTemplates, StaticFolderPath);
         }
 
-        private void GenerateProjectFileFromTemplate()
+        protected virtual void GenerateProjectFileFromTemplate()
         {
             output.Write(ProjectFolderPath, $"{ProjectType}.csproj", ProjectTemplate);
         }
 
         protected abstract string ProjectTemplate { get; }
 
-        private string baseFolder { get { return "./src/"; } }
+        protected string baseFolder { get { return "./src/"; } }
 
         protected virtual string ProjectFolderPath => $"{baseFolder}{namespaceName}.{ProjectType}";
         protected virtual string FolderPath => $"{ProjectFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
@@ -72,7 +72,7 @@ namespace CodeGenerator.Lib.Services
             OutputTemplate(names, templates, folderPath);
         }
 
-        protected void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
+        protected virtual void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
         {
             for (int i = 0; i < templates.Count(); i++)
             {
@@ -83,7 +83,7 @@ namespace CodeGenerator.Lib.Services
             }
         }
 
-        private void Output(string basePath, string file, string content)
+        protected void Output(string basePath, string file, string content)
         {
             output.Write(basePath, file, content);
         }
@@ -94,6 +94,7 @@ namespace CodeGenerator.Lib.Services
         {
             public static string Logic = "Lib";
             public static string Web = "Web";
+            public static string Solution = "Solution";
         }
     }
 }

@@ -157,7 +157,7 @@ namespace CodeGenerator.Test
                         //---------------------------------------------------------------------------------------
 
                         using Example.Lib.Model;
-                        using Example.Lib.Service;
+                        using Example.Lib.Services;
                         using Microsoft.Extensions.Logging;
                         using Microsoft.AspNetCore.Mvc;
                         using Newtonsoft.Json;
@@ -215,7 +215,7 @@ namespace CodeGenerator.Test
                             }
                         }";
 
-            var classes = CreateClassWithPropertiesInsideList("Persona");
+            var classes = CreateClassWithPropertiesInsideList("Person");
 
             controller.Run(CodeGeneratorTypes.Api, CodeGeneratorFetcherTypes.FromString, "Example", classes);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
