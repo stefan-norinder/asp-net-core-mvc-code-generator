@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class SqlInsertIgnoreAttributeTemplate : SqlInsertIgnoreAttributeTemplateBase
     {
@@ -29,14 +29,14 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             this.Write(@"//---------------------------------------------------------------------------------------
-// This is an auto generated file. Don't make any changes because they may be overwritten
+// Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
 using System;
 
 namespace ");
             
-            #line 12 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlInsertIgnoreAttributeTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default

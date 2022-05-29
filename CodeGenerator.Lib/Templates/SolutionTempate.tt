@@ -4,7 +4,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<!-- This is an auto generated file. Don't make any changes because they may be overwritten -->
+<!-- Warning! This is an auto generated file. Changes may be overwritten -->
 <# 
 	var solutionGuid = Guid.NewGuid();
 	var webProjectGuid = Guid.NewGuid();

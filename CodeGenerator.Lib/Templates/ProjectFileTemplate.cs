@@ -28,7 +28,7 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<!-- This is an auto generated file. Don't make any changes because they may be overwritten -->
+            this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
 <Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>

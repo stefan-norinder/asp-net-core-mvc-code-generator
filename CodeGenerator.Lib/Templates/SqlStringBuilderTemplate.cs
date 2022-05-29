@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class SqlStringBuilderTemplate : SqlStringBuilderTemplateBase
     {
@@ -29,12 +29,12 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             this.Write(@"//---------------------------------------------------------------------------------------
-// This is an auto generated file. Don't make any changes because they may be overwritten
+// Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
 using ");
             
-            #line 10 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
+            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -42,7 +42,7 @@ using ");
             this.Write(".Lib.Model;\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing System.Linq;" +
                     "\r\nusing System.Reflection;\r\n\r\nnamespace ");
             
-            #line 16 "C:\Users\Stefan Adm\code\dotnet-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlStringBuilderTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default

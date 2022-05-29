@@ -8,15 +8,27 @@ namespace CodeGenerator.Lib.Models
         public CodeGenerationModel()
         {
         }
-        public CodeGenerationModel(string @namespace)
+
+        public CodeGenerationModel(string @namespace, CodeGenerationModel.CodeGenerationModelMetaData metaData)
         {
             Namespace = @namespace;
+            MetaData = metaData;
         }
 
         public string Namespace { get; set; }
+        public CodeGenerationModelMetaData MetaData { get; }
         public IEnumerable<Class> Classes { get; set; } = new List<Class>();
 
         public override string ToString() => Namespace;
+
+        public class CodeGenerationModelMetaData
+        {
+            public string Server { get; set; }
+            public string EscapedServerString => Server.Replace(@"\", @"\\");
+            public string Datasource { get; set; }
+            public string UserId{ get; set; }
+            public string Password { get; set; }
+        }
     }
 
     public class Class

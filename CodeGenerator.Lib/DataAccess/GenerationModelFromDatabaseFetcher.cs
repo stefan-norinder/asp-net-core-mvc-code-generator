@@ -63,12 +63,20 @@ namespace CodeGenerator.Lib.DataAccess
                 var columns = tuples.Select(x => new Proprety { Name = x.Item1, DataType = x.Item2 });
                 classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns) });
             }
-            return new CodeGenerationModel(Namespace) { Classes = classes };
+            return new CodeGenerationModel(Namespace,dataModel.MetaData) { Classes = classes };
         }
 
         private CodeGenerationModel GetDataModel()
         {
-            return new CodeGenerationModel(Namespace)
+            var metaData = new CodeGenerationModel.CodeGenerationModelMetaData
+            {
+                Server = server,
+                Datasource = datasource,
+                UserId = userId,
+                Password = password
+            };
+
+            return new CodeGenerationModel(Namespace, metaData)
             {
                 Classes = GetTableNames().Select(tableName => new Class { Name = tableName }).ToList()
             };

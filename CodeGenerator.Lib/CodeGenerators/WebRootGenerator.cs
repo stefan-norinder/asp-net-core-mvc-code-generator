@@ -31,7 +31,8 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             return new List<string>
             {
-                new StartupTemplate(model.Namespace, model.Classes).TransformText()
+                new StartupTemplate(model.Namespace, model.Classes).TransformText(),
+                new AppSettingsTemplate(model.MetaData.EscapedServerString, model.MetaData.Datasource).TransformText(),
             };
         }
 
@@ -39,7 +40,9 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected override void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
         {
-            OutputTemplate(new [] { "Startup"},new[]{ templates.First() }, ProjectFolderPath);
+            var list = templates.ToList();
+            Output(ProjectFolderPath, $"Startup.cs", list[0]);
+            Output(ProjectFolderPath, $"appsettings.json", list[1]);
         }
     }
 }

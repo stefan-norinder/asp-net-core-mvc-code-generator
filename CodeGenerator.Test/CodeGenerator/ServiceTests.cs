@@ -17,7 +17,7 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             var mock = new Mock<ICodeGenerationModelFetcher>();
-            mock.Setup(x => x.Get()).Returns(new CodeGenerationModel("Foo")
+            mock.Setup(x => x.Get()).Returns(new CodeGenerationModel("Foo", new CodeGenerationModel.CodeGenerationModelMetaData())
             {
                 Classes = new List<Class>
                 {

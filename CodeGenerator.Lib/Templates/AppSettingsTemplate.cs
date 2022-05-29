@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProgramTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ProgramTemplate : ProgramTemplateBase
+    public partial class AppSettingsTemplate : AppSettingsTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,38 +28,22 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
-
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-
-namespace ");
+            this.Write("// Warning! This is an auto generated file. Changes may be overwritten\r\n{\r\n  \"Con" +
+                    "nectionStrings\": {\r\n    \"Default\": \"Data Source=");
             
-            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProgramTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(server));
             
             #line default
             #line hidden
-            this.Write(@".Web
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
-");
+            this.Write(";Initial Catalog=");
+            
+            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(datasource));
+            
+            #line default
+            #line hidden
+            this.Write(";Trusted_Connection=True;\"\r\n  }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -71,7 +55,7 @@ namespace ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ProgramTemplateBase
+    public class AppSettingsTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

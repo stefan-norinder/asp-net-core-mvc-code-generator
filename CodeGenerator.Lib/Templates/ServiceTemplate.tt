@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
 //---------------------------------------------------------------------------------------
-// This is an auto generated file. Don't make any changes because they may be overwritten
+// Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
 using <#= namespaceName #>.Lib.DataAccess;
