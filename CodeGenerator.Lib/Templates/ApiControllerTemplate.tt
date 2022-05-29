@@ -47,14 +47,14 @@ namespace <#= namespaceName #>.Web.ApiController
         [HttpPost]
         public async Task Post([FromBody] string value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>Entity>(value);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
            await service.Insert(item);
         }
 
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] string value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>Entity>(value);
+           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value);
            await service.Update(item);
         }
 

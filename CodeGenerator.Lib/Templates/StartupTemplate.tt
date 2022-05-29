@@ -32,8 +32,8 @@ namespace <#= namespaceName #>.Web
         {
 <# foreach(var item in Model) { #>
             services.AddTransient<I<#= item #>Service, <#= item #>Service>();
-            services.AddTransient<I<#= item #>EntityDataAccess, <#= item #>EntityDataAccess>();
-            services.AddSingleton<SqlStringBuilder<<#= item #>Entity>>();
+            services.AddTransient<I<#= item #>DataAccess, <#= item #>DataAccess>();
+            services.AddSingleton<SqlStringBuilder<<#= item #>>>();
 <# } #>
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddControllersWithViews();

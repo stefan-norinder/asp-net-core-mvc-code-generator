@@ -13,12 +13,12 @@ using <#= namespaceName #>.Lib.DataAccess;
 
 namespace <#= namespaceName #>.Lib.DataAccess
 {
-    public interface I<#= Model.Name #>EntityDataAccess : IDataAccess<<#= Model.Name #>Entity>
+    public interface I<#= Model.Name #>DataAccess : IDataAccess<<#= Model.Name #>>
     {    }
 
-    public class <#= Model.Name #>EntityDataAccess : BaseDataAccess<<#= Model.Name #>Entity>, I<#= Model.Name #>EntityDataAccess
+    public class <#= Model.Name #>DataAccess : BaseDataAccess<<#= Model.Name #>>, I<#= Model.Name #>DataAccess
     {
-        public <#= Model.Name #>EntityDataAccess(ISqlDataAccess db, SqlStringBuilder<<#= Model.Name #>Entity> sqlStringBuilder)
+        public <#= Model.Name #>DataAccess(ISqlDataAccess db, SqlStringBuilder<<#= Model.Name #>> sqlStringBuilder)
             : base(db, sqlStringBuilder)
         { }
      }

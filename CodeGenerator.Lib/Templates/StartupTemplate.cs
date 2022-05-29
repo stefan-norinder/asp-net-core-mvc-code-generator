@@ -104,21 +104,21 @@ using ");
             
             #line default
             #line hidden
-            this.Write("EntityDataAccess, ");
+            this.Write("DataAccess, ");
             
             #line 35 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
-            this.Write("EntityDataAccess>();\r\n            services.AddSingleton<SqlStringBuilder<");
+            this.Write("DataAccess>();\r\n            services.AddSingleton<SqlStringBuilder<");
             
             #line 36 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
-            this.Write("Entity>>();\r\n");
+            this.Write(">>();\r\n");
             
             #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
