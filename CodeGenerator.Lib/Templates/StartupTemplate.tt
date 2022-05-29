@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------------------
 
 using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Lib.Model;
 using <#= namespaceName #>.Lib.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,10 +33,10 @@ namespace <#= namespaceName #>.Web
 <# foreach(var item in Model) { #>
             services.AddTransient<I<#= item #>Service, <#= item #>Service>();
             services.AddTransient<I<#= item #>EntityDataAccess, <#= item #>EntityDataAccess>();
+            services.AddSingleton<SqlStringBuilder<<#= item #>Entity>>();
 <# } #>
-           services.AddTransient<ISqlDataAccess, SqlDataAccess>();
-           services.AddSingleton<SqlStringBuilder>();
-           services.AddControllersWithViews();
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
