@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CodeGenerator.Lib.Models;
+using System;
+using System.Linq;
 
 namespace CodeGenerator.Lib
 {
@@ -20,6 +22,15 @@ namespace CodeGenerator.Lib
                 default:
                     throw new ArgumentException();
             }
+        }
+    }
+    public static partial class StringExtensions
+    {
+        public static bool IsBasedOnDatasource(this string[] args)
+        {
+            if (args.Contains(ParamsConstants.Server) && args.Contains(ParamsConstants.DataSource)) return true;
+            if (args.Contains(ParamsConstants.Namespace)) return false;
+            throw new ArgumentException(string.Join(",",args));
         }
     }
 }

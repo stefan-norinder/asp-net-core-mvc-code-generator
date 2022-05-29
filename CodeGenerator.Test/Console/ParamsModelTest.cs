@@ -73,8 +73,8 @@ namespace CodeGenerator.Test
             Assert.AreEqual("string", propCollection[0].DataType);
             Assert.AreEqual("Age", propCollection[1].Name);
             Assert.AreEqual("int", propCollection[1].DataType);
-            Assert.AreEqual("Car", sut.Get().Classes.First().Name);
-            propCollection = sut.Get().Classes.First().Properties.ToList();
+            Assert.AreEqual("Car", sut.Get().Classes.Last().Name);
+            propCollection = sut.Get().Classes.Last().Properties.ToList();
             Assert.AreEqual("CarModel", propCollection[0].Name);
             Assert.AreEqual("string", propCollection[0].DataType);
             Assert.AreEqual("Year", propCollection[1].Name);

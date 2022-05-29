@@ -50,7 +50,7 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
             try
             {
                 var controller = serviceProvider.GetService<IController>();
-                controller.Run(CodeGeneratorTypes.All,CodeGeneratorFetcherTypes.FromString, args);
+                controller.Run(CodeGeneratorTypes.All,args);
             }
             catch (Exception ex)
             {

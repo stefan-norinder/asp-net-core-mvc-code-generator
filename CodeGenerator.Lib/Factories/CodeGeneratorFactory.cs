@@ -10,8 +10,8 @@ namespace CodeGenerator.Lib.Factories
 {
     public interface ICodeGeneratorFactory
     {
-        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, ICodeGenerationModelFetcher generationModelFetcher);
-        ICodeGenerator CreateInstance(CodeGeneratorTypes type, CodeGeneratorFetcherTypes fetcherType, ICodeGenerationModelFetcher generationModelFetcher);
+        IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes type, ICodeGenerationModelFetcher generationModelFetcher);
+        ICodeGenerator CreateInstance(CodeGeneratorTypes type,  ICodeGenerationModelFetcher generationModelFetcher);
     }
 
     public class CodeGeneratorFactory : ICodeGeneratorFactory
@@ -29,7 +29,6 @@ namespace CodeGenerator.Lib.Factories
         }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
-            CodeGeneratorFetcherTypes fetcherType,
             ICodeGenerationModelFetcher generationModelFetcher)
         {
             switch (type)
@@ -55,13 +54,12 @@ namespace CodeGenerator.Lib.Factories
         }
 
         public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types,
-            CodeGeneratorFetcherTypes fetcherType,
             ICodeGenerationModelFetcher generationModelFetcher)
         {
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
             foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && types.HasFlag(type)))
             {
-                yield return CreateInstance(type, fetcherType, generationModelFetcher);
+                yield return CreateInstance(type, generationModelFetcher);
             }
             yield break;
         }

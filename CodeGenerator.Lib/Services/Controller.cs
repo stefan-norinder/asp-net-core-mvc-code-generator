@@ -5,7 +5,7 @@ namespace CodeGenerator.Lib.Services
 {
     public interface IController
     {
-        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherTypes, string[] args);
+        public void Run(CodeGeneratorTypes types, string[] args);
     }
 
     public class Controller : IController
@@ -17,13 +17,12 @@ namespace CodeGenerator.Lib.Services
             this.factory = factory;
         }
 
-        public void Run(CodeGeneratorTypes types, CodeGeneratorFetcherTypes fetcherType, string[] args)
+        public void Run(CodeGeneratorTypes types, string[] args)
         {
-
             var generationFactory = new GenerationModelFetcherFactory(args);
-            var generationModelFetcher = generationFactory.CreateInstance(fetcherType);
+            var generationModelFetcher = generationFactory.CreateInstance();
 
-            foreach (var codeGenerator in factory.CreateInstances(types, fetcherType, generationModelFetcher))
+            foreach (var codeGenerator in factory.CreateInstances(types, generationModelFetcher))
             {
                 codeGenerator.Invoke();
             }

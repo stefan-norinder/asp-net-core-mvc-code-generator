@@ -16,7 +16,7 @@ namespace CodeGenerator.Test
         [Test]
         public void CunstructCodeGenerationModel()
         {
-            var args = new[] { ParamsConstants.Namespace, "Foo", ParamsConstants.Server, ".\\sqlexpress", ParamsConstants.DataSource, "Databases" };
+            var args = new[] { ParamsConstants.Namespace, "Foo", ParamsConstants.Class, "Foo"};
             var generator = new GenerationModelFetcher(args);
             var model = generator.Get();
             Assert.AreEqual("Foo", model.Classes.First().Name);

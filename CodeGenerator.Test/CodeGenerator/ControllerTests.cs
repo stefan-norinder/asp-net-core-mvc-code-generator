@@ -45,7 +45,7 @@ namespace CodeGenerator.Test
                                     { }
                                  }
                             }  ";
-            controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, null);
+            controller.Run(CodeGeneratorTypes.DataAccess, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
@@ -66,7 +66,7 @@ namespace CodeGenerator.Test
                             }
                         } ";
 
-            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, null);
+            controller.Run(CodeGeneratorTypes.Models, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -97,7 +97,7 @@ namespace CodeGenerator.Test
                         }
                             ";
 
-            controller.Run(CodeGeneratorTypes.Services, CodeGeneratorFetcherTypes.FromString, null);
+            controller.Run(CodeGeneratorTypes.Services, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -129,7 +129,7 @@ namespace CodeGenerator.Test
                         }
                             ";
 
-            controller.Run(CodeGeneratorTypes.Controllers, CodeGeneratorFetcherTypes.FromString, null);
+            controller.Run(CodeGeneratorTypes.Controllers, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -199,7 +199,7 @@ namespace CodeGenerator.Test
                             }
                         }";
 
-            controller.Run(CodeGeneratorTypes.Api, CodeGeneratorFetcherTypes.FromString, null);
+            controller.Run(CodeGeneratorTypes.Api, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
