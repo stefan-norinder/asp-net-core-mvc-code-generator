@@ -1,4 +1,5 @@
 using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Models;
 using NUnit.Framework;
 using System.Linq;
 
@@ -11,7 +12,8 @@ namespace CodeGenerator.Test
         [SetUp]
         public void Setup()
         {
-            fetcher = new GenerationModelFromDatabaseFetcher(".\\SQLEXPRESS", "Databases");
+            var args = new[] { ParamsConstants.Namespace, "Foo", ParamsConstants.Server, ".\\sqlexpress", ParamsConstants.DataSource, "Databases" };
+            fetcher = new GenerationModelFromDatabaseFetcher(args);
         }
 
         [Test]

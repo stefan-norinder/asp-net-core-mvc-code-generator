@@ -27,7 +27,7 @@ namespace CodeGenerator.Lib.Services
             var list = new List<string>();
             foreach (var @class in model.Classes)
             {
-                var template = new ApiControllerTemplate(model.NamespaceName, @class);
+                var template = new ApiControllerTemplate(model.Namespace, @class);
                 var generatedCodeFile = template.TransformText();
                 list.Add(generatedCodeFile);
             }

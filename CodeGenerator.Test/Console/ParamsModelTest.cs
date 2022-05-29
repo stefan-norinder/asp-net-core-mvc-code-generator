@@ -31,15 +31,15 @@ namespace CodeGenerator.Test
                     "int"
             };
 
-            var sut = new ManualParamsModel(args);
+            var sut = new GenerationModelFetcher(args);
 
             Assert.AreEqual("Foo", sut.Namespace);
-            Assert.AreEqual("Bar", sut.Classes.First().ClassName);
-            var propCollection = sut.Classes.First().Properties.ToList();
-            Assert.AreEqual("Inc", propCollection[0].Key);
-            Assert.AreEqual("string", propCollection[0].Value);
-            Assert.AreEqual("Age", propCollection[1].Key);
-            Assert.AreEqual("int", propCollection[1].Value);
+            Assert.AreEqual("Bar", sut.Get().Classes.First().Name);
+            var propCollection = sut.Get().Classes.First().Properties.ToList();
+            Assert.AreEqual("Inc", propCollection[0].Name);
+            Assert.AreEqual("string", propCollection[0].DataType);
+            Assert.AreEqual("Age", propCollection[1].Name);
+            Assert.AreEqual("int", propCollection[1].DataType);
         }
 
         [Test]
@@ -64,21 +64,21 @@ namespace CodeGenerator.Test
                     "int"
             };
 
-            var sut = new ManualParamsModel(args);
+            var sut = new GenerationModelFetcher(args);
 
             Assert.AreEqual("Foo", sut.Namespace);
-            Assert.AreEqual("Bar", sut.Classes.First().ClassName);
-            var propCollection = sut.Classes.First().Properties.ToList();
-            Assert.AreEqual("Inc", propCollection[0].Key);
-            Assert.AreEqual("string", propCollection[0].Value);
-            Assert.AreEqual("Age", propCollection[1].Key);
-            Assert.AreEqual("int", propCollection[1].Value);
-            Assert.AreEqual("Car", sut.Classes.Last().ClassName);
-            propCollection = sut.Classes.Last().Properties.ToList();
-            Assert.AreEqual("CarModel", propCollection[0].Key);
-            Assert.AreEqual("string", propCollection[0].Value);
-            Assert.AreEqual("Year", propCollection[1].Key);
-            Assert.AreEqual("int", propCollection[1].Value);
+            Assert.AreEqual("Bar", sut.Get().Classes.First().Name);
+            var propCollection = sut.Get().Classes.First().Properties.ToList();
+            Assert.AreEqual("Inc", propCollection[0].Name);
+            Assert.AreEqual("string", propCollection[0].DataType);
+            Assert.AreEqual("Age", propCollection[1].Name);
+            Assert.AreEqual("int", propCollection[1].DataType);
+            Assert.AreEqual("Car", sut.Get().Classes.First().Name);
+            propCollection = sut.Get().Classes.First().Properties.ToList();
+            Assert.AreEqual("CarModel", propCollection[0].Name);
+            Assert.AreEqual("string", propCollection[0].DataType);
+            Assert.AreEqual("Year", propCollection[1].Name);
+            Assert.AreEqual("int", propCollection[1].DataType);
         }
 
         [Test]
@@ -95,16 +95,16 @@ namespace CodeGenerator.Test
                     "test"
             };
 
-            var sut = new ParamsModelFromDatasource(args);
+            var sut = new GenerationModelFetcher(args);
 
             Assert.AreEqual("DatabaseTest", sut.Namespace);
             //Assert.AreEqual("DatabaseTest", sut.D);
-            Assert.AreEqual("Bar", sut.Classes.First().ClassName);
-            var propCollection = sut.Classes.First().Properties.ToList();
-            Assert.AreEqual("Inc", propCollection[0].Key);
-            Assert.AreEqual("string", propCollection[0].Value);
-            Assert.AreEqual("Age", propCollection[1].Key);
-            Assert.AreEqual("int", propCollection[1].Value);
+            Assert.AreEqual("Bar", sut.Get().Classes.First().Name);
+            var propCollection = sut.Get().Classes.First().Properties.ToList();
+            Assert.AreEqual("Inc", propCollection[0].Name);
+            Assert.AreEqual("string", propCollection[0].DataType);
+            Assert.AreEqual("Age", propCollection[1].Name);
+            Assert.AreEqual("int", propCollection[1].DataType);
         }
 
 

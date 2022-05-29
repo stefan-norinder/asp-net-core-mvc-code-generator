@@ -31,7 +31,7 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             return new List<string>
             {
-                new StartupTemplate(model.NamespaceName, model.Classes).TransformText()
+                new StartupTemplate(model.Namespace, model.Classes).TransformText()
             };
         }
 

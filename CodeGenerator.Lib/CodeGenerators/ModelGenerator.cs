@@ -27,7 +27,7 @@ namespace CodeGenerator.Lib.CodeGenerators
             var list = new List<string>();
             foreach (var @class in model.Classes)
             {
-                var template = new ModelTemplate(model.NamespaceName, @class);
+                var template = new ModelTemplate(model.Namespace, @class);
                 var generatedCodeFile = template.TransformText();
                 list.Add(generatedCodeFile);
             }

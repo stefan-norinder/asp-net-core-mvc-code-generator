@@ -9,20 +9,45 @@ namespace CodeGenerator.Lib.DataAccess
     {
         private CodeGenerationModel codeGenerationModel { get; set; }
 
-        public GenerationModelFetcher(string namespaceName, IEnumerable<ParamClass> classes)
+        public GenerationModelFetcher(string[] args)
         {
-            CreateCodeGenerationModel(namespaceName, classes);
+            codeGenerationModel = new CodeGenerationModel();
+            PopulateModelFromPassedArguments(args);
         }
 
-        private void CreateCodeGenerationModel(string namespaceName, IEnumerable<ParamClass> classes)
-        {
+        #region private 
 
-            codeGenerationModel = new CodeGenerationModel(namespaceName)
+        private void PopulateModelFromPassedArguments(string[] args)
+        {
+            var classes = new List<Class>();
+            Class @class = null;
+            for (var i = 0; i < args.Length; i++)
             {
-                Classes = classes.Select(x => new Class { Name = x.ClassName, Properties = x.Properties.ToProperties() })
-            };
+                if (args[i] == ParamsConstants.Namespace) codeGenerationModel.Namespace = args[++i];
+                if (args[i] == ParamsConstants.Class)
+                {
+                    if (@class != null) classes.Add(@class.Clone());
+                    @class = new Class { Name = args[++i] };
+                }
+                if (args[i] == ParamsConstants.Properies)
+                {
+                    i++;
+                    var list = new List<Proprety>();
+                    while (i < args.Length && !args[i].Contains("--"))
+                    {
+                        list.Add(new Proprety { Name = args[i++], DataType = args[i++] });
+                    }
+                    if (i < args.Length && args[i].Contains("--")) i--;
+                    @class.Properties = list;
+                }
+            }
+            if (@class != null) classes.Add(@class.Clone());
+            codeGenerationModel.Classes = classes;
         }
-        public string Namespace => throw new NotImplementedException();
+
+        #endregion
+
+        public string Namespace => codeGenerationModel.Namespace;
 
         public CodeGenerationModel Get()
         {

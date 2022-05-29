@@ -45,7 +45,8 @@ namespace CodeGenerator.Test
         [Test]
         public void RunWithDatabase()
         {
-            var databaseService = new DataAccessGenerator(new GenerationModelFromDatabaseFetcher(".\\sqlexpress", "Databases"), outputMock.Object);
+            var args = new[] { ParamsConstants.Namespace, "Databases", ParamsConstants.Server, ".\\sqlexpress", ParamsConstants.DataSource, "Databases" };
+            var databaseService = new DataAccessGenerator(new GenerationModelFromDatabaseFetcher(args), outputMock.Object);
             databaseService.Invoke();
         }
 

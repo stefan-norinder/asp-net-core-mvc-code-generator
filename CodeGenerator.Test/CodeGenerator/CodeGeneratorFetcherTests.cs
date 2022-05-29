@@ -16,17 +16,10 @@ namespace CodeGenerator.Test
         [Test]
         public void CunstructCodeGenerationModel()
         {
-            var generator = new GenerationModelFetcher("Bar", CreateClasses("Foo"));
+            var args = new[] { ParamsConstants.Namespace, "Foo", ParamsConstants.Server, ".\\sqlexpress", ParamsConstants.DataSource, "Databases" };
+            var generator = new GenerationModelFetcher(args);
             var model = generator.Get();
             Assert.AreEqual("Foo", model.Classes.First().Name);
-        }
-
-        private IEnumerable<ParamClass> CreateClasses(params string[] names)
-        {
-            foreach (var name in names)
-            {
-                yield return new ParamClass(name);
-            }
         }
     }
 }

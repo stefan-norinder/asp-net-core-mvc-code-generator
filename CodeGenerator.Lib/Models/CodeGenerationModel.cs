@@ -5,15 +5,18 @@ namespace CodeGenerator.Lib.Models
 {
     public class CodeGenerationModel
     {
-        public CodeGenerationModel(string namespaceName)
+        public CodeGenerationModel()
         {
-            NamespaceName = namespaceName;
+        }
+        public CodeGenerationModel(string @namespace)
+        {
+            Namespace = @namespace;
         }
 
-        public string NamespaceName { get; private set; }
+        public string Namespace { get; set; }
         public IEnumerable<Class> Classes { get; set; } = new List<Class>();
 
-        public override string ToString() => NamespaceName;
+        public override string ToString() => Namespace;
     }
 
     public class Class
@@ -30,6 +33,17 @@ namespace CodeGenerator.Lib.Models
         }
 
         public override string ToString() => Name;
+
+        internal Class Clone()
+        {
+            var @class = new Class
+            {
+                Name = Name,
+
+            };
+            @class.AddProperties(Properties);
+            return @class;
+        }
     }
 
     public class Proprety

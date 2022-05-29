@@ -24,7 +24,7 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             var model = codeGeneratorFetcher.Get();
 
-            namespaceName = model.NamespaceName;
+            namespaceName = model.Namespace;
 
             var templates = GenerateTemplatesFromModel(model);
 

@@ -49,9 +49,8 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
 
             try
             {
-                var paramsModel = new ManualParamsModel(args);
                 var controller = serviceProvider.GetService<IController>();
-                controller.Run(CodeGeneratorTypes.All,CodeGeneratorFetcherTypes.FromString, paramsModel);
+                controller.Run(CodeGeneratorTypes.All,CodeGeneratorFetcherTypes.FromString, args);
             }
             catch (Exception ex)
             {

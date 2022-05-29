@@ -45,7 +45,7 @@ namespace CodeGenerator.Test
                                     { }
                                  }
                             }  ";
-            controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, "Foo", CreateClasses("Bar"));
+            controller.Run(CodeGeneratorTypes.DataAccess, CodeGeneratorFetcherTypes.FromString, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
@@ -65,21 +65,9 @@ namespace CodeGenerator.Test
                                 public int Age {get;set;}
                             }
                         } ";
-            var classes = CreateClassWithPropertiesInsideList("Person");
 
-            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, "Example", classes);
+            controller.Run(CodeGeneratorTypes.Models, CodeGeneratorFetcherTypes.FromString, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
-        }
-
-        private IEnumerable<ParamClass> CreateClassWithPropertiesInsideList(string name)
-        {
-            var classes = CreateClasses(name);
-            classes.First().Properties = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("Name", "string"),
-                new KeyValuePair<string, string>("Age", "int"),
-            };
-            return classes;
         }
 
         [Test]
@@ -109,9 +97,7 @@ namespace CodeGenerator.Test
                         }
                             ";
 
-            var classes = CreateClassWithPropertiesInsideList("Persona");
-
-            controller.Run(CodeGeneratorTypes.Services, CodeGeneratorFetcherTypes.FromString, "Example", classes);
+            controller.Run(CodeGeneratorTypes.Services, CodeGeneratorFetcherTypes.FromString, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -143,9 +129,7 @@ namespace CodeGenerator.Test
                         }
                             ";
 
-            var classes = CreateClassWithPropertiesInsideList("Person");
-
-            controller.Run(CodeGeneratorTypes.Controllers, CodeGeneratorFetcherTypes.FromString, "Example",classes);
+            controller.Run(CodeGeneratorTypes.Controllers, CodeGeneratorFetcherTypes.FromString, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -215,9 +199,7 @@ namespace CodeGenerator.Test
                             }
                         }";
 
-            var classes = CreateClassWithPropertiesInsideList("Person");
-
-            controller.Run(CodeGeneratorTypes.Api, CodeGeneratorFetcherTypes.FromString, "Example", classes);
+            controller.Run(CodeGeneratorTypes.Api, CodeGeneratorFetcherTypes.FromString, null);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -225,15 +207,6 @@ namespace CodeGenerator.Test
         private static bool AssertAreEqual(string expected, string actual)
         {
             return string.Compare(expected, actual, CultureInfo.CurrentCulture, CompareOptions.IgnoreCase | CompareOptions.IgnoreSymbols) == 0;
-        }
-
-
-        private IEnumerable<ParamClass> CreateClasses(params string[] names)
-        {
-            foreach (var name in names)
-            {
-                yield return new ParamClass(name);
-            }
         }
     }
 }

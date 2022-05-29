@@ -10,17 +10,29 @@ namespace CodeGenerator.Lib.DataAccess
     public class GenerationModelFromDatabaseFetcher : ICodeGenerationModelFetcher
     {
         private readonly string server;
+        private readonly string datasource;
         private readonly string userId;
         private readonly string password;
 
         public string Namespace { get; private set; }
 
-        public GenerationModelFromDatabaseFetcher(string server, string database, string userId = "", string password = "")
+        public GenerationModelFromDatabaseFetcher(string[] args)
         {
-            this.server = server;
-            Namespace = database;
-            this.userId = userId;
-            this.password = password;
+            Namespace = GetValueForArgument(ParamsConstants.Namespace, args);
+            server = GetValueForArgument(ParamsConstants.Server, args);
+            datasource = GetValueForArgument(ParamsConstants.DataSource, args);
+            userId = GetValueForArgument(ParamsConstants.UserId, args);
+            password = GetValueForArgument(ParamsConstants.Password, args);
+        }
+
+        private static string GetValueForArgument(string argument,string[] args)
+        {
+            if (!args.Any(x => x == argument)) return string.Empty;
+            var serverIndex = Array.FindIndex(args, (str) =>
+            {
+                return str == argument;
+            });
+            return args[serverIndex + 1];
         }
 
         public CodeGenerationModel Get()
@@ -49,14 +61,14 @@ namespace CodeGenerator.Lib.DataAccess
             {
                 var tuples = GetColumnsWithDatatypes(item.Name);
                 var columns = tuples.Select(x => new Proprety { Name = x.Item1, DataType = x.Item2 });
-                classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns)});
+                classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns) });
             }
-            return new CodeGenerationModel("Foo") { Classes = classes};
+            return new CodeGenerationModel(Namespace) { Classes = classes };
         }
 
         private CodeGenerationModel GetDataModel()
         {
-            return new CodeGenerationModel("Foo")
+            return new CodeGenerationModel(Namespace)
             {
                 Classes = GetTableNames().Select(tableName => new Class { Name = tableName }).ToList()
             };
@@ -106,7 +118,7 @@ namespace CodeGenerator.Lib.DataAccess
             var builder = new SqlConnectionStringBuilder
             {
                 DataSource = server,
-                InitialCatalog = Namespace
+                InitialCatalog = datasource
             };
 
             if (UserIdAndPasswordIsSet())
