@@ -60,7 +60,7 @@ namespace CodeGenerator.Lib.Services
 
         #region private
 
-        private void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
+        protected virtual void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
         {
             OutputTemplate(classes.Select(x => x.ToString()), templates, folderPath);
         }
@@ -72,7 +72,7 @@ namespace CodeGenerator.Lib.Services
             OutputTemplate(names, templates, folderPath);
         }
 
-        private void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
+        protected void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
         {
             for (int i = 0; i < templates.Count(); i++)
             {

@@ -6,6 +6,9 @@
 //---------------------------------------------------------------------------------------
 // This is an auto generated file. Don't make any changes because they may be overwritten
 //---------------------------------------------------------------------------------------
+
+using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Lib.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +29,13 @@ namespace <#= namespaceName #>.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            <# foreach(var item in Model) { #>
-                <#= item #>B
-           <# } #>
-            services.AddControllersWithViews();
+<# foreach(var item in Model) { #>
+            services.AddTransient<I<#= item #>Service, <#= item #>Service>();
+            services.AddTransient<I<#= item #>EntityDataAccess, <#= item #>EntityDataAccess>();
+<# } #>
+           services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+           services.AddSingleton<SqlStringBuilder>();
+           services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

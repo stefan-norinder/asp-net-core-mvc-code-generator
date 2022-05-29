@@ -22,15 +22,23 @@ namespace CodeGenerator.Lib.Services
         {
             return new List<Tuple<string, string>>
             {
-                new Tuple<string, string>("Program", new ProgramTemplate(namespaceName).TransformText())
+                new Tuple<string, string>("Program", new ProgramTemplate(namespaceName).TransformText()),
             };
         }
 
         protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            return Enumerable.Empty<string>();
+            return new List<string>
+            {
+                new StartupTemplate(model.NamespaceName, model.Classes).TransformText()
+            };
         }
 
         protected override string ProjectTemplate => new WebProjectFileTemplate(base.namespaceName).TransformText();
+
+        protected override void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
+        {
+            OutputTemplate(new [] { "Startup"},new[]{ templates.First() }, ProjectFolderPath);
+        }
     }
 }
