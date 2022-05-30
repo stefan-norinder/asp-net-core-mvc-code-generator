@@ -21,9 +21,10 @@ namespace CodeGenerator.Lib.CodeGenerators
             foreach (var @class in model.Classes)
             {
                 var template = new ServiceTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Service", File = $"{@class}Service.cs", Content = template.TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Service", File = $"{@class}Service.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectType}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectType}/Service", File = $"Service.cs", Content = new BaseServiceTemplate(namespaceName).TransformText() };
         }
 
     }

@@ -48,7 +48,7 @@ namespace CodeGenerator.Test
                                  }
                             } ";
             controller.Run(CodeGeneratorTypes.DataAccess, args);
-            outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Lib/DataAccess", "PersonDataAccess.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
 
@@ -68,7 +68,7 @@ namespace CodeGenerator.Test
                             } ";
 
             controller.Run(CodeGeneratorTypes.Models, args);
-            outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Lib/Model", "PersonModel.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace CodeGenerator.Test
                             }";
 
             controller.Run(CodeGeneratorTypes.Services, args);
-            outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Lib/Service", "PersonService.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
         [Ignore("Not done")]
@@ -201,7 +201,7 @@ namespace CodeGenerator.Test
                             }";
 
             controller.Run(CodeGeneratorTypes.Api, args);
-            outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Web/ApiController", "PersonApiController.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
 

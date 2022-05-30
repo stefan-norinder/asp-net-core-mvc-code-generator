@@ -21,10 +21,10 @@ namespace CodeGenerator.Lib.CodeGenerators
             foreach (var @class in model.Classes)
             {
                 var template = new ModelTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Model", File = $"{@class}Model.cs", Content = template.TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Model", File = $"{@class}Model.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
-            yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Model", File = $"Entity.cs", Content = new BaseEntityTemplate(model.Namespace).TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectTypeConstant.Logic}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Model", File = $"Entity.cs", Content = new BaseEntityTemplate(model.Namespace).TransformText() };
         }
     }
 }

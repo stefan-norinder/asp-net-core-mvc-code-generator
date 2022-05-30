@@ -1,9 +1,7 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
@@ -36,11 +34,7 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected string baseFolder { get { return "./src/"; } }
 
-        protected string ProjectFolderPath => $"{baseFolder}{namespaceName}";
-        protected string FolderPath => $"{ProjectFolderPath}/{namespaceName}";
-
         protected abstract IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model);
-
 
         #region private
 

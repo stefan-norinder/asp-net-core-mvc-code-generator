@@ -13,6 +13,8 @@ namespace CodeGenerator.Lib.CodeGenerators
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
+        private string ProjectFolderPath => $"{baseFolder}{namespaceName}";
+
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
             return new List<TemplateModel>

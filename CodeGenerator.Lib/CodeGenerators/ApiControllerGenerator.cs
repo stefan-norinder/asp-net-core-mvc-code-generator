@@ -1,14 +1,13 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Templates;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace CodeGenerator.Lib.Services
+namespace CodeGenerator.Lib.CodeGenerators
 {
 
-    public class ApiControllerGenerator : CodeGenerators.CodeGenerator
+    public class ApiControllerGenerator : CodeGenerator
     {
         public ApiControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
@@ -19,9 +18,9 @@ namespace CodeGenerator.Lib.Services
             foreach (var @class in model.Classes)
             {
                 var template = new ApiControllerTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectTypeConstant.Logic}.ApiController", File = $"{@class}ApiController.cs", Content = template.TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}/ApiController", File = $"{@class}ApiController.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectTypeConstant.Logic}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content = new ProjectFileTemplate().TransformText() };
         }
     }
 }
