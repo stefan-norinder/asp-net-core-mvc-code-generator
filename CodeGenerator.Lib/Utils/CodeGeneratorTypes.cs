@@ -12,14 +12,7 @@ namespace CodeGenerator.Lib.Utils
         Models = 32,
         WebRoot = 64,
         SolutionRoot = 128,
-        All = Api | DataAccess | Services | Models | WebRoot | SolutionRoot
-    }
-
-    public static class CodeGeneratorTypesExtensions
-    {
-        public static bool HasFlag(this CodeGeneratorTypes type, CodeGeneratorTypes checkflag)
-        {
-            return (type & checkflag) == checkflag;
-        }
+        ViewModels = 256,
+        All = Api | DataAccess | Services | Models | WebRoot | SolutionRoot | ViewModels
     }
 }
