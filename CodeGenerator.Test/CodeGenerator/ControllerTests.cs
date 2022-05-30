@@ -14,6 +14,7 @@ namespace CodeGenerator.Test
     {
         private Controller controller;
         private Mock<IOutputAdapter> outputMock;
+        private string[] args;
 
         [SetUp]
         public void Setup()
@@ -21,31 +22,32 @@ namespace CodeGenerator.Test
             outputMock = new Mock<IOutputAdapter>();
             var factory = new CodeGeneratorFactory(outputMock.Object);
             controller = new Controller(factory);
+            args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person" };
         }
 
         [Test]
         public void CreateDataAccessFromTemplate_ShouldBeCorrectContent()
         {
             var expected = @"//---------------------------------------------------------------------------------------
-                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            using Foo.Lib.Model;
-                            using Foo.Lib.DataAccess;
+                            using Example.Lib.Model;
+                            using Example.Lib.DataAccess;
 
-                            namespace Foo.Lib.DataAccess
+                            namespace Example.Lib.DataAccess
                             {
-                                public interface IBarEntityDataAccess : IDataAccess<BarEntity>
+                                public interface IPersonDataAccess : IDataAccess<Person>
                                 {    }
 
-                                public class BarEntityDataAccess : BaseDataAccess<BarEntity>, IBarEntityDataAccess
+                                public class PersonDataAccess : BaseDataAccess<Person>, IPersonDataAccess
                                 {
-                                    public BarEntityDataAccess(ISqlDataAccess db, SqlStringBuilder<BarEntity> sqlStringBuilder)
+                                    public PersonDataAccess(ISqlDataAccess db, SqlStringBuilder<Person> sqlStringBuilder)
                                         : base(db, sqlStringBuilder)
                                     { }
                                  }
-                            }  ";
-            controller.Run(CodeGeneratorTypes.DataAccess, null);
+                            } ";
+            controller.Run(CodeGeneratorTypes.DataAccess, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
@@ -54,19 +56,18 @@ namespace CodeGenerator.Test
         public void CreateModelFromTemplate_ShouldBeCorrectContent()
         {
             var expected = @"//---------------------------------------------------------------------------------------
-                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                        namespace Example.Lib.Model
-                        {
-                            public class PersonEntity : Entity
+                            namespace Example.Lib.Model
                             {
-                                public string Name {get;set;}
-                                public int Age {get;set;}
-                            }
-                        } ";
+                                public class Person : Entity
+                                {
+      
+                                }
+                            } ";
 
-            controller.Run(CodeGeneratorTypes.Models, null);
+            controller.Run(CodeGeneratorTypes.Models, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -74,30 +75,29 @@ namespace CodeGenerator.Test
         public void CreateServiceFromTemplate_ShouldBeCorrectContent()
         {
             var expected = @"//---------------------------------------------------------------------------------------
-                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                       using Example.Lib.DataAccess;
-                        using Example.Lib.Model;
-                        using Microsoft.Extensions.Logging;
+                            using Example.Lib.DataAccess;
+                            using Example.Lib.Model;
+                            using Microsoft.Extensions.Logging;
 
-                        namespace Example.Lib.Services
-                        {
-                            public interface IPersonService : IService<PersonEntity>
+                            namespace Example.Lib.Services
                             {
-                            }
+                                public interface IPersonService : IService<Person>
+                                {
+                                }
 
-                            public class PersonService : Service<PersonEntity>, IPersonService
-                            {
-                                public PersonService(ILogger<PersonService> logger,
-                                   IPersonEntityDataAccess dataAccess)
-                                   : base(logger, dataAccess)
-                                { }
-                            }
-                        }
-                            ";
+                                public class PersonService : Service<Person>, IPersonService
+                                {
+                                    public PersonService(ILogger<PersonService> logger,
+                                       IPersonDataAccess dataAccess)
+                                       : base(logger, dataAccess)
+                                    { }
+                                }
+                            }";
 
-            controller.Run(CodeGeneratorTypes.Services, null);
+            controller.Run(CodeGeneratorTypes.Services, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(),It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -129,7 +129,7 @@ namespace CodeGenerator.Test
                         }
                             ";
 
-            controller.Run(CodeGeneratorTypes.Controllers, null);
+            controller.Run(CodeGeneratorTypes.Controllers, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -137,69 +137,70 @@ namespace CodeGenerator.Test
         public void CreateApiControllerFromTemplate_ShouldBeCorrectContent()
         {
             var expected = @"//---------------------------------------------------------------------------------------
-                        // This is an auto generated file. Don't make any changes because they may be overwritten
-                        //---------------------------------------------------------------------------------------
+                            // Warning! This is an auto generated file. Changes may be overwritten 
+                            //---------------------------------------------------------------------------------------
 
-                        using Example.Lib.Model;
-                        using Example.Lib.Services;
-                        using Microsoft.Extensions.Logging;
-                        using Microsoft.AspNetCore.Mvc;
-                        using Newtonsoft.Json;
-                        using System.Collections.Generic;
-                        using System.Threading.Tasks;
+                            using Example.Lib.Model;
+                            using Example.Lib.Services;
+                            using Microsoft.Extensions.Logging;
+                            using Microsoft.AspNetCore.Mvc;
+                            using Newtonsoft.Json;
+                            using System.Collections.Generic;
+                            using System.Threading.Tasks;
 
-                        namespace Example.Web.ApiController
-                        { 
-                            [Route(""api/v1/[controller]"")]
-                            [ApiController]
-                            public class PersonController: ControllerBase
-                            {
-                                private readonly ILogger<PersonController> logger;
-                                private readonly IPersonService service;
-
-                                public PersonController(ILogger<PersonController> logger, IPersonService service)
+                            namespace Example.Web.ApiController
+                            { 
+                                [Route(""api/v1/[controller]"")]
+                                [ApiController]
+                                public class PersonController: ControllerBase
                                 {
-                                    this.logger = logger;
-                                    this.service = service;
-                                }
+                                    private readonly ILogger<PersonController> logger;
+                                    private readonly IPersonService service;
 
-                                [HttpGet]
-                                public async Task<IEnumerable<string>> Get()
-                                {
-                                    var items = await service.GetAll();
-                                    return JsonConvert.SerializeObject(items);
-                                }
+                                    public PersonController(ILogger<PersonController> logger, IPersonService service)
+                                    {
+                                        this.logger = logger;
+                                        this.service = service;
+                                    }
 
-                                [HttpGet(""{id}"")]
-                                public async Task<string> Get(int id)
-                                {
-                                    var item = await service.Get(id);
-                                    return JsonConvert.SerializeObject(item);
-                                }
+                                    [HttpGet]
+                                    public async Task<string> Get()
+                                    {
+                                        var items = await service.GetAll();
+                                        return JsonConvert.SerializeObject(items);
+                                    }
 
-                                [HttpPost]
-                                public async Task Post([FromBody] string value)
-                                {
-                                   var item = JsonConvert.DeserializeObject<Person>(value);
-                                   await service.Insert(item);
-                                }
+                                    [HttpGet(""{id}"")]
+                                    public async Task<string> Get(int id)
+                                    {
+                                        var item = await service.Get(id);
+                                        return JsonConvert.SerializeObject(item);
+                                    }
 
-                                [HttpPut(""{id}"")]
-                                public async Task Put(int id, [FromBody] string value)
-                                {
-                                   var item = JsonConvert.DeserializeObject<Person>(value);
-                                   await service.Update(id, item);
-                                }
+                                    [HttpPost]
+                                    public async Task Post([FromBody] dynamic value)
+                                    {
+                                       var item = JsonConvert.DeserializeObject<Person>(value.ToString());
+                                       await service.Insert(item);
+                                    }
 
-                                [HttpDelete(""{id}"")]
-                                public async Task Delete(int id)
-                                {
-                                       await service.Delete(id);
-                                }
-                            }
-                        }";
+                                    [HttpPut(""{id}"")]
+                                    public async Task Put(int id, [FromBody] dynamic value)
+                                    {
+                                       var item = JsonConvert.DeserializeObject<Person>(value.ToString());
+                                       item.Id = id;
+                                       await service.Update(item);
+                                    }
 
-            controller.Run(CodeGeneratorTypes.Api, null);
+                                    [HttpDelete(""{id}"")]
+                                    public async Task Delete(int id)
+                                    {
+                                           await service.Delete(id);
+                                    }
+                                }
+                            }";
+
+            controller.Run(CodeGeneratorTypes.Api, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
