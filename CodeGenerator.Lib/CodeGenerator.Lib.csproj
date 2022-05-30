@@ -50,6 +50,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataAccessTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\HomeViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HomeViewTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ListViewTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -136,6 +141,10 @@
     <None Update="Templates\DataAccessBase.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataAccessBase.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\HomeViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HomeViewTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ListViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

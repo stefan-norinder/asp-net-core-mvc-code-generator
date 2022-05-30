@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ListViewTemplate : ListViewTemplateBase
+    public partial class HomeViewTemplate : HomeViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,85 +28,37 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@* --------------------------------------------------------------------*@
-@* Warning! This is an auto generated file. Changes may be overwritten *@
-@* --------------------------------------------------------------------*@
-@model IEnumerable<DatabaseTest.Web.ViewModel.");
+            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
+                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
+                    "------------------------------------------------------------*@\r\n<ul>\r\n");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("ViewModel>\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"");
-            
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+ foreach (var item in Model){ 
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>");
+            this.Write("    <li><a href=\"");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</h1>\r\n@*\r\n<p>\r\n    <a asp-action=\"Create\">Create New</a>\r\n</p>\r\n*@\r\n<table class" +
-                    "=\"table\">\r\n    <thead>\r\n        <tr>\r\n");
-            
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("            <th>\r\n                @Html.DisplayNameFor(model => model.");
-            
-            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(")\r\n            </th>\r\n");
+            this.Write("\">");
             
-            #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  \r\n            <th></th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n@foreach (va" +
-                    "r item in Model) {\r\n        <tr>\r\n");
-            
-            #line 35 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("            <td>\r\n                @Html.DisplayFor(modelItem => item.");
-            
-            #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(")\r\n            </td>\r\n");
+            this.Write("</a></li>\r\n");
             
-            #line 39 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"  
-            <td>
-                @*@Html.ActionLink(""Edit"", ""Edit"", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink(""Details"", ""Details"", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink(""Delete"", ""Delete"", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-");
+            this.Write("  \r\n</ul>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -118,7 +70,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ListViewTemplateBase
+    public class HomeViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

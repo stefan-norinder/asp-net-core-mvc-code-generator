@@ -21,8 +21,9 @@ namespace CodeGenerator.Lib.CodeGenerators
             foreach (var @class in model.Classes)
             {
                 var template = new ListViewTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = $"Index.cshtml", Content = template.TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Index.cshtml", Content = template.TransformText() };
             }
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Home", File = "Index.cshtml", Content = new HomeViewTemplate(namespaceName, model.Classes).TransformText() };
         }
     }
 }
