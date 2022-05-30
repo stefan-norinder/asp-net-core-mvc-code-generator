@@ -8,9 +8,9 @@
 //---------------------------------------------------------------------------------------
 
 using AutoMapper;
-using <#= namespaceName #>.Lib.DataAccess;
-using <#= namespaceName #>.Lib.Model;
-using <#= namespaceName #>.Lib.Services;
+using <#= namespaceName #>.Logic.DataAccess;
+using <#= namespaceName #>.Logic.Model;
+using <#= namespaceName #>.Logic.Services;
 using <#= namespaceName #>.Web.ViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

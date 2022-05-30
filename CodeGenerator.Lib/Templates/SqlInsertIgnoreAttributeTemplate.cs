@@ -41,8 +41,8 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n    public class SqlInsertIgnoreAttribute : Attribute\r\n    { " +
-                    "   }\r\n}");
+            this.Write(".Logic.DataAccess\r\n{\r\n    public class SqlInsertIgnoreAttribute : Attribute\r\n    " +
+                    "{    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

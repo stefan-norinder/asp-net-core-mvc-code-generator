@@ -41,7 +41,7 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Model\r\n{\r\n    public class ");
+            this.Write(".Logic.Model\r\n{\r\n    public class ");
             
             #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

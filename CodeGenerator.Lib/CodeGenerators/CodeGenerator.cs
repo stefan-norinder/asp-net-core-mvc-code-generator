@@ -42,7 +42,7 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected static class ProjectTypeConstant
         {
-            public static string Logic = "Lib";
+            public static string Logic = "Logic";
             public static string Web = "Web";
             public static string Solution = "Solution";
         }

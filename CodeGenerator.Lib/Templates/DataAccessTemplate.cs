@@ -39,21 +39,21 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Model;\r\nusing ");
+            this.Write(".Logic.Model;\r\nusing ");
             
             #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\n\r\nnamespace ");
+            this.Write(".Logic.DataAccess;\r\n\r\nnamespace ");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n    public interface I");
+            this.Write(".Logic.DataAccess\r\n{\r\n    public interface I");
             
             #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

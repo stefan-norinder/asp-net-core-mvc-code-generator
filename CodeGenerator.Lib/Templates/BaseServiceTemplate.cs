@@ -39,22 +39,22 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Model;\r\nusing ");
+            this.Write(".Logic.Model;\r\nusing ");
             
             #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections.G" +
-                    "eneric;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
+            this.Write(".Logic.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections" +
+                    ".Generic;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(@".Lib.Model
+            this.Write(@".Logic.Model
 {
      public interface IService<TModel>
     {  

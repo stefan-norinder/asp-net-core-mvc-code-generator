@@ -14,5 +14,5 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{<#= solutionGuid #>}") = "Web", "<#= @namespace #>.Web\Web.csproj", "{<#= webProjectGuid #>}"
 EndProject
-Project("{<#= solutionGuid #>}") = "Lib", "<#= @namespace #>.Lib\Lib.csproj", "{<#= libProjectGuid #>}"
+Project("{<#= solutionGuid #>}") = "Logic", "<#= @namespace #>.Logic\Logic.csproj", "{<#= libProjectGuid #>}"
 EndProject

@@ -40,21 +40,21 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing ");
+            this.Write(".Logic.DataAccess;\r\nusing ");
             
             #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.Model;\r\nusing ");
+            this.Write(".Logic.Model;\r\nusing ");
             
             #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.Services;\r\nusing ");
+            this.Write(".Logic.Services;\r\nusing ");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));

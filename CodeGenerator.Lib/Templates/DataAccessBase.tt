@@ -7,11 +7,11 @@
 //---------------------------------------------------------------------------------------
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
-using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Logic.DataAccess;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace <#= namespaceName #>.Lib.DataAccess
+namespace <#= namespaceName #>.Logic.DataAccess
 {
     public interface IDataAccess<T>
     {

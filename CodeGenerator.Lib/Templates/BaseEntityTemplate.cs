@@ -41,7 +41,7 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write(@".Lib.Model
+            this.Write(@".Logic.Model
 {
     public class Entity
     {

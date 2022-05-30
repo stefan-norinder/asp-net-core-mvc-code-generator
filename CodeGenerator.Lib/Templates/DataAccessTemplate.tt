@@ -8,10 +8,10 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
-using <#= namespaceName #>.Lib.Model;
-using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Logic.Model;
+using <#= namespaceName #>.Logic.DataAccess;
 
-namespace <#= namespaceName #>.Lib.DataAccess
+namespace <#= namespaceName #>.Logic.DataAccess
 {
     public interface I<#= Model.Name #>DataAccess : IDataAccess<<#= Model.Name #>>
     {    }

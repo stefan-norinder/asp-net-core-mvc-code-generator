@@ -17,7 +17,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <#= $"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />" #>    
+    <#= $"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />" #>    
   </ItemGroup>
 
 </Project>

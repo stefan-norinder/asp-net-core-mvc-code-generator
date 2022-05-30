@@ -7,14 +7,14 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
-using <#= namespaceName #>.Lib.Model;
-using <#= namespaceName #>.Lib.DataAccess;
+using <#= namespaceName #>.Logic.Model;
+using <#= namespaceName #>.Logic.DataAccess;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace <#= namespaceName #>.Lib.Model
+namespace <#= namespaceName #>.Logic.Model
 {
      public interface IService<TModel>
     {  

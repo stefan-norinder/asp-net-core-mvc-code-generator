@@ -10,7 +10,7 @@
 
 using System;
 
-namespace <#= namespaceName #>.Lib.Model
+namespace <#= namespaceName #>.Logic.Model
 {
     public class <#= Model.Name #> : Entity
     {

@@ -48,51 +48,51 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n\r\n    public interface ISqlDataAccess\r\n    {\r\n        Task<T>" +
-                    " LoadSingularData<T, U>(string sql, U parameters);\r\n        Task<List<T>> LoadDa" +
-                    "ta<T, U>(string sql, U parameters);\r\n        Task SaveData<T>(string sql, T para" +
-                    "meters);\r\n        T LoadSingularDataSynchronous<T, U>(string sql, U parameters);" +
-                    "\r\n    }\r\n\r\n    public class SqlDataAccess : ISqlDataAccess\r\n    {\r\n        priva" +
-                    "te string _connectionString;\r\n        private readonly ILogger logger;\r\n\r\n      " +
-                    "  public SqlDataAccess(IConfiguration iconfiguration,\r\n            ILogger<SqlDa" +
-                    "taAccess> logger)\r\n        {\r\n            _connectionString = iconfiguration.Get" +
-                    "ConnectionString(\"Default\");\r\n            this.logger = logger;\r\n        }\r\n\r\n  " +
-                    "      public async Task<T> LoadSingularData<T, U>(string sql, U parameters)\r\n   " +
-                    "     {\r\n            using (IDbConnection connection = new SqlConnection(_connect" +
-                    "ionString))\r\n            {\r\n                try\r\n                {\r\n            " +
-                    "        return await connection.QueryFirstOrDefaultAsync<T>(sql, parameters);\r\n " +
-                    "               }\r\n                catch (Exception e)\r\n                {\r\n      " +
-                    "              LogException(e);\r\n                    connection.Close();\r\n       " +
-                    "             throw;\r\n                }\r\n            }\r\n        }\r\n\r\n        publ" +
-                    "ic async Task<List<T>> LoadData<T, U>(string sql, U parameters)\r\n        {\r\n    " +
-                    "        using (IDbConnection connection = new SqlConnection(_connectionString))\r" +
-                    "\n            {\r\n                try\r\n                {\r\n                    var " +
-                    "data = await connection.QueryAsync<T>(sql, parameters);\r\n                    ret" +
-                    "urn data.AsList();\r\n                }\r\n                catch (Exception e)\r\n    " +
-                    "            {\r\n                    LogException(e);\r\n                    connect" +
-                    "ion.Close();\r\n                    throw;\r\n                }\r\n            }\r\n    " +
-                    "    }\r\n\r\n        public T LoadSingularDataSynchronous<T, U>(string sql, U parame" +
-                    "ters)\r\n        {\r\n            using (IDbConnection connection = new SqlConnectio" +
-                    "n(_connectionString))\r\n            {\r\n                try\r\n                {\r\n  " +
-                    "                  return connection.QueryFirstOrDefault<T>(sql, parameters);\r\n  " +
-                    "              }\r\n                catch (Exception e)\r\n                {\r\n       " +
-                    "             LogException(e);\r\n                    connection.Close();\r\n        " +
-                    "            throw;\r\n                }\r\n            }\r\n        }\r\n\r\n        publi" +
-                    "c async Task SaveData<T>(string sql, T parameters)\r\n        {\r\n            using" +
-                    " (IDbConnection connection = new SqlConnection(_connectionString))\r\n            " +
-                    "{\r\n                try\r\n                {\r\n                    await connection." +
-                    "ExecuteAsync(sql, parameters);\r\n                }\r\n                catch (SqlExc" +
-                    "eption e)\r\n                {\r\n                    if (e.Message.Contains(\"Violat" +
-                    "ion of UNIQUE KEY constraint\"))\r\n                    {\r\n                        " +
-                    "logger.LogWarning(e.Message);\r\n                    }\r\n                    else\r\n" +
-                    "                    {\r\n                        LogException(e);\r\n               " +
-                    "         connection.Close();\r\n                        throw;\r\n                  " +
-                    "  }\r\n                }\r\n                catch (Exception e)\r\n                {\r\n" +
-                    "                    LogException(e);\r\n                    connection.Close();\r\n " +
-                    "                   throw;\r\n                }\r\n            }\r\n        }\r\n\r\n      " +
-                    "  #region private \r\n\r\n        private void LogException(Exception e)\r\n        {\r" +
-                    "\n            logger.LogError(e, \"An error occured when quering data from data so" +
-                    "urce\");\r\n        }\r\n\r\n        #endregion\r\n\r\n    }\r\n}");
+            this.Write(".Logic.DataAccess\r\n{\r\n\r\n    public interface ISqlDataAccess\r\n    {\r\n        Task<" +
+                    "T> LoadSingularData<T, U>(string sql, U parameters);\r\n        Task<List<T>> Load" +
+                    "Data<T, U>(string sql, U parameters);\r\n        Task SaveData<T>(string sql, T pa" +
+                    "rameters);\r\n        T LoadSingularDataSynchronous<T, U>(string sql, U parameters" +
+                    ");\r\n    }\r\n\r\n    public class SqlDataAccess : ISqlDataAccess\r\n    {\r\n        pri" +
+                    "vate string _connectionString;\r\n        private readonly ILogger logger;\r\n\r\n    " +
+                    "    public SqlDataAccess(IConfiguration iconfiguration,\r\n            ILogger<Sql" +
+                    "DataAccess> logger)\r\n        {\r\n            _connectionString = iconfiguration.G" +
+                    "etConnectionString(\"Default\");\r\n            this.logger = logger;\r\n        }\r\n\r\n" +
+                    "        public async Task<T> LoadSingularData<T, U>(string sql, U parameters)\r\n " +
+                    "       {\r\n            using (IDbConnection connection = new SqlConnection(_conne" +
+                    "ctionString))\r\n            {\r\n                try\r\n                {\r\n          " +
+                    "          return await connection.QueryFirstOrDefaultAsync<T>(sql, parameters);\r" +
+                    "\n                }\r\n                catch (Exception e)\r\n                {\r\n    " +
+                    "                LogException(e);\r\n                    connection.Close();\r\n     " +
+                    "               throw;\r\n                }\r\n            }\r\n        }\r\n\r\n        pu" +
+                    "blic async Task<List<T>> LoadData<T, U>(string sql, U parameters)\r\n        {\r\n  " +
+                    "          using (IDbConnection connection = new SqlConnection(_connectionString)" +
+                    ")\r\n            {\r\n                try\r\n                {\r\n                    va" +
+                    "r data = await connection.QueryAsync<T>(sql, parameters);\r\n                    r" +
+                    "eturn data.AsList();\r\n                }\r\n                catch (Exception e)\r\n  " +
+                    "              {\r\n                    LogException(e);\r\n                    conne" +
+                    "ction.Close();\r\n                    throw;\r\n                }\r\n            }\r\n  " +
+                    "      }\r\n\r\n        public T LoadSingularDataSynchronous<T, U>(string sql, U para" +
+                    "meters)\r\n        {\r\n            using (IDbConnection connection = new SqlConnect" +
+                    "ion(_connectionString))\r\n            {\r\n                try\r\n                {\r\n" +
+                    "                    return connection.QueryFirstOrDefault<T>(sql, parameters);\r\n" +
+                    "                }\r\n                catch (Exception e)\r\n                {\r\n     " +
+                    "               LogException(e);\r\n                    connection.Close();\r\n      " +
+                    "              throw;\r\n                }\r\n            }\r\n        }\r\n\r\n        pub" +
+                    "lic async Task SaveData<T>(string sql, T parameters)\r\n        {\r\n            usi" +
+                    "ng (IDbConnection connection = new SqlConnection(_connectionString))\r\n          " +
+                    "  {\r\n                try\r\n                {\r\n                    await connectio" +
+                    "n.ExecuteAsync(sql, parameters);\r\n                }\r\n                catch (SqlE" +
+                    "xception e)\r\n                {\r\n                    if (e.Message.Contains(\"Viol" +
+                    "ation of UNIQUE KEY constraint\"))\r\n                    {\r\n                      " +
+                    "  logger.LogWarning(e.Message);\r\n                    }\r\n                    else" +
+                    "\r\n                    {\r\n                        LogException(e);\r\n             " +
+                    "           connection.Close();\r\n                        throw;\r\n                " +
+                    "    }\r\n                }\r\n                catch (Exception e)\r\n                {" +
+                    "\r\n                    LogException(e);\r\n                    connection.Close();\r" +
+                    "\n                    throw;\r\n                }\r\n            }\r\n        }\r\n\r\n    " +
+                    "    #region private \r\n\r\n        private void LogException(Exception e)\r\n        " +
+                    "{\r\n            logger.LogError(e, \"An error occured when quering data from data " +
+                    "source\");\r\n        }\r\n\r\n        #endregion\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

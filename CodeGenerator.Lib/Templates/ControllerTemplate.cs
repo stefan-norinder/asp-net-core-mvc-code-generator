@@ -40,9 +40,9 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Services;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Loggi" +
-                    "ng;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\nusing Dat" +
-                    "abaseTest.Web.ViewModel;\r\n\r\nnamespace ");
+            this.Write(".Logic.Services;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Log" +
+                    "ging;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\nusing D" +
+                    "atabaseTest.Web.ViewModel;\r\n\r\nnamespace ");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));

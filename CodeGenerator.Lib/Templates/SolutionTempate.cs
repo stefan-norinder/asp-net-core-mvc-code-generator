@@ -68,14 +68,14 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("}\") = \"Lib\", \"");
+            this.Write("}\") = \"Logic\", \"");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
             
             #line default
             #line hidden
-            this.Write(".Lib\\Lib.csproj\", \"{");
+            this.Write(".Logic\\Logic.csproj\", \"{");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(libProjectGuid));

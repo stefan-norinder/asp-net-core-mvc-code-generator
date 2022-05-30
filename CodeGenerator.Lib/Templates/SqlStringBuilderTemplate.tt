@@ -7,13 +7,13 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
-using <#= namespaceName #>.Lib.Model;
+using <#= namespaceName #>.Logic.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace <#= namespaceName #>.Lib.DataAccess
+namespace <#= namespaceName #>.Logic.DataAccess
 {
     public class SqlStringBuilder<T>
     {

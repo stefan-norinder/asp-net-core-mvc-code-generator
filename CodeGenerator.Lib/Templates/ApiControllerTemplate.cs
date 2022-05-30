@@ -39,16 +39,16 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.Model;\r\nusing ");
+            this.Write(".Logic.Model;\r\nusing ");
             
             #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore.M" +
-                    "vc;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.Thr" +
-                    "eading.Tasks;\r\n\r\nnamespace ");
+            this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore" +
+                    ".Mvc;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.T" +
+                    "hreading.Tasks;\r\n\r\nnamespace ");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));

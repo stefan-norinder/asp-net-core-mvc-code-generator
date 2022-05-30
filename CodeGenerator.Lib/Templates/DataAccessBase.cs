@@ -38,44 +38,44 @@ using ");
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks" +
-                    ";\r\n\r\nnamespace ");
+            this.Write(".Logic.DataAccess;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tas" +
+                    "ks;\r\n\r\nnamespace ");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DataAccessBase.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.DataAccess\r\n{\r\n    public interface IDataAccess<T>\r\n    {\r\n        Task<T> G" +
-                    "et(int id);\r\n        Task<IEnumerable<T>> GetAll();\r\n        Task Insert(T model" +
-                    ");\r\n        Task Update(T model);\r\n        Task Delete(int id);\r\n        Task De" +
-                    "leteAll();\r\n    }\r\n\r\n    public class BaseDataAccess<T> : IDataAccess<T>\r\n    {\r" +
-                    "\n        protected readonly ISqlDataAccess db;\r\n        private readonly SqlStri" +
-                    "ngBuilder<T> sqlStringBuilder;\r\n\r\n        public BaseDataAccess(ISqlDataAccess d" +
-                    "b,\r\n            SqlStringBuilder<T> sqlStringBuilder)\r\n        {\r\n            th" +
-                    "is.db = db;\r\n            this.sqlStringBuilder = sqlStringBuilder;\r\n            " +
-                    "Table = typeof(T).Name;\r\n        }\r\n\r\n        protected string Table { get; }\r\n\r" +
-                    "\n        public async virtual Task Insert(T model)\r\n        {\r\n            strin" +
-                    "g sql = sqlStringBuilder.GetInsertString(model);\r\n\r\n            await db.SaveDat" +
-                    "a(sql, model);\r\n        }\r\n\r\n        public async virtual Task Update(T model)\r\n" +
-                    "        {\r\n            string sql = sqlStringBuilder.GetUpdateString(model);\r\n\r\n" +
-                    "            await db.SaveData(sql, model);\r\n        }\r\n\r\n        public virtual " +
-                    "async Task<IEnumerable<T>> GetAll()\r\n        {\r\n            string sql = $\"SELEC" +
-                    "T * FROM {Table} \";\r\n            return await ExecuteSelectMany(sql);\r\n        }" +
-                    "\r\n        \r\n        public virtual async Task<T> Get(int id)\r\n        {\r\n       " +
-                    "     string sql = $\"SELECT * FROM {Table} Where Id = @id\";\r\n            return a" +
-                    "wait db.LoadSingularData<T, dynamic>(sql, new { Id = id });\r\n        }\r\n\r\n      " +
-                    "  public async Task DeleteAll()\r\n        {\r\n            string sql = $\"DELETE FR" +
-                    "OM {Table} \";\r\n            await db.SaveData(sql, new { });\r\n        }\r\n\r\n      " +
-                    "  public async Task Delete(int id)\r\n        {\r\n            string sql = $\"DELETE" +
-                    " FROM {Table} WHERE Id = @id\";\r\n            await db.SaveData(sql, new { Id = id" +
-                    " });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(string sq" +
-                    "l, int id)\r\n        {\r\n            return await db.LoadSingularData<T, dynamic>(" +
-                    "sql, new { Id = id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSele" +
-                    "ctSingle(string sql)\r\n        {\r\n            return await db.LoadSingularData<T," +
-                    " dynamic>(sql, new { });\r\n        }\r\n\r\n        protected async Task<List<T>> Exe" +
-                    "cuteSelectMany(string sql)\r\n        {\r\n            return await db.LoadData<T, d" +
-                    "ynamic>(sql, new { });\r\n        }\r\n    }\r\n}\r\n");
+            this.Write(".Logic.DataAccess\r\n{\r\n    public interface IDataAccess<T>\r\n    {\r\n        Task<T>" +
+                    " Get(int id);\r\n        Task<IEnumerable<T>> GetAll();\r\n        Task Insert(T mod" +
+                    "el);\r\n        Task Update(T model);\r\n        Task Delete(int id);\r\n        Task " +
+                    "DeleteAll();\r\n    }\r\n\r\n    public class BaseDataAccess<T> : IDataAccess<T>\r\n    " +
+                    "{\r\n        protected readonly ISqlDataAccess db;\r\n        private readonly SqlSt" +
+                    "ringBuilder<T> sqlStringBuilder;\r\n\r\n        public BaseDataAccess(ISqlDataAccess" +
+                    " db,\r\n            SqlStringBuilder<T> sqlStringBuilder)\r\n        {\r\n            " +
+                    "this.db = db;\r\n            this.sqlStringBuilder = sqlStringBuilder;\r\n          " +
+                    "  Table = typeof(T).Name;\r\n        }\r\n\r\n        protected string Table { get; }\r" +
+                    "\n\r\n        public async virtual Task Insert(T model)\r\n        {\r\n            str" +
+                    "ing sql = sqlStringBuilder.GetInsertString(model);\r\n\r\n            await db.SaveD" +
+                    "ata(sql, model);\r\n        }\r\n\r\n        public async virtual Task Update(T model)" +
+                    "\r\n        {\r\n            string sql = sqlStringBuilder.GetUpdateString(model);\r\n" +
+                    "\r\n            await db.SaveData(sql, model);\r\n        }\r\n\r\n        public virtua" +
+                    "l async Task<IEnumerable<T>> GetAll()\r\n        {\r\n            string sql = $\"SEL" +
+                    "ECT * FROM {Table} \";\r\n            return await ExecuteSelectMany(sql);\r\n       " +
+                    " }\r\n        \r\n        public virtual async Task<T> Get(int id)\r\n        {\r\n     " +
+                    "       string sql = $\"SELECT * FROM {Table} Where Id = @id\";\r\n            return" +
+                    " await db.LoadSingularData<T, dynamic>(sql, new { Id = id });\r\n        }\r\n\r\n    " +
+                    "    public async Task DeleteAll()\r\n        {\r\n            string sql = $\"DELETE " +
+                    "FROM {Table} \";\r\n            await db.SaveData(sql, new { });\r\n        }\r\n\r\n    " +
+                    "    public async Task Delete(int id)\r\n        {\r\n            string sql = $\"DELE" +
+                    "TE FROM {Table} WHERE Id = @id\";\r\n            await db.SaveData(sql, new { Id = " +
+                    "id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(string " +
+                    "sql, int id)\r\n        {\r\n            return await db.LoadSingularData<T, dynamic" +
+                    ">(sql, new { Id = id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSe" +
+                    "lectSingle(string sql)\r\n        {\r\n            return await db.LoadSingularData<" +
+                    "T, dynamic>(sql, new { });\r\n        }\r\n\r\n        protected async Task<List<T>> E" +
+                    "xecuteSelectMany(string sql)\r\n        {\r\n            return await db.LoadData<T," +
+                    " dynamic>(sql, new { });\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

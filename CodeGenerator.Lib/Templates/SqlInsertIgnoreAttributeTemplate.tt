@@ -9,7 +9,7 @@
 
 using System;
 
-namespace <#= namespaceName #>.Lib.DataAccess
+namespace <#= namespaceName #>.Logic.DataAccess
 {
     public class SqlInsertIgnoreAttribute : Attribute
     {    }

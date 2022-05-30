@@ -4,9 +4,7 @@ using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
 using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
 namespace CodeGenerator.Test
 {
@@ -32,10 +30,10 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            using Example.Lib.Model;
-                            using Example.Lib.DataAccess;
+                            using Example.Logic.Model;
+                            using Example.Logic.DataAccess;
 
-                            namespace Example.Lib.DataAccess
+                            namespace Example.Logic.DataAccess
                             {
                                 public interface IPersonDataAccess : IDataAccess<Person>
                                 {    }
@@ -48,7 +46,7 @@ namespace CodeGenerator.Test
                                  }
                             } ";
             controller.Run(CodeGeneratorTypes.DataAccess, args);
-            outputMock.Verify(x => x.Write("./src/Example.Lib/DataAccess", "PersonDataAccess.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Logic/DataAccess", "PersonDataAccess.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
 
@@ -59,7 +57,7 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            namespace Example.Lib.Model
+                            namespace Example.Logic.Model
                             {
                                 public class Person : Entity
                                 {
@@ -68,7 +66,7 @@ namespace CodeGenerator.Test
                             } ";
 
             controller.Run(CodeGeneratorTypes.Models, args);
-            outputMock.Verify(x => x.Write("./src/Example.Lib/Model", "PersonModel.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Logic/Model", "PersonModel.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
         [Test]
@@ -78,11 +76,11 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            using Example.Lib.DataAccess;
-                            using Example.Lib.Model;
+                            using Example.Logic.DataAccess;
+                            using Example.Logic.Model;
                             using Microsoft.Extensions.Logging;
 
-                            namespace Example.Lib.Services
+                            namespace Example.Logic.Services
                             {
                                 public interface IPersonService : IService<Person>
                                 {
@@ -98,7 +96,7 @@ namespace CodeGenerator.Test
                             }";
 
             controller.Run(CodeGeneratorTypes.Services, args);
-            outputMock.Verify(x => x.Write("./src/Example.Lib/Service", "PersonService.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
+            outputMock.Verify(x => x.Write("./src/Example.Logic/Service", "PersonService.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
         [Test]
@@ -108,28 +106,36 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            using Example.Lib.Model;
-                            using Example.Lib.Service;
+                            using AutoMapper;
+                            using Example.Logic.Services;
                             using Microsoft.AspNetCore.Mvc;
                             using Microsoft.Extensions.Logging;
-                            using System.Diagnostics;
+                            using System.Collections.Generic;
+                            using System.Threading.Tasks;
+                            using DatabaseTest.Web.ViewModel;
 
-                            namespace Example.Web.Controller
+                            namespace Example.Web.Controllers
                             {
                                 public class PersonController : Controller
                                 {
                                     private readonly ILogger<PersonController> logger;
                                     private readonly IPersonService service;
+                                    private readonly IMapper mapper;
 
-                                    public PersonController(ILogger<PersonController> logger, IPersonService service)
+                                    public PersonController(ILogger<PersonController> logger, 
+                                    IPersonService service, 
+                                    IMapper mapper)
                                     {
                                         this.logger = logger;
                                         this.service = service;
+                                        this.mapper = mapper;
                                     }
 
-                                    public IActionResult Index()
+                                    public async Task<IActionResult> Index()
                                     {
-                                        return View();
+                                        var list = await service.GetAll();
+                                        var viewModels = mapper.Map < IEnumerable<PersonViewModel>>(list);
+                                        return View(viewModels);
                                     }
                                 }
                             }";
@@ -145,8 +151,8 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                            using Example.Lib.Model;
-                            using Example.Lib.Services;
+                            using Example.Logic.Model;
+                            using Example.Logic.Services;
                             using Microsoft.Extensions.Logging;
                             using Microsoft.AspNetCore.Mvc;
                             using Newtonsoft.Json;
