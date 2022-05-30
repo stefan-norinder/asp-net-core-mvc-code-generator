@@ -44,6 +44,8 @@ namespace CodeGenerator.Lib.Factories
                     return new SolutionRootGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.ViewModels:
                     return new ViewModelGenerator(generationFetcher, output);
+                case CodeGeneratorTypes.ListViews:
+                    return new ListViewGenerator(generationFetcher, output);
                 default:
                     throw new ArgumentException();
             }

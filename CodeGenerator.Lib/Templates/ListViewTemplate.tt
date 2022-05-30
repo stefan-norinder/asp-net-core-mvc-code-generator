@@ -1,0 +1,47 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@model IEnumerable<DatabaseTest.Web.ViewModel.<#= Model.Name #>ViewModel>
+
+@{
+    ViewData["Title"] = "<#= Model.Name #>";
+}
+
+<h1><#= Model.Name #></h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+<# foreach (var item in Model.Properties){ #>
+            <th>
+                @Html.DisplayNameFor(model => model.<#= item.Name #>)
+            </th>
+<# } #>  
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+<# foreach (var item in Model.Properties){ #>
+            <td>
+                @Html.DisplayFor(modelItem => item.<#= item.Name #>)
+            </td>
+<# } #>  
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
