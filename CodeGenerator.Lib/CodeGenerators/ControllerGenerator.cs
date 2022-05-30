@@ -13,14 +13,17 @@ namespace CodeGenerator.Lib.CodeGenerators
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
+        private string projectType = ProjectTypeConstant.Web;
+
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
             foreach (var @class in model.Classes)
             {
                 var template = new ControllerTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}/Controller", File = $"{@class}Controller.cs", Content = template.TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{projectType}/Controller", File = $"{@class}Controller.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectTypeConstant.Logic}", File = $"{ProjectTypeConstant.Web}.csproj", Content = new WebProjectFileTemplate(namespaceName).TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{projectType}/Controller", File = "HomeController.cs", Content = new HomeControllerTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{projectType}", File = $"{projectType}.csproj", Content = new WebProjectFileTemplate(namespaceName).TransformText() };
         }
     }
 }

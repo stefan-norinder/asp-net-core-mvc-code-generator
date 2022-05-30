@@ -67,9 +67,15 @@ namespace CodeGenerator.Lib.Models
             get
             {
                 if (DataType.ToLower().Trim().StartsWith("nvarchar")) return "string";
+                if (DataType.ToLower().Trim().Contains("int")) return "int";
                 if (DataType.ToLower().Trim().StartsWith("varchar")) return "string";
                 if (DataType.ToLower().Trim() == "bit") return "bool";
-                if (DataType.ToLower().Trim() == "date") return "DateTime";
+                if (DataType.ToLower().Trim().Contains("date")) return "DateTime";
+                if (DataType.ToLower().Trim().Contains("binary")) return "byte[]";
+                if (DataType.ToLower().Trim().Contains("text")) return "string";
+                if (DataType.ToLower().Trim() == "numeric") return "decimal";
+                if (DataType.ToLower().Trim() == "money") return "decimal";
+                if (DataType.ToLower().Trim() == "float") return "double";
                 return DataType;
             }
         }
