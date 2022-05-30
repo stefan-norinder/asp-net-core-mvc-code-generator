@@ -2,39 +2,25 @@
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Templates;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
 
     public class ControllerGenerator : CodeGenerator
     {
-        public ControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+        public ControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        protected override string ProjectType => ProjectTypeConstant.Web;
-        protected override string ClassTypeDescription => "Controller";
-
-        protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
+        protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            return Enumerable.Empty<Tuple<string, string>>();
-        }
-
-        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
-        {
-            var list = new List<string>();
             foreach (var @class in model.Classes)
             {
                 var template = new ControllerTemplate(model.Namespace, @class);
-                var generatedCodeFile = template.TransformText();
-                list.Add(generatedCodeFile);
+                yield return new TemplateModel { Folder = $"{FolderPath}{ProjectTypeConstant.Web}.Controller", File = $"{@class}Controller.cs", Content = template.TransformText() };
             }
-
-            return list.ToArray();
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectTypeConstant.Web}.csproj", Content = new ProjectFileTemplate().TransformText() };
         }
-        protected override string ProjectTemplate => new WebProjectFileTemplate(namespaceName).TransformText();
     }
 }

@@ -28,65 +28,21 @@ namespace CodeGenerator.Lib.CodeGenerators
 
             var templates = GenerateTemplatesFromModel(model);
 
-            OutputTemplate(model.Classes, templates, FolderPath);
-
-            GenerateProjectFileFromTemplate();
-
-            var staticNameAndTemplates = GenerateStaticTemplates(namespaceName);
-
-            OutputTemplate(staticNameAndTemplates, StaticFolderPath);
-        }
-
-        protected virtual void GenerateProjectFileFromTemplate()
-        {
-            output.Write(ProjectFolderPath, $"{ProjectType}.csproj", ProjectTemplate);
-        }
-
-        protected abstract string ProjectTemplate { get; }
-
-        protected string baseFolder { get { return "./src/"; } }
-
-        protected virtual string ProjectFolderPath => $"{baseFolder}{namespaceName}.{ProjectType}";
-        protected virtual string FolderPath => $"{ProjectFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
-        protected virtual string StaticFolderPath => $"{ProjectFolderPath}/{namespaceName}.{ProjectType}.{ClassTypeDescription}";
-
-        protected abstract string ProjectType { get; }
-
-        protected abstract string ClassTypeDescription { get; }
-
-        protected abstract IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model);
-
-        protected abstract IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName);
-
-        #region private
-
-        protected virtual void OutputTemplate(IEnumerable<Class> classes, IEnumerable<string> templates, string folderPath)
-        {
-            OutputTemplate(classes.Select(x => x.ToString()), templates, folderPath);
-        }
-
-        private void OutputTemplate(IEnumerable<Tuple<string, string>> nameAndTemplatesList, string folderPath)
-        {
-            var names = nameAndTemplatesList.Select(x => x.Item1);
-            var templates = nameAndTemplatesList.Select(x => x.Item2);
-            OutputTemplate(names, templates, folderPath);
-        }
-
-        protected virtual void OutputTemplate(IEnumerable<string> classes, IEnumerable<string> templates, string folderPath)
-        {
-            for (int i = 0; i < templates.Count(); i++)
+            foreach (var template in templates)
             {
-                var @class = classes.ElementAt(i);
-                var file = $"{@class}{ClassTypeDescription}.cs";
-                var content = templates.ToList().ElementAt(i);
-                Output(folderPath, file, content);
+                output.Write(template.Folder, template.File, template.Content);
             }
         }
 
-        protected void Output(string basePath, string file, string content)
-        {
-            output.Write(basePath, file, content);
-        }
+        protected string baseFolder { get { return "./src/"; } }
+
+        protected string ProjectFolderPath => $"{baseFolder}{namespaceName}";
+        protected string FolderPath => $"{ProjectFolderPath}/{namespaceName}";
+
+        protected abstract IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model);
+
+
+        #region private
 
         #endregion
 
@@ -96,5 +52,12 @@ namespace CodeGenerator.Lib.CodeGenerators
             public static string Web = "Web";
             public static string Solution = "Solution";
         }
-    }
+        protected class TemplateModel
+        {
+            public string Content { get; set; }
+            public string Folder { get; set; }
+            public string File{ get; set; }
+        }
+
+        }
 }

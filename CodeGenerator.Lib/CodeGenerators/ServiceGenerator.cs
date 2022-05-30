@@ -10,31 +10,21 @@ namespace CodeGenerator.Lib.CodeGenerators
 
     public class ServiceGenerator : CodeGenerator
     {
-        public ServiceGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+        public ServiceGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        protected override string ProjectType => ProjectTypeConstant.Logic;
-        protected override string ClassTypeDescription => "Service";
+        private string ProjectType = ProjectTypeConstant.Logic;
 
-        protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
+        protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            return new List<Tuple<string, string>> { new Tuple<string, string>("", new BaseServiceTemplate(namespaceName).TransformText()) };
-        }
-
-        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
-        {
-            var list = new List<string>();
             foreach (var @class in model.Classes)
             {
                 var template = new ServiceTemplate(model.Namespace, @class);
-                var generatedCodeFile = template.TransformText();
-                list.Add(generatedCodeFile);
+                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Service", File = $"{@class}Service.cs", Content = template.TransformText() };
             }
-
-            return list.ToArray();
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
         }
 
-        protected override string ProjectTemplate => new ProjectFileTemplate().TransformText();
     }
 }

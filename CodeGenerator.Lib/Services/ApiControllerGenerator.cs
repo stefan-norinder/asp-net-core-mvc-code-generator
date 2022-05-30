@@ -14,26 +14,14 @@ namespace CodeGenerator.Lib.Services
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        protected override string ProjectType => ProjectTypeConstant.Web;
-        protected override string ClassTypeDescription => "ApiController";
-
-        protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
+        protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            return Enumerable.Empty<Tuple<string, string>>();
-        }
-
-        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
-        {
-            var list = new List<string>();
             foreach (var @class in model.Classes)
             {
                 var template = new ApiControllerTemplate(model.Namespace, @class);
-                var generatedCodeFile = template.TransformText();
-                list.Add(generatedCodeFile);
+                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectTypeConstant.Logic}.ApiController", File = $"{@class}ApiController.cs", Content = template.TransformText() };
             }
-            return list.ToArray();
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectTypeConstant.Logic}.csproj", Content = new ProjectFileTemplate().TransformText() };
         }
-
-        protected override string ProjectTemplate => new WebProjectFileTemplate(base.namespaceName).TransformText();
     }
 }

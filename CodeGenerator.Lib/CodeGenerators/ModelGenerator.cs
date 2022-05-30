@@ -10,31 +10,21 @@ namespace CodeGenerator.Lib.CodeGenerators
 
     public class ModelGenerator : CodeGenerator
     {
-        public ModelGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher, 
+        public ModelGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        protected override string ProjectType => ProjectTypeConstant.Logic;
-        protected override string ClassTypeDescription => "Model";
+        private string ProjectType = ProjectTypeConstant.Logic;
 
-        protected override IEnumerable<Tuple<string, string>> GenerateStaticTemplates(string namespaceName)
+        protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            return new List<Tuple<string, string>> { new Tuple<string, string>("Entity",new BaseEntityTemplate(namespaceName).TransformText()) };
-        }
-
-        protected override IEnumerable<string> GenerateTemplatesFromModel(CodeGenerationModel model)
-        {
-            var list = new List<string>();
             foreach (var @class in model.Classes)
             {
                 var template = new ModelTemplate(model.Namespace, @class);
-                var generatedCodeFile = template.TransformText();
-                list.Add(generatedCodeFile);
+                yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Model", File = $"{@class}Model.cs", Content = template.TransformText() };
             }
-
-            return list.ToArray();
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Logic}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{FolderPath}.{ProjectType}.Model", File = $"Entity.cs", Content = new BaseEntityTemplate(model.Namespace).TransformText() };
         }
-
-        protected override string ProjectTemplate => new ProjectFileTemplate().TransformText();
     }
 }
