@@ -8,6 +8,7 @@
 //---------------------------------------------------------------------------------------
 
 using AutoMapper;
+using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,27 @@ namespace <#= namespaceName #>.Web.Controllers
             var list = await service.GetAll();
             var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
             return View(viewModels);
+        }
+
+         public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: HomeController1/Create
+        [HttpPost]
+        public async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
+        {
+            try
+            {                
+                var model = mapper.Map<<#= Model.Name #>>(viewModel);
+                await service.Insert(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

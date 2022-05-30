@@ -13,11 +13,11 @@
 }
 
 <h1><#= Model.Name #></h1>
-@*
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <a href="/<#= Model.Name #>/create">Create New</a>
 </p>
-*@
+
 <table class="table">
     <thead>
         <tr>

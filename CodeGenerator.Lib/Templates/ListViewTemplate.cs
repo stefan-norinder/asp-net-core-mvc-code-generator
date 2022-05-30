@@ -52,8 +52,15 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("</h1>\r\n@*\r\n<p>\r\n    <a asp-action=\"Create\">Create New</a>\r\n</p>\r\n*@\r\n<table class" +
-                    "=\"table\">\r\n    <thead>\r\n        <tr>\r\n");
+            this.Write("</h1>\r\n\r\n<p>\r\n    <a href=\"/");
+            
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("/create\">Create New</a>\r\n</p>\r\n\r\n<table class=\"table\">\r\n    <thead>\r\n        <tr>" +
+                    "\r\n");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
  foreach (var item in Model.Properties){ 
