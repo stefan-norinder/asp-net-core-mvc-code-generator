@@ -76,6 +76,7 @@ namespace CodeGenerator.Lib.Models
                 if (DataType.ToLower().Trim() == "numeric") return "decimal";
                 if (DataType.ToLower().Trim() == "money") return "decimal";
                 if (DataType.ToLower().Trim() == "float") return "double";
+                if (DataType.ToLower().Trim() == "nchar") return "string";
                 return DataType;
             }
         }
