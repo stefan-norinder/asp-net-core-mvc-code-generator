@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": "--namespace DatabaseTest --server .\\sqlexpress --datasource Digitaliserat"
+      "commandLineArgs": "--namespace DatabaseTest --server .\\sqlexpress --datasource media"
     }
   }
 }
