@@ -101,33 +101,38 @@ namespace CodeGenerator.Test
             outputMock.Verify(x => x.Write("./src/Example.Lib/Service", "PersonService.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
-        [Ignore("Not done")]
         [Test]
         public void CreateControllerFromTemplate_ShouldBeCorrectContent()
         {
             var expected = @"//---------------------------------------------------------------------------------------
-                            // This is an auto generated file. Don't make any changes because they may be overwritten
+                            // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
-                       using Example.Lib.DataAccess;
-                        using Example.Lib.Model;
-                        using Microsoft.Extensions.Logging;
+                            using Example.Lib.Model;
+                            using Example.Lib.Service;
+                            using Microsoft.AspNetCore.Mvc;
+                            using Microsoft.Extensions.Logging;
+                            using System.Diagnostics;
 
-                        namespace Example.Lib.Services
-                        {
-                            public interface IPersonService : IService<PersonEntity>
+                            namespace Example.Web.Controller
                             {
-                            }
+                                public class PersonController : Controller
+                                {
+                                    private readonly ILogger<PersonController> logger;
+                                    private readonly IPersonService service;
 
-                            public class PersonService : Service<PersonEntity>, IPersonService
-                            {
-                                public PersonService(ILogger<PersonService> logger,
-                                   IPersonEntityDataAccess dataAccess)
-                                   : base(logger, dataAccess)
-                                { }
-                            }
-                        }
-                            ";
+                                    public PersonController(ILogger<PersonController> logger, IPersonService service)
+                                    {
+                                        this.logger = logger;
+                                        this.service = service;
+                                    }
+
+                                    public IActionResult Index()
+                                    {
+                                        return View();
+                                    }
+                                }
+                            }";
 
             controller.Run(CodeGeneratorTypes.Controllers, args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
