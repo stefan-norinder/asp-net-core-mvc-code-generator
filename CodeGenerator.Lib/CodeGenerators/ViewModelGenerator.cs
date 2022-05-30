@@ -22,7 +22,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 var template = new ViewModelTemplate(model.Namespace, @class);
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/ViewModel", File = $"{@class}ViewModel.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectType}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectType}", File = $"{ProjectType}.csproj", Content = new WebProjectFileTemplate(namespaceName).TransformText() };
         }
     }
 }

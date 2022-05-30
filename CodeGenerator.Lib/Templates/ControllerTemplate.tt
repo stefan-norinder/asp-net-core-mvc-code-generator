@@ -7,28 +7,36 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
-using <#= namespaceName #>.Lib.Model;
-using <#= namespaceName #>.Lib.Service;
+using AutoMapper;
+using <#= namespaceName #>.Lib.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using DatabaseTest.Web.ViewModel;
 
-namespace <#= namespaceName #>.Web.Controller
+namespace <#= namespaceName #>.Web.Controllers
 {
     public class <#= Model.Name #>Controller : Controller
     {
         private readonly ILogger<<#= Model.Name #>Controller> logger;
         private readonly I<#= Model.Name #>Service service;
+        private readonly IMapper mapper;
 
-        public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, I<#= Model.Name #>Service service)
+        public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, 
+        I<#= Model.Name #>Service service, 
+        IMapper mapper)
         {
             this.logger = logger;
             this.service = service;
+            this.mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = await service.GetAll();
+            var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
+            return View(viewModels);
         }
     }
 }

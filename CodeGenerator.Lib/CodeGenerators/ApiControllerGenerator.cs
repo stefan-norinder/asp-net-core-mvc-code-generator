@@ -20,7 +20,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 var template = new ApiControllerTemplate(model.Namespace, @class);
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}/ApiController", File = $"{@class}ApiController.cs", Content = template.TransformText() };
             }
-            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content = new WebProjectFileTemplate(namespaceName).TransformText() };
         }
     }
 }

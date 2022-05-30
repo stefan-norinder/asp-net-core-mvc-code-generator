@@ -7,9 +7,11 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
+using AutoMapper;
 using <#= namespaceName #>.Lib.DataAccess;
 using <#= namespaceName #>.Lib.Model;
 using <#= namespaceName #>.Lib.Services;
+using <#= namespaceName #>.Web.ViewModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +38,15 @@ namespace <#= namespaceName #>.Web
             services.AddSingleton<SqlStringBuilder<<#= item #>>>();
 <# } #>
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+
+             var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingConfiguration());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             services.AddControllersWithViews();
         }
 
@@ -65,4 +76,16 @@ namespace <#= namespaceName #>.Web
             });
         }
     }
+        public class MappingConfiguration : Profile
+        {
+            public MappingConfiguration()
+            {
+        
+<# foreach(var item in Model) { #>
+                CreateMap<<#= item #>, <#= item #>ViewModel>();
+        
+<# } #>
+    
+            }
+        }
 }

@@ -28,11 +28,23 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("<!-- Warning! This is an auto generated file. Changes may be overwritten -->\r\n<Pr" +
-                    "oject Sdk=\"Microsoft.NET.Sdk.Web\">\r\n\r\n  <PropertyGroup>\r\n    <TargetFramework>ne" +
-                    "t5.0</TargetFramework>\r\n  </PropertyGroup>\r\n  \r\n  <ItemGroup>\r\n    ");
+            this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
+<Project Sdk=""Microsoft.NET.Sdk.Web"">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Version>0.0.1</Version>
+    <Description>Auto generated project</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include=""AutoMapper"" Version=""11.0.1"" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    ");
             
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Lib\\Lib.csproj\" />"));
             
             #line default

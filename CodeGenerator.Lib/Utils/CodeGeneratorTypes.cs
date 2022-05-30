@@ -13,6 +13,6 @@ namespace CodeGenerator.Lib.Utils
         WebRoot = 64,
         SolutionRoot = 128,
         ViewModels = 256,
-        All = Api | DataAccess | Services | Models | WebRoot | SolutionRoot | ViewModels
+        All = Api | Controllers | DataAccess | Services | Models | WebRoot | SolutionRoot | ViewModels
     }
 }

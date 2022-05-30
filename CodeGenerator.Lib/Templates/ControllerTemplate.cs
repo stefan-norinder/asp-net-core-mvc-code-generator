@@ -32,73 +32,84 @@ namespace CodeGenerator.Lib.Templates
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
+using AutoMapper;
 using ");
-            
-            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
-            
-            #line default
-            #line hidden
-            this.Write(".Lib.Model;\r\nusing ");
             
             #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Lib.Service;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Loggin" +
-                    "g;\r\nusing System.Diagnostics;\r\n\r\nnamespace ");
+            this.Write(".Lib.Services;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Loggi" +
+                    "ng;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\nusing Dat" +
+                    "abaseTest.Web.ViewModel;\r\n\r\nnamespace ");
             
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Web.Controller\r\n{\r\n    public class ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Controller : Controller\r\n    {\r\n        private readonly ILogger<");
+            this.Write(".Web.Controllers\r\n{\r\n    public class ");
             
             #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller> logger;\r\n        private readonly I");
+            this.Write("Controller : Controller\r\n    {\r\n        private readonly ILogger<");
             
-            #line 21 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Service service;\r\n\r\n        public ");
+            this.Write("Controller> logger;\r\n        private readonly I");
             
             #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service service;\r\n        private readonly IMapper mapper;\r\n\r\n        public ");
+            
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Controller(ILogger<");
             
-            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller> logger, I");
+            this.Write("Controller> logger, \r\n        I");
             
-            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Service service)\r\n        {\r\n            this.logger = logger;\r\n            this." +
-                    "service = service;\r\n        }\r\n\r\n        public IActionResult Index()\r\n        {" +
-                    "\r\n            return View();\r\n        }\r\n    }\r\n}");
+            this.Write(@"Service service, 
+        IMapper mapper)
+        {
+            this.logger = logger;
+            this.service = service;
+            this.mapper = mapper;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var list = await service.GetAll();
+            var viewModels = mapper.Map < IEnumerable<");
+            
+            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel>>(list);\r\n            return View(viewModels);\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
