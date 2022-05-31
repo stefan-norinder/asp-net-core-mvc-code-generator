@@ -55,6 +55,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataAccessTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\DeleteViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DeleteViewTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\EditViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EditViewTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\HomeControllerTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -155,6 +165,14 @@
     <None Update="Templates\DataAccessBase.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>DataAccessBase.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\DeleteViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DeleteViewTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\EditViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EditViewTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\HomeControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

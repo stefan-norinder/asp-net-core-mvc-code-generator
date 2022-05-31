@@ -116,20 +116,12 @@ using ");
             
             #line default
             #line hidden
-            this.Write(@"ViewModel>>(list);
-            return View(viewModels);
-        }
-
-         public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HomeController1/Create
-        [HttpPost]
-        public async Task<ActionResult> Create([FromForm]");
+            this.Write("ViewModel>>(list);\r\n            return View(viewModels);\r\n        }\r\n        \r\n  " +
+                    "       public ActionResult Create()\r\n        {\r\n            return View();\r\n    " +
+                    "    }\r\n\r\n        [HttpPost]\r\n        public async Task<ActionResult> Create([Fro" +
+                    "mForm]");
             
-            #line 50 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 49 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -137,14 +129,86 @@ using ");
             this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
                     "                var model = mapper.Map<");
             
-            #line 54 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 53 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">(viewModel);\r\n                await service.Insert(model);\r\n                retu" +
-                    "rn RedirectToAction(nameof(Index));\r\n            }\r\n            catch\r\n         " +
-                    "   {\r\n                return View();\r\n            }\r\n        }\r\n    }\r\n}");
+            this.Write(@">(viewModel);
+                await service.Insert(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+       public async Task<ActionResult> Edit(int id)
+        {
+            var entity = await service.Get(id);
+            return View(mapper.Map<");
+            
+            #line 66 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel>(entity));\r\n        }\r\n\r\n\r\n        [HttpPost]\r\n        public async Tas" +
+                    "k<ActionResult> Edit([FromForm]");
+            
+            #line 71 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
+                    "                var model = mapper.Map<");
+            
+            #line 75 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@">(viewModel);
+                await service.Update(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public async Task<ActionResult> Remove(int id)
+        {
+            var entity = await service.Get(id);
+            return View(mapper.Map<");
+            
+            #line 88 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel>(entity));\r\n        }\r\n\r\n        [HttpPost]\r\n        public async Task<" +
+                    "ActionResult> Remove([FromForm]");
+            
+            #line 92 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
+                    "                var model = mapper.Map<");
+            
+            #line 96 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(viewModel);\r\n                await service.Delete(model.Id);\r\n                r" +
+                    "eturn RedirectToAction(nameof(Index));\r\n            }\r\n            catch\r\n      " +
+                    "      {\r\n                return View();\r\n            }\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

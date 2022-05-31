@@ -39,13 +39,12 @@ namespace <#= namespaceName #>.Web.Controllers
             var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
             return View(viewModels);
         }
-
+        
          public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HomeController1/Create
         [HttpPost]
         public async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
@@ -53,6 +52,49 @@ namespace <#= namespaceName #>.Web.Controllers
             {                
                 var model = mapper.Map<<#= Model.Name #>>(viewModel);
                 await service.Insert(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+       public async Task<ActionResult> Edit(int id)
+        {
+            var entity = await service.Get(id);
+            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Edit([FromForm]<#= Model.Name #>ViewModel viewModel)
+        {
+            try
+            {                
+                var model = mapper.Map<<#= Model.Name #>>(viewModel);
+                await service.Update(model);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public async Task<ActionResult> Remove(int id)
+        {
+            var entity = await service.Get(id);
+            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
+        {
+            try
+            {                
+                var model = mapper.Map<<#= Model.Name #>>(viewModel);
+                await service.Delete(model.Id);
                 return RedirectToAction(nameof(Index));
             }
             catch

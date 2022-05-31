@@ -103,17 +103,31 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(@"  
-            <td>
-                @*@Html.ActionLink(""Edit"", ""Edit"", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink(""Details"", ""Details"", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink(""Delete"", ""Delete"", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-");
+            this.Write("  \r\n            <td>\r\n                @Html.ActionLink(\"Edit\", \"Edit\", \"");
+            
+            #line 41 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", new {  id=item.Id  }) |\r\n                @*@Html.ActionLink(\"Details\", \"Detail" +
+                    "s\", \"");
+            
+            #line 42 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", new { /* id=item.PrimaryKey */ }) |*@\r\n                @Html.ActionLink(\"Delet" +
+                    "e\", \"Remove\", \"");
+            
+            #line 43 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", new {  id=item.Id  })\r\n            </td>\r\n        </tr>\r\n}\r\n    </tbody>\r\n</ta" +
+                    "ble>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

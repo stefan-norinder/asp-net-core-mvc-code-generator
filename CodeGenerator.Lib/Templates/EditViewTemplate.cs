@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class CreateViewTemplate : CreateViewTemplateBase
+    public partial class EditViewTemplate : EditViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -32,28 +32,28 @@ namespace CodeGenerator.Lib.Templates
                     "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
                     "------------------------------------------------------------*@\r\n@model ");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Web.ViewModel.");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Create ");
+            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Edit ");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>Create ");
+            this.Write("\";\r\n}\r\n\r\n<h1>Edit ");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -61,56 +61,56 @@ namespace CodeGenerator.Lib.Templates
             this.Write("</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form met" +
                     "hod=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
             
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\" asp-action=\"Create\">\r\n            <div asp-validation-summary=\"ModelOnly\" class" +
-                    "=\"text-danger\"></div>\r\n");
+            this.Write("\" asp-action=\"Edit\">\r\n            <div asp-validation-summary=\"ModelOnly\" class=\"" +
+                    "text-danger\"></div>\r\n");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
  foreach(var item in Model.Properties) { 
             
             #line default
             #line hidden
             this.Write("            <div class=\"form-group\">\r\n                <label asp-for=\"");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\" class=\"control-label\"></label>\r\n                <input name=\"");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\" asp-for=\"");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\" class=\"form-control\" />\r\n                <span asp-validation-for=\"");
             
-            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\" class=\"text-danger\"></span>\r\n            </div>\r\n");
             
-            #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(@"            <div class=""form-group"">
-                <input type=""submit"" value=""Create"" class=""btn btn-primary"" />
+                <input type=""submit"" value=""Save"" class=""btn btn-primary"" />
             </div>
         </form>
     </div>
@@ -135,7 +135,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class CreateViewTemplateBase
+    public class EditViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
