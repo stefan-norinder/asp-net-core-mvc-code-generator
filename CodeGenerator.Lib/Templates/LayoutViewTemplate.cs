@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\LayoutViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ViewModelTemplate : ViewModelTemplateBase
+    public partial class LayoutViewTemplate : LayoutViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,62 +28,34 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
-
-using System.ComponentModel.DataAnnotations;
-
-namespace ");
-            
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
-            
-            #line default
-            #line hidden
-            this.Write(".Web.ViewModel\r\n{\r\n    public class ");
-            
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("ViewModel\r\n    {\r\n    ");
-            
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("    [Display(Name=\"");
-            
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\")]\r\n        public ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" {get;set;}\r\n    ");
-            
-            #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  \r\n    }\r\n} ");
+            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
+                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
+                    "------------------------------------------------------------*@\r\n<!DOCTYPE html>\r" +
+                    "\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewpor" +
+                    "t\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>@ViewData[\"Tit" +
+                    "le\"]</title>\r\n    <link rel=\"stylesheet\" href=\"~/lib/bootstrap/dist/css/bootstra" +
+                    "p.min.css\" />\r\n    <link rel=\"stylesheet\" href=\"~/css/site.css\" />\r\n</head>\r\n<bo" +
+                    "dy>\r\n    <header>\r\n        <nav class=\"navbar navbar-expand-sm navbar-toggleable" +
+                    "-sm navbar-light bg-white border-bottom box-shadow mb-3\">\r\n            <div clas" +
+                    "s=\"container\">\r\n                <a class=\"navbar-brand\" asp-area=\"\" asp-controll" +
+                    "er=\"Home\" asp-action=\"Index\">Home</a>\r\n                <button class=\"navbar-tog" +
+                    "gler\" type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-c" +
+                    "ontrols=\"navbarSupportedContent\"\r\n                        aria-expanded=\"false\" " +
+                    "aria-label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler" +
+                    "-icon\"></span>\r\n                </button>\r\n                <div class=\"navbar-co" +
+                    "llapse collapse d-sm-inline-flex justify-content-between\">\r\n                    " +
+                    "<ul class=\"navbar-nav flex-grow-1\">\r\n                        <li class=\"nav-item" +
+                    "\">\r\n                            <a class=\"nav-link text-dark\" asp-area=\"\" asp-co" +
+                    "ntroller=\"Home\" asp-action=\"Index\">Home</a>\r\n                        </li>\r\n    " +
+                    "                </ul>\r\n                </div>\r\n            </div>\r\n        </nav" +
+                    ">\r\n    </header>\r\n    <div class=\"container\">\r\n        <main role=\"main\" class=\"" +
+                    "pb-3\">\r\n            @RenderBody()\r\n        </main>\r\n    </div>\r\n\r\n    <footer cl" +
+                    "ass=\"border-top footer text-muted\">\r\n        <div class=\"container\">\r\n          " +
+                    "  &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jquery/dis" +
+                    "t/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/bootstrap.b" +
+                    "undle.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-version=\"true" +
+                    "\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n</body>\r" +
+                    "\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -95,7 +67,7 @@ namespace ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ViewModelTemplateBase
+    public class LayoutViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

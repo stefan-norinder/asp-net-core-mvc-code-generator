@@ -7,13 +7,14 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
-using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace <#= namespaceName #>.Web.ViewModel
 {
     public class <#= Model.Name #>ViewModel
     {
     <# foreach (var item in Model.Properties){ #>
+    [Display(Name="<#= item.Name #>")]
         public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
     <# } #>  
     }

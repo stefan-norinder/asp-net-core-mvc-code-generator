@@ -70,7 +70,7 @@ namespace CodeGenerator.Lib.Templates
                     "text-danger\"></div>\r\n");
             
             #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
- foreach(var item in Model.Properties) { 
+ foreach(var item in Model.Properties.Where(x => x.Name != "Id")) { 
             
             #line default
             #line hidden
@@ -81,21 +81,21 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("\" class=\"control-label\"></label>\r\n                <input name=\"");
+            this.Write("\"></label>\r\n                <input asp-for=\"");
             
             #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write("\" asp-for=\"");
+            this.Write("\" value=\"@Model.");
             
             #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write("\" class=\"form-control\" />\r\n                <span asp-validation-for=\"");
+            this.Write("\" />\r\n                <span asp-validation-for=\"");
             
             #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
@@ -109,7 +109,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(@"            <div class=""form-group"">
+            this.Write(@"            <input type=""hidden"" asp-for=""Id"" value=""@Model.Id"" />
+            <div class=""form-group"">
                 <input type=""submit"" value=""Save"" class=""btn btn-primary"" />
             </div>
         </form>

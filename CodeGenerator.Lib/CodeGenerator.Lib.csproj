@@ -75,6 +75,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>HomeViewTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ImportsViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ImportsViewTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\LayoutViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LayoutViewTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ListViewTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -124,6 +134,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StartupTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\StartViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StartViewTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
@@ -182,6 +197,14 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>HomeViewTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\ImportsViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ImportsViewTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\LayoutViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LayoutViewTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\ListViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ListViewTemplate.cs</LastGenOutput>
@@ -225,6 +248,10 @@
     <None Update="Templates\StartupTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartupTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\StartViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>StartViewTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ViewModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

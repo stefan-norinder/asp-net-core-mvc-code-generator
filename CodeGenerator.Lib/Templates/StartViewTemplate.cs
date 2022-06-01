@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ViewModelTemplate : ViewModelTemplateBase
+    public partial class StartViewTemplate : StartViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,62 +28,13 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
-
-using System.ComponentModel.DataAnnotations;
-
-namespace ");
-            
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
-            
-            #line default
-            #line hidden
-            this.Write(".Web.ViewModel\r\n{\r\n    public class ");
-            
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("ViewModel\r\n    {\r\n    ");
-            
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("    [Display(Name=\"");
-            
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\")]\r\n        public ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" {get;set;}\r\n    ");
-            
-            #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  \r\n    }\r\n} ");
+            this.Write(@"@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@{
+    Layout = ""_Layout"";
+}
+");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -95,7 +46,7 @@ namespace ");
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ViewModelTemplateBase
+    public class StartViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

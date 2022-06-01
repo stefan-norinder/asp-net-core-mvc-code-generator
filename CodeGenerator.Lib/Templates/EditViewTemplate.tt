@@ -19,13 +19,14 @@
     <div class="col-md-4">
         <form method="post"  enctype="multipart/form-data" asp-controller="<#= Model.Name #>" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<# foreach(var item in Model.Properties) { #>
+<# foreach(var item in Model.Properties.Where(x => x.Name != "Id")) { #>
             <div class="form-group">
-                <label asp-for="<#= item.Name #>" class="control-label"></label>
-                <input name="<#= item.Name #>" asp-for="<#= item.Name #>" class="form-control" />
+                <label asp-for="<#= item.Name #>"></label>
+                <input asp-for="<#= item.Name #>" value="@Model.<#= item.Name #>" />
                 <span asp-validation-for="<#= item.Name #>" class="text-danger"></span>
             </div>
 <# } #>
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

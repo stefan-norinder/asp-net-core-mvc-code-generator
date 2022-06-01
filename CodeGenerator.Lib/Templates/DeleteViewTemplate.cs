@@ -90,8 +90,8 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(@"    </dl>
-    <form method=""post""  enctype=""multipart/form-data"" asp-controller=""Person"" asp-action=""Delete"">    
-        @Html.HiddenFor(m => m.Id)
+    <form method=""post""  enctype=""multipart/form-data"" asp-controller=""Person"" asp-action=""Remove"">    
+        @Html.HiddenFor(x => x.Id)
         <input type=""submit"" value=""Delete"" class=""btn btn-danger"" /> |
         <a asp-action=""Index"">Back to List</a>
     </form>
