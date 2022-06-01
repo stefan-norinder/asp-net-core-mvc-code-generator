@@ -8,7 +8,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public abstract class CodeGenerator : ICodeGenerator
     {
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
-        private readonly IOutputAdapter output;
+        protected readonly IOutputAdapter output;
         protected string namespaceName;
 
         public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,

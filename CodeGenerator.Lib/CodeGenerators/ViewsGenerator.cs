@@ -2,8 +2,9 @@
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
 using CodeGenerator.Lib.Services;
-using System;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
@@ -18,6 +19,8 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
+            GenerateStaticContent($"{baseFolder}{model.Namespace}.{ProjectType}");
+
             foreach (var @class in model.Classes)
             {
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Index.cshtml", Content = new ListViewTemplate(model.Namespace, @class).TransformText() };
@@ -29,6 +32,14 @@ namespace CodeGenerator.Lib.CodeGenerators
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Shared", File = "_Layout.cshtml", Content = new LayoutViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewImports.cshtml", Content = new ImportsViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewStart.cshtml", Content = new StartViewTemplate().TransformText() };
+        }
+
+        private void GenerateStaticContent(string basePath)
+        {
+            var sourcePath = "./Templates/StaticContent";
+            var targetPath = $"{basePath}/wwwroot";
+
+           output.CopyFoldersAndFilesFromSourceToTarge(sourcePath, targetPath);
         }
     }
 }
