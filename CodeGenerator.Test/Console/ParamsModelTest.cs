@@ -93,7 +93,9 @@ namespace CodeGenerator.Test
                     "test"
             };
 
-            var sut = new GenerationModelFromDatabaseFetcher(args);
+            var mock = new Moq.Mock<IDataAccess>();
+
+            var sut = new GenerationModelFromDatabaseFetcher(mock.Object,args);
 
             Assert.AreEqual("DatabaseTest", sut.Namespace);
             var model = sut.Get();

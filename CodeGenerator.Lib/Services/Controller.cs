@@ -1,4 +1,5 @@
-﻿using CodeGenerator.Lib.Factories;
+﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Utils;
 
 namespace CodeGenerator.Lib.Services
@@ -11,15 +12,18 @@ namespace CodeGenerator.Lib.Services
     public class Controller : IController
     {
         private readonly ICodeGeneratorFactory factory;
+        private readonly IDataAccess dataAccess;
 
-        public Controller(ICodeGeneratorFactory factory)
+        public Controller(ICodeGeneratorFactory factory, 
+            IDataAccess dataAccess)
         {
             this.factory = factory;
+            this.dataAccess = dataAccess;
         }
 
         public void Run(CodeGeneratorTypes types, string[] args)
         {
-            var generationFactory = new GenerationModelFetcherFactory(args);
+            var generationFactory = new GenerationModelFetcherFactory(dataAccess, args);
             var generationModelFetcher = generationFactory.CreateInstance();
 
             foreach (var codeGenerator in factory.CreateInstances(types, generationModelFetcher))

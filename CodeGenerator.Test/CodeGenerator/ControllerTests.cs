@@ -1,3 +1,4 @@
+using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
@@ -18,8 +19,9 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             outputMock = new Mock<IOutputAdapter>();
+            var dataAccessMock = new Mock<IDataAccess>();
             var factory = new CodeGeneratorFactory(outputMock.Object);
-            controller = new Controller(factory);
+            controller = new Controller(factory, dataAccessMock.Object);
             args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person" };
         }
 

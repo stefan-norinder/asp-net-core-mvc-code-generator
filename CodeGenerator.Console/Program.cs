@@ -1,4 +1,5 @@
-﻿using CodeGenerator.Lib.Factories;
+﻿using CodeGenerator.Lib.DataAccess;
+using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
@@ -72,6 +73,7 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
             serviceCollection.AddTransient<IController, Controller>();
             serviceCollection.AddTransient<ICodeGeneratorFactory, CodeGeneratorFactory>();
             serviceCollection.AddTransient<IOutputAdapter, FileWriterOutputAdapter>();
+            serviceCollection.AddTransient<IDataAccess, DataAccess>();
         }
     }
 

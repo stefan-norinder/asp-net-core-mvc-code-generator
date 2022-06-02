@@ -9,16 +9,18 @@ namespace CodeGenerator.Lib.Factories
 
     public class GenerationModelFetcherFactory : ICodeGenerationModelFetcherFactory
     {
+        private readonly IDataAccess dataAccess;
         private readonly string[] args;
 
-        public GenerationModelFetcherFactory(string[] args)
+        public GenerationModelFetcherFactory(IDataAccess dataAccess, string[] args)
         {
+            this.dataAccess = dataAccess;
             this.args = args;
         }
 
         public ICodeGenerationModelFetcher CreateInstance()
         {
-            if (args.IsBasedOnDatasource()) return new GenerationModelFromDatabaseFetcher(args);
+            if (args.IsBasedOnDatasource()) return new GenerationModelFromDatabaseFetcher(dataAccess,args);
             
             return new GenerationModelFetcher(args);
         }
