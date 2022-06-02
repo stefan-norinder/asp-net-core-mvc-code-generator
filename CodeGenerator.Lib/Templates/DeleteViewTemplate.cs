@@ -63,7 +63,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("\"}\")\"</h1>\r\n\r\n<h3>@SharedLocalizer.GetLocalizedHtmlString(\"Are you sure you want " +
+            this.Write("\")}\")</h1>\r\n\r\n<h3>@SharedLocalizer.GetLocalizedHtmlString(\"Are you sure you want " +
                     "to delete this?\")\"</h3>\r\n<div>\r\n    <hr />\r\n    <dl class=\"row\">\r\n\r\n");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"

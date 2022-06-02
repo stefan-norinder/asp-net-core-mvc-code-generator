@@ -14,7 +14,7 @@
     ViewData["Title"] = $"{SharedLocalizer.GetLocalizedHtmlString("Delete")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
-<h1>@($"{SharedLocalizer.GetLocalizedHtmlString("Delete")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>"}")"</h1>
+<h1>@($"{SharedLocalizer.GetLocalizedHtmlString("Delete")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}")</h1>
 
 <h3>@SharedLocalizer.GetLocalizedHtmlString("Are you sure you want to delete this?")"</h3>
 <div>

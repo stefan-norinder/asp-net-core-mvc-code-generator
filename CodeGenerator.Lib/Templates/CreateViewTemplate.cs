@@ -63,7 +63,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("\"}\")\"</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <for" +
+            this.Write("\")}\")</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <for" +
                     "m method=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
             
             #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
