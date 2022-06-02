@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class EditViewTemplate : EditViewTemplateBase
+    public partial class ResourceTemplate : ResourceTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,106 +28,107 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@* --------------------------------------------------------------------*@
-@* Warning! This is an auto generated file. Changes may be overwritten *@
-@* --------------------------------------------------------------------*@
-@using Localization
-@inject LocService SharedLocalizer
-@model ");
+            this.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<root>\r\n  <!-- \r\n    Microsoft ResX Schem" +
+                    "a \r\n    \r\n    Version 2.0\r\n    \r\n    The primary goals of this format is to allo" +
+                    "w a simple XML format \r\n    that is mostly human readable. The generation and pa" +
+                    "rsing of the \r\n    various data types are done through the TypeConverter classes" +
+                    " \r\n    associated with the data types.\r\n    \r\n    Example:\r\n    \r\n    ... ado.ne" +
+                    "t/XML headers & schema ...\r\n    <resheader name=\"resmimetype\">text/microsoft-res" +
+                    "x</resheader>\r\n    <resheader name=\"version\">2.0</resheader>\r\n    <resheader nam" +
+                    "e=\"reader\">System.Resources.ResXResourceReader, System.Windows.Forms, ...</reshe" +
+                    "ader>\r\n    <resheader name=\"writer\">System.Resources.ResXResourceWriter, System." +
+                    "Windows.Forms, ...</resheader>\r\n    <data name=\"Name1\"><value>this is my long st" +
+                    "ring</value><comment>this is a comment</comment></data>\r\n    <data name=\"Color1\"" +
+                    " type=\"System.Drawing.Color, System.Drawing\">Blue</data>\r\n    <data name=\"Bitmap" +
+                    "1\" mimetype=\"application/x-microsoft.net.object.binary.base64\">\r\n        <value>" +
+                    "[base64 mime encoded serialized .NET Framework object]</value>\r\n    </data>\r\n   " +
+                    " <data name=\"Icon1\" type=\"System.Drawing.Icon, System.Drawing\" mimetype=\"applica" +
+                    "tion/x-microsoft.net.object.bytearray.base64\">\r\n        <value>[base64 mime enco" +
+                    "ded string representing a byte array form of the .NET Framework object]</value>\r" +
+                    "\n        <comment>This is a comment</comment>\r\n    </data>\r\n                \r\n  " +
+                    "  There are any number of \"resheader\" rows that contain simple \r\n    name/value " +
+                    "pairs.\r\n    \r\n    Each data row contains a name, and value. The row also contain" +
+                    "s a \r\n    type or mimetype. Type corresponds to a .NET class that support \r\n    " +
+                    "text/value conversion through the TypeConverter architecture. \r\n    Classes that" +
+                    " don\'t support this are serialized and stored with the \r\n    mimetype set.\r\n    " +
+                    "\r\n    The mimetype is used for serialized objects, and tells the \r\n    ResXResou" +
+                    "rceReader how to depersist the object. This is currently not \r\n    extensible. F" +
+                    "or a given mimetype the value must be set accordingly:\r\n    \r\n    Note - applica" +
+                    "tion/x-microsoft.net.object.binary.base64 is the format \r\n    that the ResXResou" +
+                    "rceWriter will generate, however the reader can \r\n    read any of the formats li" +
+                    "sted below.\r\n    \r\n    mimetype: application/x-microsoft.net.object.binary.base6" +
+                    "4\r\n    value   : The object must be serialized with \r\n            : System.Runti" +
+                    "me.Serialization.Formatters.Binary.BinaryFormatter\r\n            : and then encod" +
+                    "ed with base64 encoding.\r\n    \r\n    mimetype: application/x-microsoft.net.object" +
+                    ".soap.base64\r\n    value   : The object must be serialized with \r\n            : S" +
+                    "ystem.Runtime.Serialization.Formatters.Soap.SoapFormatter\r\n            : and the" +
+                    "n encoded with base64 encoding.\r\n\r\n    mimetype: application/x-microsoft.net.obj" +
+                    "ect.bytearray.base64\r\n    value   : The object must be serialized into a byte ar" +
+                    "ray \r\n            : using a System.ComponentModel.TypeConverter\r\n            : a" +
+                    "nd then encoded with base64 encoding.\r\n    -->\r\n  <xsd:schema id=\"root\" xmlns=\"\"" +
+                    " xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsof" +
+                    "t-com:xml-msdata\">\r\n    <xsd:import namespace=\"http://www.w3.org/XML/1998/namesp" +
+                    "ace\" />\r\n    <xsd:element name=\"root\" msdata:IsDataSet=\"true\">\r\n      <xsd:compl" +
+                    "exType>\r\n        <xsd:choice maxOccurs=\"unbounded\">\r\n          <xsd:element name" +
+                    "=\"metadata\">\r\n            <xsd:complexType>\r\n              <xsd:sequence>\r\n     " +
+                    "           <xsd:element name=\"value\" type=\"xsd:string\" minOccurs=\"0\" />\r\n       " +
+                    "       </xsd:sequence>\r\n              <xsd:attribute name=\"name\" use=\"required\" " +
+                    "type=\"xsd:string\" />\r\n              <xsd:attribute name=\"type\" type=\"xsd:string\"" +
+                    " />\r\n              <xsd:attribute name=\"mimetype\" type=\"xsd:string\" />\r\n        " +
+                    "      <xsd:attribute ref=\"xml:space\" />\r\n            </xsd:complexType>\r\n       " +
+                    "   </xsd:element>\r\n          <xsd:element name=\"assembly\">\r\n            <xsd:com" +
+                    "plexType>\r\n              <xsd:attribute name=\"alias\" type=\"xsd:string\" />\r\n     " +
+                    "         <xsd:attribute name=\"name\" type=\"xsd:string\" />\r\n            </xsd:comp" +
+                    "lexType>\r\n          </xsd:element>\r\n          <xsd:element name=\"data\">\r\n       " +
+                    "     <xsd:complexType>\r\n              <xsd:sequence>\r\n                <xsd:eleme" +
+                    "nt name=\"value\" type=\"xsd:string\" minOccurs=\"0\" msdata:Ordinal=\"1\" />\r\n         " +
+                    "       <xsd:element name=\"comment\" type=\"xsd:string\" minOccurs=\"0\" msdata:Ordina" +
+                    "l=\"2\" />\r\n              </xsd:sequence>\r\n              <xsd:attribute name=\"name" +
+                    "\" type=\"xsd:string\" use=\"required\" msdata:Ordinal=\"1\" />\r\n              <xsd:att" +
+                    "ribute name=\"type\" type=\"xsd:string\" msdata:Ordinal=\"3\" />\r\n              <xsd:a" +
+                    "ttribute name=\"mimetype\" type=\"xsd:string\" msdata:Ordinal=\"4\" />\r\n              " +
+                    "<xsd:attribute ref=\"xml:space\" />\r\n            </xsd:complexType>\r\n          </x" +
+                    "sd:element>\r\n          <xsd:element name=\"resheader\">\r\n            <xsd:complexT" +
+                    "ype>\r\n              <xsd:sequence>\r\n                <xsd:element name=\"value\" ty" +
+                    "pe=\"xsd:string\" minOccurs=\"0\" msdata:Ordinal=\"1\" />\r\n              </xsd:sequenc" +
+                    "e>\r\n              <xsd:attribute name=\"name\" type=\"xsd:string\" use=\"required\" />" +
+                    "\r\n            </xsd:complexType>\r\n          </xsd:element>\r\n        </xsd:choice" +
+                    ">\r\n      </xsd:complexType>\r\n    </xsd:element>\r\n  </xsd:schema>\r\n  <resheader n" +
+                    "ame=\"resmimetype\">\r\n    <value>text/microsoft-resx</value>\r\n  </resheader>\r\n  <r" +
+                    "esheader name=\"version\">\r\n    <value>2.0</value>\r\n  </resheader>\r\n  <resheader n" +
+                    "ame=\"reader\">\r\n    <value>System.Resources.ResXResourceReader, System.Windows.Fo" +
+                    "rms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>\r\n" +
+                    "  </resheader>\r\n  <resheader name=\"writer\">\r\n    <value>System.Resources.ResXRes" +
+                    "ourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyTo" +
+                    "ken=b77a5c561934e089</value>\r\n  </resheader>\r\n  ");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            #line 125 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+ foreach (var name in Model){ 
             
             #line default
             #line hidden
-            this.Write(".Web.ViewModel.");
+            this.Write("  <data name=\"");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Edit ");
-            
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 126 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>Edit ");
+            this.Write("\" xml:space=\"preserve\">\r\n    <value>");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form met" +
-                    "hod=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
-            
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            #line 127 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(name));
             
             #line default
             #line hidden
-            this.Write("\" asp-action=\"Edit\">\r\n            <div asp-validation-summary=\"ModelOnly\" class=\"" +
-                    "text-danger\"></div>\r\n");
+            this.Write("</value>\r\n  </data>\r\n  ");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
- foreach(var item in Model.Properties.Where(x => x.Name != "Id")) { 
-            
-            #line default
-            #line hidden
-            this.Write("            <div class=\"form-group\">\r\n                <label asp-for=\"");
-            
-            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\"></label>\r\n                <input asp-for=\"");
-            
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" value=\"@Model.");
-            
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" />\r\n                <span asp-validation-for=\"");
-            
-            #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" class=\"text-danger\"></span>\r\n            </div>\r\n");
-            
-            #line 30 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
+            #line 129 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"            <input type=""hidden"" asp-for=""Id"" value=""@Model.Id"" />
-            <div class=""form-group"">
-                <input type=""submit"" value=""Save"" class=""btn btn-primary"" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action=""Index"">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync(""_ValidationScriptsPartial"");}
-}
-");
+            this.Write("</root>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -139,7 +140,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class EditViewTemplateBase
+    public class ResourceTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

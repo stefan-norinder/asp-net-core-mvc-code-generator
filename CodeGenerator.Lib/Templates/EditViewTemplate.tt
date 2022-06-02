@@ -6,6 +6,8 @@
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{

@@ -28,40 +28,45 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
-                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
-                    "------------------------------------------------------------*@\r\n@model ");
+            this.Write(@"@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
+@model ");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Web.ViewModel.");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Create ");
+            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = $\"{@SharedLocalizer.GetLocalizedHtmlStri" +
+                    "ng(\"Create\")} {@SharedLocalizer.GetLocalizedHtmlString(\"");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>Create ");
+            this.Write("\")}\";\r\n}\r\n\r\n<h1>$\"{@SharedLocalizer.GetLocalizedHtmlString(\"Create\")} {@SharedLoc" +
+                    "alizer.GetLocalizedHtmlString(\"");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form met" +
-                    "hod=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
+            this.Write("\")}\"</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form" +
+                    " method=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
             
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -69,55 +74,62 @@ namespace CodeGenerator.Lib.Templates
             this.Write("\" asp-action=\"Create\">\r\n            <div asp-validation-summary=\"ModelOnly\" class" +
                     "=\"text-danger\"></div>\r\n");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
  foreach(var item in Model.Properties) { 
             
             #line default
             #line hidden
             this.Write("            <div class=\"form-group\">\r\n                <label asp-for=\"");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write("\" class=\"control-label\"></label>\r\n                <input name=\"");
-            
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" asp-for=\"");
-            
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\" class=\"form-control\" />\r\n                <span asp-validation-for=\"");
+            this.Write("\" class=\"control-label\">@SharedLocalizer.GetLocalizedHtmlString(\"");
             
             #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write("\" class=\"text-danger\"></span>\r\n            </div>\r\n");
+            this.Write("\")</label>\r\n                <input name=\"");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\" asp-for=\"");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\" class=\"form-control\" />\r\n                <span asp-validation-for=\"");
             
             #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\" class=\"text-danger\"></span>\r\n            </div>\r\n");
+            
+            #line 30 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write(@"            <div class=""form-group"">
-                <input type=""submit"" value=""Create"" class=""btn btn-primary"" />
+                <input type=""submit"" value=""@SharedLocalizer.GetLocalizedHtmlString(""Create"")"" class=""btn btn-primary"" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action=""Index"">Back to List</a>
+    <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
 </div>
 
 @section Scripts {

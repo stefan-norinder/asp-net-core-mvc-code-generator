@@ -6,6 +6,8 @@
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
 <ul>
 <# foreach (var item in Model){ #>
     <li><a href="<#= item.Name#>"><#= item.Name#></a></li>

@@ -8,15 +8,18 @@
 //---------------------------------------------------------------------------------------
 
 using AutoMapper;
-using <#= namespaceName #>.Logic.DataAccess;
-using <#= namespaceName #>.Logic.Model;
-using <#= namespaceName #>.Logic.Services;
-using <#= namespaceName #>.Web.ViewModel;
+using DatabaseTest.Logic.DataAccess;
+using DatabaseTest.Logic.Model;
+using DatabaseTest.Logic.Services;
+using DatabaseTest.Web.ViewModel;
+using Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
 
 namespace <#= namespaceName #>.Web
 {
@@ -36,6 +39,7 @@ namespace <#= namespaceName #>.Web
             services.AddTransient<I<#= item #>Service, <#= item #>Service>();
             services.AddTransient<I<#= item #>DataAccess, <#= item #>DataAccess>();
             services.AddSingleton<SqlStringBuilder<<#= item #>>>();
+            services.AddSingleton<LocService>();
 <# } #>
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
@@ -47,7 +51,10 @@ namespace <#= namespaceName #>.Web
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddControllersWithViews();
+            services.AddLocalization(x => x.ResourcesPath = "Resources");
+            
+            services.AddControllersWithViews()
+                .AddViewLocalization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,13 +67,24 @@ namespace <#= namespaceName #>.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            var supportedCultures = new[] {
+                new CultureInfo("en-US"),
+                // add more culture info options
+            };
+            var requestLocalizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+            app.UseRequestLocalization(requestLocalizationOptions);
 
             app.UseEndpoints(endpoints =>
             {

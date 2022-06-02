@@ -32,11 +32,12 @@ namespace CodeGenerator.Lib.CodeGenerators
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Shared", File = "_Layout.cshtml", Content = new LayoutViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewImports.cshtml", Content = new ImportsViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewStart.cshtml", Content = new StartViewTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Resources", File = "SharedResource.en.resx", Content = new ResourceTemplate(namespaceName,model.Classes).TransformText() };
         }
 
         private void GenerateStaticContent(string basePath)
         {
-            var sourcePath = "./Templates/StaticContent";
+            var sourcePath = "./Templates/StaticContent/wwwroot";
             var targetPath = $"{basePath}/wwwroot";
 
            output.CopyFoldersAndFilesFromSourceToTarge(sourcePath, targetPath);

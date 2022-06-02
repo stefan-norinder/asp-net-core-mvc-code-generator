@@ -28,72 +28,90 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
-                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
-                    "------------------------------------------------------------*@\r\n@model ");
+            this.Write(@"@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
+@model ");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Web.ViewModel.");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Delete ");
+            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = $\"{@SharedLocalizer.GetLocalizedHtmlStri" +
+                    "ng(\"Delete\")} {@SharedLocalizer.GetLocalizedHtmlString(\"");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>Delete ");
+            this.Write("\")}\";\r\n}\r\n\r\n<h1>$\"{@SharedLocalizer.GetLocalizedHtmlString(\"Delete\")} {@SharedLoc" +
+                    "alizer.GetLocalizedHtmlString(\"");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("</h1>\r\n\r\n<h3>Are you sure you want to delete this?</h3>\r\n<div>\r\n    <hr />\r\n    <" +
-                    "dl class=\"row\">\r\n\r\n");
+            this.Write("\")}\"</h1>\r\n\r\n<h3>@SharedLocalizer.GetLocalizedHtmlString(\"Are you sure you want t" +
+                    "o delete this?\")\"</h3>\r\n<div>\r\n    <hr />\r\n    <dl class=\"row\">\r\n\r\n");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
  foreach(var item in Model.Properties) { 
             
             #line default
             #line hidden
-            this.Write("        <dt class = \"col-sm-2\">\r\n            @Html.DisplayNameFor(model => model." +
-                    "");
+            this.Write("        <dt class = \"col-sm-2\">\r\n            <label asp-for=\"");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(")\r\n        </dt>\r\n        <dd class = \"col-sm-10\">\r\n            @Html.DisplayFor(" +
-                    "model => model.");
+            this.Write("\" class=\"control-label\">@SharedLocalizer.GetLocalizedHtmlString(\"");
             
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(")\r\n        </dd>\r\n");
+            this.Write("\")</label>\r\n        </dt>\r\n        <dd class = \"col-sm-10\">\r\n            @SharedL" +
+                    "ocalizer.GetLocalizedHtmlString(\"");
             
             #line 29 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\")\r\n        </dd>\r\n");
+            
+            #line 31 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"    </dl>
-    <form method=""post""  enctype=""multipart/form-data"" asp-controller=""Person"" asp-action=""Remove"">    
+            this.Write("    </dl>\r\n    <form method=\"post\"  enctype=\"multipart/form-data\" asp-controller=" +
+                    "\"");
+            
+            #line 33 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@""" asp-action=""Delete"">    
         @Html.HiddenFor(x => x.Id)
-        <input type=""submit"" value=""Delete"" class=""btn btn-danger"" /> |
-        <a asp-action=""Index"">Back to List</a>
+        <input type=""submit"" value=""@SharedLocalizer.GetLocalizedHtmlString(""Delete"")"" class=""btn btn-danger"" /> |
+        <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
     </form>
     </div>
 

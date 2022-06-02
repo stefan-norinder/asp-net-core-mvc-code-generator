@@ -6,16 +6,18 @@
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
 @model IEnumerable<DatabaseTest.Web.ViewModel.<#= Model.Name #>ViewModel>
 
 @{
-    ViewData["Title"] = "<#= Model.Name #>";
+    ViewData["Title"] = $"{@SharedLocalizer.GetLocalizedHtmlString("Edit")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
-<h1><#= Model.Name #></h1>
+<h1>@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")</h1>
 
 <p>
-    <a href="/<#= Model.Name #>/create">Create New</a>
+    <a href="/<#= Model.Name #>/create">@SharedLocalizer.GetLocalizedHtmlString("Create New")</a>
 </p>
 
 <table class="table">
@@ -23,9 +25,9 @@
         <tr>
 <# foreach (var item in Model.Properties){ #>
             <th>
-                @Html.DisplayNameFor(model => model.<#= item.Name #>)
+                @SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")
             </th>
-<# } #>  
+<# } #>
             <th></th>
         </tr>
     </thead>
@@ -34,13 +36,13 @@
         <tr>
 <# foreach (var item in Model.Properties){ #>
             <td>
-                @Html.DisplayFor(modelItem => item.<#= item.Name #>)
+                @item.<#= item.Name #>
             </td>
 <# } #>  
             <td>
                 @Html.ActionLink("Edit", "Edit", "<#= Model.Name #>", new {  id=item.Id  }) |
                 @*@Html.ActionLink("Details", "Details", "<#= Model.Name #>", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Delete", "Remove", "<#= Model.Name #>", new {  id=item.Id  })
+                @Html.ActionLink("Delete", "Delete", "<#= Model.Name #>", new {  id=item.Id  })
             </td>
         </tr>
 }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.5" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.IO.FileSystem" Version="4.3.0" />
@@ -104,6 +105,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ProjectFileTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\ResourceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\ServiceTemplate.cs">
       <DesignTime>True</DesignTime>
@@ -225,6 +231,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ProjectFileTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\ResourceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ResourceTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
@@ -253,97 +263,97 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartViewTemplate.cs</LastGenOutput>
     </None>
-    <None Update="Templates\StaticContent\css\site.css">
+    <None Update="Templates\StaticContent\wwwroot\css\site.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\js\README.md">
+    <None Update="Templates\StaticContent\wwwroot\js\README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-grid.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-grid.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-grid.min.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-grid.min.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-reboot.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-reboot.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-reboot.min.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap.min.css">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\css\bootstrap.min.css.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.bundle.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.bundle.js.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.bundle.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.js.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\bootstrap\dist\js\bootstrap.min.js.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation\dist\additional-methods.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation\dist\additional-methods.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation\dist\additional-methods.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation\dist\additional-methods.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation\dist\jquery.validate.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation\dist\jquery.validate.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery-validation\dist\jquery.validate.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery\dist\jquery.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery\dist\jquery.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery\dist\jquery.min.js">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery\dist\jquery.min.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\lib\jquery\dist\jquery.min.map">
+    <None Update="Templates\StaticContent\wwwroot\lib\jquery\dist\jquery.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Templates\ViewModelTemplate.tt">

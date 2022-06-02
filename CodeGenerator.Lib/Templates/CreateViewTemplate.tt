@@ -6,15 +6,16 @@
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
-    ViewData["Title"] = "Create <#= Model.Name #>";
+    ViewData["Title"] = $"{@SharedLocalizer.GetLocalizedHtmlString("Create")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
-<h1>Create <#= Model.Name #></h1>
+<h1>$"{@SharedLocalizer.GetLocalizedHtmlString("Create")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}"</h1>
 
-<h4>Admins</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,20 +23,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <# foreach(var item in Model.Properties) { #>
             <div class="form-group">
-                <label asp-for="<#= item.Name #>" class="control-label"></label>
+                <label asp-for="<#= item.Name #>" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")</label>
                 <input name="<#= item.Name #>" asp-for="<#= item.Name #>" class="form-control" />
                 <span asp-validation-for="<#= item.Name #>" class="text-danger"></span>
             </div>
 <# } #>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@SharedLocalizer.GetLocalizedHtmlString("Create")" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
 </div>
 
 @section Scripts {
