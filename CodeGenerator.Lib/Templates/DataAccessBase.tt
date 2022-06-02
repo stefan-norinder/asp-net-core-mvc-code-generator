@@ -7,8 +7,8 @@
 //---------------------------------------------------------------------------------------
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
-using <#= namespaceName #>.Logic.DataAccess;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace <#= namespaceName #>.Logic.DataAccess
@@ -39,8 +39,8 @@ namespace <#= namespaceName #>.Logic.DataAccess
         protected string Table { get; }
 
         public async virtual Task Insert(T model)
-        {
-            string sql = sqlStringBuilder.GetInsertString(model);
+        {            
+            var sql = await HasIdentityColumn() ? sqlStringBuilder.GetInsertString(model) : sqlStringBuilder.GetInsertString(model, await GetNextId());
 
             await db.SaveData(sql, model);
         }
@@ -90,5 +90,34 @@ namespace <#= namespaceName #>.Logic.DataAccess
         {
             return await db.LoadData<T, dynamic>(sql, new { });
         }
+
+        #region private
+
+        private async Task<bool> HasIdentityColumn()
+        {
+            var sql = @$"select b.name as IdentityColumn 
+                        from sysobjects a inner join syscolumns b on a.id = b.id 
+                       where a.name = '{Table}' and    
+                            columnproperty(a.id, b.name, 'isIdentity') = 1 and 
+                            objectproperty(a.id, 'isTable') = 1";
+            var result = await ExecuteSelectMany(sql);
+            return result.Any();
+        }
+
+        private async Task<int> GetNextId()
+        {
+            var sql = @$"select top 1 column_name
+                        from information_schema.columns
+                        where table_name = '{Table}'
+                        order by ordinal_position";
+            var firstColumnName = await db.LoadSingularData<string, dynamic>(sql, new { });
+            if (firstColumnName.ToLower() != "id") return 0;
+
+            sql = @$"select top 1 id from {Table} order by 1 desc";
+            var currentId = await db.LoadSingularData<int, dynamic>(sql, new { });
+            return currentId + 1;
+        }
+
+        #endregion
     }
 }

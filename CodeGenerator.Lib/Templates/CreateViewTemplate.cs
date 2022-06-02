@@ -75,7 +75,7 @@ namespace CodeGenerator.Lib.Templates
                     "=\"text-danger\"></div>\r\n");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
- foreach(var item in Model.Properties) { 
+ foreach(var item in Model.Properties.Where(x => x.Name.ToLower() != "id")) { 
             
             #line default
             #line hidden

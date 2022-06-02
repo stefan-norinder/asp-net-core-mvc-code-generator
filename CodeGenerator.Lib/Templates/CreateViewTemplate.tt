@@ -21,7 +21,7 @@
     <div class="col-md-4">
         <form method="post"  enctype="multipart/form-data" asp-controller="<#= Model.Name #>" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<# foreach(var item in Model.Properties) { #>
+<# foreach(var item in Model.Properties.Where(x => x.Name.ToLower() != "id")) { #>
             <div class="form-group">
                 <label asp-for="<#= item.Name #>" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")</label>
                 <input name="<#= item.Name #>" asp-for="<#= item.Name #>" class="form-control" />

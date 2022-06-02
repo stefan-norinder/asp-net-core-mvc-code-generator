@@ -14,7 +14,7 @@ namespace <#= namespaceName #>.Logic.Model
 {
     public class <#= Model.Name #> : Entity
     {
-    <# foreach (var item in Model.Properties.Where(x => x.Name != "Id")){ #>
+    <# foreach (var item in Model.Properties.Where(x => x.Name.ToLower() != "id")){ #>
         public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
     <# } #>  
     }

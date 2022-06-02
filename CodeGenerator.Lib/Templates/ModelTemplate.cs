@@ -51,7 +51,7 @@ namespace ");
             this.Write(" : Entity\r\n    {\r\n    ");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
- foreach (var item in Model.Properties.Where(x => x.Name != "Id")){ 
+ foreach (var item in Model.Properties.Where(x => x.Name.ToLower() != "id")){ 
             
             #line default
             #line hidden

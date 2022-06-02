@@ -40,8 +40,6 @@ namespace CodeGenerator.Lib.DataAccess
             return ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
         }
 
-
-
         public bool HasIdentityColumn(string tableName)
         {
             CheckInitialization();
