@@ -31,13 +31,15 @@ namespace CodeGenerator.Lib.DataAccess
         public IEnumerable<string> GetTableNames()
         {
             CheckInitialization();
-            return ExecuteQuery("select distinct table_name from information_schema.columns", GetStringFromReader);
+            return ExecuteQuery("select distinct table_name from information_schema.columns", GetStringFromReader);           
         }
 
         public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table)
         {
             CheckInitialization();
-            return ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
+            var columns = ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
+            if (!columns.Any(x => x.Item1.ToLower() == "id")) throw new Exception($"Table `{table}` must contain an id column");
+            return columns;
         }
 
         public bool HasIdentityColumn(string tableName)

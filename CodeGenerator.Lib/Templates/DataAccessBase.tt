@@ -106,14 +106,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
 
         private async Task<int> GetNextId()
         {
-            var sql = @$"select top 1 column_name
-                        from information_schema.columns
-                        where table_name = '{Table}'
-                        order by ordinal_position";
-            var firstColumnName = await db.LoadSingularData<string, dynamic>(sql, new { });
-            if (firstColumnName.ToLower() != "id") return 0;
-
-            sql = @$"select top 1 id from {Table} order by 1 desc";
+            var sql = @$"select top 1 id from {Table} order by 1 desc";
             var currentId = await db.LoadSingularData<int, dynamic>(sql, new { });
             return currentId + 1;
         }

@@ -80,14 +80,10 @@ namespace ");
                     "ame, \'isIdentity\') = 1 and \r\n                            objectproperty(a.id, \'i" +
                     "sTable\') = 1\";\r\n            var result = await ExecuteSelectMany(sql);\r\n        " +
                     "    return result.Any();\r\n        }\r\n\r\n        private async Task<int> GetNextId" +
-                    "()\r\n        {\r\n            var sql = @$\"select top 1 column_name\r\n              " +
-                    "          from information_schema.columns\r\n                        where table_n" +
-                    "ame = \'{Table}\'\r\n                        order by ordinal_position\";\r\n          " +
-                    "  var firstColumnName = await db.LoadSingularData<string, dynamic>(sql, new { })" +
-                    ";\r\n            if (firstColumnName.ToLower() != \"id\") return 0;\r\n\r\n            s" +
-                    "ql = @$\"select top 1 id from {Table} order by 1 desc\";\r\n            var currentI" +
-                    "d = await db.LoadSingularData<int, dynamic>(sql, new { });\r\n            return c" +
-                    "urrentId + 1;\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+                    "()\r\n        {\r\n            var sql = @$\"select top 1 id from {Table} order by 1 " +
+                    "desc\";\r\n            var currentId = await db.LoadSingularData<int, dynamic>(sql," +
+                    " new { });\r\n            return currentId + 1;\r\n        }\r\n\r\n        #endregion\r\n" +
+                    "    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
