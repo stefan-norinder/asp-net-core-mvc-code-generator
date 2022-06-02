@@ -18,9 +18,9 @@ namespace CodeGenerator.Test
         [Test]
         public void GetTablesInDatabase()
         {
-            
+
             var result = dataAccess.GetTableNames();
-            Assert.AreEqual(11, result.Count() );
+            Assert.AreEqual(11, result.Count());
         }
 
         [Test]
@@ -28,6 +28,14 @@ namespace CodeGenerator.Test
         {
             var result = dataAccess.GetColumnsWithDatatypes("Admins");
             Assert.AreEqual(2, result.Count());
+        }
+
+        [Test]
+        public void HasIdentityColumn()
+        {
+            var result = dataAccess.GetTableNames();
+            var hasIdentityColumn = dataAccess.HasIdentityColumn(result.First());
+            Assert.IsFalse(hasIdentityColumn);
         }
     }
 }

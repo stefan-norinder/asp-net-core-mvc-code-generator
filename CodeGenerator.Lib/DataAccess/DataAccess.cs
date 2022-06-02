@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace CodeGenerator.Lib.DataAccess
 {
@@ -9,6 +10,7 @@ namespace CodeGenerator.Lib.DataAccess
         void Initilize(string server, string datasource, string userId = "", string password = "");
         IEnumerable<string> GetTableNames();
         IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table);
+        bool HasIdentityColumn(string tableName);
     }
 
     public class DataAccess : IDataAccess
@@ -38,11 +40,25 @@ namespace CodeGenerator.Lib.DataAccess
             return ExecuteQuery($"select column_name, data_type from information_schema.columns where table_name = '{table}'", GetTupleFromReader);
         }
 
+
+
+        public bool HasIdentityColumn(string tableName)
+        {
+            CheckInitialization();
+            var sql = @$"select b.name as IdentityColumn 
+                        from    sysobjects a inner join syscolumns b on a.id = b.id 
+                       where a.name = '{tableName}' and    
+                            columnproperty(a.id, b.name, 'isIdentity') = 1 and 
+                            objectproperty(a.id, 'isTable') = 1";
+            var result = ExecuteQuery(sql, GetStringFromReader);
+            return result.Any();
+        }
+
         #region private
 
         private void CheckInitialization()
         {
-            if(string.IsNullOrEmpty(server) || string.IsNullOrEmpty(datasource))throw new ArgumentException("Data access not initialized.");
+            if (string.IsNullOrEmpty(server) || string.IsNullOrEmpty(datasource)) throw new ArgumentException("Data access not initialized.");
         }
 
         private IEnumerable<T> ExecuteQuery<T>(string sql, Func<SqlDataReader, T> getDataFromReaderFunction)
@@ -112,7 +128,6 @@ namespace CodeGenerator.Lib.DataAccess
             return !string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(password);
         }
 
-        
         #endregion
     }
 }
