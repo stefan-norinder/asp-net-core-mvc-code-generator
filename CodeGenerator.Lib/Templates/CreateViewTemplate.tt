@@ -11,10 +11,10 @@
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
-    ViewData["Title"] = $"{@SharedLocalizer.GetLocalizedHtmlString("Create")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
+    ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("Create")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
-<h1>$"{@SharedLocalizer.GetLocalizedHtmlString("Create")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}"</h1>
+<h1>@($"{SharedLocalizer.GetLocalizedHtmlString("Create")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>"}")"</h1>
 
 <hr />
 <div class="row">

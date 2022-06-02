@@ -40,8 +40,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("ViewModel>\r\n\r\n@{\r\n    ViewData[\"Title\"] = $\"{@SharedLocalizer.GetLocalizedHtmlStr" +
-                    "ing(\"Edit\")} {@SharedLocalizer.GetLocalizedHtmlString(\"");
+            this.Write("ViewModel>\r\n\r\n@{\r\n    ViewData[\"Title\"] = @$\"{SharedLocalizer.GetLocalizedHtmlStr" +
+                    "ing(\"Edit\")} {SharedLocalizer.GetLocalizedHtmlString(\"");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -84,8 +84,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("            <th></th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n@foreach (var it" +
-                    "em in Model) {\r\n        <tr>\r\n");
+            this.Write("            <th></th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n    @foreach (va" +
+                    "r item in Model) {\r\n        <tr>\r\n");
             
             #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
  foreach (var item in Model.Properties){ 
@@ -106,31 +106,23 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("  \r\n            <td>\r\n                @Html.ActionLink(\"Edit\", \"Edit\", \"");
+            this.Write("  \r\n            <td>\r\n                <a href=\"/");
             
             #line 43 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\", new {  id=item.Id  }) |\r\n                @*@Html.ActionLink(\"Details\", \"Detail" +
-                    "s\", \"");
+            this.Write("/edit/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Edit\")</a> | \r\n         " +
+                    "       <a href=\"/");
             
             #line 44 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\", new { /* id=item.PrimaryKey */ }) |*@\r\n                @Html.ActionLink(\"Delet" +
-                    "e\", \"Delete\", \"");
-            
-            #line 45 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\", new {  id=item.Id  })\r\n            </td>\r\n        </tr>\r\n}\r\n    </tbody>\r\n</ta" +
-                    "ble>\r\n");
+            this.Write("/delete/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Delete\")</a> \r\n       " +
+                    "     </td>\r\n        </tr>\r\n}\r\n    </tbody>\r\n</table>\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

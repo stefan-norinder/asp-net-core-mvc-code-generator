@@ -26,7 +26,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Index.cshtml", Content = new ListViewTemplate(model.Namespace, @class).TransformText() };
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Create.cshtml", Content = new CreateViewTemplate(model.Namespace, @class).TransformText() };
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Edit.cshtml", Content = new EditViewTemplate(model.Namespace, @class).TransformText() };
-                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Remove.cshtml", Content = new DeleteViewTemplate(model.Namespace, @class).TransformText() };
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/{@class.Name}", File = "Delete.cshtml", Content = new DeleteViewTemplate(model.Namespace, @class).TransformText() };
             }
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Home", File = "Index.cshtml", Content = new HomeViewTemplate(namespaceName, model.Classes).TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Shared", File = "_Layout.cshtml", Content = new LayoutViewTemplate().TransformText() };

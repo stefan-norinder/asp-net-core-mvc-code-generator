@@ -47,24 +47,24 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = $\"{@SharedLocalizer.GetLocalizedHtmlStri" +
-                    "ng(\"Create\")} {@SharedLocalizer.GetLocalizedHtmlString(\"");
+            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = @$\"{SharedLocalizer.GetLocalizedHtmlStri" +
+                    "ng(\"Create\")} {SharedLocalizer.GetLocalizedHtmlString(\"");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\")}\";\r\n}\r\n\r\n<h1>$\"{@SharedLocalizer.GetLocalizedHtmlString(\"Create\")} {@SharedLoc" +
-                    "alizer.GetLocalizedHtmlString(\"");
+            this.Write("\")}\";\r\n}\r\n\r\n<h1>@($\"{SharedLocalizer.GetLocalizedHtmlString(\"Create\")} {@SharedLo" +
+                    "calizer.GetLocalizedHtmlString(\"");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\")}\"</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form" +
-                    " method=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
+            this.Write("\"}\")\"</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <for" +
+                    "m method=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
             
             #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\CreateViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

@@ -11,7 +11,7 @@
 @model IEnumerable<DatabaseTest.Web.ViewModel.<#= Model.Name #>ViewModel>
 
 @{
-    ViewData["Title"] = $"{@SharedLocalizer.GetLocalizedHtmlString("Edit")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
+    ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("Edit")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
 <h1>@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")</h1>
@@ -32,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
 <# foreach (var item in Model.Properties){ #>
             <td>
@@ -40,9 +40,8 @@
             </td>
 <# } #>  
             <td>
-                @Html.ActionLink("Edit", "Edit", "<#= Model.Name #>", new {  id=item.Id  }) |
-                @*@Html.ActionLink("Details", "Details", "<#= Model.Name #>", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Delete", "Delete", "<#= Model.Name #>", new {  id=item.Id  })
+                <a href="/<#= Model.Name #>/edit/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> | 
+                <a href="/<#= Model.Name #>/delete/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> 
             </td>
         </tr>
 }
