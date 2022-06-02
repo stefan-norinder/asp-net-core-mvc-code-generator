@@ -57,6 +57,8 @@ namespace CodeGenerator.Test
                             // Warning! This is an auto generated file. Changes may be overwritten 
                             //---------------------------------------------------------------------------------------
 
+                            using System;
+
                             namespace Example.Logic.Model
                             {
                                 public class Person : Entity
@@ -107,6 +109,7 @@ namespace CodeGenerator.Test
                             //---------------------------------------------------------------------------------------
 
                             using AutoMapper;
+                            using Example.Logic.Model;
                             using Example.Logic.Services;
                             using Microsoft.AspNetCore.Mvc;
                             using Microsoft.Extensions.Logging;
@@ -136,6 +139,69 @@ namespace CodeGenerator.Test
                                         var list = await service.GetAll();
                                         var viewModels = mapper.Map < IEnumerable<PersonViewModel>>(list);
                                         return View(viewModels);
+                                    }
+        
+                                        public ActionResult Create()
+                                    {
+                                        return View();
+                                    }
+
+                                    [HttpPost]
+                                    public async Task<ActionResult> Create([FromForm]PersonViewModel viewModel)
+                                    {
+                                        try
+                                        {                
+                                            var model = mapper.Map<Person>(viewModel);
+                                            await service.Insert(model);
+                                            return RedirectToAction(nameof(Index));
+                                        }
+                                        catch
+                                        {
+                                            return View();
+                                        }
+                                    }
+
+                                    public async Task<ActionResult> Edit(int id)
+                                    {
+                                        var entity = await service.Get(id);
+                                        return View(mapper.Map<PersonViewModel>(entity));
+                                    }
+
+
+                                    [HttpPost]
+                                    public async Task<ActionResult> Edit([FromForm]PersonViewModel viewModel)
+                                    {
+                                        try
+                                        {                
+                                            var model = mapper.Map<Person>(viewModel);
+                                            await service.Update(model);
+                                            return RedirectToAction(nameof(Index));
+                                        }
+                                        catch
+                                        {
+                                            return View();
+                                        }
+                                    }
+
+                                    public async Task<ActionResult> Delete(int id)
+                                    {
+                                        var entity = await service.Get(id);
+                                        return View(mapper.Map<PersonViewModel>(entity));
+                                    }
+
+                                    [HttpPost]
+                                    public async Task<ActionResult> Delete([FromForm]PersonViewModel viewModel)
+                                    {
+                                        try
+                                        {                
+                                            var model = mapper.Map<Person>(viewModel);
+                                            await service.Delete(model.Id);
+                                            return RedirectToAction(nameof(Index));
+                                        }
+                                        catch
+                                        {
+                                            return View();
+                                        }
                                     }
                                 }
                             }";

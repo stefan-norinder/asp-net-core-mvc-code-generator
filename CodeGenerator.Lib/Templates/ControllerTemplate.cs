@@ -180,7 +180,7 @@ using ");
             }
         }
 
-        public async Task<ActionResult> Remove(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await service.Get(id);
             return View(mapper.Map<");
@@ -191,7 +191,7 @@ using ");
             #line default
             #line hidden
             this.Write("ViewModel>(entity));\r\n        }\r\n\r\n        [HttpPost]\r\n        public async Task<" +
-                    "ActionResult> Remove([FromForm]");
+                    "ActionResult> Delete([FromForm]");
             
             #line 92 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

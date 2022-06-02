@@ -82,14 +82,14 @@ namespace <#= namespaceName #>.Web.Controllers
             }
         }
 
-        public async Task<ActionResult> Remove(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var entity = await service.Get(id);
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
+        public async Task<ActionResult> Delete([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             try
             {                

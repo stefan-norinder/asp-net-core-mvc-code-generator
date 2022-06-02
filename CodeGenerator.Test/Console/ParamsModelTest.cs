@@ -82,10 +82,8 @@ namespace CodeGenerator.Test
         }
 
         [Test]
-        [Ignore("Not done")]
         public void ConstructParamsModelFromDatasourceParams()
         {
-            // --namespace DatabaseTest --server .\sqlexpress --datasource test
             var args = new[] {
                     "--namespace",
                     "DatabaseTest",
@@ -95,16 +93,12 @@ namespace CodeGenerator.Test
                     "test"
             };
 
-            var sut = new GenerationModelFetcher(args);
+            var sut = new GenerationModelFromDatabaseFetcher(args);
 
             Assert.AreEqual("DatabaseTest", sut.Namespace);
-            //Assert.AreEqual("DatabaseTest", sut.D);
-            Assert.AreEqual("Bar", sut.Get().Classes.First().Name);
-            var propCollection = sut.Get().Classes.First().Properties.ToList();
-            Assert.AreEqual("Inc", propCollection[0].Name);
-            Assert.AreEqual("string", propCollection[0].DataType);
-            Assert.AreEqual("Age", propCollection[1].Name);
-            Assert.AreEqual("int", propCollection[1].DataType);
+            var model = sut.Get();
+            Assert.AreEqual("test", model.MetaData.Datasource);
+            Assert.AreEqual(".\\sqlexpress", model.MetaData.Server);
         }
 
 
