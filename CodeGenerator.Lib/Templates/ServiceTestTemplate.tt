@@ -47,7 +47,7 @@ namespace <#= namespaceName #>.Test
             var result = await sut.Get(2);
             Assert.NotNull(result);
             Assert.AreEqual(2, result.Id);
-            VerifyLogging(LogLevel.Information, "Fetching entity with id 2 from data source.");
+            loggerMock.VerifyLoggingExact(LogLevel.Information, "Fetching entity with id 2 from data source.");
         }
 
         [Test]
@@ -65,17 +65,34 @@ namespace <#= namespaceName #>.Test
             Assert.AreEqual(3, result.Count());
             Assert.AreEqual(1, result.First().Id);
             Assert.AreEqual(3, result.Last().Id);
-            VerifyLogging(LogLevel.Information, "Fetching all entities from data source.");
+            loggerMock.VerifyLoggingExact(LogLevel.Information, "Fetching all entities from data source.");
         }
 
-        private void VerifyLogging(LogLevel logLevel, string str)
+        [Test]
+        public async Task Insert<#= Model.Name #>_VerifyInsertIsCalled()
         {
-            loggerMock.Verify(x => x.Log(logLevel,
-                                         It.IsAny<EventId>(),
-                                         It.Is<It.IsAnyType>((object message, Type t) =>
-                                         message.ToString() == str),
-                                         It.IsAny<Exception>(),
-                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
+            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+            await sut.Insert(new <#= Model.Name #> { Id = 2 });
+            dataAccessMock.Verify(x => x.Insert(It.Is<<#= Model.Name #>>(y => y.Id == 2)));
+            loggerMock.VerifyLoggingContains(LogLevel.Information, "Saving entity");
+        }
+
+        [Test]
+        public async Task Update<#= Model.Name #>_VerifyUpdateIsCalled()
+        {
+            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+            await sut.Update(new <#= Model.Name #> { Id = 5 });
+            dataAccessMock.Verify(x => x.Update(It.Is<<#= Model.Name #>>(y => y.Id == 5)));
+            loggerMock.VerifyLoggingContains(LogLevel.Information, "Update entity");
+        }
+
+        [Test]
+        public async Task Delete<#= Model.Name #>_VerifyDeleteIsCalled()
+        {
+            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+            await sut.Delete(9);
+            dataAccessMock.Verify(x => x.Delete(It.Is<int>(y => y == 9)));
+            loggerMock.VerifyLoggingExact(LogLevel.Information, "Deleting entity with id 9 from data source.");
         }
     }
 }

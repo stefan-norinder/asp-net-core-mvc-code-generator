@@ -133,7 +133,7 @@ using ");
             var result = await sut.Get(2);
             Assert.NotNull(result);
             Assert.AreEqual(2, result.Id);
-            VerifyLogging(LogLevel.Information, ""Fetching entity with id 2 from data source."");
+            loggerMock.VerifyLoggingExact(LogLevel.Information, ""Fetching entity with id 2 from data source."");
         }
 
         [Test]
@@ -185,17 +185,90 @@ using ");
             Assert.AreEqual(3, result.Count());
             Assert.AreEqual(1, result.First().Id);
             Assert.AreEqual(3, result.Last().Id);
-            VerifyLogging(LogLevel.Information, ""Fetching all entities from data source."");
+            loggerMock.VerifyLoggingExact(LogLevel.Information, ""Fetching all entities from data source."");
         }
 
-        private void VerifyLogging(LogLevel logLevel, string str)
-        {
-            loggerMock.Verify(x => x.Log(logLevel,
-                                         It.IsAny<EventId>(),
-                                         It.Is<It.IsAnyType>((object message, Type t) =>
-                                         message.ToString() == str),
-                                         It.IsAny<Exception>(),
-                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
+        [Test]
+        public async Task Insert");
+            
+            #line 72 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("_VerifyInsertIsCalled()\r\n        {\r\n            var sut = new ");
+            
+            #line 74 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service(loggerMock.Object, dataAccessMock.Object);\r\n            await sut.Insert(" +
+                    "new ");
+            
+            #line 75 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { Id = 2 });\r\n            dataAccessMock.Verify(x => x.Insert(It.Is<");
+            
+            #line 76 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(y => y.Id == 2)));\r\n            loggerMock.VerifyLoggingContains(LogLevel.Infor" +
+                    "mation, \"Saving entity\");\r\n        }\r\n\r\n        [Test]\r\n        public async Tas" +
+                    "k Update");
+            
+            #line 81 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("_VerifyUpdateIsCalled()\r\n        {\r\n            var sut = new ");
+            
+            #line 83 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service(loggerMock.Object, dataAccessMock.Object);\r\n            await sut.Update(" +
+                    "new ");
+            
+            #line 84 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" { Id = 5 });\r\n            dataAccessMock.Verify(x => x.Update(It.Is<");
+            
+            #line 85 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">(y => y.Id == 5)));\r\n            loggerMock.VerifyLoggingContains(LogLevel.Infor" +
+                    "mation, \"Update entity\");\r\n        }\r\n\r\n        [Test]\r\n        public async Tas" +
+                    "k Delete");
+            
+            #line 90 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("_VerifyDeleteIsCalled()\r\n        {\r\n            var sut = new ");
+            
+            #line 92 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(@"Service(loggerMock.Object, dataAccessMock.Object);
+            await sut.Delete(9);
+            dataAccessMock.Verify(x => x.Delete(It.Is<int>(y => y == 9)));
+            loggerMock.VerifyLoggingExact(LogLevel.Information, ""Deleting entity with id 9 from data source."");
         }
     }
 }

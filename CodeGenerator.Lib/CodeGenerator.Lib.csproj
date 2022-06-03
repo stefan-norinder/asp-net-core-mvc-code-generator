@@ -121,6 +121,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ServiceTestTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceTestTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\SolutionTempate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
