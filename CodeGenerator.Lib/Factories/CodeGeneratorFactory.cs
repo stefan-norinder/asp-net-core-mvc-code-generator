@@ -46,8 +46,10 @@ namespace CodeGenerator.Lib.Factories
                     return new ViewModelGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Views:
                     return new ViewsGenerator(generationFetcher, output);
+                case CodeGeneratorTypes.Test:
+                    return new TestRootGenerator(generationFetcher, output);
                 default:
-                    throw new ArgumentException();
+                    throw new ArgumentException(type.ToString());
             }
 
         }

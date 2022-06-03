@@ -14,6 +14,7 @@ namespace CodeGenerator.Lib.Utils
         SolutionRoot = 128,
         ViewModels = 256,
         Views = 512,
-        All = Api | Controllers | DataAccess | Services | Models | WebRoot | SolutionRoot | ViewModels | Views 
+        Test = 1024,
+        All = Api | Controllers | DataAccess | Services | Models | WebRoot | SolutionRoot | ViewModels | Views | Test
     }
 }

@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class WebProjectFileTemplate : WebProjectFileTemplateBase
+    public partial class TestProjectTemplate : TestProjectTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,47 +29,37 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
-<Project Sdk=""Microsoft.NET.Sdk.Web"">
+<Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework> 
-    <Version>0.0.1</Version>
-    <Description>Auto generated project</Description>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""AutoMapper"" Version=""11.0.1"" />
-    <PackageReference Include=""NLog"" Version=""5.0.0"" />
-    <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.0.0"" />
-  </ItemGroup>  
-  
+    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""16.9.4"" />
+    <PackageReference Include=""NUnit"" Version=""3.13.1"" />
+    <PackageReference Include=""NUnit3TestAdapter"" Version=""3.17.0"" />
+    <PackageReference Include=""coverlet.collector"" Version=""3.0.2"" />
+  </ItemGroup>
+
   <ItemGroup>
     ");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
             
             #line default
             #line hidden
-            this.Write(@"    
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include=""logs\"" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Content Update=""nlog.config"">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update=""nlog.Development.config"">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-
-</Project>
-");
+            this.Write("  \r\n    ");
+            
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Web\\Web.csproj\" />"));
+            
+            #line default
+            #line hidden
+            this.Write("  \r\n  </ItemGroup>\r\n\r\n</Project>");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -81,7 +71,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class WebProjectFileTemplateBase
+    public class TestProjectTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

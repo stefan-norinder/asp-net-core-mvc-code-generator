@@ -19,7 +19,8 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            GenerateStaticContent($"{baseFolder}{model.Namespace}.{ProjectType}");
+            GenerateContentForWwwRoot(model);
+            GenerateStaticSharedContent(model);
 
             foreach (var @class in model.Classes)
             {
@@ -32,15 +33,21 @@ namespace CodeGenerator.Lib.CodeGenerators
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Shared", File = "_Layout.cshtml", Content = new LayoutViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewImports.cshtml", Content = new ImportsViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewStart.cshtml", Content = new StartViewTemplate().TransformText() };
-            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Resources", File = "SharedResource.en.resx", Content = new ResourceTemplate(namespaceName,model.Classes).TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/Resources", File = "SharedResource.en.resx", Content = new ResourceTemplate(namespaceName, model.Classes).TransformText() };
         }
 
-        private void GenerateStaticContent(string basePath)
+        private void GenerateStaticSharedContent(CodeGenerationModel model)
         {
-            var sourcePath = "./Templates/StaticContent/wwwroot";
-            var targetPath = $"{basePath}/wwwroot";
+            var source = "./Templates/StaticContent/StaticSharedContent";
+            var target = $"{baseFolder}{model.Namespace}.{ProjectType}/Views/Shared";
+            output.CopyFoldersAndFilesFromSourceToTarge(source, target);
+        }
 
-           output.CopyFoldersAndFilesFromSourceToTarge(sourcePath, targetPath);
+        private void GenerateContentForWwwRoot(CodeGenerationModel model)
+        {
+            var source = "./Templates/StaticContent/wwwroot";
+            var target = $"{baseFolder}{model.Namespace}.{ProjectType}/wwwroot";
+            output.CopyFoldersAndFilesFromSourceToTarge(source, target);
         }
     }
 }

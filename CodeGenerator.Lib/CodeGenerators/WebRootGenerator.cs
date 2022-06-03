@@ -19,12 +19,13 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             GenerateStaticContent($"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}");
 
+            var webProjectFileContent = new WebProjectFileTemplate(model.Namespace).TransformText();
             return new List<TemplateModel>
             {
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "Startup.cs", Content =  new StartupTemplate(model.Namespace, model.Classes).TransformText()},
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "Program.cs", Content =  new ProgramTemplate(model.Namespace).TransformText()},
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "appsettings.json", Content =  new AppSettingsTemplate(model.MetaData.EscapedServerString, model.MetaData.Datasource).TransformText()},
-                new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content =  new WebProjectFileTemplate(model.Namespace).TransformText()},
+                new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content =  webProjectFileContent},
             };
         }
         private void GenerateStaticContent(string basePath)

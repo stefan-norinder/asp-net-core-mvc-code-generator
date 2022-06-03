@@ -149,6 +149,11 @@
     <Compile Update="Templates\StaticContent\WebProjectRoot\SharedResource.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="Templates\TestProjectTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestProjectTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -266,6 +271,9 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartViewTemplate.cs</LastGenOutput>
     </None>
+    <None Update="Templates\StaticContent\StaticSharedContent\_ValidationScriptsPartial.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\StaticContent\WebProjectRoot\appsettings.Development.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -367,6 +375,10 @@
     </None>
     <None Update="Templates\StaticContent\wwwroot\lib\jquery\dist\jquery.min.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\TestProjectTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TestProjectTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ViewModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

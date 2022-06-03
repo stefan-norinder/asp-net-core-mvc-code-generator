@@ -45,6 +45,8 @@ namespace CodeGenerator.Lib.CodeGenerators
             public static string Logic = "Logic";
             public static string Web = "Web";
             public static string Solution = "Solution";
+            public static string Test = "Test";
+
         }
         protected class TemplateModel
         {

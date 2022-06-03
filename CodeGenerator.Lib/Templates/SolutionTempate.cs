@@ -35,6 +35,7 @@ namespace CodeGenerator.Lib.Templates
 	var solutionGuid = Guid.NewGuid();
 	var webProjectGuid = Guid.NewGuid();
 	var libProjectGuid = Guid.NewGuid();
+	var testProjectGuid = Guid.NewGuid();
 
             
             #line default
@@ -42,43 +43,64 @@ namespace CodeGenerator.Lib.Templates
             this.Write("Microsoft Visual Studio Solution File, Format Version 12.00\r\nMinimumVisualStudioV" +
                     "ersion = 10.0.40219.1\r\nProject(\"{");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(solutionGuid));
             
             #line default
             #line hidden
             this.Write("}\") = \"Web\", \"");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
             
             #line default
             #line hidden
             this.Write(".Web\\Web.csproj\", \"{");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(webProjectGuid));
             
             #line default
             #line hidden
             this.Write("}\"\r\nEndProject\r\nProject(\"{");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(solutionGuid));
             
             #line default
             #line hidden
             this.Write("}\") = \"Logic\", \"");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
             
             #line default
             #line hidden
             this.Write(".Logic\\Logic.csproj\", \"{");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(libProjectGuid));
+            
+            #line default
+            #line hidden
+            this.Write("}\"\r\nEndProject\r\nProject(\"{");
+            
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(solutionGuid));
+            
+            #line default
+            #line hidden
+            this.Write("}\") = \"Test\", \"");
+            
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(@namespace));
+            
+            #line default
+            #line hidden
+            this.Write(".Test\\Test.csproj\", \"{");
+            
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SolutionTempate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(testProjectGuid));
             
             #line default
             #line hidden
