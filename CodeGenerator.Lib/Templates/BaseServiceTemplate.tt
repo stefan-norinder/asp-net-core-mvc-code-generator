@@ -35,31 +35,35 @@ namespace <#= namespaceName #>.Logic.Model
         {
             this.logger = logger;
             this.dataAccess = dataAccess;
-        }
+        }        
 
         public async Task<TModel> Get(int id)
         {
+            logger.LogInformation($"Fetching entity with id {id} from data source.");
             return await dataAccess.Get(id);
         }
 
         public async Task<IEnumerable<TModel>> GetAll()
         {
+            logger.LogInformation($"Fetching all entities from data source.");
             return await dataAccess.GetAll();
         }
 
         public async virtual Task Insert(TModel model)
         {
+            logger.LogInformation($"Saving entity {model} to data source.");
             await dataAccess.Insert(model);
         }
 
         public async virtual Task Update(TModel model)
         {
+            logger.LogInformation($"Update entity {model} in data source.");
             await dataAccess.Update(model);
         }
 
         public async Task Delete(int id)
         {
+            logger.LogInformation($"Deleting entity with id {id} from data source.");
             await dataAccess.Delete(id);
         }
     }
-}

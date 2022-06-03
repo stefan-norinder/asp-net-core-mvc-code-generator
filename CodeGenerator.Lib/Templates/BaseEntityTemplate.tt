@@ -7,6 +7,7 @@
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
 using System;
 
 namespace <#= namespaceName #>.Logic.Model
@@ -26,6 +27,11 @@ namespace <#= namespaceName #>.Logic.Model
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);
+        }        
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
 
         private bool BothEntitiesAreNew(Entity castedObj)

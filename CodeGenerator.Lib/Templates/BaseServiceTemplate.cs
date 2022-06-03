@@ -54,56 +54,28 @@ using ");
             
             #line default
             #line hidden
-            this.Write(@".Logic.Model
-{
-     public interface IService<TModel>
-    {  
-        Task<TModel> Get(int id);
-        Task<IEnumerable<TModel>> GetAll();
-        Task Insert(TModel model);
-        Task Update(TModel model);
-        Task Delete(int id);
-    }
-
-    public class Service<TModel> : IService<TModel> where TModel : Entity
-    {
-        protected readonly ILogger<Service<TModel>> logger;
-        protected readonly IDataAccess<TModel> dataAccess;
-
-        public Service(ILogger<Service<TModel>> logger,
-            IDataAccess<TModel> dataAccess)
-        {
-            this.logger = logger;
-            this.dataAccess = dataAccess;
-        }
-
-        public async Task<TModel> Get(int id)
-        {
-            return await dataAccess.Get(id);
-        }
-
-        public async Task<IEnumerable<TModel>> GetAll()
-        {
-            return await dataAccess.GetAll();
-        }
-
-        public async virtual Task Insert(TModel model)
-        {
-            await dataAccess.Insert(model);
-        }
-
-        public async virtual Task Update(TModel model)
-        {
-            await dataAccess.Update(model);
-        }
-
-        public async Task Delete(int id)
-        {
-            await dataAccess.Delete(id);
-        }
-    }
-}
-");
+            this.Write(".Logic.Model\r\n{\r\n     public interface IService<TModel>\r\n    {  \r\n        Task<TM" +
+                    "odel> Get(int id);\r\n        Task<IEnumerable<TModel>> GetAll();\r\n        Task In" +
+                    "sert(TModel model);\r\n        Task Update(TModel model);\r\n        Task Delete(int" +
+                    " id);\r\n    }\r\n\r\n    public class Service<TModel> : IService<TModel> where TModel" +
+                    " : Entity\r\n    {\r\n        protected readonly ILogger<Service<TModel>> logger;\r\n " +
+                    "       protected readonly IDataAccess<TModel> dataAccess;\r\n\r\n        public Serv" +
+                    "ice(ILogger<Service<TModel>> logger,\r\n            IDataAccess<TModel> dataAccess" +
+                    ")\r\n        {\r\n            this.logger = logger;\r\n            this.dataAccess = d" +
+                    "ataAccess;\r\n        }        \r\n\r\n        public async Task<TModel> Get(int id)\r\n" +
+                    "        {\r\n            logger.LogInformation($\"Fetching entity with id {id} from" +
+                    " data source.\");\r\n            return await dataAccess.Get(id);\r\n        }\r\n\r\n   " +
+                    "     public async Task<IEnumerable<TModel>> GetAll()\r\n        {\r\n            log" +
+                    "ger.LogInformation($\"Fetching all entities from data source.\");\r\n            ret" +
+                    "urn await dataAccess.GetAll();\r\n        }\r\n\r\n        public async virtual Task I" +
+                    "nsert(TModel model)\r\n        {\r\n            logger.LogInformation($\"Saving entit" +
+                    "y {model} to data source.\");\r\n            await dataAccess.Insert(model);\r\n     " +
+                    "   }\r\n\r\n        public async virtual Task Update(TModel model)\r\n        {\r\n     " +
+                    "       logger.LogInformation($\"Update entity {model} in data source.\");\r\n       " +
+                    "     await dataAccess.Update(model);\r\n        }\r\n\r\n        public async Task Del" +
+                    "ete(int id)\r\n        {\r\n            logger.LogInformation($\"Deleting entity with" +
+                    " id {id} from data source.\");\r\n            await dataAccess.Delete(id);\r\n       " +
+                    " }\r\n    }");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -32,11 +32,12 @@ namespace CodeGenerator.Lib.Templates
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
 using System;
 
 namespace ");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -58,6 +59,11 @@ namespace ");
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);
+        }        
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
 
         private bool BothEntitiesAreNew(Entity castedObj)
