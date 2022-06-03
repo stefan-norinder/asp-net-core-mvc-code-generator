@@ -26,6 +26,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/ModelTests", File = $"{@class}ModelTests.cs", Content = modelTestsTemplate.TransformText() };
             }
             yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectTypeConstant.Test}", File = $"{ProjectTypeConstant.Test}.csproj", Content = new TestProjectTemplate(model.Namespace).TransformText() };
+            yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectTypeConstant.Test}", File = "TestUtils.cs", Content = new TestUtilsTemplate(model.Namespace).TransformText() };
         }
 
     }
