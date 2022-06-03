@@ -7,5 +7,12 @@
 {
   "ConnectionStrings": {
     "Default": "Data Source=<#= server #>;Initial Catalog=<#= datasource #>;Trusted_Connection=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
   }
 }

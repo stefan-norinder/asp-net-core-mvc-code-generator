@@ -14,10 +14,26 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
-  </ItemGroup>
+    <PackageReference Include="NLog" Version="5.0.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
+  </ItemGroup>  
   
   <ItemGroup>
     <#= $"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />" #>    
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="logs\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="nlog.Development.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 </Project>

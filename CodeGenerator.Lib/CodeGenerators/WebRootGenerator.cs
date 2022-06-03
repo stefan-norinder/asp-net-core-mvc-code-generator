@@ -17,6 +17,8 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
+            GenerateStaticContent($"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}");
+
             return new List<TemplateModel>
             {
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "Startup.cs", Content =  new StartupTemplate(model.Namespace, model.Classes).TransformText()},
@@ -24,6 +26,13 @@ namespace CodeGenerator.Lib.CodeGenerators
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "appsettings.json", Content =  new AppSettingsTemplate(model.MetaData.EscapedServerString, model.MetaData.Datasource).TransformText()},
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content =  new WebProjectFileTemplate(model.Namespace).TransformText()},
             };
+        }
+        private void GenerateStaticContent(string basePath)
+        {
+            var sourcePath = "./Templates/StaticContent/WebProjectRoot";
+            var targetPath = $"{basePath}";
+
+            output.CopyFoldersAndFilesFromSourceToTarge(sourcePath, targetPath);
         }
     }
 }

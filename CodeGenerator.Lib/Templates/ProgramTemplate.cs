@@ -33,33 +33,52 @@ namespace CodeGenerator.Lib.Templates
 //---------------------------------------------------------------------------------------
 
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Web;
+using System;
+using System.IO;
 
 namespace ");
             
-            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProgramTemplate.tt"
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProgramTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(@".Web
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
-");
+            this.Write(".Web\r\n{\r\n    public class Program\r\n    {\r\n        public static IHostBuilder Crea" +
+                    "teHostBuilder(string[] args) =>\r\n             Host.CreateDefaultBuilder(args)\r\n " +
+                    "           .ConfigureWebHostDefaults(webBuilder =>\r\n            {\r\n             " +
+                    "   webBuilder.UseStartup<Startup>();\r\n                webBuilder.ConfigureKestre" +
+                    "l(options =>\r\n                {\r\n                });\r\n            })\r\n          " +
+                    "  .ConfigureLogging(logging =>\r\n            {\r\n                logging.SetMinimu" +
+                    "mLevel(LogLevel.Trace);\r\n            })\r\n            .UseNLog();\r\n\r\n        publ" +
+                    "ic static void Main(string[] args)\r\n        {\r\n            var logger = NLogBuil" +
+                    "der.ConfigureNLog(\"nlog.config\").GetCurrentClassLogger();\r\n            try\r\n    " +
+                    "        {\r\n                logger.Info(\"init main\");\r\n                var webHos" +
+                    "t = CreateHostBuilder(args)\r\n                  .UseContentRoot(Directory.GetCurr" +
+                    "entDirectory())\r\n                  .ConfigureAppConfiguration((hostingContext, c" +
+                    "onfig) =>\r\n                  {\r\n                      var env = hostingContext.H" +
+                    "ostingEnvironment;\r\n                      config.AddJsonFile(\"appsettings.json\"," +
+                    " optional: true, reloadOnChange: true)\r\n                            .AddJsonFile" +
+                    "($\"appsettings.{env.EnvironmentName}.json\",\r\n                                opt" +
+                    "ional: true, reloadOnChange: true);\r\n                      config.AddEnvironment" +
+                    "Variables();\r\n                      try\r\n                      {\r\n              " +
+                    "            var logFactory = NLog.LogManager.LoadConfiguration($\"nlog.{env.Envir" +
+                    "onmentName}.config\");\r\n                          NLog.LogManager.Configuration =" +
+                    " logFactory.Configuration;\r\n                      }\r\n                      catch" +
+                    " (Exception)\r\n                      {\r\n                          // No problems " +
+                    "here!\r\n                          // If environment specific log config doesn\'t e" +
+                    "xists just continue\r\n                      }\r\n                  })\r\n            " +
+                    "      .ConfigureLogging((hostingContext, logging) =>\r\n                  {\r\n     " +
+                    "                 logging.AddConfiguration(hostingContext.Configuration.GetSectio" +
+                    "n(\"Logging\"));\r\n                  })\r\n                  .Build();\r\n\r\n           " +
+                    "     webHost.Run();\r\n            }\r\n            catch (Exception exception)\r\n   " +
+                    "         {\r\n                logger.Error(exception, \"Stopped program because of " +
+                    "exception\");\r\n                throw;\r\n            }\r\n            finally\r\n      " +
+                    "      {\r\n                NLog.LogManager.Shutdown();\r\n            }\r\n        }\r\n" +
+                    "    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

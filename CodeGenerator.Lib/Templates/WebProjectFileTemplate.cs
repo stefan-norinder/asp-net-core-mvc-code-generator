@@ -39,17 +39,37 @@ namespace CodeGenerator.Lib.Templates
 
   <ItemGroup>
     <PackageReference Include=""AutoMapper"" Version=""11.0.1"" />
-  </ItemGroup>
+    <PackageReference Include=""NLog"" Version=""5.0.0"" />
+    <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.0.0"" />
+  </ItemGroup>  
   
   <ItemGroup>
     ");
             
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
             
             #line default
             #line hidden
-            this.Write("    \r\n  </ItemGroup>\r\n\r\n</Project>\r\n");
+            this.Write(@"    
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include=""logs\"" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update=""nlog.config"">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update=""nlog.Development.config"">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+</Project>
+");
             return this.GenerationEnvironment.ToString();
         }
     }

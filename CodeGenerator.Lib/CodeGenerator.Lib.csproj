@@ -146,6 +146,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>StartViewTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\StaticContent\WebProjectRoot\SharedResource.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="Templates\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -262,6 +265,15 @@
     <None Update="Templates\StartViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>StartViewTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\StaticContent\WebProjectRoot\appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\StaticContent\WebProjectRoot\nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Templates\StaticContent\WebProjectRoot\nlog.Development.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Templates\StaticContent\wwwroot\css\site.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

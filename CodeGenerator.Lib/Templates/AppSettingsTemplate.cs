@@ -43,7 +43,9 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(";Trusted_Connection=True;\"\r\n  }\r\n}");
+            this.Write(";Trusted_Connection=True;\"\r\n  },\r\n  \"Logging\": {\r\n    \"LogLevel\": {\r\n      \"Defau" +
+                    "lt\": \"Information\",\r\n      \"Microsoft\": \"Information\",\r\n      \"Microsoft.Hosting" +
+                    ".Lifetime\": \"Information\"\r\n    }\r\n  }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
