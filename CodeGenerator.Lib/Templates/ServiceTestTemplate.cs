@@ -55,30 +55,30 @@ using ");
             #line hidden
             this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Moq;\r\nusing NUnit.Fr" +
                     "amework;\r\nusing System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\nusin" +
-                    "g System.Linq;\r\n\r\nnamespace ");
+                    "g System.Linq;\r\nusing System;\r\n\r\nnamespace ");
             
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 21 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Test\r\n{    \r\n    public class ");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("ServiceTests\r\n    {\r\n        private Mock<ILogger<");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Service>> loggerMock;\r\n        private Mock<I");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -86,14 +86,14 @@ using ");
             this.Write("DataAccess> dataAccessMock;\r\n\r\n        [SetUp]\r\n        public void Setup()\r\n    " +
                     "    {\r\n            loggerMock = new Mock<ILogger<");
             
-            #line 30 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 31 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Service>>();\r\n            dataAccessMock = new Mock<I");
             
-            #line 31 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 32 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -101,43 +101,73 @@ using ");
             this.Write("DataAccess>();\r\n        }\r\n\r\n        [Test]\r\n        public void Initiate_SholdNo" +
                     "tBeNull()\r\n        {\r\n            var sut = new ");
             
-            #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Service(loggerMock.Object, dataAccessMock.Object);\r\n            Assert.IsNotNull(" +
-                    "sut);\r\n        }\r\n\r\n        [Test]\r\n        public async Task GetAll");
+                    "sut);\r\n        }\r\n        \r\n        [Test]\r\n        public async Task Get");
             
-            #line 42 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 43 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("s_SholdContainEntities()\r\n        {\r\n            var testData = new List<");
+            this.Write("_SholdNotBeNull()\r\n        {\r\n            dataAccessMock.Setup(x => x.Get(It.IsAn" +
+                    "y<int>())).Returns(Task.FromResult(new ");
             
-            #line 44 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 45 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">\r\n            {\r\n                new ");
+            this.Write(" { Id = 2 }));\r\n            var sut = new ");
             
             #line 46 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
+            this.Write(@"Service(loggerMock.Object, dataAccessMock.Object);
+            var result = await sut.Get(2);
+            Assert.NotNull(result);
+            Assert.AreEqual(2, result.Id);
+            VerifyLogging(LogLevel.Information, ""Fetching entity with id 2 from data source."");
+        }
+
+        [Test]
+        public async Task GetAll");
+            
+            #line 54 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("s_SholdContainEntities()\r\n        {\r\n            var testData = new List<");
+            
+            #line 56 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write(">\r\n            {\r\n                new ");
+            
+            #line 58 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
             this.Write("{ Id = 1 },\r\n                new ");
             
-            #line 47 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 59 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("{ Id = 2 },\r\n                new ");
             
-            #line 48 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 60 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -145,7 +175,7 @@ using ");
             this.Write("{ Id = 3 }\r\n            };\r\n            dataAccessMock.Setup(x => x.GetAll()).Ret" +
                     "urns(Task.FromResult(testData.AsEnumerable()));\r\n            var sut = new ");
             
-            #line 51 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            #line 63 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -155,6 +185,17 @@ using ");
             Assert.AreEqual(3, result.Count());
             Assert.AreEqual(1, result.First().Id);
             Assert.AreEqual(3, result.Last().Id);
+            VerifyLogging(LogLevel.Information, ""Fetching all entities from data source."");
+        }
+
+        private void VerifyLogging(LogLevel logLevel, string str)
+        {
+            loggerMock.Verify(x => x.Log(logLevel,
+                                         It.IsAny<EventId>(),
+                                         It.Is<It.IsAnyType>((object message, Type t) =>
+                                         message.ToString() == str),
+                                         It.IsAny<Exception>(),
+                                         (Func<It.IsAnyType, Exception, string>)It.IsAny<object>()));
         }
     }
 }
