@@ -116,6 +116,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ServiceTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ServiceTestTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ServiceTestTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\SolutionTempate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -246,6 +251,10 @@
     <None Update="Templates\ServiceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\ServiceTestTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceTestTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\SolutionTempate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

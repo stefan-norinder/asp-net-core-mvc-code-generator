@@ -2,7 +2,6 @@
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Templates;
-using System;
 using System.Collections.Generic;
 
 namespace CodeGenerator.Lib.CodeGenerators

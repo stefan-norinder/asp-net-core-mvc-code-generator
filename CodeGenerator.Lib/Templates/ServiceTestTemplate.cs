@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class TestProjectTemplate : TestProjectTemplateBase
+    public partial class ServiceTestTemplate : ServiceTestTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,39 +28,78 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
-<Project Sdk=""Microsoft.NET.Sdk"">
+            this.Write(@"//---------------------------------------------------------------------------------------
+// Warning! This is an auto generated file. Changes may be overwritten 
+//---------------------------------------------------------------------------------------
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""16.9.4"" />
-    <PackageReference Include=""Moq"" Version=""4.18.1"" />
-    <PackageReference Include=""NUnit"" Version=""3.13.1"" />
-    <PackageReference Include=""NUnit3TestAdapter"" Version=""3.17.0"" />
-    <PackageReference Include=""coverlet.collector"" Version=""3.0.2"" />
-  </ItemGroup>
-
-  <ItemGroup>
-    ");
+using ");
             
-            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
+            #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write("  \r\n    ");
+            this.Write(".Logic.DataAccess;\r\nusing ");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\TestProjectTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Web\\Web.csproj\" />"));
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write("  \r\n  </ItemGroup>\r\n\r\n</Project>");
+            this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Moq;\r\nusing NUnit.Fr" +
+                    "amework;\r\n\r\nnamespace ");
+            
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Test\r\n{    \r\n    public class ");
+            
+            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ServiceTests\r\n    {\r\n        private Mock<ILogger<");
+            
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service>> loggerMock;\r\n        private Mock<I");
+            
+            #line 21 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("DataAccess> dataAccessMock;\r\n\r\n        [SetUp]\r\n        public void Setup()\r\n    " +
+                    "    {\r\n            loggerMock = new Mock<ILogger<");
+            
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service>>();\r\n            dataAccessMock = new Mock<I");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("DataAccess>();\r\n        }\r\n\r\n        [Test]\r\n        public void Initiate_SholdNo" +
+                    "tBeNull()\r\n        {\r\n            var sut = new ");
+            
+            #line 33 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("Service(loggerMock.Object, dataAccessMock.Object);\r\n            Assert.IsNotNull(" +
+                    "sut);\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -72,7 +111,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class TestProjectTemplateBase
+    public class ServiceTestTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
