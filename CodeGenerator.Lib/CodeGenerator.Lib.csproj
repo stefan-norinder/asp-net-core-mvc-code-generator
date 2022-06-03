@@ -96,6 +96,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ModelTestsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModelTestsTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ProgramTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -235,6 +240,10 @@
     <None Update="Templates\DataAccessTemplate.tt">
       <LastGenOutput>DataAccessTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
+    <None Update="Templates\ModelTestsTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelTestsTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ProgramTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

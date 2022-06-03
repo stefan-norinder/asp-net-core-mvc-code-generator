@@ -20,8 +20,10 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             foreach (var @class in model.Classes)
             {
-                var template = new ServiceTestTemplate(model.Namespace, @class);
-                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/ServiceTests", File = $"{@class}ServiceTests.cs", Content = template.TransformText() };
+                var serviceTestTemplate = new ServiceTestTemplate(model.Namespace, @class);
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/ServiceTests", File = $"{@class}ServiceTests.cs", Content = serviceTestTemplate.TransformText() };
+                var modelTestsTemplate = new ModelTestsTemplate(model.Namespace, @class);
+                yield return new TemplateModel { Folder = $"{baseFolder}{model.Namespace}.{ProjectType}/ModelTests", File = $"{@class}ModelTests.cs", Content = modelTestsTemplate.TransformText() };
             }
             yield return new TemplateModel { Folder = $"{baseFolder}{namespaceName}.{ProjectTypeConstant.Test}", File = $"{ProjectTypeConstant.Test}.csproj", Content = new TestProjectTemplate(model.Namespace).TransformText() };
         }
