@@ -8,10 +8,14 @@
 //---------------------------------------------------------------------------------------
 
 using <#= namespaceName #>.Logic.DataAccess;
+using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace <#= namespaceName #>.Test
 {    
@@ -32,6 +36,23 @@ namespace <#= namespaceName #>.Test
         {
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             Assert.IsNotNull(sut);
+        }
+
+        [Test]
+        public async Task GetAll<#= Model.Name #>s_SholdContainEntities()
+        {
+            var testData = new List<<#= Model.Name #>>
+            {
+                new <#= Model.Name #>{ Id = 1 },
+                new <#= Model.Name #>{ Id = 2 },
+                new <#= Model.Name #>{ Id = 3 }
+            };
+            dataAccessMock.Setup(x => x.GetAll()).Returns(Task.FromResult(testData.AsEnumerable()));
+            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+            var result = await sut.GetAll();
+            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(1, result.First().Id);
+            Assert.AreEqual(3, result.Last().Id);
         }
     }
 }
