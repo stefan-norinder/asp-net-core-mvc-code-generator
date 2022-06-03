@@ -209,7 +209,7 @@ using ");
             }
         }
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Remove(int id)
         {
             try
             {   
@@ -231,7 +231,7 @@ using ");
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete([FromForm]");
+        public async Task<ActionResult> Remove([FromForm]");
             
             #line 119 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

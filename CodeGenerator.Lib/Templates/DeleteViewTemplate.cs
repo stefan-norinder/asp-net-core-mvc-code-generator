@@ -64,7 +64,7 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write("\")}\")</h1>\r\n\r\n<h3>@SharedLocalizer.GetLocalizedHtmlString(\"Are you sure you want " +
-                    "to delete this?\")\"</h3>\r\n<div>\r\n    <hr />\r\n    <dl class=\"row\">\r\n\r\n");
+                    "to delete this?\")</h3>\r\n<div>\r\n    <hr />\r\n    <dl class=\"row\">\r\n\r\n");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\DeleteViewTemplate.tt"
  foreach(var item in Model.Properties) { 
@@ -107,7 +107,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(@""" asp-action=""Delete"">    
+            this.Write(@""" asp-action=""Remove"">    
         @Html.HiddenFor(x => x.Id)
         <input type=""submit"" value=""@SharedLocalizer.GetLocalizedHtmlString(""Delete"")"" class=""btn btn-danger"" /> |
         <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>

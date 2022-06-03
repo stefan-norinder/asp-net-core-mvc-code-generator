@@ -41,7 +41,7 @@
 <# } #>  
             <td>
                 <a href="/<#= Model.Name #>/edit/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> | 
-                <a href="/<#= Model.Name #>/delete/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> 
+                <a href="/<#= Model.Name #>/remove/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> 
             </td>
         </tr>
 }

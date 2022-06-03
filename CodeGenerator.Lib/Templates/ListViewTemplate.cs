@@ -121,7 +121,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("/delete/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Delete\")</a> \r\n       " +
+            this.Write("/remove/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Delete\")</a> \r\n       " +
                     "     </td>\r\n        </tr>\r\n}\r\n    </tbody>\r\n</table>\r\n");
             return this.GenerationEnvironment.ToString();
         }
