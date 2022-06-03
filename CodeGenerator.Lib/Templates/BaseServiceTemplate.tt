@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace <#= namespaceName #>.Logic.Model
 {
      public interface IService<TModel>
@@ -67,3 +66,4 @@ namespace <#= namespaceName #>.Logic.Model
             await dataAccess.Delete(id);
         }
     }
+}

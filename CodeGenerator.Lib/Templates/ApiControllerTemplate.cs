@@ -47,37 +47,37 @@ using ");
             #line default
             #line hidden
             this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore" +
-                    ".Mvc;\r\nusing Newtonsoft.Json;\r\nusing System.Collections.Generic;\r\nusing System.T" +
-                    "hreading.Tasks;\r\n\r\nnamespace ");
+                    ".Mvc;\r\nusing Newtonsoft.Json;\r\nusing System.Threading.Tasks;\r\nusing System;\r\n\r\nn" +
+                    "amespace ");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Web.ApiController\r\n{ \r\n    [Route(\"api/v1/[controller]\")]\r\n    [ApiController]\r\n" +
-                    "    public class ");
+            this.Write(".Web.ApiController\r\n{ \r\n        [Route(\"api/v1/[controller]\")]\r\n        [ApiContr" +
+                    "oller]\r\n        public class ");
             
             #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller: ControllerBase\r\n    {\r\n        private readonly ILogger<");
+            this.Write("Controller: ControllerBase\r\n        {\r\n            private readonly ILogger<");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller> logger;\r\n        private readonly I");
+            this.Write("Controller> logger;\r\n            private readonly I");
             
             #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Service service;\r\n\r\n        public ");
+            this.Write("Service service;\r\n\r\n            public ");
             
             #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -99,48 +99,110 @@ using ");
             #line default
             #line hidden
             this.Write(@"Service service)
-        {
-            this.logger = logger;
-            this.service = service;
-        }
+            {
+                this.logger = logger;
+                this.service = service;
+            }
 
         [HttpGet]
         public async Task<string> Get()
         {
-            var items = await service.GetAll();
-            return JsonConvert.SerializeObject(items);
+            try
+            {
+                var items = await service.GetAll();
+                return JsonConvert.SerializeObject(items);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpGet(""{id}"")]
         public async Task<string> Get(int id)
         {
-            var item = await service.Get(id);
-            return JsonConvert.SerializeObject(item);
+            try
+            {
+                var item = await service.Get(id);
+                return JsonConvert.SerializeObject(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpPost]
         public async Task Post([FromBody] dynamic value)
         {
-           var item = JsonConvert.DeserializeObject<");
+            try
+            {
+                var item = JsonConvert.DeserializeObject <");
             
-            #line 50 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 68 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">(value.ToString());\r\n           await service.Insert(item);\r\n        }\r\n\r\n      " +
-                    "  [HttpPut(\"{id}\")]\r\n        public async Task Put(int id, [FromBody] dynamic va" +
-                    "lue)\r\n        {\r\n           var item = JsonConvert.DeserializeObject<");
+            this.Write(@">(value.ToString());
+                   await service.Insert(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
+        }
+
+        [HttpPut(""{id}"")]
+        public async Task Put(int id, [FromBody] dynamic value)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject <");
             
-            #line 57 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 83 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(">(value.ToString());\r\n           item.Id = id;\r\n           await service.Update(i" +
-                    "tem);\r\n        }\r\n\r\n        [HttpDelete(\"{id}\")]\r\n        public async Task Dele" +
-                    "te(int id)\r\n        {\r\n               await service.Delete(id);\r\n        }\r\n    " +
-                    "}\r\n}");
+            this.Write(@">(value.ToString());
+                   item.Id = id;
+                await service.Update(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
+        }
+
+        [HttpDelete(""{id}"")]
+        public async Task Delete(int id)
+        {
+            try
+            {
+                await service.Delete(id);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
+        }
+
+        #region private 
+
+        private void LogError(Exception e)
+        {
+            logger.LogError(e, e.Message);
+        }
+
+        #endregion
+    }
+}");
             return this.GenerationEnvironment.ToString();
         }
     }

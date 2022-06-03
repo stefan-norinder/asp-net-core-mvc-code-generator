@@ -12,57 +12,106 @@ using <#= namespaceName #>.Logic.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace <#= namespaceName #>.Web.ApiController
 { 
-    [Route("api/v1/[controller]")]
-    [ApiController]
-    public class <#= Model.Name #>Controller: ControllerBase
-    {
-        private readonly ILogger<<#= Model.Name #>Controller> logger;
-        private readonly I<#= Model.Name #>Service service;
-
-        public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, I<#= Model.Name #>Service service)
+        [Route("api/v1/[controller]")]
+        [ApiController]
+        public class <#= Model.Name #>Controller: ControllerBase
         {
-            this.logger = logger;
-            this.service = service;
-        }
+            private readonly ILogger<<#= Model.Name #>Controller> logger;
+            private readonly I<#= Model.Name #>Service service;
+
+            public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, I<#= Model.Name #>Service service)
+            {
+                this.logger = logger;
+                this.service = service;
+            }
 
         [HttpGet]
         public async Task<string> Get()
         {
-            var items = await service.GetAll();
-            return JsonConvert.SerializeObject(items);
+            try
+            {
+                var items = await service.GetAll();
+                return JsonConvert.SerializeObject(items);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<string> Get(int id)
         {
-            var item = await service.Get(id);
-            return JsonConvert.SerializeObject(item);
+            try
+            {
+                var item = await service.Get(id);
+                return JsonConvert.SerializeObject(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpPost]
         public async Task Post([FromBody] dynamic value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
-           await service.Insert(item);
+            try
+            {
+                var item = JsonConvert.DeserializeObject <<#= Model.Name #>>(value.ToString());
+                   await service.Insert(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] dynamic value)
         {
-           var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
-           item.Id = id;
-           await service.Update(item);
+            try
+            {
+                var item = JsonConvert.DeserializeObject <<#= Model.Name #>>(value.ToString());
+                   item.Id = id;
+                await service.Update(item);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-               await service.Delete(id);
+            try
+            {
+                await service.Delete(id);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                throw;
+            }
         }
+
+        #region private 
+
+        private void LogError(Exception e)
+        {
+            logger.LogError(e, e.Message);
+        }
+
+        #endregion
     }
 }

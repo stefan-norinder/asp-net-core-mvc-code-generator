@@ -10,11 +10,12 @@
 using AutoMapper;
 using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System;
 using DatabaseTest.Web.ViewModel;
+using System.Collections.Generic;
 
 namespace <#= namespaceName #>.Web.Controllers
 {
@@ -35,9 +36,17 @@ namespace <#= namespaceName #>.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await service.GetAll();
-            var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
-            return View(viewModels);
+            try
+            {
+                var list = await service.GetAll();
+                var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
+                return View(viewModels);
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                return new BadRequestResult();
+            }
         }
         
          public ActionResult Create()
@@ -54,16 +63,25 @@ namespace <#= namespaceName #>.Web.Controllers
                 await service.Insert(model);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                LogError(e);
+                return new BadRequestResult();
             }
         }
 
        public async Task<ActionResult> Edit(int id)
         {
-            var entity = await service.Get(id);
-            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+            try
+            {   
+                var entity = await service.Get(id);
+                return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+            }
+            catch (Exception e)
+            {
+                LogError(e);
+                return new BadRequestResult();
+            }
         }
 
 
@@ -76,16 +94,25 @@ namespace <#= namespaceName #>.Web.Controllers
                 await service.Update(model);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                LogError(e);
+                return new BadRequestResult();
             }
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            var entity = await service.Get(id);
-            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+            try
+            {   
+                var entity = await service.Get(id);
+                return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
+            }            
+            catch (Exception e)
+            {
+                LogError(e);
+                return new BadRequestResult();
+            }
         }
 
         [HttpPost]
@@ -97,10 +124,20 @@ namespace <#= namespaceName #>.Web.Controllers
                 await service.Delete(model.Id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                LogError(e);
+                return new BadRequestResult();
             }
         }
+
+        #region private 
+
+        private void LogError(Exception e)
+        {
+            logger.LogError(e, e.Message);
+        }
+
+        #endregion
     }
 }

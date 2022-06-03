@@ -47,9 +47,9 @@ using ");
             #line default
             #line hidden
             this.Write(".Logic.DataAccess;\r\nusing Microsoft.Extensions.Logging;\r\nusing System.Collections" +
-                    ".Generic;\r\nusing System.Threading.Tasks;\r\n\r\n\r\nnamespace ");
+                    ".Generic;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace ");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -75,7 +75,7 @@ using ");
                     "     await dataAccess.Update(model);\r\n        }\r\n\r\n        public async Task Del" +
                     "ete(int id)\r\n        {\r\n            logger.LogInformation($\"Deleting entity with" +
                     " id {id} from data source.\");\r\n            await dataAccess.Delete(id);\r\n       " +
-                    " }\r\n    }");
+                    " }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
