@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace CodeGenerator.Test
 {
@@ -103,6 +104,12 @@ namespace CodeGenerator.Test
             Assert.AreEqual(".\\sqlexpress", model.MetaData.Server);
         }
 
+        [Test]
+        public void asdf()
+        {
+            var a = DateTime.Now;
+        }
 
-    }
+
+        }
 }

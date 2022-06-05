@@ -28,8 +28,13 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("// Warning! This is an auto generated file. Changes may be overwritten\r\n{\r\n  \"Con" +
-                    "nectionStrings\": {\r\n    \"Default\": \"Data Source=");
+            
+            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n{\r\n  \"ConnectionStrings\": {\r\n    \"Default\": \"Data Source=");
             
             #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(server));

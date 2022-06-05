@@ -28,23 +28,15 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
-
-using Microsoft.AspNetCore.Mvc;
-
-namespace Web.Controllers
-{
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
-}
-");
+            
+            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\r\nusing Microsoft.AspNetCore.Mvc;\r\n\r\nnamespace Web.Controllers\r\n{\r\n    public " +
+                    "class HomeController : Controller\r\n    {\r\n        public IActionResult Index()\r\n" +
+                    "        {\r\n            return View();\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

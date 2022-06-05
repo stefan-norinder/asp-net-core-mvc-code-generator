@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-// Warning! This is an auto generated file. Changes may be overwritten
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #>
 {
   "ConnectionStrings": {
     "Default": "Data Source=<#= server #>;Initial Catalog=<#= datasource #>;Trusted_Connection=True;"

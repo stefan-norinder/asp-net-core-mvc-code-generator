@@ -28,22 +28,18 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
-
-using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
-using System;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
-using Dapper;
-
-namespace ");
             
-            #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
+            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\r\nusing System.Collections.Generic;\r\nusing System.Data;\r\nusing System.Threadin" +
+                    "g.Tasks;\r\nusing System;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.Ex" +
+                    "tensions.Configuration;\r\nusing System.Data.SqlClient;\r\nusing Dapper;\r\n\r\nnamespac" +
+                    "e ");
+            
+            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default

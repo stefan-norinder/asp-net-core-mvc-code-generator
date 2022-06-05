@@ -4,9 +4,8 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-//---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
-//---------------------------------------------------------------------------------------
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
+
 using <#= namespaceName #>.Logic.Model;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,7 +2,9 @@
 
 namespace CodeGenerator.Lib.Templates
 {
-    partial class ApiControllerTemplate
+   
+
+    partial class ApiControllerTemplate 
     {
         public readonly string namespaceName;
 
