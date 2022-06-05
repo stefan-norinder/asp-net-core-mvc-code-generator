@@ -70,13 +70,13 @@ namespace <#= namespaceName #>.Logic.DataAccess
         public async Task DeleteAll()
         {
             string sql = $"DELETE FROM {Table} ";
-            await db.InsertData(sql, new { });
+            await db.UpdateData(sql, new { });
         }
 
         public async Task Delete(int id)
         {
             string sql = $"DELETE FROM {Table} WHERE Id = @id";
-            await db.InsertData(sql, new { Id = id });
+            await db.UpdateData(sql, new { Id = id });
         }
 
         protected async Task<T> ExecuteSelectSingle(string sql, int id)

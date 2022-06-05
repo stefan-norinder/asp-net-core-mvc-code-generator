@@ -47,53 +47,53 @@ using ");
             #line default
             #line hidden
             this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore" +
-                    ".Mvc;\r\nusing Newtonsoft.Json;\r\nusing System.Threading.Tasks;\r\nusing System;\r\n\r\nn" +
-                    "amespace ");
+                    ".Mvc;\r\nusing Newtonsoft.Json;\r\nusing System.Threading.Tasks;\r\nusing System;\r\nusi" +
+                    "ng System.Linq;\r\nusing Microsoft.AspNetCore.Http;\r\n\r\nnamespace ");
             
-            #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Web.ApiController\r\n{ \r\n        [Route(\"api/v1/[controller]\")]\r\n        [ApiContr" +
-                    "oller]\r\n        public class ");
-            
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("Controller: ControllerBase\r\n        {\r\n            private readonly ILogger<");
+            this.Write(".Web.ApiController\r\n{ \r\n        [Route(\"api/v1/[controller]s\")]\r\n        [ApiCont" +
+                    "roller]\r\n        public class ");
             
             #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
+            this.Write("Controller: ControllerBase\r\n        {\r\n            private readonly ILogger<");
+            
+            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
             this.Write("Controller> logger;\r\n            private readonly I");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Service service;\r\n\r\n            public ");
             
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 29 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Controller(ILogger<");
             
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 29 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("Controller> logger, I");
             
-            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 29 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -105,12 +105,13 @@ using ");
             }
 
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
                 var items = await service.GetAll();
-                return JsonConvert.SerializeObject(items);
+                if (!items.Any()) return NotFound();
+                return base.Ok(items);
             }
             catch (Exception e)
             {
@@ -120,12 +121,13 @@ using ");
         }
 
         [HttpGet(""{id}"")]
-        public async Task<string> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
                 var item = await service.Get(id);
-                return JsonConvert.SerializeObject(item);
+                if (item == null) return NotFound();
+                return Ok(item);
             }
             catch (Exception e)
             {
@@ -135,23 +137,20 @@ using ");
         }
 
         [HttpPost]
-        public async Task<");
+        public async Task<IActionResult> Post([FromBody] dynamic value)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<");
             
-            #line 64 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("> Post([FromBody] dynamic value)\r\n        {\r\n            try\r\n            {\r\n    " +
-                    "            var item = JsonConvert.DeserializeObject <");
-            
-            #line 68 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 72 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(value.ToString());
-                return await service.Insert(item);
+                var newItem = await service.Insert(item);
+                return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
             }
             catch (Exception e)
             {
@@ -161,20 +160,22 @@ using ");
         }
 
         [HttpPut(""{id}"")]
-        public async Task Put(int id, [FromBody] dynamic value)
+        public async Task<IActionResult> Put(int id, [FromBody] dynamic value)
         {
             try
             {
-                var item = JsonConvert.DeserializeObject <");
+                if (!await service.Exists(id)) return NotFound();
+                var item = JsonConvert.DeserializeObject<");
             
-            #line 83 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 89 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(value.ToString());
-                   item.Id = id;
+                item.Id = id;
                 await service.Update(item);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             catch (Exception e)
             {
@@ -184,11 +185,13 @@ using ");
         }
 
         [HttpDelete(""{id}"")]
-        public async Task Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                if (!await service.Exists(id)) return NotFound();
                 await service.Delete(id);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             catch (Exception e)
             {

@@ -68,9 +68,9 @@ using ");
                     "            string sql = $\"SELECT * FROM {Table} Where Id = @id\";\r\n            r" +
                     "eturn await db.LoadSingularData<T, dynamic>(sql, new { Id = id });\r\n        }\r\n\r" +
                     "\n        public async Task DeleteAll()\r\n        {\r\n            string sql = $\"DE" +
-                    "LETE FROM {Table} \";\r\n            await db.InsertData(sql, new { });\r\n        }\r" +
+                    "LETE FROM {Table} \";\r\n            await db.UpdateData(sql, new { });\r\n        }\r" +
                     "\n\r\n        public async Task Delete(int id)\r\n        {\r\n            string sql =" +
-                    " $\"DELETE FROM {Table} WHERE Id = @id\";\r\n            await db.InsertData(sql, ne" +
+                    " $\"DELETE FROM {Table} WHERE Id = @id\";\r\n            await db.UpdateData(sql, ne" +
                     "w { Id = id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSelectSingl" +
                     "e(string sql, int id)\r\n        {\r\n            return await db.LoadSingularData<T" +
                     ", dynamic>(sql, new { Id = id });\r\n        }\r\n\r\n        protected async Task<T> " +

@@ -55,27 +55,29 @@ using ");
             #line default
             #line hidden
             this.Write(".Logic.Model\r\n{\r\n     public interface IService<TModel>\r\n    {  \r\n        Task<TM" +
-                    "odel> Get(int id);\r\n        Task<IEnumerable<TModel>> GetAll();\r\n        Task<TM" +
-                    "odel> Insert(TModel model);\r\n        Task Update(TModel model);\r\n        Task De" +
-                    "lete(int id);\r\n    }\r\n\r\n    public class Service<TModel> : IService<TModel> wher" +
-                    "e TModel : Entity\r\n    {\r\n        protected readonly ILogger<Service<TModel>> lo" +
-                    "gger;\r\n        protected readonly IDataAccess<TModel> dataAccess;\r\n\r\n        pub" +
-                    "lic Service(ILogger<Service<TModel>> logger,\r\n            IDataAccess<TModel> da" +
-                    "taAccess)\r\n        {\r\n            this.logger = logger;\r\n            this.dataAc" +
-                    "cess = dataAccess;\r\n        }        \r\n\r\n        public async Task<TModel> Get(i" +
-                    "nt id)\r\n        {\r\n            logger.LogInformation($\"Fetching entity with id {" +
-                    "id} from data source.\");\r\n            return await dataAccess.Get(id);\r\n        " +
-                    "}\r\n\r\n        public async Task<IEnumerable<TModel>> GetAll()\r\n        {\r\n       " +
-                    "     logger.LogInformation($\"Fetching all entities from data source.\");\r\n       " +
-                    "     return await dataAccess.GetAll();\r\n        }\r\n        \r\n        public asyn" +
-                    "c virtual Task<TModel> Insert(TModel model)\r\n        {\r\n            logger.LogIn" +
-                    "formation($\"Saving entity {model} to data source.\");\r\n            return await d" +
-                    "ataAccess.Insert(model);\r\n        }\r\n\r\n        public async virtual Task Update(" +
-                    "TModel model)\r\n        {\r\n            logger.LogInformation($\"Update entity {mod" +
-                    "el} in data source.\");\r\n            await dataAccess.Update(model);\r\n        }\r\n" +
-                    "\r\n        public async Task Delete(int id)\r\n        {\r\n            logger.LogInf" +
-                    "ormation($\"Deleting entity with id {id} from data source.\");\r\n            await " +
-                    "dataAccess.Delete(id);\r\n        }\r\n    }\r\n}");
+                    "odel> Get(int id);\r\n        Task<bool> Exists(int id);\r\n        Task<IEnumerable" +
+                    "<TModel>> GetAll();\r\n        Task<TModel> Insert(TModel model);\r\n        Task Up" +
+                    "date(TModel model);\r\n        Task Delete(int id);\r\n    }\r\n\r\n    public class Ser" +
+                    "vice<TModel> : IService<TModel> where TModel : Entity\r\n    {\r\n        protected " +
+                    "readonly ILogger<Service<TModel>> logger;\r\n        protected readonly IDataAcces" +
+                    "s<TModel> dataAccess;\r\n\r\n        public Service(ILogger<Service<TModel>> logger," +
+                    "\r\n            IDataAccess<TModel> dataAccess)\r\n        {\r\n            this.logge" +
+                    "r = logger;\r\n            this.dataAccess = dataAccess;\r\n        }        \r\n\r\n   " +
+                    "     public async Task<TModel> Get(int id)\r\n        {\r\n            logger.LogInf" +
+                    "ormation($\"Fetching entity with id {id} from data source.\");\r\n            return" +
+                    " await dataAccess.Get(id);\r\n        }\r\n\r\n        public async Task<bool> Exists(" +
+                    "int id)\r\n        {\r\n            var item = await Get(id);\r\n            return it" +
+                    "em != null;\r\n        }\r\n\r\n        public async Task<IEnumerable<TModel>> GetAll(" +
+                    ")\r\n        {\r\n            logger.LogInformation($\"Fetching all entities from dat" +
+                    "a source.\");\r\n            return await dataAccess.GetAll();\r\n        }\r\n        " +
+                    "\r\n        public async virtual Task<TModel> Insert(TModel model)\r\n        {\r\n   " +
+                    "         logger.LogInformation($\"Saving entity {model} to data source.\");\r\n     " +
+                    "       return await dataAccess.Insert(model);\r\n        }\r\n\r\n        public async" +
+                    " virtual Task Update(TModel model)\r\n        {\r\n            logger.LogInformation" +
+                    "($\"Update entity {model} in data source.\");\r\n            await dataAccess.Update" +
+                    "(model);\r\n        }\r\n\r\n        public async Task Delete(int id)\r\n        {\r\n    " +
+                    "        logger.LogInformation($\"Deleting entity with id {id} from data source.\")" +
+                    ";\r\n            await dataAccess.Delete(id);\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

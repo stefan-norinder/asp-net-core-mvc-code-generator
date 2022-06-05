@@ -18,6 +18,7 @@ namespace <#= namespaceName #>.Logic.Model
      public interface IService<TModel>
     {  
         Task<TModel> Get(int id);
+        Task<bool> Exists(int id);
         Task<IEnumerable<TModel>> GetAll();
         Task<TModel> Insert(TModel model);
         Task Update(TModel model);
@@ -40,6 +41,12 @@ namespace <#= namespaceName #>.Logic.Model
         {
             logger.LogInformation($"Fetching entity with id {id} from data source.");
             return await dataAccess.Get(id);
+        }
+
+        public async Task<bool> Exists(int id)
+        {
+            var item = await Get(id);
+            return item != null;
         }
 
         public async Task<IEnumerable<TModel>> GetAll()

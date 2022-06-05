@@ -14,10 +14,12 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace <#= namespaceName #>.Web.ApiController
 { 
-        [Route("api/v1/[controller]")]
+        [Route("api/v1/[controller]s")]
         [ApiController]
         public class <#= Model.Name #>Controller: ControllerBase
         {
@@ -31,12 +33,13 @@ namespace <#= namespaceName #>.Web.ApiController
             }
 
         [HttpGet]
-        public async Task<string> Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
                 var items = await service.GetAll();
-                return JsonConvert.SerializeObject(items);
+                if (!items.Any()) return NotFound();
+                return base.Ok(items);
             }
             catch (Exception e)
             {
@@ -46,12 +49,13 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpGet("{id}")]
-        public async Task<string> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
             try
             {
                 var item = await service.Get(id);
-                return JsonConvert.SerializeObject(item);
+                if (item == null) return NotFound();
+                return Ok(item);
             }
             catch (Exception e)
             {
@@ -61,12 +65,13 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpPost]
-        public async Task<<#= Model.Name #>> Post([FromBody] dynamic value)
+        public async Task<IActionResult> Post([FromBody] dynamic value)
         {
             try
             {
-                var item = JsonConvert.DeserializeObject <<#= Model.Name #>>(value.ToString());
-                return await service.Insert(item);
+                var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
+                var newItem = await service.Insert(item);
+                return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
             }
             catch (Exception e)
             {
@@ -76,13 +81,15 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] dynamic value)
+        public async Task<IActionResult> Put(int id, [FromBody] dynamic value)
         {
             try
             {
-                var item = JsonConvert.DeserializeObject <<#= Model.Name #>>(value.ToString());
-                   item.Id = id;
+                if (!await service.Exists(id)) return NotFound();
+                var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
+                item.Id = id;
                 await service.Update(item);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             catch (Exception e)
             {
@@ -92,11 +99,13 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
+                if (!await service.Exists(id)) return NotFound();
                 await service.Delete(id);
+                return StatusCode(StatusCodes.Status204NoContent);
             }
             catch (Exception e)
             {
