@@ -49,8 +49,14 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(".Logic.Services;\r\nusing Microsoft.Extensions.Logging;\r\nusing Microsoft.AspNetCore" +
-                    ".Mvc;\r\nusing System.Threading.Tasks;\r\nusing System;\r\nusing DatabaseTest.Web.View" +
-                    "Model;\r\nusing System.Collections.Generic;\r\n\r\nnamespace ");
+                    ".Mvc;\r\nusing System.Threading.Tasks;\r\nusing System;\r\nusing ");
+            
+            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Web.ViewModel;\r\nusing System.Collections.Generic;\r\n\r\nnamespace ");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));

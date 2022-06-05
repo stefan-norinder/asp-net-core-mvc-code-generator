@@ -22,7 +22,7 @@ namespace CodeGenerator.Test
             var dataAccessMock = new Mock<IDataAccess>();
             var factory = new CodeGeneratorFactory(outputMock.Object);
             controller = new Controller(factory, dataAccessMock.Object);
-            args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person" };
+            args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person", ParamsConstants.GeneratorTypes, "DataAccess Models Services Controllers Api" };
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace CodeGenerator.Test
                                     { }
                                  }
                             } ";
-            controller.Run(CodeGeneratorTypes.DataAccess, args);
+            controller.Run(args);
             outputMock.Verify(x => x.Write("./src/Example.Logic/DataAccess", "PersonDataAccess.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
 
         }
@@ -69,7 +69,7 @@ namespace CodeGenerator.Test
                                 }
                             } ";
 
-            controller.Run(CodeGeneratorTypes.Models, args);
+            controller.Run(args);
             outputMock.Verify(x => x.Write("./src/Example.Logic/Model", "PersonModel.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -99,7 +99,7 @@ namespace CodeGenerator.Test
                                 }
                             }";
 
-            controller.Run(CodeGeneratorTypes.Services, args);
+            controller.Run(args);
             outputMock.Verify(x => x.Write("./src/Example.Logic/Service", "PersonService.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -117,7 +117,7 @@ namespace CodeGenerator.Test
                             using Microsoft.Extensions.Logging;
                             using System.Collections.Generic;
                             using System.Threading.Tasks;
-                            using DatabaseTest.Web.ViewModel;
+                            using <#= namespaceName #>.Web.ViewModel;
 
                             namespace Example.Web.Controllers
                             {
@@ -208,7 +208,7 @@ namespace CodeGenerator.Test
                                 }
                             }";
 
-            controller.Run(CodeGeneratorTypes.Controllers, args);
+            controller.Run(args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.IsAny<string>(), It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 
@@ -279,7 +279,7 @@ namespace CodeGenerator.Test
                                 }
                             }";
 
-            controller.Run(CodeGeneratorTypes.Api, args);
+            controller.Run( args);
             outputMock.Verify(x => x.Write("./src/Example.Web/ApiController", "PersonApiController.cs", It.Is<string>(template => AssertAreEqual(expected, template))));
         }
 

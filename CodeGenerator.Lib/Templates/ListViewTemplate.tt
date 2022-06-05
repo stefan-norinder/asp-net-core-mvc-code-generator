@@ -8,7 +8,7 @@
 @* --------------------------------------------------------------------*@
 @using Localization
 @inject LocService SharedLocalizer
-@model IEnumerable<DatabaseTest.Web.ViewModel.<#= Model.Name #>ViewModel>
+@model IEnumerable<<#=namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel>
 
 @{
     ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("Edit")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";

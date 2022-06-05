@@ -1,4 +1,5 @@
 ﻿using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Utils;
 
 namespace CodeGenerator.Lib.DataAccess
 {
@@ -6,5 +7,6 @@ namespace CodeGenerator.Lib.DataAccess
     {
         CodeGenerationModel Get();
         string Namespace { get; }
+        CodeGeneratorTypes GeneratorTypes { get; }
     }
 }

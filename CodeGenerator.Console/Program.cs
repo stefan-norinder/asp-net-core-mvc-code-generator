@@ -20,6 +20,8 @@ namespace CodeGenerator.Console
             var serviceCollection = new ServiceCollection()
                                            .AddLogging();
 
+            var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>().Select(x => x.ToString());
+
             if (args == null || args.Length == 0)
             {
                 System.Console.WriteLine("Please provide parameters. For help, pass --help");
@@ -27,17 +29,20 @@ namespace CodeGenerator.Console
             }
             if (args.First() == "--help")
             {
-                System.Console.WriteLine(
-@$"
+                System.Console.WriteLine(@$"
 Help for dot-net-mvc-code-generator
 
 The following parameters can be pass to the application:
 
-    {ParamsConstants.Namespace}    namespace of the code to generate
-    {ParamsConstants.Class}        entity name of the code to generate
-    {ParamsConstants.Properies}    pair of strings representing properties to generate for enteties
-
-Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --properties Name string Age int
+    {ParamsConstants.Namespace}         Namespace of the code to generate
+    {ParamsConstants.Server}            Server that hosts the database of which your code should be based
+    {ParamsConstants.DataSource}        Dtabase of which your code should be based. 
+                        Note that all tables must contain a column named `Id` with datatype `int`. 
+                        It must not be a identity column
+    {ParamsConstants.GeneratorTypes}    (optional) decides what should be generated. Provide one or more of the following values: 
+                        {string.Join("\r\n\t\t\t", allCodeGeneratorTypes)} (default)
+                                        
+Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {ParamsConstants.Server} .\sqlexpress {ParamsConstants.DataSource}  MyDatabase {ParamsConstants.GeneratorTypes} DataAccess Services Models 
 ");
                 return;
             }
@@ -51,12 +56,12 @@ Example: .\CodeGenerator.Console.exe --namespace MyApplication --class Person --
             try
             {
                 var controller = serviceProvider.GetService<IController>();
-                controller.Run(CodeGeneratorTypes.All,args);
+                controller.Run(args);
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine("Error running service: " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

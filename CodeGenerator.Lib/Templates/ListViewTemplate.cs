@@ -33,7 +33,14 @@ namespace CodeGenerator.Lib.Templates
 @* --------------------------------------------------------------------*@
 @using Localization
 @inject LocService SharedLocalizer
-@model IEnumerable<DatabaseTest.Web.ViewModel.");
+@model IEnumerable<");
+            
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Web.ViewModel.");
             
             #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

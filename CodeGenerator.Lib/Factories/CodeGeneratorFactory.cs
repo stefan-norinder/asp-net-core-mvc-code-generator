@@ -48,6 +48,8 @@ namespace CodeGenerator.Lib.Factories
                     return new ViewsGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Test:
                     return new TestsGenerator(generationFetcher, output);
+                case CodeGeneratorTypes.None:
+                    return null;
                 default:
                     throw new ArgumentException(type.ToString());
             }
@@ -58,7 +60,7 @@ namespace CodeGenerator.Lib.Factories
             ICodeGenerationModelFetcher generationModelFetcher)
         {
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
-            foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && types.HasFlag(type)))
+            foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && type != CodeGeneratorTypes.None && types.HasFlag(type)))
             {
                 yield return CreateInstance(type, generationModelFetcher);
             }

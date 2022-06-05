@@ -1,4 +1,5 @@
 ﻿using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,19 +50,11 @@ namespace CodeGenerator.Lib.DataAccess
 
         public string Namespace => codeGenerationModel.Namespace;
 
+        public CodeGeneratorTypes GeneratorTypes => throw new NotImplementedException();
+
         public CodeGenerationModel Get()
         {
             return codeGenerationModel;
-        }
-
-        public IEnumerable<Tuple<string, string>> GetColumnsWithDatatypes(string table)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<string> GetTableNames()
-        {
-            throw new NotImplementedException();
         }
     }
 

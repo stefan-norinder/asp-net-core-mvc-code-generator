@@ -6,10 +6,10 @@
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using AutoMapper;
-using DatabaseTest.Logic.DataAccess;
-using DatabaseTest.Logic.Model;
-using DatabaseTest.Logic.Services;
-using DatabaseTest.Web.ViewModel;
+using <#= namespaceName #>.Logic.DataAccess;
+using <#= namespaceName #>.Logic.Model;
+using <#= namespaceName #>.Logic.Services;
+using <#= namespaceName #>.Web.ViewModel;
 using Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
