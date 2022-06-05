@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace <#= namespaceName #>.Logic.DataAccess
 {
-   public class SqlStringBuilder<T>
+       public class SqlStringBuilder<T>
     {
         private BuilderType type;
 
@@ -113,13 +113,12 @@ namespace <#= namespaceName #>.Logic.DataAccess
         public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int nextId)
         {
             var insertStringHead = $"insert into {typeof(T).Name} (";
-            var insertStringTail = "values (";
-            var value = string.Empty;
+            var insertStringTail = " output inserted.[Id] values (";
             foreach (var item in dictionary)
             {
                 if (item.Key == "Id" && hasIdentityColumn) continue;
                 insertStringHead += $"[{item.Key}], ";
-                value = ColumnIsIdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];
+                var value = ColumnIsIdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];
                 insertStringTail += value == null ? "NULL, " : "'" + value + "', ";
             }
             insertStringHead = insertStringHead.RemoveLast(2);

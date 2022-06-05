@@ -7,6 +7,7 @@
 //---------------------------------------------------------------------------------------
 // Warning! This is an auto generated file. Changes may be overwritten 
 //---------------------------------------------------------------------------------------
+using <#= namespaceName #>.Logic.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +18,13 @@ namespace <#= namespaceName #>.Logic.DataAccess
     {
         Task<T> Get(int id);
         Task<IEnumerable<T>> GetAll();
-        Task Insert(T model);
+        Task<T> Insert(T model);
         Task Update(T model);
         Task Delete(int id);
         Task DeleteAll();
     }
 
-    public class BaseDataAccess<T> : IDataAccess<T>
+    public class BaseDataAccess<T> : IDataAccess<T> where T : Entity
     {
         protected readonly ISqlDataAccess db;
         private readonly SqlStringBuilder<T> sqlStringBuilder;
@@ -38,18 +39,22 @@ namespace <#= namespaceName #>.Logic.DataAccess
 
         protected string Table { get; }
 
-        public async virtual Task Insert(T model)
+        public async virtual Task<T> Insert(T model)
         {            
             var sql = await HasIdentityColumn() ? sqlStringBuilder.GetInsertString(model) : sqlStringBuilder.GetInsertString(model, await GetNextId());
 
-            await db.SaveData(sql, model);
+            int id = await db.InsertData(sql, model);
+
+            model.Id = id;
+
+            return model;
         }
 
         public async virtual Task Update(T model)
         {
             string sql = sqlStringBuilder.GetUpdateString(model);
 
-            await db.SaveData(sql, model);
+            await db.UpdateData(sql, model);
         }
 
         public virtual async Task<IEnumerable<T>> GetAll()
@@ -67,13 +72,13 @@ namespace <#= namespaceName #>.Logic.DataAccess
         public async Task DeleteAll()
         {
             string sql = $"DELETE FROM {Table} ";
-            await db.SaveData(sql, new { });
+            await db.InsertData(sql, new { });
         }
 
         public async Task Delete(int id)
         {
             string sql = $"DELETE FROM {Table} WHERE Id = @id";
-            await db.SaveData(sql, new { Id = id });
+            await db.InsertData(sql, new { Id = id });
         }
 
         protected async Task<T> ExecuteSelectSingle(string sql, int id)

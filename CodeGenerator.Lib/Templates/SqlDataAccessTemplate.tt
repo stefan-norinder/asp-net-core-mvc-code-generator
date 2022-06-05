@@ -23,7 +23,8 @@ namespace <#= namespaceName #>.Logic.DataAccess
     {
         Task<T> LoadSingularData<T, U>(string sql, U parameters);
         Task<List<T>> LoadData<T, U>(string sql, U parameters);
-        Task SaveData<T>(string sql, T parameters);
+        Task<int> InsertData<T>(string sql, T parameters);
+        Task UpdateData<T>(string sql, T parameters);
         T LoadSingularDataSynchronous<T, U>(string sql, U parameters);
     }
 
@@ -91,7 +92,41 @@ namespace <#= namespaceName #>.Logic.DataAccess
             }
         }
 
-        public async Task SaveData<T>(string sql, T parameters)
+        public async Task<int> InsertData<T>(string sql, T parameters)
+        {
+            using (IDbConnection connection = new SqlConnection(_connectionString))
+            {
+                int newId = default;
+                try
+                {
+                    newId = await connection.QuerySingleAsync<int>(sql, parameters);
+                    return newId;
+                }
+                catch (SqlException e)
+                {
+                    if (e.Message.Contains("Violation of UNIQUE KEY constraint"))
+                    {
+                        logger.LogWarning(e.Message);
+                    }
+                    else
+                    {
+                        LogException(e);
+                        connection.Close();
+                        throw;
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogException(e);
+                    connection.Close();
+                    throw;
+                }
+                return newId;
+            }
+        }
+
+
+        public async Task UpdateData<T>(string sql, T parameters)
         {
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
