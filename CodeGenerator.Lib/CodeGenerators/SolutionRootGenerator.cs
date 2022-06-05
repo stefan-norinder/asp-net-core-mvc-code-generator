@@ -15,7 +15,7 @@ namespace CodeGenerator.Lib.CodeGenerators
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            yield return new TemplateModel { Folder = baseFolder, File = $"App.sln", Content = new SolutionTempate(base.namespaceName).TransformText() };
+            yield return new TemplateModel { Folder = BaseFolder, File = $"App.sln", Content = new SolutionTempate(base.namespaceName).TransformText() };
         }
     }
 }

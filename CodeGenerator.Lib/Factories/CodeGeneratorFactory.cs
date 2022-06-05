@@ -59,6 +59,7 @@ namespace CodeGenerator.Lib.Factories
         public IEnumerable<ICodeGenerator> CreateInstances(CodeGeneratorTypes types,
             ICodeGenerationModelFetcher generationModelFetcher)
         {
+            if (types == CodeGeneratorTypes.None) types = CodeGeneratorTypes.All;
             var allCodeGeneratorTypes = Enum.GetValues(typeof(CodeGeneratorTypes)).Cast<CodeGeneratorTypes>();
             foreach (var type in allCodeGeneratorTypes.Where(type => type != CodeGeneratorTypes.All && type != CodeGeneratorTypes.None && types.HasFlag(type)))
             {

@@ -11,6 +11,7 @@ namespace CodeGenerator.Lib.DataAccess
     {
         private readonly string server;
         private readonly string datasource;
+        private readonly string output;
         private readonly string userId;
         private readonly string password;
         private readonly IDataAccess dataAccess;
@@ -25,6 +26,7 @@ namespace CodeGenerator.Lib.DataAccess
             GeneratorTypes = ConvertToGeneratorTypes(generatorTypes);
             server = GetValueForArgument(ParamsConstants.Server, args);
             datasource = GetValueForArgument(ParamsConstants.DataSource, args);
+            output = GetValueForArgument(ParamsConstants.Output, args);
             userId = GetValueForArgument(ParamsConstants.UserId, args);
             password = GetValueForArgument(ParamsConstants.Password, args);
 
@@ -87,6 +89,7 @@ namespace CodeGenerator.Lib.DataAccess
             {
                 Server = server,
                 Datasource = datasource,
+                Output = output,
                 UserId = userId,
                 Password = password
             };

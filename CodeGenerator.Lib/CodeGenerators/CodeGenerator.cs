@@ -22,6 +22,8 @@ namespace CodeGenerator.Lib.CodeGenerators
         {
             var model = codeGeneratorFetcher.Get();
 
+            BaseFolder = model.MetaData.Output;
+
             namespaceName = model.Namespace;
 
             var templates = GenerateTemplatesFromModel(model);
@@ -32,7 +34,8 @@ namespace CodeGenerator.Lib.CodeGenerators
             }
         }
 
-        protected string baseFolder { get { return "./src/"; } }
+        private string baseFolder;
+        protected string BaseFolder { get { return string.IsNullOrEmpty(baseFolder) ? "./src/" : baseFolder; } set { baseFolder = value;  } }
 
         protected abstract IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model);
 

@@ -89,7 +89,9 @@ namespace CodeGenerator.Test
                     "--server",
                     ".\\sqlexpress",
                     "--datasource",
-                    "test"
+                    "test",
+                    "--output",
+                    "foo/bar"
             };
 
             var mock = new Moq.Mock<IDataAccess>();
@@ -101,6 +103,7 @@ namespace CodeGenerator.Test
             Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Api));
             Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Controllers));
             Assert.AreEqual("test", model.MetaData.Datasource);
+            Assert.AreEqual("foo/bar/", model.MetaData.Datasource);
             Assert.AreEqual(".\\sqlexpress", model.MetaData.Server);
         }
     }

@@ -13,11 +13,11 @@ namespace CodeGenerator.Lib.CodeGenerators
             IOutputAdapter output) : base(codeGenerationModelFetcher, output)
         { }
 
-        private string ProjectFolderPath => $"{baseFolder}{namespaceName}";
+        private string ProjectFolderPath => $"{BaseFolder}{namespaceName}";
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
-            GenerateStaticContent($"{baseFolder}{model.Namespace}.{ProjectTypeConstant.Web}");
+            GenerateStaticContent($"{BaseFolder}{model.Namespace}.{ProjectTypeConstant.Web}");
 
             var webProjectFileContent = new WebProjectFileTemplate(model.Namespace).TransformText();
             return new List<TemplateModel>

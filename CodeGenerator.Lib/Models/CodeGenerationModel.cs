@@ -27,7 +27,21 @@ namespace CodeGenerator.Lib.Models
             public string Server { get; set; }
             public string EscapedServerString => Server.Replace(@"\", @"\\");
             public string Datasource { get; set; }
-            public string UserId{ get; set; }
+            private string output;
+            public string Output
+            {
+                get
+                {
+                    if (output == null) return string.Empty;
+                    if(output.EndsWith("/") || output.EndsWith("\\")) return output;
+                    return output + "/";
+                }
+                set
+                {
+                    output = value;
+                }
+            }
+            public string UserId { get; set; }
             public string Password { get; set; }
         }
     }
