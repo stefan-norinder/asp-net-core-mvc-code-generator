@@ -1,7 +1,7 @@
 ﻿using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Utils;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace CodeGenerator.Lib.DataAccess
@@ -16,27 +16,20 @@ namespace CodeGenerator.Lib.DataAccess
         private readonly IDataAccess dataAccess;
 
         public string Namespace { get; private set; }
+        public CodeGeneratorTypes GeneratorTypes { get; private set; }
 
         public GenerationModelFromDatabaseFetcher(IDataAccess dataAccess, string[] args)
         {
             Namespace = GetValueForArgument(ParamsConstants.Namespace, args);
+            var generatorTypes = GetValueForArgument(ParamsConstants.GeneratorTypes, args);
+            GeneratorTypes = ConvertToGeneratorTypes(generatorTypes);
             server = GetValueForArgument(ParamsConstants.Server, args);
             datasource = GetValueForArgument(ParamsConstants.DataSource, args);
             userId = GetValueForArgument(ParamsConstants.UserId, args);
             password = GetValueForArgument(ParamsConstants.Password, args);
-            
+
             this.dataAccess = dataAccess;
             this.dataAccess.Initilize(server, datasource, userId, password);
-        }
-
-        private static string GetValueForArgument(string argument,string[] args)
-        {
-            if (!args.Any(x => x == argument)) return string.Empty;
-            var serverIndex = Array.FindIndex(args, (str) =>
-            {
-                return str == argument;
-            });
-            return args[serverIndex + 1];
         }
 
         public CodeGenerationModel Get()
@@ -48,6 +41,34 @@ namespace CodeGenerator.Lib.DataAccess
 
         #region private
 
+        private CodeGeneratorTypes ConvertToGeneratorTypes(string arg)
+        {
+            CodeGeneratorTypes returnValues = CodeGeneratorTypes.None;
+            var splittedString = arg.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in Enum.GetValues(typeof(CodeGeneratorTypes)))
+            {
+                var @enum = (CodeGeneratorTypes)item;
+                foreach (var str in splittedString)
+                {
+                    if(string.Equals(@enum.ToString(), str, StringComparison.OrdinalIgnoreCase))
+                    {
+                        returnValues |= @enum;
+                    }
+                }
+            }
+            return returnValues;
+        }
+
+        private static string GetValueForArgument(string argument, string[] args)
+        {
+            if (!args.Any(x => x == argument)) return string.Empty;
+            var serverIndex = Array.FindIndex(args, (str) =>
+            {
+                return str == argument;
+            });
+            return args[serverIndex + 1];
+        }
+
         private CodeGenerationModel GetDataModelPopulatedWithColumns(CodeGenerationModel dataModel)
         {
             var classes = new List<Class>();
@@ -57,7 +78,7 @@ namespace CodeGenerator.Lib.DataAccess
                 var columns = tuples.Select(x => new Proprety { Name = x.Item1, DataType = x.Item2 });
                 classes.Add(new Class { Name = item.Name, Properties = new List<Proprety>(columns) });
             }
-            return new CodeGenerationModel(Namespace,dataModel.MetaData) { Classes = classes };
+            return new CodeGenerationModel(Namespace, dataModel.MetaData) { Classes = classes };
         }
 
         private CodeGenerationModel GetDataModel()

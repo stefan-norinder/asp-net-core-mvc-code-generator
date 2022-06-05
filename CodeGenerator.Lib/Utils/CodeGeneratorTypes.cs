@@ -5,6 +5,7 @@ namespace CodeGenerator.Lib.Utils
     [Flags]
     public enum CodeGeneratorTypes
     {
+        None = 0,
         Api = 1,
         Controllers = 2,
         DataAccess = 4,

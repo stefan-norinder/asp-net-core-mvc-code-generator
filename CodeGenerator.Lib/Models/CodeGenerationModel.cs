@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CodeGenerator.Lib.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeGenerator.Lib.Models

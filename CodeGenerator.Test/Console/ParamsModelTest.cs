@@ -1,11 +1,7 @@
-using CodeGenerator.Console;
 using CodeGenerator.Lib.DataAccess;
-using CodeGenerator.Lib.Models;
+using CodeGenerator.Lib.Utils;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace CodeGenerator.Test
 {
@@ -86,6 +82,8 @@ namespace CodeGenerator.Test
         public void ConstructParamsModelFromDatasourceParams()
         {
             var args = new[] {
+                    "--generatorTypes",
+                    "api controllers",
                     "--namespace",
                     "DatabaseTest",
                     "--server",
@@ -96,20 +94,14 @@ namespace CodeGenerator.Test
 
             var mock = new Moq.Mock<IDataAccess>();
 
-            var sut = new GenerationModelFromDatabaseFetcher(mock.Object,args);
+            var sut = new GenerationModelFromDatabaseFetcher(mock.Object, args);
 
             Assert.AreEqual("DatabaseTest", sut.Namespace);
             var model = sut.Get();
+            Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Api));
+            Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Controllers));
             Assert.AreEqual("test", model.MetaData.Datasource);
             Assert.AreEqual(".\\sqlexpress", model.MetaData.Server);
         }
-
-        [Test]
-        public void asdf()
-        {
-            var a = DateTime.Now;
-        }
-
-
-        }
+    }
 }
