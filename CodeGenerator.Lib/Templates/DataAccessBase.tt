@@ -43,9 +43,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
         {            
             var sql = await HasIdentityColumn() ? sqlStringBuilder.GetInsertString(model) : sqlStringBuilder.GetInsertString(model, await GetNextId());
 
-            int id = await db.InsertData(sql, model);
-
-            model.Id = id;
+            model.Id = await db.InsertData(sql, model);
 
             return model;
         }

@@ -61,12 +61,12 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpPost]
-        public async Task Post([FromBody] dynamic value)
+        public async Task<<#= Model.Name #>> Post([FromBody] dynamic value)
         {
             try
             {
                 var item = JsonConvert.DeserializeObject <<#= Model.Name #>>(value.ToString());
-                   await service.Insert(item);
+                return await service.Insert(item);
             }
             catch (Exception e)
             {

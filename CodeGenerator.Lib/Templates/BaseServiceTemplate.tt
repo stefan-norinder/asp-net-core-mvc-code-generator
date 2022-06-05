@@ -19,7 +19,7 @@ namespace <#= namespaceName #>.Logic.Model
     {  
         Task<TModel> Get(int id);
         Task<IEnumerable<TModel>> GetAll();
-        Task Insert(TModel model);
+        Task<TModel> Insert(TModel model);
         Task Update(TModel model);
         Task Delete(int id);
     }
@@ -47,11 +47,11 @@ namespace <#= namespaceName #>.Logic.Model
             logger.LogInformation($"Fetching all entities from data source.");
             return await dataAccess.GetAll();
         }
-
-        public async virtual Task Insert(TModel model)
+        
+        public async virtual Task<TModel> Insert(TModel model)
         {
             logger.LogInformation($"Saving entity {model} to data source.");
-            await dataAccess.Insert(model);
+            return await dataAccess.Insert(model);
         }
 
         public async virtual Task Update(TModel model)

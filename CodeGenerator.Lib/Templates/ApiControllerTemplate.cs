@@ -135,11 +135,15 @@ using ");
         }
 
         [HttpPost]
-        public async Task Post([FromBody] dynamic value)
-        {
-            try
-            {
-                var item = JsonConvert.DeserializeObject <");
+        public async Task<");
+            
+            #line 64 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("> Post([FromBody] dynamic value)\r\n        {\r\n            try\r\n            {\r\n    " +
+                    "            var item = JsonConvert.DeserializeObject <");
             
             #line 68 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -147,7 +151,7 @@ using ");
             #line default
             #line hidden
             this.Write(@">(value.ToString());
-                   await service.Insert(item);
+                return await service.Insert(item);
             }
             catch (Exception e)
             {
