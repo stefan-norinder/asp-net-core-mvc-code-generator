@@ -109,107 +109,61 @@ namespace CodeGenerator.Lib.Templates
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            try
-            {
-                var items = await service.GetAll();
-                if (!items.Any()) return NotFound();
-                return base.Ok(items);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                throw;
-            }
+            var items = await service.GetAll();
+            if (!items.Any()) return NotFound();
+            return base.Ok(items);
+            
         }
 
         [HttpGet(""{id}"")]
         public async Task<IActionResult> Get(int id)
         {
-            try
-            {
-                var item = await service.Get(id);
-                if (item == null) return NotFound();
-                return Ok(item);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                throw;
-            }
+            
+            var item = await service.Get(id);
+            if (item == null) return NotFound();
+            return Ok(item);
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] dynamic value)
         {
-            try
-            {
-                var item = JsonConvert.DeserializeObject<");
+            var item = JsonConvert.DeserializeObject<");
             
-            #line 71 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 56 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(value.ToString());
-                var newItem = await service.Insert(item);
-                return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                throw;
-            }
+            var newItem = await service.Insert(item);
+            return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
         }
 
         [HttpPut(""{id}"")]
         public async Task<IActionResult> Put(int id, [FromBody] dynamic value)
         {
-            try
-            {
-                if (!await service.Exists(id)) return NotFound();
-                var item = JsonConvert.DeserializeObject<");
+            if (!await service.Exists(id)) return NotFound();
+            var item = JsonConvert.DeserializeObject<");
             
-            #line 88 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 65 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(value.ToString());
-                item.Id = id;
-                await service.Update(item);
-                return StatusCode(StatusCodes.Status204NoContent);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                throw;
-            }
+            item.Id = id;
+            await service.Update(item);
+            return StatusCode(StatusCodes.Status204NoContent);
         }
 
         [HttpDelete(""{id}"")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                if (!await service.Exists(id)) return NotFound();
-                await service.Delete(id);
-                return StatusCode(StatusCodes.Status204NoContent);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                throw;
-            }
+            if (!await service.Exists(id)) return NotFound();
+            await service.Delete(id);
+            return StatusCode(StatusCodes.Status204NoContent);
         }
-
-        #region private 
-
-        private void LogError(Exception e)
-        {
-            logger.LogError(e, e.Message);
-        }
-
-        #endregion
     }
 }");
             return this.GenerationEnvironment.ToString();

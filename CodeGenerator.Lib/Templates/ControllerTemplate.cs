@@ -140,153 +140,94 @@ namespace CodeGenerator.Lib.Templates
 
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var list = await httpService.Get(apiBaseUrl);
-                var viewModels = mapper.Map<IEnumerable<");
+            var list = await httpService.Get(apiBaseUrl);
+            var viewModels = mapper.Map<IEnumerable<");
             
-            #line 48 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 46 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(@"ViewModel>>(list);
-                return View(viewModels);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
-        }
-        
-         public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Create([FromForm]");
+            this.Write("ViewModel>>(list);\r\n            return View(viewModels);\r\n        }\r\n        \r\n  " +
+                    "      public ActionResult Create()\r\n        {\r\n            return View();\r\n     " +
+                    "   }\r\n\r\n        [HttpPost]\r\n        public async Task<ActionResult> Create([From" +
+                    "Form]");
             
-            #line 64 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 56 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
-                    "                var model = mapper.Map<");
+            this.Write("ViewModel viewModel)\r\n        {\r\n            var model = mapper.Map<");
             
-            #line 68 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 58 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(viewModel);
-                await httpService.Post(apiBaseUrl, model);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            await httpService.Post(apiBaseUrl, model);
+            return RedirectToAction(nameof(Index));
         }
 
-       public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            try
-            {   
-                var entity = await httpService.Get(apiBaseUrl,id.ToString());
-                return View(mapper.Map<");
+            var entity = await httpService.Get(apiBaseUrl,id.ToString());
+            return View(mapper.Map<");
             
-            #line 84 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 66 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(@"ViewModel>(entity));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
-        }
-
-
-        [HttpPost]
-        public async Task<ActionResult> Edit([FromForm]");
+            this.Write("ViewModel>(entity));\r\n        }\r\n\r\n\r\n        [HttpPost]\r\n        public async Tas" +
+                    "k<ActionResult> Edit([FromForm]");
             
-            #line 95 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 71 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
-                    "                var model = mapper.Map<");
+            this.Write("ViewModel viewModel)\r\n        {\r\n            var model = mapper.Map<");
             
-            #line 99 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 73 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(viewModel);
-                await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
+            return RedirectToAction(nameof(Index));         
         }
 
         public async Task<ActionResult> Remove(int id)
         {
-            try
-            {   
-                var entity = await httpService.Get(apiBaseUrl, id.ToString());
-                return View(mapper.Map<");
+            var entity = await httpService.Get(apiBaseUrl, id.ToString());
+            return View(mapper.Map<");
             
-            #line 115 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 81 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(@"ViewModel>(entity));
-            }            
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Remove([FromForm]");
+            this.Write("ViewModel>(entity));        \r\n        }\r\n\r\n        [HttpPost]\r\n        public asy" +
+                    "nc Task<ActionResult> Remove([FromForm]");
             
-            #line 125 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 85 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("ViewModel viewModel)\r\n        {\r\n            try\r\n            {                \r\n" +
-                    "                var model = mapper.Map<");
+            this.Write("ViewModel viewModel)\r\n        {\r\n            var model = mapper.Map<");
             
-            #line 129 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            #line 87 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write(@">(viewModel);
-                await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
+            return RedirectToAction(nameof(Index));         
         }
 
         #region private 
@@ -297,11 +238,6 @@ namespace CodeGenerator.Lib.Templates
             var host = httpContextAccessor.HttpContext.Request.Host.Value;
             var path = ""/person"";
             return $""{schema}://{host}/api/v1{path}s"";
-        }
-
-        private void LogError(Exception e)
-        {
-            logger.LogError(e, e.Message);
         }
 
         #endregion

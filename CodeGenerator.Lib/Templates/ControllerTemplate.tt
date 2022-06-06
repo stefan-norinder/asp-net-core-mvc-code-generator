@@ -42,20 +42,12 @@ namespace <#= namespaceName #>.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var list = await httpService.Get(apiBaseUrl);
-                var viewModels = mapper.Map<IEnumerable<<#= Model.Name #>ViewModel>>(list);
-                return View(viewModels);
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var list = await httpService.Get(apiBaseUrl);
+            var viewModels = mapper.Map<IEnumerable<<#= Model.Name #>ViewModel>>(list);
+            return View(viewModels);
         }
         
-         public ActionResult Create()
+        public ActionResult Create()
         {
             return View();
         }
@@ -63,78 +55,38 @@ namespace <#= namespaceName #>.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
-            try
-            {                
-                var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await httpService.Post(apiBaseUrl, model);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var model = mapper.Map<<#= Model.Name #>>(viewModel);
+            await httpService.Post(apiBaseUrl, model);
+            return RedirectToAction(nameof(Index));
         }
 
-       public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            try
-            {   
-                var entity = await httpService.Get(apiBaseUrl,id.ToString());
-                return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var entity = await httpService.Get(apiBaseUrl,id.ToString());
+            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
         }
 
 
         [HttpPost]
         public async Task<ActionResult> Edit([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
-            try
-            {                
-                var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var model = mapper.Map<<#= Model.Name #>>(viewModel);
+            await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
+            return RedirectToAction(nameof(Index));         
         }
 
         public async Task<ActionResult> Remove(int id)
         {
-            try
-            {   
-                var entity = await httpService.Get(apiBaseUrl, id.ToString());
-                return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
-            }            
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var entity = await httpService.Get(apiBaseUrl, id.ToString());
+            return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));        
         }
 
         [HttpPost]
         public async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
-            try
-            {                
-                var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                LogError(e);
-                return new BadRequestResult();
-            }
+            var model = mapper.Map<<#= Model.Name #>>(viewModel);
+            await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
+            return RedirectToAction(nameof(Index));         
         }
 
         #region private 
@@ -145,11 +97,6 @@ namespace <#= namespaceName #>.Web.Controllers
             var host = httpContextAccessor.HttpContext.Request.Host.Value;
             var path = "/person";
             return $"{schema}://{host}/api/v1{path}s";
-        }
-
-        private void LogError(Exception e)
-        {
-            logger.LogError(e, e.Message);
         }
 
         #endregion
