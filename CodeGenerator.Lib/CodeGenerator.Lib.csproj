@@ -77,6 +77,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>HomeViewTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\HttpServiceTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HttpServiceTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\HttpServiceBaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HttpServiceBaseTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ImportsViewTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -226,6 +236,18 @@
     <None Update="Templates\HomeViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>HomeViewTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\HttpClientTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HttpClientTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\HttpServiceTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HttpServiceTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\HttpServiceBaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HttpServiceBaseTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ImportsViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

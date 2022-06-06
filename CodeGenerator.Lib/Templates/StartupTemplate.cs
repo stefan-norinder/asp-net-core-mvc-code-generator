@@ -48,16 +48,23 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Logic.Model;\r\nusing ");
+            this.Write(".Logic.Http;\r\nusing ");
             
             #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Logic.Services;\r\nusing ");
+            this.Write(".Logic.Model;\r\nusing ");
             
             #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Services;\r\nusing ");
+            
+            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -74,7 +81,7 @@ using System.Globalization;
 
 namespace ");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -90,7 +97,6 @@ namespace ");
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 ");
@@ -100,110 +106,135 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write("            services.AddTransient<I");
+            this.Write("            #region register ");
             
             #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            services.AddTransient<I");
+            
+            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("Service, ");
             
-            #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("Service>();\r\n            services.AddTransient<I");
             
-            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 39 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
-            this.Write("DataAccess, ");
-            
-            #line 38 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item));
-            
-            #line default
-            #line hidden
-            this.Write("DataAccess>();\r\n            services.AddSingleton<SqlStringBuilder<");
+            this.Write("HttpService, ");
             
             #line 39 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
-            this.Write(">>();\r\n            services.AddSingleton<LocService>();\r\n");
+            this.Write("HttpService>();\r\n            services.AddTransient<I");
+            
+            #line 40 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("DataAccess, ");
+            
+            #line 40 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write("DataAccess>();\r\n            services.AddSingleton<SqlStringBuilder<");
             
             #line 41 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item));
+            
+            #line default
+            #line hidden
+            this.Write(">>();\r\n            #endregion\r\n\r\n");
+            
+            #line 44 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("            services.AddTransient<ISqlDataAccess, SqlDataAccess>();\r\n\r\n          " +
-                    "   var mapperConfig = new MapperConfiguration(mc =>\r\n            {\r\n            " +
-                    "    mc.AddProfile(new MappingConfiguration());\r\n            });\r\n\r\n            I" +
-                    "Mapper mapper = mapperConfig.CreateMapper();\r\n            services.AddSingleton(" +
-                    "mapper);\r\n\r\n            services.AddLocalization(x => x.ResourcesPath = \"Resourc" +
-                    "es\");\r\n            \r\n            services.AddControllersWithViews()\r\n           " +
-                    "     .AddViewLocalization();\r\n        }\r\n\r\n        // This method gets called by" +
-                    " the runtime. Use this method to configure the HTTP request pipeline.\r\n        p" +
-                    "ublic void Configure(IApplicationBuilder app, IWebHostEnvironment env)\r\n        " +
-                    "{\r\n            if (env.IsDevelopment())\r\n            {\r\n                app.UseD" +
-                    "eveloperExceptionPage();\r\n            }\r\n            else\r\n            {\r\n      " +
-                    "          app.UseExceptionHandler(\"/Home/Error\");\r\n                app.UseHsts()" +
-                    ";\r\n            }\r\n            app.UseHttpsRedirection();\r\n            app.UseSta" +
-                    "ticFiles();\r\n\r\n            app.UseRouting();\r\n\r\n            var supportedCulture" +
-                    "s = new[] {\r\n                new CultureInfo(\"en-US\"),\r\n                // add m" +
-                    "ore culture info options\r\n            };\r\n            var requestLocalizationOpt" +
-                    "ions = new RequestLocalizationOptions\r\n            {\r\n                DefaultReq" +
-                    "uestCulture = new RequestCulture(\"en-US\"),\r\n                SupportedCultures = " +
-                    "supportedCultures,\r\n                SupportedUICultures = supportedCultures\r\n   " +
-                    "         };\r\n            app.UseRequestLocalization(requestLocalizationOptions);" +
-                    "\r\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                en" +
-                    "dpoints.MapControllerRoute(\r\n                    name: \"default\",\r\n             " +
-                    "       pattern: \"{controller=Home}/{action=Index}/{id?}\");\r\n            });\r\n   " +
-                    "     }\r\n    }\r\n        public class MappingConfiguration : Profile\r\n        {\r\n " +
-                    "           public MappingConfiguration()\r\n            {\r\n        \r\n");
+            this.Write("            services.AddSingleton<LocService>();\r\n            services.AddTransie" +
+                    "nt<IHttpClient, HttpClient>();\r\n            services.AddTransient<ISqlDataAccess" +
+                    ", SqlDataAccess>();\r\n\r\n            services.AddHttpClient();            \r\n      " +
+                    "      services.AddSingleton(GetMapper());\r\n            services.AddLocalization(" +
+                    "x => x.ResourcesPath = \"Resources\");            \r\n            services.AddContro" +
+                    "llersWithViews()\r\n                .AddViewLocalization();\r\n        }\r\n\r\n        " +
+                    "// This method gets called by the runtime. Use this method to configure the HTTP" +
+                    " request pipeline.\r\n        public void Configure(IApplicationBuilder app, IWebH" +
+                    "ostEnvironment env)\r\n        {\r\n            if (env.IsDevelopment())\r\n          " +
+                    "  {\r\n                app.UseDeveloperExceptionPage();\r\n            }\r\n          " +
+                    "  else\r\n            {\r\n                app.UseExceptionHandler(\"/Home/Error\");\r\n" +
+                    "                app.UseHsts();\r\n            }\r\n            app.UseHttpsRedirecti" +
+                    "on();\r\n            app.UseStaticFiles();\r\n\r\n            app.UseRouting();\r\n\r\n   " +
+                    "         var supportedCultures = new[] {\r\n                new CultureInfo(\"en-US" +
+                    "\"),\r\n                // add more culture info options\r\n            };\r\n         " +
+                    "   var requestLocalizationOptions = new RequestLocalizationOptions\r\n            " +
+                    "{\r\n                DefaultRequestCulture = new RequestCulture(\"en-US\"),\r\n       " +
+                    "         SupportedCultures = supportedCultures,\r\n                SupportedUICult" +
+                    "ures = supportedCultures\r\n            };\r\n            app.UseRequestLocalization" +
+                    "(requestLocalizationOptions);\r\n\r\n            app.UseEndpoints(endpoints =>\r\n    " +
+                    "        {\r\n                endpoints.MapControllerRoute(\r\n                    na" +
+                    "me: \"default\",\r\n                    pattern: \"{controller=Home}/{action=Index}/{" +
+                    "id?}\");\r\n            });\r\n        }\r\n\r\n        #region private\r\n\r\n        privat" +
+                    "e IMapper GetMapper()\r\n        {\r\n            var mapperConfig = new MapperConfi" +
+                    "guration(mc =>\r\n            {\r\n                mc.AddProfile(new MappingConfigur" +
+                    "ation());\r\n            });\r\n\r\n            return mapperConfig.CreateMapper();\r\n " +
+                    "       }\r\n\r\n        #endregion\r\n    }\r\n        public class MappingConfiguration" +
+                    " : Profile\r\n        {\r\n            public MappingConfiguration()\r\n            {\r" +
+                    "\n        \r\n");
             
-            #line 100 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 112 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  foreach(var item in Model) { 
             
             #line default
             #line hidden
             this.Write("                CreateMap<");
             
-            #line 101 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 113 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 101 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 113 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel>();\r\n\r\n                CreateMap<");
             
-            #line 103 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 115 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel, ");
             
-            #line 103 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 115 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(">();\r\n        \r\n");
             
-            #line 105 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 117 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
             
             #line default

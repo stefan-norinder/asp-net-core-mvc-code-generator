@@ -11,7 +11,7 @@
 @model IEnumerable<<#=namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel>
 
 @{
-    ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("Edit")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
+    ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("List")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
 <h1>@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")</h1>

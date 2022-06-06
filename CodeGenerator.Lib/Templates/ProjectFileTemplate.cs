@@ -38,11 +38,12 @@ namespace CodeGenerator.Lib.Templates
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Dapper"" Version=""2.0.123"" />
-    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Core"" Version=""2.2.5"" />
-    <PackageReference Include=""Microsoft.Extensions.Configuration.Abstractions"" Version=""5.0.0"" />
-    <PackageReference Include=""Microsoft.Extensions.Logging.Abstractions"" Version=""5.0.0"" />
-    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.3"" />
+    <PackageReference Include=""Dapper"" Version=""2.0.*"" />
+    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Core"" Version=""2.2.*"" />
+    <PackageReference Include=""Microsoft.Extensions.Configuration.Abstractions"" Version=""5.0.*"" />
+    <PackageReference Include=""Microsoft.Extensions.Http"" Version=""5.0.*"" />
+    <PackageReference Include=""Microsoft.Extensions.Logging.Abstractions"" Version=""5.0.*"" />
+    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.*"" />
   </ItemGroup>
 </Project>");
             return this.GenerationEnvironment.ToString();

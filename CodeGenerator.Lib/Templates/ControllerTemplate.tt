@@ -6,14 +6,16 @@
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using AutoMapper;
+using <#= namespaceName #>.Logic.Http;
 using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
+using <#= namespaceName #>.Web.ViewModel;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
-using <#= namespaceName #>.Web.ViewModel;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace <#= namespaceName #>.Web.Controllers
 {
@@ -21,23 +23,29 @@ namespace <#= namespaceName #>.Web.Controllers
     {
         private readonly ILogger<<#= Model.Name #>Controller> logger;
         private readonly I<#= Model.Name #>Service service;
+        private readonly I<#= Model.Name #>HttpService httpService;
         private readonly IMapper mapper;
+        private readonly string apiBaseUrl;
 
         public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, 
         I<#= Model.Name #>Service service, 
-        IMapper mapper)
+        IMapper mapper, 
+        I<#= Model.Name #>HttpService httpService, 
+        IHttpContextAccessor httpContextAccessor)
         {
             this.logger = logger;
             this.service = service;
             this.mapper = mapper;
+            this.httpService = httpService;
+            apiBaseUrl = GetApiBaseUrl(httpContextAccessor);
         }
 
         public async Task<IActionResult> Index()
         {
             try
             {
-                var list = await service.GetAll();
-                var viewModels = mapper.Map < IEnumerable<<#= Model.Name #>ViewModel>>(list);
+                var list = await httpService.Get(apiBaseUrl);
+                var viewModels = mapper.Map<IEnumerable<<#= Model.Name #>ViewModel>>(list);
                 return View(viewModels);
             }
             catch (Exception e)
@@ -130,6 +138,14 @@ namespace <#= namespaceName #>.Web.Controllers
         }
 
         #region private 
+
+        private string GetApiBaseUrl(IHttpContextAccessor httpContextAccessor)
+        {
+            var schema = httpContextAccessor.HttpContext.Request.Scheme;
+            var host = httpContextAccessor.HttpContext.Request.Host.Value;
+            var path = httpContextAccessor.HttpContext.Request.Path.Value;
+            return $"{schema}://{host}/api/v1{path}s";
+        }
 
         private void LogError(Exception e)
         {

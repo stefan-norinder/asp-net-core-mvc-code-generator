@@ -7,6 +7,7 @@
 
 using AutoMapper;
 using <#= namespaceName #>.Logic.DataAccess;
+using <#= namespaceName #>.Logic.Http;
 using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
 using <#= namespaceName #>.Web.ViewModel;
@@ -30,27 +31,24 @@ namespace <#= namespaceName #>.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 <# foreach(var item in Model) { #>
+            #region register <#= item #>
             services.AddTransient<I<#= item #>Service, <#= item #>Service>();
+            services.AddTransient<I<#= item #>HttpService, <#= item #>HttpService>();
             services.AddTransient<I<#= item #>DataAccess, <#= item #>DataAccess>();
             services.AddSingleton<SqlStringBuilder<<#= item #>>>();
-            services.AddSingleton<LocService>();
+            #endregion
+
 <# } #>
+            services.AddSingleton<LocService>();
+            services.AddTransient<IHttpClient, HttpClient>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
 
-             var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingConfiguration());
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
-            services.AddLocalization(x => x.ResourcesPath = "Resources");
-            
+            services.AddHttpClient();            
+            services.AddSingleton(GetMapper());
+            services.AddLocalization(x => x.ResourcesPath = "Resources");            
             services.AddControllersWithViews()
                 .AddViewLocalization();
         }
@@ -91,6 +89,20 @@ namespace <#= namespaceName #>.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        #region private
+
+        private IMapper GetMapper()
+        {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingConfiguration());
+            });
+
+            return mapperConfig.CreateMapper();
+        }
+
+        #endregion
     }
         public class MappingConfiguration : Profile
         {

@@ -1,10 +1,10 @@
 ﻿namespace CodeGenerator.Lib.Templates
 {
-    partial class BaseServiceTemplate
+    partial class HttpServiceBaseTemplate
     {
         public readonly string namespaceName;
 
-        public BaseServiceTemplate(string namespaceName)
+        public HttpServiceBaseTemplate(string namespaceName)
         {
             this.namespaceName = namespaceName;
         }

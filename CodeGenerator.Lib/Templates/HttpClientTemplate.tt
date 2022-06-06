@@ -1,0 +1,128 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
+
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace <#= namespaceName #>.Logic.Http
+{
+    public interface IHttpClient
+    {
+        Task<HttpResponse> Get(Uri url);
+        Task<HttpResponse> Post(Uri url, string content);
+        Task<HttpResponse> Put(Uri url, string content);
+        Task<HttpResponse> Delete(Uri url);
+    }
+
+    public class HttpClient : IHttpClient
+    {
+        protected readonly IHttpClientFactory clientFactory;
+        protected readonly ILogger<HttpClient> logger;
+
+        public HttpClient(IHttpClientFactory clientFactory,
+            ILogger<HttpClient> logger)
+        {
+            this.clientFactory = clientFactory;
+            this.logger = logger;
+        }
+
+        public async Task<HttpResponse> Get(Uri url)
+        {
+            return await SendRequest(HttpMethod.Get, url);
+        }
+
+        public async Task<HttpResponse> Post(Uri url, string content)
+        {
+            return await SendRequest(HttpMethod.Post, url, content);
+        }
+
+        public async Task<HttpResponse> Put(Uri url, string content)
+        {
+            return await SendRequest(HttpMethod.Put, url, content);
+        }
+
+        public async Task<HttpResponse> Delete(Uri url)
+        {
+            return await SendRequest(HttpMethod.Delete, url);
+        }
+
+        #region private
+
+        private async Task<HttpResponse> SendRequest(HttpMethod method, Uri url, string content = "")
+        {
+            var request = new HttpRequestMessage(method, url);
+            if (!string.IsNullOrEmpty(content)) request.Content = new StringContent(content, Encoding.UTF8, "application/json");
+
+            var client = clientFactory.CreateClient();
+
+            var response = await client.SendAsync(request);
+
+            return new HttpResponse(response.StatusCode, response.IsSuccessStatusCode, await GetContent(response));
+        }
+
+        private static async Task<string> GetContent(HttpResponseMessage response)
+        {
+            try
+            {
+                var contenttype = response.Content.Headers.FirstOrDefault(h => h.Key.Equals("Content-Type"));
+
+                var rawencoding = contenttype.Value.First();
+
+                if (rawencoding.Contains("utf8") || rawencoding.Contains("UTF-8"))
+                {
+                    var bytes = await response.Content.ReadAsByteArrayAsync();
+                    return Encoding.UTF8.GetString(bytes);
+                }
+                else
+                {
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        #endregion
+    }
+
+    #region models 
+
+    public class HttpResponse
+    {
+        public HttpResponse(HttpStatusCode statusCode, bool isSuccess) : this(statusCode,  isSuccess, string.Empty)
+        { }
+
+        public HttpResponse(HttpStatusCode statusCode, bool isSuccess, string content)
+        {
+            StatusCode = statusCode;
+            IsSuccess = isSuccess;
+            Content = content;
+        }
+
+        public string Content { get; private set; }
+        public HttpStatusCode StatusCode { get; private set; }
+        public bool IsSuccess { get; set; }
+
+        /// <throws>HttpRequestException</throws>
+        public void CheckStatus()
+        {
+            if (!IsSuccess)
+            {
+                throw new HttpRequestException($"Request failed ({StatusCode}). {Content}",null, StatusCode);
+            }
+        }
+    }
+
+    #endregion
+}

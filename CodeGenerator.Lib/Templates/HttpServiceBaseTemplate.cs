@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpServiceBaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class ListViewTemplate : ListViewTemplateBase
+    public partial class HttpServiceBaseTemplate : HttpServiceBaseTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,108 +28,64 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@* --------------------------------------------------------------------*@
-@* Warning! This is an auto generated file. Changes may be overwritten *@
-@* --------------------------------------------------------------------*@
-@using Localization
-@inject LocService SharedLocalizer
-@model IEnumerable<");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpServiceBaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\r\nusing Microsoft.Extensions.Logging;\r\nusing Newtonsoft.Json;\r\nusing System;\r\n" +
+                    "using System.Collections.Generic;\r\nusing System.Threading.Tasks;\r\n\r\nnamespace ");
+            
+            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpServiceBaseTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Web.ViewModel.");
-            
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("ViewModel>\r\n\r\n@{\r\n    ViewData[\"Title\"] = @$\"{SharedLocalizer.GetLocalizedHtmlStr" +
-                    "ing(\"List\")} {SharedLocalizer.GetLocalizedHtmlString(\"");
-            
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\")}\";\r\n}\r\n\r\n<h1>@SharedLocalizer.GetLocalizedHtmlString(\"");
-            
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\")</h1>\r\n\r\n<p>\r\n    <a href=\"/");
-            
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("/create\">@SharedLocalizer.GetLocalizedHtmlString(\"Create New\")</a>\r\n</p>\r\n\r\n<tabl" +
-                    "e class=\"table\">\r\n    <thead>\r\n        <tr>\r\n");
-            
-            #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("            <th>\r\n                @SharedLocalizer.GetLocalizedHtmlString(\"");
-            
-            #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\")\r\n            </th>\r\n");
-            
-            #line 30 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("            <th></th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n    @foreach (va" +
-                    "r item in Model) {\r\n        <tr>\r\n");
-            
-            #line 37 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- foreach (var item in Model.Properties){ 
-            
-            #line default
-            #line hidden
-            this.Write("            <td>\r\n                @item.");
-            
-            #line 39 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n            </td>\r\n");
-            
-            #line 41 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("  \r\n            <td>\r\n                <a href=\"/");
-            
-            #line 43 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("/edit/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Edit\")</a> | \r\n         " +
-                    "       <a href=\"/");
-            
-            #line 44 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
-            
-            #line default
-            #line hidden
-            this.Write("/remove/@item.Id\">@SharedLocalizer.GetLocalizedHtmlString(\"Delete\")</a> \r\n       " +
-                    "     </td>\r\n        </tr>\r\n}\r\n    </tbody>\r\n</table>\r\n");
+            this.Write(".Logic.Http\r\n{\r\n    public interface IHttpService<T>\r\n    {\r\n        Task<T> Get(" +
+                    "string url, string id);\r\n        Task<IEnumerable<T>> Get(string url);\r\n        " +
+                    "Task<T> Post(string url, string content);\r\n        Task Put(string url, string i" +
+                    "d, string content);\r\n        Task Delete(string url, string id);\r\n    }\r\n    pub" +
+                    "lic class HttpService<T> : IHttpService<T>\r\n    {\r\n        protected readonly IH" +
+                    "ttpClient client;\r\n        protected readonly ILogger logger;\r\n\r\n        public " +
+                    "HttpService(IHttpClient client,\r\n            ILogger<HttpService<T>> logger)\r\n  " +
+                    "      {\r\n            this.client = client;\r\n            this.logger = logger;\r\n " +
+                    "       }\r\n\r\n        public virtual async Task<T> Get(string url, string id)\r\n   " +
+                    "     {\r\n            try\r\n            {\r\n                var uri = CombineUrls(ur" +
+                    "l, id);\r\n                var response = await client.Get(uri);\r\n                " +
+                    "response.CheckStatus();\r\n                logger.LogDebug($\"Get data from {uri}: " +
+                    "{response.Content}\");\r\n                return JsonConvert.DeserializeObject<T>(r" +
+                    "esponse.Content);\r\n            }\r\n            catch (Exception e)\r\n            {" +
+                    "\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n      " +
+                    "      }\r\n        }\r\n\r\n        public virtual async Task<IEnumerable<T>> Get(stri" +
+                    "ng url)\r\n        {\r\n            try\r\n            {\r\n                var response" +
+                    " = await client.Get(new Uri(url));\r\n                response.CheckStatus();\r\n   " +
+                    "             logger.LogDebug($\"Get data from {url}: {response.Content}\");\r\n     " +
+                    "           return JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content" +
+                    ");\r\n            }\r\n            catch (Exception e)\r\n            {\r\n             " +
+                    "   logger.LogError(e, e.Message);\r\n                throw;\r\n            }\r\n      " +
+                    "  }\r\n\r\n        public virtual async Task<T> Post(string url, string content)\r\n  " +
+                    "      {\r\n            try\r\n            {\r\n                var response = await cl" +
+                    "ient.Post(new Uri(url), content);\r\n                response.CheckStatus();\r\n    " +
+                    "            logger.LogDebug($\"Post data to {url}: {response.Content}\");\r\n       " +
+                    "         return JsonConvert.DeserializeObject<T>(response.Content);\r\n           " +
+                    " }\r\n            catch (Exception e)\r\n            {\r\n                logger.LogEr" +
+                    "ror(e, e.Message);\r\n                throw;\r\n            }\r\n        }\r\n\r\n        " +
+                    "public virtual async Task Put(string url, string id, string content)\r\n        {\r" +
+                    "\n            try\r\n            {\r\n                var uri = CombineUrls(url, id);" +
+                    "\r\n                var response = await client.Put(uri, content);\r\n              " +
+                    "  response.CheckStatus();\r\n                logger.LogDebug($\"Put data from {uri}" +
+                    ": {response.Content}\");\r\n            }\r\n            catch (Exception e)\r\n       " +
+                    "     {\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n" +
+                    "            }\r\n        }\r\n\r\n        public virtual async Task Delete(string url," +
+                    " string id)\r\n        {\r\n            try\r\n            {\r\n                var uri " +
+                    "= CombineUrls(url, id);\r\n                var response = await client.Delete(uri)" +
+                    ";\r\n                response.CheckStatus();\r\n                logger.LogDebug($\"De" +
+                    "lete data from {uri}\");\r\n            }\r\n            catch (Exception e)\r\n       " +
+                    "     {\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n" +
+                    "            }\r\n        }\r\n\r\n        #region\r\n\r\n        private static Uri Combin" +
+                    "eUrls(string url, string id)\r\n        {\r\n            return new Uri(new Uri(url)" +
+                    ", id);\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -141,7 +97,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class ListViewTemplateBase
+    public class HttpServiceBaseTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

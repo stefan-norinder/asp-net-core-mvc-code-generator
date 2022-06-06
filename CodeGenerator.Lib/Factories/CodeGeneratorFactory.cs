@@ -48,6 +48,8 @@ namespace CodeGenerator.Lib.Factories
                     return new ViewsGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Test:
                     return new TestsGenerator(generationFetcher, output);
+                case CodeGeneratorTypes.HttpService:
+                    return new HttpServiceGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.None:
                     return null;
                 default:

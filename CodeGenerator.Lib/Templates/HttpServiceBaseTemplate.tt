@@ -1,0 +1,126 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
+
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace <#= namespaceName #>.Logic.Http
+{
+    public interface IHttpService<T>
+    {
+        Task<T> Get(string url, string id);
+        Task<IEnumerable<T>> Get(string url);
+        Task<T> Post(string url, string content);
+        Task Put(string url, string id, string content);
+        Task Delete(string url, string id);
+    }
+    public class HttpService<T> : IHttpService<T>
+    {
+        protected readonly IHttpClient client;
+        protected readonly ILogger logger;
+
+        public HttpService(IHttpClient client,
+            ILogger<HttpService<T>> logger)
+        {
+            this.client = client;
+            this.logger = logger;
+        }
+
+        public virtual async Task<T> Get(string url, string id)
+        {
+            try
+            {
+                var uri = CombineUrls(url, id);
+                var response = await client.Get(uri);
+                response.CheckStatus();
+                logger.LogDebug($"Get data from {uri}: {response.Content}");
+                return JsonConvert.DeserializeObject<T>(response.Content);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                throw;
+            }
+        }
+
+        public virtual async Task<IEnumerable<T>> Get(string url)
+        {
+            try
+            {
+                var response = await client.Get(new Uri(url));
+                response.CheckStatus();
+                logger.LogDebug($"Get data from {url}: {response.Content}");
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                throw;
+            }
+        }
+
+        public virtual async Task<T> Post(string url, string content)
+        {
+            try
+            {
+                var response = await client.Post(new Uri(url), content);
+                response.CheckStatus();
+                logger.LogDebug($"Post data to {url}: {response.Content}");
+                return JsonConvert.DeserializeObject<T>(response.Content);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                throw;
+            }
+        }
+
+        public virtual async Task Put(string url, string id, string content)
+        {
+            try
+            {
+                var uri = CombineUrls(url, id);
+                var response = await client.Put(uri, content);
+                response.CheckStatus();
+                logger.LogDebug($"Put data from {uri}: {response.Content}");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                throw;
+            }
+        }
+
+        public virtual async Task Delete(string url, string id)
+        {
+            try
+            {
+                var uri = CombineUrls(url, id);
+                var response = await client.Delete(uri);
+                response.CheckStatus();
+                logger.LogDebug($"Delete data from {uri}");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, e.Message);
+                throw;
+            }
+        }
+
+        #region
+
+        private static Uri CombineUrls(string url, string id)
+        {
+            return new Uri(new Uri(url), id);
+        }
+
+        #endregion
+    }
+}
