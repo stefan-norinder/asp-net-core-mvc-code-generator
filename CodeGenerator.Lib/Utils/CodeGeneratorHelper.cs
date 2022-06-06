@@ -9,14 +9,15 @@ namespace CodeGenerator.Lib
             return $"public {type.ConventionalName()} {name} {{ get; set; }}";
         }
 
-        public static string GetTemplateHeaderText()
+        public static string GetTemplateHeaderText(string remark = "")
         {
+            if (!string.IsNullOrEmpty(remark)) remark = $"\r\n// Remark: {remark}";
             return $@"
-//---------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
 // Warning! This is an auto generated file. Changes may be overwritten. 
 // Generator version: { typeof(CodeGeneratorHelper).Assembly.GetName().Version }
-// Created at: { DateTime.Now }
-//---------------------------------------------------------------------------------------";
+// Created at: { DateTime.Now }{remark}
+//--------------------------------------------------------------------------------------------------------------------";
         }
 
         #region private 

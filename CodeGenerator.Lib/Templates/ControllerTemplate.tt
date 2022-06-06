@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
+<#= CodeGeneratorHelper.GetTemplateHeaderText($"The point of using `I{Model.Name}HttpService` instead of `I{Model.Name}Service` is just to show an example of this.") #> 
 
 using AutoMapper;
 using <#= namespaceName #>.Logic.Http;
@@ -66,7 +66,7 @@ namespace <#= namespaceName #>.Web.Controllers
             try
             {                
                 var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await service.Insert(model);
+                await httpService.Post(apiBaseUrl, model);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace <#= namespaceName #>.Web.Controllers
         {
             try
             {   
-                var entity = await service.Get(id);
+                var entity = await httpService.Get(apiBaseUrl,id.ToString());
                 return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
             }
             catch (Exception e)
@@ -97,7 +97,7 @@ namespace <#= namespaceName #>.Web.Controllers
             try
             {                
                 var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await service.Update(model);
+                await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace <#= namespaceName #>.Web.Controllers
         {
             try
             {   
-                var entity = await service.Get(id);
+                var entity = await httpService.Get(apiBaseUrl, id.ToString());
                 return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
             }            
             catch (Exception e)
@@ -127,7 +127,7 @@ namespace <#= namespaceName #>.Web.Controllers
             try
             {                
                 var model = mapper.Map<<#= Model.Name #>>(viewModel);
-                await service.Delete(model.Id);
+                await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
@@ -143,7 +143,8 @@ namespace <#= namespaceName #>.Web.Controllers
         {
             var schema = httpContextAccessor.HttpContext.Request.Scheme;
             var host = httpContextAccessor.HttpContext.Request.Host.Value;
-            return $"{schema}://{host}/api/v1/<#= Model.Name.ToLower() #>s";
+            var path = "/person";
+            return $"{schema}://{host}/api/v1{path}s";
         }
 
         private void LogError(Exception e)

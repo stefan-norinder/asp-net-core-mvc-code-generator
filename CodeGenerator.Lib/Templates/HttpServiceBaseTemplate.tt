@@ -120,7 +120,8 @@ namespace <#= namespaceName #>.Logic.Http
 
         private static Uri CombineUrls(string url, string id)
         {
-            return new Uri(new Uri(url), id);
+            if (!url.EndsWith("/")) url += "/";
+            return new Uri(url + id);
         }
 
         #endregion

@@ -85,8 +85,9 @@ namespace CodeGenerator.Lib.Templates
                     "      logger.LogDebug($\"Delete data from {uri}\");\r\n            }\r\n            ca" +
                     "tch (Exception e)\r\n            {\r\n                logger.LogError(e, e.Message);" +
                     "\r\n                throw;\r\n            }\r\n        }\r\n\r\n        #region\r\n\r\n       " +
-                    " private static Uri CombineUrls(string url, string id)\r\n        {\r\n            r" +
-                    "eturn new Uri(new Uri(url), id);\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+                    " private static Uri CombineUrls(string url, string id)\r\n        {\r\n            i" +
+                    "f (!url.EndsWith(\"/\")) url += \"/\";\r\n            return new Uri(url + id);\r\n     " +
+                    "   }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
