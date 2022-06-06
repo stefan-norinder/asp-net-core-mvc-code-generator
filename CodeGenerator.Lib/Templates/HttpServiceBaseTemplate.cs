@@ -44,48 +44,49 @@ namespace CodeGenerator.Lib.Templates
             #line hidden
             this.Write(".Logic.Http\r\n{\r\n    public interface IHttpService<T>\r\n    {\r\n        Task<T> Get(" +
                     "string url, string id);\r\n        Task<IEnumerable<T>> Get(string url);\r\n        " +
-                    "Task<T> Post(string url, string content);\r\n        Task Put(string url, string i" +
-                    "d, string content);\r\n        Task Delete(string url, string id);\r\n    }\r\n    pub" +
-                    "lic class HttpService<T> : IHttpService<T>\r\n    {\r\n        protected readonly IH" +
-                    "ttpClient client;\r\n        protected readonly ILogger logger;\r\n\r\n        public " +
-                    "HttpService(IHttpClient client,\r\n            ILogger<HttpService<T>> logger)\r\n  " +
-                    "      {\r\n            this.client = client;\r\n            this.logger = logger;\r\n " +
-                    "       }\r\n\r\n        public virtual async Task<T> Get(string url, string id)\r\n   " +
-                    "     {\r\n            try\r\n            {\r\n                var uri = CombineUrls(ur" +
-                    "l, id);\r\n                var response = await client.Get(uri);\r\n                " +
-                    "response.CheckStatus();\r\n                logger.LogDebug($\"Get data from {uri}: " +
-                    "{response.Content}\");\r\n                return JsonConvert.DeserializeObject<T>(r" +
-                    "esponse.Content);\r\n            }\r\n            catch (Exception e)\r\n            {" +
-                    "\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n      " +
-                    "      }\r\n        }\r\n\r\n        public virtual async Task<IEnumerable<T>> Get(stri" +
-                    "ng url)\r\n        {\r\n            try\r\n            {\r\n                var response" +
-                    " = await client.Get(new Uri(url));\r\n                response.CheckStatus();\r\n   " +
-                    "             logger.LogDebug($\"Get data from {url}: {response.Content}\");\r\n     " +
-                    "           return JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content" +
-                    ");\r\n            }\r\n            catch (Exception e)\r\n            {\r\n             " +
-                    "   logger.LogError(e, e.Message);\r\n                throw;\r\n            }\r\n      " +
-                    "  }\r\n\r\n        public virtual async Task<T> Post(string url, string content)\r\n  " +
-                    "      {\r\n            try\r\n            {\r\n                var response = await cl" +
-                    "ient.Post(new Uri(url), content);\r\n                response.CheckStatus();\r\n    " +
-                    "            logger.LogDebug($\"Post data to {url}: {response.Content}\");\r\n       " +
-                    "         return JsonConvert.DeserializeObject<T>(response.Content);\r\n           " +
-                    " }\r\n            catch (Exception e)\r\n            {\r\n                logger.LogEr" +
-                    "ror(e, e.Message);\r\n                throw;\r\n            }\r\n        }\r\n\r\n        " +
-                    "public virtual async Task Put(string url, string id, string content)\r\n        {\r" +
-                    "\n            try\r\n            {\r\n                var uri = CombineUrls(url, id);" +
-                    "\r\n                var response = await client.Put(uri, content);\r\n              " +
-                    "  response.CheckStatus();\r\n                logger.LogDebug($\"Put data from {uri}" +
-                    ": {response.Content}\");\r\n            }\r\n            catch (Exception e)\r\n       " +
-                    "     {\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n" +
-                    "            }\r\n        }\r\n\r\n        public virtual async Task Delete(string url," +
-                    " string id)\r\n        {\r\n            try\r\n            {\r\n                var uri " +
-                    "= CombineUrls(url, id);\r\n                var response = await client.Delete(uri)" +
-                    ";\r\n                response.CheckStatus();\r\n                logger.LogDebug($\"De" +
-                    "lete data from {uri}\");\r\n            }\r\n            catch (Exception e)\r\n       " +
-                    "     {\r\n                logger.LogError(e, e.Message);\r\n                throw;\r\n" +
-                    "            }\r\n        }\r\n\r\n        #region\r\n\r\n        private static Uri Combin" +
-                    "eUrls(string url, string id)\r\n        {\r\n            return new Uri(new Uri(url)" +
-                    ", id);\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+                    "Task<T> Post(string url, T model);\r\n        Task Put(string url, string id, T mo" +
+                    "del);\r\n        Task Delete(string url, string id);\r\n    }\r\n    public class Http" +
+                    "Service<T> : IHttpService<T>\r\n    {\r\n        protected readonly IHttpClient clie" +
+                    "nt;\r\n        protected readonly ILogger logger;\r\n\r\n        public HttpService(IH" +
+                    "ttpClient client,\r\n            ILogger<HttpService<T>> logger)\r\n        {\r\n     " +
+                    "       this.client = client;\r\n            this.logger = logger;\r\n        }\r\n\r\n  " +
+                    "      public virtual async Task<T> Get(string url, string id)\r\n        {\r\n      " +
+                    "      try\r\n            {\r\n                var uri = CombineUrls(url, id);\r\n     " +
+                    "           var response = await client.Get(uri);\r\n                response.Check" +
+                    "Status();\r\n                logger.LogDebug($\"Get data from {uri}: {response.Cont" +
+                    "ent}\");\r\n                return JsonConvert.DeserializeObject<T>(response.Conten" +
+                    "t);\r\n            }\r\n            catch (Exception e)\r\n            {\r\n            " +
+                    "    logger.LogError(e, e.Message);\r\n                throw;\r\n            }\r\n     " +
+                    "   }\r\n\r\n        public virtual async Task<IEnumerable<T>> Get(string url)\r\n     " +
+                    "   {\r\n            try\r\n            {\r\n                var response = await clien" +
+                    "t.Get(new Uri(url));\r\n                response.CheckStatus();\r\n                l" +
+                    "ogger.LogDebug($\"Get data from {url}: {response.Content}\");\r\n                ret" +
+                    "urn JsonConvert.DeserializeObject<IEnumerable<T>>(response.Content);\r\n          " +
+                    "  }\r\n            catch (Exception e)\r\n            {\r\n                logger.LogE" +
+                    "rror(e, e.Message);\r\n                throw;\r\n            }\r\n        }\r\n\r\n       " +
+                    " public virtual async Task<T> Post(string url, T model)\r\n        {\r\n            " +
+                    "try\r\n            {\r\n                var content = JsonConvert.SerializeObject(mo" +
+                    "del);\r\n                var response = await client.Post(new Uri(url), content);\r" +
+                    "\n                response.CheckStatus();\r\n                logger.LogDebug($\"Post" +
+                    " data to {url}: {response.Content}\");\r\n                return JsonConvert.Deseri" +
+                    "alizeObject<T>(response.Content);\r\n            }\r\n            catch (Exception e" +
+                    ")\r\n            {\r\n                logger.LogError(e, e.Message);\r\n              " +
+                    "  throw;\r\n            }\r\n        }\r\n\r\n        public virtual async Task Put(stri" +
+                    "ng url, string id, T model)\r\n        {\r\n            try\r\n            {\r\n        " +
+                    "        var content = JsonConvert.SerializeObject(model);\r\n                var u" +
+                    "ri = CombineUrls(url, id);\r\n                var response = await client.Put(uri," +
+                    " content);\r\n                response.CheckStatus();\r\n                logger.LogD" +
+                    "ebug($\"Put data from {uri}: {response.Content}\");\r\n            }\r\n            ca" +
+                    "tch (Exception e)\r\n            {\r\n                logger.LogError(e, e.Message);" +
+                    "\r\n                throw;\r\n            }\r\n        }\r\n\r\n        public virtual asy" +
+                    "nc Task Delete(string url, string id)\r\n        {\r\n            try\r\n            {" +
+                    "\r\n                var uri = CombineUrls(url, id);\r\n                var response " +
+                    "= await client.Delete(uri);\r\n                response.CheckStatus();\r\n          " +
+                    "      logger.LogDebug($\"Delete data from {uri}\");\r\n            }\r\n            ca" +
+                    "tch (Exception e)\r\n            {\r\n                logger.LogError(e, e.Message);" +
+                    "\r\n                throw;\r\n            }\r\n        }\r\n\r\n        #region\r\n\r\n       " +
+                    " private static Uri CombineUrls(string url, string id)\r\n        {\r\n            r" +
+                    "eturn new Uri(new Uri(url), id);\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

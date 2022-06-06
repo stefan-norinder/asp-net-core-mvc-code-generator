@@ -295,18 +295,15 @@ namespace CodeGenerator.Lib.Templates
         {
             var schema = httpContextAccessor.HttpContext.Request.Scheme;
             var host = httpContextAccessor.HttpContext.Request.Host.Value;
-            var path = httpContextAccessor.HttpContext.Request.Path.Value;
-            return $""{schema}://{host}/api/v1{path}s"";
-        }
-
-        private void LogError(Exception e)
-        {
-            logger.LogError(e, e.Message);
-        }
-
-        #endregion
-    }
-}");
+            return $""{schema}://{host}/api/v1/");
+            
+            #line 146 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name.ToLower()));
+            
+            #line default
+            #line hidden
+            this.Write("s\";\r\n        }\r\n\r\n        private void LogError(Exception e)\r\n        {\r\n        " +
+                    "    logger.LogError(e, e.Message);\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

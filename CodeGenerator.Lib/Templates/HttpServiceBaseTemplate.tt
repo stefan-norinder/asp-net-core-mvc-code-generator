@@ -17,8 +17,8 @@ namespace <#= namespaceName #>.Logic.Http
     {
         Task<T> Get(string url, string id);
         Task<IEnumerable<T>> Get(string url);
-        Task<T> Post(string url, string content);
-        Task Put(string url, string id, string content);
+        Task<T> Post(string url, T model);
+        Task Put(string url, string id, T model);
         Task Delete(string url, string id);
     }
     public class HttpService<T> : IHttpService<T>
@@ -66,10 +66,11 @@ namespace <#= namespaceName #>.Logic.Http
             }
         }
 
-        public virtual async Task<T> Post(string url, string content)
+        public virtual async Task<T> Post(string url, T model)
         {
             try
             {
+                var content = JsonConvert.SerializeObject(model);
                 var response = await client.Post(new Uri(url), content);
                 response.CheckStatus();
                 logger.LogDebug($"Post data to {url}: {response.Content}");
@@ -82,10 +83,11 @@ namespace <#= namespaceName #>.Logic.Http
             }
         }
 
-        public virtual async Task Put(string url, string id, string content)
+        public virtual async Task Put(string url, string id, T model)
         {
             try
             {
+                var content = JsonConvert.SerializeObject(model);
                 var uri = CombineUrls(url, id);
                 var response = await client.Put(uri, content);
                 response.CheckStatus();

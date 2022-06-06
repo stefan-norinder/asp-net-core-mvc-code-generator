@@ -13,7 +13,7 @@ namespace CodeGenerator.Lib
         {
             return $@"
 //---------------------------------------------------------------------------------------
-// Warning! This is an auto generated file. Changes may be overwritten 
+// Warning! This is an auto generated file. Changes may be overwritten. 
 // Generator version: { typeof(CodeGeneratorHelper).Assembly.GetName().Version }
 // Created at: { DateTime.Now }
 //---------------------------------------------------------------------------------------";
