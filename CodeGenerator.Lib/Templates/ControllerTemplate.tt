@@ -95,7 +95,7 @@ namespace <#= namespaceName #>.Web.Controllers
         {
             var schema = httpContextAccessor.HttpContext.Request.Scheme;
             var host = httpContextAccessor.HttpContext.Request.Host.Value;
-            var path = "/person";
+            var path = "/<#= Model.Name.ToLower() #>";
             return $"{schema}://{host}/api/v1{path}s";
         }
 

@@ -77,6 +77,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>HomeViewTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\HttpClientTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HttpClientTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\HttpServiceTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

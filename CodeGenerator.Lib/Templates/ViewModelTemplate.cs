@@ -34,7 +34,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" \r\n\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
+            this.Write(" \r\n\r\nusing System;\r\n\r\nnamespace ");
             
             #line 10 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));

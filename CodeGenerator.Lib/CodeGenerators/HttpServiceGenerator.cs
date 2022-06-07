@@ -23,6 +23,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Http", File = $"{@class}HttpService.cs", Content = template.TransformText() };
             }
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
+            yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Http", File = $"HttpClient.cs", Content = new HttpClientTemplate(namespaceName).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Http", File = $"HttpService.cs", Content = new HttpServiceBaseTemplate(namespaceName).TransformText() };
         }
 

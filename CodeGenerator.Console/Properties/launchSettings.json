@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace MyApplication --server .\\sqlexpress --datasource  test --output ./../../../../../generated-code"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace Funka --server .\\sqlexpress --datasource  Funka --output ./../../../../../funka"
     }
   }
 }
