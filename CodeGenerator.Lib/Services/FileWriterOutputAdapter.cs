@@ -30,14 +30,42 @@ namespace CodeGenerator.Lib.Services
         {
             Directory.CreateDirectory(targetPath);
 
-            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            foreach (string directory in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
-                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                CreateDirectory(directory.Replace(sourcePath, targetPath));
             }
 
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
+                Copy(newPath, sourcePath, targetPath);
+            }
+        }
+
+        private void CreateDirectory(string path)
+        {
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch (System.Exception e)
+            {
+                if (FileIsWriteProtected(e)) return;
+
+                throw;
+            }
+        }
+
+        private void Copy(string newPath, string sourcePath, string targetPath)
+        {
+            try
+            {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
+            catch (System.Exception e)
+            {
+                if (FileIsWriteProtected(e)) return;
+
+                throw;
             }
         }
 

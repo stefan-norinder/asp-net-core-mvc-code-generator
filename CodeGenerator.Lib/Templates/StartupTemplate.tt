@@ -55,6 +55,7 @@ namespace <#= namespaceName #>.Web
             services.AddSingleton(GetMapper());
             ConfigureLocalization(services);
             services.AddLocalization(x => x.ResourcesPath = "Resources");
+            CustomServiceConfiguration(services);
             services.AddControllersWithViews()
                 .AddViewLocalization();
         }
@@ -65,6 +66,7 @@ namespace <#= namespaceName #>.Web
             app.UseStaticFiles();
             app.UseRouting();
             app.UseRequestLocalization();
+            CustomConfiguration(app, env);
 
             app.UseExceptionHandler(
             builder =>
@@ -93,6 +95,16 @@ namespace <#= namespaceName #>.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        protected virtual void CustomServiceConfiguration(IServiceCollection services)
+        {
+            //override for custom behaviour
+        }
+
+        protected virtual void CustomConfiguration(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            //override for custom behaviour
         }
         
         protected void ConfigureLocalization(IServiceCollection services)

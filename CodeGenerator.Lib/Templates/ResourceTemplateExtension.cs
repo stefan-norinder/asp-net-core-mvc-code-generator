@@ -30,10 +30,13 @@ namespace CodeGenerator.Lib.Templates
         private static List<string> GetReourceKeys(IEnumerable<Class> classes)
         {
             var list = new List<string>(staticKeys);
-            foreach (var @class in classes)
+            foreach (var @class in classes.Distinct())
             {
                 list.Add(@class.Name);
-                list.AddRange(@class.Properties.Where(x => x.Name != "Id").Select(x => x.Name).Distinct());
+                foreach (var prop in @class.Properties)
+                {
+                    if (!list.Contains(prop.Name)) list.Add(prop.Name);
+                }
             }
 
             return list;
