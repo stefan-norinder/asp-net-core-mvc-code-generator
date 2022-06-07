@@ -34,9 +34,33 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" \r\n\r\nusing Microsoft.AspNetCore.Mvc;\r\n\r\nnamespace Web.Controllers\r\n{\r\n    public " +
-                    "class HomeController : Controller\r\n    {\r\n        public IActionResult Index()\r\n" +
-                    "        {\r\n            return View();\r\n        }\r\n    }\r\n}\r\n");
+            this.Write(" \r\n\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Http;\r\nusing" +
+                    " Microsoft.AspNetCore.Localization;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Micr" +
+                    "osoft.Extensions.Options;\r\nusing System.Globalization;\r\nusing System.Linq;\r\nusin" +
+                    "g System.Threading;\r\n\r\nnamespace Web.Controllers\r\n{\r\n    public class HomeContro" +
+                    "ller : Controller\r\n    {\r\n        private readonly RequestLocalizationOptions lo" +
+                    "calizationOptions;\r\n\r\n        public HomeController(IOptions<RequestLocalization" +
+                    "Options> localizationOptions)\r\n        {\r\n            this.localizationOptions =" +
+                    " localizationOptions.Value;\r\n        }\r\n\r\n        public IActionResult Index()\r\n" +
+                    "        {\r\n            return View();\r\n        }\r\n\r\n        [HttpPost]\r\n        " +
+                    "public IActionResult ToggleCulture(string returnUrl)\r\n        {\r\n            var" +
+                    " culture = GetNextCultureFromSupportedCultures();\r\n            SetCookie(culture" +
+                    ");\r\n\r\n            return Redirect(returnUrl);\r\n        }\r\n\r\n        #region priv" +
+                    "ate\r\n\r\n        private CultureInfo GetNextCultureFromSupportedCultures()\r\n      " +
+                    "  {\r\n            var cultureInfo = Thread.CurrentThread.CurrentCulture;\r\n       " +
+                    "     int index = default;\r\n            for (var i = 0; i < localizationOptions.S" +
+                    "upportedCultures.Count(); i++)\r\n            {\r\n                if (localizationO" +
+                    "ptions.SupportedCultures[i].GetHashCode() == cultureInfo.GetHashCode())\r\n       " +
+                    "         {\r\n                    index = i;\r\n                    break;\r\n        " +
+                    "        }\r\n            }\r\n            var culture = index < localizationOptions." +
+                    "SupportedCultures.Count() - 1 ? localizationOptions.SupportedCultures[index + 1]" +
+                    " : localizationOptions.SupportedCultures[0];\r\n            return culture;\r\n     " +
+                    "   }\r\n\r\n        private void SetCookie(CultureInfo culture)\r\n        {\r\n        " +
+                    "    HttpContext.Response.Cookies.Append(\r\n                            CookieRequ" +
+                    "estCultureProvider.DefaultCookieName,\r\n                            CookieRequest" +
+                    "CultureProvider.MakeCookieValue(new RequestCulture(culture)),\r\n                 " +
+                    "           new CookieOptions { Path = Url.Content(\"~/\") });\r\n        }\r\n\r\n      " +
+                    "  #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -30,7 +30,7 @@ namespace CodeGenerator.Lib.Templates
         {
             
             #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText($"The point of using `I{Model.Name}HttpService` instead of `I{Model.Name}Service` is just to show an example of this.")));
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText($"The point of using `I{Model.Name}HttpService` instead of `I{Model.Name}Service` is just to show an example of how to use `I{Model.Name}HttpService`.")));
             
             #line default
             #line hidden

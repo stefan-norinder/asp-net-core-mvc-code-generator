@@ -6,6 +6,18 @@
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
+
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Http.Extensions
+@using Localization
+@inject LocService SharedLocalizer
+
+@{
+    var httpContext = ViewContext.HttpContext;
+    var currentCulture = httpContext.Features.Get<IRequestCultureFeature>().RequestCulture.UICulture;
+    var currentUrl = UriHelper.BuildRelative(httpContext.Request.PathBase, httpContext.Request.Path, httpContext.Request.QueryString);
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +31,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Home")</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,9 +39,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Home")</a>
+                       </li>
                     </ul>
+                </div>                
+                <div>
+                    <form id="changeLanguageFormId" asp-controller="Home" asp-action="ToggleCulture" method="post">
+                        <input type="hidden" name="returnUrl" value="@currentUrl">
+                        <img id="iconLanguageId" src="~/img/icon_language.png" title="@SharedLocalizer.GetLocalizedHtmlString("Toggle language")" class="icon-language" />
+                    </form>
                 </div>
             </div>
         </nav>

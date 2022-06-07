@@ -30,32 +30,44 @@ namespace CodeGenerator.Lib.Templates
         {
             this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
                     "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
-                    "------------------------------------------------------------*@\r\n<!DOCTYPE html>\r" +
-                    "\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewpor" +
-                    "t\" content=\"width=device-width, initial-scale=1.0\" />\r\n    <title>@ViewData[\"Tit" +
-                    "le\"]</title>\r\n    <link rel=\"stylesheet\" href=\"~/lib/bootstrap/dist/css/bootstra" +
-                    "p.min.css\" />\r\n    <link rel=\"stylesheet\" href=\"~/css/site.css\" />\r\n</head>\r\n<bo" +
-                    "dy>\r\n    <header>\r\n        <nav class=\"navbar navbar-expand-sm navbar-toggleable" +
-                    "-sm navbar-light bg-white border-bottom box-shadow mb-3\">\r\n            <div clas" +
-                    "s=\"container\">\r\n                <a class=\"navbar-brand\" asp-area=\"\" asp-controll" +
-                    "er=\"Home\" asp-action=\"Index\">Home</a>\r\n                <button class=\"navbar-tog" +
-                    "gler\" type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-c" +
-                    "ontrols=\"navbarSupportedContent\"\r\n                        aria-expanded=\"false\" " +
-                    "aria-label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler" +
-                    "-icon\"></span>\r\n                </button>\r\n                <div class=\"navbar-co" +
-                    "llapse collapse d-sm-inline-flex justify-content-between\">\r\n                    " +
-                    "<ul class=\"navbar-nav flex-grow-1\">\r\n                        <li class=\"nav-item" +
-                    "\">\r\n                            <a class=\"nav-link text-dark\" asp-area=\"\" asp-co" +
-                    "ntroller=\"Home\" asp-action=\"Index\">Home</a>\r\n                        </li>\r\n    " +
-                    "                </ul>\r\n                </div>\r\n            </div>\r\n        </nav" +
-                    ">\r\n    </header>\r\n    <div class=\"container\">\r\n        <main role=\"main\" class=\"" +
-                    "pb-3\">\r\n            @RenderBody()\r\n        </main>\r\n    </div>\r\n\r\n    <footer cl" +
-                    "ass=\"border-top footer text-muted\">\r\n        <div class=\"container\">\r\n          " +
-                    "  &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jquery/dis" +
-                    "t/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/bootstrap.b" +
-                    "undle.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-version=\"true" +
-                    "\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n</body>\r" +
-                    "\n</html>\r\n\r\n");
+                    "------------------------------------------------------------*@\r\n\r\n@using Microso" +
+                    "ft.AspNetCore.Localization\r\n@using Microsoft.AspNetCore.Http.Extensions\r\n@using " +
+                    "Localization\r\n@inject LocService SharedLocalizer\r\n\r\n@{\r\n    var httpContext = Vi" +
+                    "ewContext.HttpContext;\r\n    var currentCulture = httpContext.Features.Get<IReque" +
+                    "stCultureFeature>().RequestCulture.UICulture;\r\n    var currentUrl = UriHelper.Bu" +
+                    "ildRelative(httpContext.Request.PathBase, httpContext.Request.Path, httpContext." +
+                    "Request.QueryString);\r\n}\r\n\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta" +
+                    " charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, init" +
+                    "ial-scale=1.0\" />\r\n    <title>@ViewData[\"Title\"]</title>\r\n    <link rel=\"stylesh" +
+                    "eet\" href=\"~/lib/bootstrap/dist/css/bootstrap.min.css\" />\r\n    <link rel=\"styles" +
+                    "heet\" href=\"~/css/site.css\" />\r\n</head>\r\n<body>\r\n    <header>\r\n        <nav clas" +
+                    "s=\"navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bot" +
+                    "tom box-shadow mb-3\">\r\n            <div class=\"container\">\r\n                <a c" +
+                    "lass=\"navbar-brand\" asp-controller=\"Home\" asp-action=\"Index\">@SharedLocalizer.Ge" +
+                    "tLocalizedHtmlString(\"Home\")</a>\r\n                <button class=\"navbar-toggler\"" +
+                    " type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-contro" +
+                    "ls=\"navbarSupportedContent\"\r\n                        aria-expanded=\"false\" aria-" +
+                    "label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler-icon" +
+                    "\"></span>\r\n                </button>\r\n                <div class=\"navbar-collaps" +
+                    "e collapse d-sm-inline-flex justify-content-between\">\r\n                    <ul c" +
+                    "lass=\"navbar-nav flex-grow-1\">\r\n                        <li class=\"nav-item\">\r\n " +
+                    "                           <a class=\"nav-link text-dark\" asp-area=\"\" asp-control" +
+                    "ler=\"Home\" asp-action=\"Index\">@SharedLocalizer.GetLocalizedHtmlString(\"Home\")</a" +
+                    ">\r\n                       </li>\r\n                    </ul>\r\n                </di" +
+                    "v>                \r\n                <div>\r\n                    <form id=\"changeL" +
+                    "anguageFormId\" asp-controller=\"Home\" asp-action=\"ToggleCulture\" method=\"post\">\r\n" +
+                    "                        <input type=\"hidden\" name=\"returnUrl\" value=\"@currentUrl" +
+                    "\">\r\n                        <img id=\"iconLanguageId\" src=\"~/img/icon_language.pn" +
+                    "g\" title=\"@SharedLocalizer.GetLocalizedHtmlString(\"Toggle language\")\" class=\"ico" +
+                    "n-language\" />\r\n                    </form>\r\n                </div>\r\n           " +
+                    " </div>\r\n        </nav>\r\n    </header>\r\n    <div class=\"container\">\r\n        <ma" +
+                    "in role=\"main\" class=\"pb-3\">\r\n            @RenderBody()\r\n        </main>\r\n    </" +
+                    "div>\r\n\r\n    <footer class=\"border-top footer text-muted\">\r\n        <div class=\"c" +
+                    "ontainer\">\r\n            &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script" +
+                    " src=\"~/lib/jquery/dist/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstr" +
+                    "ap/dist/js/bootstrap.bundle.min.js\"></script>\r\n    <script src=\"~/js/site.js\" as" +
+                    "p-append-version=\"true\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", requ" +
+                    "ired: false)\r\n</body>\r\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

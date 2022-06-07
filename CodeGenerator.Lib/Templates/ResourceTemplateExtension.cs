@@ -15,8 +15,10 @@ namespace CodeGenerator.Lib.Templates
                                                 "Delete",
                                                 "Save",
                                                 "Home",
+                                                "List",
                                                 "Back to List",
-                                                "Are you sure you want to delete this?"
+                                                "Are you sure you want to delete this?",
+                                                "Toggle language"
                                             };
 
         public ResourceTemplate(string namespaceName, IEnumerable<Class> classes)

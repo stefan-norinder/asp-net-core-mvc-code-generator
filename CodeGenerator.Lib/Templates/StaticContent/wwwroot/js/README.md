@@ -1,1 +1,0 @@
-﻿Put javascript in this folder. This is a placeholder file.

@@ -59,6 +59,13 @@ namespace CodeGenerator.Lib.Templates
   </ItemGroup>
   
   <ItemGroup>
+    <None Include=""wwwroot\img\icon_language.png"">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+  
+  <ItemGroup>
     <Content Update=""nlog.config"">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

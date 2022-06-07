@@ -332,7 +332,7 @@
     <None Update="Templates\StaticContent\wwwroot\css\site.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\wwwroot\js\README.md">
+    <None Update="Templates\StaticContent\wwwroot\img\icon_language.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css">
@@ -438,6 +438,10 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>WebProjectFileTemplate.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Templates\StaticContent\wwwroot\img\" />
   </ItemGroup>
 
 </Project>

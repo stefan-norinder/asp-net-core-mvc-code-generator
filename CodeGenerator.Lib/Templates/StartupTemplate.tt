@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace <#= namespaceName #>.Web
 {
@@ -49,10 +50,11 @@ namespace <#= namespaceName #>.Web
             services.AddSingleton<LocService>();
             services.AddTransient<IHttpClient, HttpClient>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
-
-            services.AddHttpClient();            
+            
+            services.AddHttpClient();
             services.AddSingleton(GetMapper());
-            services.AddLocalization(x => x.ResourcesPath = "Resources");            
+            ConfigureLocalization(services);
+            services.AddLocalization(x => x.ResourcesPath = "Resources");
             services.AddControllersWithViews()
                 .AddViewLocalization();
         }
@@ -61,20 +63,8 @@ namespace <#= namespaceName #>.Web
         {
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
-            var supportedCultures = new[] {
-                new CultureInfo("en-US"),
-                // add more culture info options
-            };
-            var requestLocalizationOptions = new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en-US"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
-            };
-            app.UseRequestLocalization(requestLocalizationOptions);
+            app.UseRequestLocalization();
 
             app.UseExceptionHandler(
             builder =>
@@ -103,6 +93,30 @@ namespace <#= namespaceName #>.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        
+        protected void ConfigureLocalization(IServiceCollection services)
+        {
+            var supportedCultures = GetSupportedLanguages();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("en-gb");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                  new QueryStringRequestCultureProvider(),
+                  new CookieRequestCultureProvider()
+                };
+            });
+        }
+
+        protected virtual IList<CultureInfo> GetSupportedLanguages()
+        {
+            return new List<CultureInfo> {
+                new CultureInfo("en-gb")
+            };
         }
 
         #region private
