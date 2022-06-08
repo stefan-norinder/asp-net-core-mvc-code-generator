@@ -57,29 +57,29 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Web.ApiController\r\n{ \r\n        [Route(\"api/v1/[controller]s\")]\r\n        [ApiCont" +
-                    "roller]\r\n        public partial class ");
+            this.Write(".Web.ApiController\r\n{ \r\n    [Route(\"api/v1/[controller]s\")]\r\n    [ApiController]\r" +
+                    "\n    public partial class ");
             
             #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller: ControllerBase\r\n        {\r\n            protected readonly ILogger<");
+            this.Write("Controller: ControllerBase\r\n    {\r\n        protected readonly ILogger<");
             
             #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller> logger;\r\n            protected readonly I");
+            this.Write("Controller> logger;\r\n        protected readonly I");
             
             #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Service service;\r\n\r\n            public ");
+            this.Write("Service service;\r\n\r\n        public ");
             
             #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -101,10 +101,10 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(@"Service service)
-            {
-                this.logger = logger;
-                this.service = service;
-            }
+        {
+            this.logger = logger;
+            this.service = service;
+        }
 
         [HttpGet]
         public virtual async Task<IActionResult> Get()
