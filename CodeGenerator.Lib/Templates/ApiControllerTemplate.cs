@@ -58,21 +58,21 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(".Web.ApiController\r\n{ \r\n        [Route(\"api/v1/[controller]s\")]\r\n        [ApiCont" +
-                    "roller]\r\n        public class ");
+                    "roller]\r\n        public partial class ");
             
             #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller: ControllerBase\r\n        {\r\n            private readonly ILogger<");
+            this.Write("Controller: ControllerBase\r\n        {\r\n            protected readonly ILogger<");
             
             #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("Controller> logger;\r\n            private readonly I");
+            this.Write("Controller> logger;\r\n            protected readonly I");
             
             #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -107,30 +107,28 @@ namespace CodeGenerator.Lib.Templates
             }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public virtual async Task<IActionResult> Get()
         {
             var items = await service.GetAll();
             if (!items.Any()) return NotFound();
-            return base.Ok(items);
-            
+            return Ok(items);            
         }
 
         [HttpGet(""{id}"")]
-        public async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(int id)
         {
             
             var item = await service.Get(id);
             if (item == null) return NotFound();
-            return Ok(item);
-            
+            return Ok(item);            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] dynamic value)
+        public virtual async Task<IActionResult> Post([FromBody] dynamic value)
         {
             var item = JsonConvert.DeserializeObject<");
             
-            #line 56 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 54 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -141,12 +139,12 @@ namespace CodeGenerator.Lib.Templates
         }
 
         [HttpPut(""{id}"")]
-        public async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
         {
             if (!await service.Exists(id)) return NotFound();
             var item = JsonConvert.DeserializeObject<");
             
-            #line 65 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            #line 63 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
@@ -158,7 +156,7 @@ namespace CodeGenerator.Lib.Templates
         }
 
         [HttpDelete(""{id}"")]
-        public async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             if (!await service.Exists(id)) return NotFound();
             await service.Delete(id);

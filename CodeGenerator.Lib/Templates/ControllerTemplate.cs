@@ -71,7 +71,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Web.Controllers\r\n{\r\n    public class ");
+            this.Write(".Web.Controllers\r\n{\r\n    public partial class ");
             
             #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -138,7 +138,7 @@ namespace CodeGenerator.Lib.Templates
             apiBaseUrl = GetApiBaseUrl(httpContextAccessor);
         }
 
-        public async Task<IActionResult> Index()
+        public virtual async Task<IActionResult> Index()
         {
             var list = await httpService.Get(apiBaseUrl);
             var viewModels = mapper.Map<IEnumerable<");
@@ -150,8 +150,8 @@ namespace CodeGenerator.Lib.Templates
             #line hidden
             this.Write("ViewModel>>(list);\r\n            return View(viewModels);\r\n        }\r\n        \r\n  " +
                     "      public ActionResult Create()\r\n        {\r\n            return View();\r\n     " +
-                    "   }\r\n\r\n        [HttpPost]\r\n        public async Task<ActionResult> Create([From" +
-                    "Form]");
+                    "   }\r\n\r\n        [HttpPost]\r\n        public virtual async Task<ActionResult> Crea" +
+                    "te([FromForm]");
             
             #line 56 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -170,7 +170,7 @@ namespace CodeGenerator.Lib.Templates
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public virtual async Task<ActionResult> Edit(int id)
         {
             var entity = await httpService.Get(apiBaseUrl,id.ToString());
             return View(mapper.Map<");
@@ -180,8 +180,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("ViewModel>(entity));\r\n        }\r\n\r\n\r\n        [HttpPost]\r\n        public async Tas" +
-                    "k<ActionResult> Edit([FromForm]");
+            this.Write("ViewModel>(entity));\r\n        }\r\n\r\n\r\n        [HttpPost]\r\n        public virtual a" +
+                    "sync Task<ActionResult> Edit([FromForm]");
             
             #line 71 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -200,7 +200,7 @@ namespace CodeGenerator.Lib.Templates
             return RedirectToAction(nameof(Index));         
         }
 
-        public async Task<ActionResult> Remove(int id)
+        public virtual async Task<ActionResult> Remove(int id)
         {
             var entity = await httpService.Get(apiBaseUrl, id.ToString());
             return View(mapper.Map<");
@@ -210,8 +210,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("ViewModel>(entity));        \r\n        }\r\n\r\n        [HttpPost]\r\n        public asy" +
-                    "nc Task<ActionResult> Remove([FromForm]");
+            this.Write("ViewModel>(entity));        \r\n        }\r\n\r\n        [HttpPost]\r\n        public vir" +
+                    "tual async Task<ActionResult> Remove([FromForm]");
             
             #line 85 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

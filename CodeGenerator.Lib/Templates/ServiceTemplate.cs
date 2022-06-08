@@ -55,7 +55,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Logic.Services\r\n{\r\n    public interface I");
+            this.Write(".Logic.Services\r\n{\r\n    public partial interface I");
             
             #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -69,7 +69,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(">\r\n    {\r\n    }\r\n\r\n    public class ");
+            this.Write(">\r\n    {\r\n    }\r\n\r\n    public partial class ");
             
             #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

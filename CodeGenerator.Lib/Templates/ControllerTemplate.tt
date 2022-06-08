@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace <#= namespaceName #>.Web.Controllers
 {
-    public class <#= Model.Name #>Controller : Controller
+    public partial class <#= Model.Name #>Controller : Controller
     {
         private readonly ILogger<<#= Model.Name #>Controller> logger;
         private readonly I<#= Model.Name #>Service service;
@@ -40,7 +40,7 @@ namespace <#= namespaceName #>.Web.Controllers
             apiBaseUrl = GetApiBaseUrl(httpContextAccessor);
         }
 
-        public async Task<IActionResult> Index()
+        public virtual async Task<IActionResult> Index()
         {
             var list = await httpService.Get(apiBaseUrl);
             var viewModels = mapper.Map<IEnumerable<<#= Model.Name #>ViewModel>>(list);
@@ -53,14 +53,14 @@ namespace <#= namespaceName #>.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
+        public virtual async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
             await httpService.Post(apiBaseUrl, model);
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public virtual async Task<ActionResult> Edit(int id)
         {
             var entity = await httpService.Get(apiBaseUrl,id.ToString());
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
@@ -68,21 +68,21 @@ namespace <#= namespaceName #>.Web.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> Edit([FromForm]<#= Model.Name #>ViewModel viewModel)
+        public virtual async Task<ActionResult> Edit([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
             await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
             return RedirectToAction(nameof(Index));         
         }
 
-        public async Task<ActionResult> Remove(int id)
+        public virtual async Task<ActionResult> Remove(int id)
         {
             var entity = await httpService.Get(apiBaseUrl, id.ToString());
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));        
         }
 
         [HttpPost]
-        public async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
+        public virtual async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
             await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());

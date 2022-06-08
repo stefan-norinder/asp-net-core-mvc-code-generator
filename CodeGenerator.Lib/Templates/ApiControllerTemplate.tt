@@ -18,40 +18,38 @@ using Microsoft.AspNetCore.Http;
 
 namespace <#= namespaceName #>.Web.ApiController
 { 
-        [Route("api/v1/[controller]s")]
-        [ApiController]
-        public class <#= Model.Name #>Controller: ControllerBase
-        {
-            private readonly ILogger<<#= Model.Name #>Controller> logger;
-            private readonly I<#= Model.Name #>Service service;
+    [Route("api/v1/[controller]s")]
+    [ApiController]
+    public partial class <#= Model.Name #>Controller: ControllerBase
+    {
+        protected readonly ILogger<<#= Model.Name #>Controller> logger;
+        protected readonly I<#= Model.Name #>Service service;
 
-            public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, I<#= Model.Name #>Service service)
-            {
-                this.logger = logger;
-                this.service = service;
-            }
+        public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, I<#= Model.Name #>Service service)
+        {
+            this.logger = logger;
+            this.service = service;
+        }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public virtual async Task<IActionResult> Get()
         {
             var items = await service.GetAll();
             if (!items.Any()) return NotFound();
-            return base.Ok(items);
-            
+            return Ok(items);            
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(int id)
         {
             
             var item = await service.Get(id);
             if (item == null) return NotFound();
-            return Ok(item);
-            
+            return Ok(item);            
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] dynamic value)
+        public virtual async Task<IActionResult> Post([FromBody] dynamic value)
         {
             var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
             var newItem = await service.Insert(item);
@@ -59,7 +57,7 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
         {
             if (!await service.Exists(id)) return NotFound();
             var item = JsonConvert.DeserializeObject<<#= Model.Name #>>(value.ToString());
@@ -69,7 +67,7 @@ namespace <#= namespaceName #>.Web.ApiController
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             if (!await service.Exists(id)) return NotFound();
             await service.Delete(id);
