@@ -34,11 +34,27 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" \r\n\r\nusing Microsoft.Extensions.Logging;\r\nusing System;\r\nusing System.Linq;\r\nusin" +
-                    "g System.Net;\r\nusing System.Net.Http;\r\nusing System.Text;\r\nusing System.Threadin" +
-                    "g.Tasks;\r\n\r\nnamespace ");
+            this.Write(" \r\n\r\nusing ");
             
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpClientTemplate.tt"
+            #line 8 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpClientTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(@".Logic.Setting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ");
+            
+            #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HttpClientTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
@@ -48,47 +64,60 @@ namespace CodeGenerator.Lib.Templates
                     "     Task<HttpResponse> Put(Uri url, string content);\r\n        Task<HttpResponse" +
                     "> Delete(Uri url);\r\n    }\r\n\r\n    public class HttpClient : IHttpClient\r\n    {\r\n " +
                     "       protected readonly IHttpClientFactory clientFactory;\r\n        protected r" +
-                    "eadonly ILogger<HttpClient> logger;\r\n\r\n        public HttpClient(IHttpClientFact" +
-                    "ory clientFactory,\r\n            ILogger<HttpClient> logger)\r\n        {\r\n        " +
-                    "    this.clientFactory = clientFactory;\r\n            this.logger = logger;\r\n    " +
-                    "    }\r\n\r\n        public async Task<HttpResponse> Get(Uri url)\r\n        {\r\n      " +
-                    "      return await SendRequest(HttpMethod.Get, url);\r\n        }\r\n\r\n        publi" +
-                    "c async Task<HttpResponse> Post(Uri url, string content)\r\n        {\r\n           " +
-                    " return await SendRequest(HttpMethod.Post, url, content);\r\n        }\r\n\r\n        " +
-                    "public async Task<HttpResponse> Put(Uri url, string content)\r\n        {\r\n       " +
-                    "     return await SendRequest(HttpMethod.Put, url, content);\r\n        }\r\n\r\n     " +
-                    "   public async Task<HttpResponse> Delete(Uri url)\r\n        {\r\n            retur" +
-                    "n await SendRequest(HttpMethod.Delete, url);\r\n        }\r\n\r\n        #region priva" +
-                    "te\r\n\r\n        private async Task<HttpResponse> SendRequest(HttpMethod method, Ur" +
-                    "i url, string content = \"\")\r\n        {\r\n            var request = new HttpReques" +
-                    "tMessage(method, url);\r\n            if (!string.IsNullOrEmpty(content)) request." +
-                    "Content = new StringContent(content, Encoding.UTF8, \"application/json\");\r\n\r\n    " +
-                    "        var client = clientFactory.CreateClient();\r\n\r\n            var response =" +
-                    " await client.SendAsync(request);\r\n\r\n            return new HttpResponse(respons" +
-                    "e.StatusCode, response.IsSuccessStatusCode, await GetContent(response));\r\n      " +
-                    "  }\r\n\r\n        private static async Task<string> GetContent(HttpResponseMessage " +
-                    "response)\r\n        {\r\n            try\r\n            {\r\n                var conten" +
-                    "ttype = response.Content.Headers.FirstOrDefault(h => h.Key.Equals(\"Content-Type\"" +
-                    "));\r\n\r\n                var rawencoding = contenttype.Value.First();\r\n\r\n         " +
-                    "       if (rawencoding.Contains(\"utf8\") || rawencoding.Contains(\"UTF-8\"))\r\n     " +
-                    "           {\r\n                    var bytes = await response.Content.ReadAsByteA" +
-                    "rrayAsync();\r\n                    return Encoding.UTF8.GetString(bytes);\r\n      " +
-                    "          }\r\n                else\r\n                {\r\n                    return" +
-                    " await response.Content.ReadAsStringAsync();\r\n                }\r\n            }\r\n" +
-                    "            catch (Exception e)\r\n            {\r\n                return await res" +
-                    "ponse.Content.ReadAsStringAsync();\r\n            }\r\n        }\r\n\r\n        #endregi" +
-                    "on\r\n    }\r\n\r\n    #region models \r\n\r\n    public class HttpResponse\r\n    {\r\n      " +
-                    "  public HttpResponse(HttpStatusCode statusCode, bool isSuccess) : this(statusCo" +
-                    "de,  isSuccess, string.Empty)\r\n        { }\r\n\r\n        public HttpResponse(HttpSt" +
-                    "atusCode statusCode, bool isSuccess, string content)\r\n        {\r\n            Sta" +
-                    "tusCode = statusCode;\r\n            IsSuccess = isSuccess;\r\n            Content =" +
-                    " content;\r\n        }\r\n\r\n        public string Content { get; private set; }\r\n   " +
-                    "     public HttpStatusCode StatusCode { get; private set; }\r\n        public bool" +
-                    " IsSuccess { get; set; }\r\n\r\n        /// <throws>HttpRequestException</throws>\r\n " +
-                    "       public void CheckStatus()\r\n        {\r\n            if (!IsSuccess)\r\n      " +
-                    "      {\r\n                throw new HttpRequestException($\"Request failed ({Statu" +
-                    "sCode}). {Content}\",null, StatusCode);\r\n            }\r\n        }\r\n    }\r\n\r\n    #" +
-                    "endregion\r\n}\r\n");
+                    "eadonly ILogger<HttpClient> logger;\r\n        protected readonly AuthenticationSe" +
+                    "ttings settings;\r\n\r\n        public HttpClient(IHttpClientFactory clientFactory,\r" +
+                    "\n            ILogger<HttpClient> logger,\r\n            IOptions<AuthenticationSet" +
+                    "tings> settings)\r\n        {\r\n            this.clientFactory = clientFactory;\r\n  " +
+                    "          this.logger = logger;\r\n            this.settings = settings.Value;\r\n  " +
+                    "      }\r\n\r\n        public async Task<HttpResponse> Get(Uri url)\r\n        {\r\n    " +
+                    "        return await SendRequest(HttpMethod.Get, url);\r\n        }\r\n\r\n        pub" +
+                    "lic async Task<HttpResponse> Post(Uri url, string content)\r\n        {\r\n         " +
+                    "   return await SendRequest(HttpMethod.Post, url, content);\r\n        }\r\n\r\n      " +
+                    "  public async Task<HttpResponse> Put(Uri url, string content)\r\n        {\r\n     " +
+                    "       return await SendRequest(HttpMethod.Put, url, content);\r\n        }\r\n\r\n   " +
+                    "     public async Task<HttpResponse> Delete(Uri url)\r\n        {\r\n            ret" +
+                    "urn await SendRequest(HttpMethod.Delete, url);\r\n        }\r\n\r\n        #region pri" +
+                    "vate\r\n\r\n        private async Task<HttpResponse> SendRequest(HttpMethod method, " +
+                    "Uri url, string content = \"\")\r\n        {\r\n            logger.LogDebug($\"Sending " +
+                    "{method} request to {url}. Content: {requestContent}\");\r\n            var request" +
+                    " = new HttpRequestMessage(method, url);\r\n            if (!string.IsNullOrEmpty(r" +
+                    "equestContent)) request.Content = new StringContent(requestContent, Encoding.UTF" +
+                    "8, \"application/json\");\r\n            var response = await Send(request);\r\n      " +
+                    "      string responseContent = await GetContent(response);\r\n            logger.L" +
+                    "ogDebug($\"Response code {response.StatusCode}. Content: {responseContent}\");\r\n  " +
+                    "          return new HttpResponse(response.StatusCode, response.IsSuccessStatusC" +
+                    "ode, responseContent);\r\n        }\r\n\r\n        private async Task<HttpResponseMess" +
+                    "age> Send(HttpRequestMessage request)\r\n        {\r\n            var client = clien" +
+                    "tFactory.CreateClient();\r\n            client.SetBearerTokenIfExists(settings.Bea" +
+                    "rerToken);\r\n            return await client.SendAsync(request);        \r\n       " +
+                    " }\r\n\r\n        private static async Task<string> GetContent(HttpResponseMessage r" +
+                    "esponse)\r\n        {\r\n            try\r\n            {\r\n                var content" +
+                    "type = response.Content.Headers.FirstOrDefault(h => h.Key.Equals(\"Content-Type\")" +
+                    ");\r\n\r\n                var rawencoding = contenttype.Value.First();\r\n\r\n          " +
+                    "      if (rawencoding.Contains(\"utf8\") || rawencoding.Contains(\"UTF-8\"))\r\n      " +
+                    "          {\r\n                    var bytes = await response.Content.ReadAsByteAr" +
+                    "rayAsync();\r\n                    return Encoding.UTF8.GetString(bytes);\r\n       " +
+                    "         }\r\n                else\r\n                {\r\n                    return " +
+                    "await response.Content.ReadAsStringAsync();\r\n                }\r\n            }\r\n " +
+                    "           catch (Exception)\r\n            {\r\n                return await respon" +
+                    "se.Content.ReadAsStringAsync();\r\n            }\r\n        }\r\n\r\n        #endregion\r" +
+                    "\n    }\r\n\r\n    #region models \r\n\r\n    public class HttpResponse\r\n    {\r\n        p" +
+                    "ublic HttpResponse(HttpStatusCode statusCode, bool isSuccess) : this(statusCode," +
+                    "  isSuccess, string.Empty)\r\n        { }\r\n\r\n        public HttpResponse(HttpStatu" +
+                    "sCode statusCode, bool isSuccess, string content)\r\n        {\r\n            Status" +
+                    "Code = statusCode;\r\n            IsSuccess = isSuccess;\r\n            Content = co" +
+                    "ntent;\r\n        }\r\n\r\n        public string Content { get; private set; }\r\n      " +
+                    "  public HttpStatusCode StatusCode { get; private set; }\r\n        public bool Is" +
+                    "Success { get; set; }\r\n\r\n        /// <throws>HttpRequestException</throws>\r\n    " +
+                    "    public void CheckStatus()\r\n        {\r\n            if (!IsSuccess)\r\n         " +
+                    "   {\r\n                throw new HttpRequestException($\"Request failed ({StatusCo" +
+                    "de}). {Content}\",null, StatusCode);\r\n            }\r\n        }\r\n    }\r\n\r\n    #end" +
+                    "region\r\n\r\n    #region Extensions \r\n    \r\n    public static class HttpClientExten" +
+                    "sions\r\n    {\r\n        public static void SetBearerTokenIfExists(this System.Net." +
+                    "Http.HttpClient client, string bearerToken)\r\n        {\r\n            if (!string." +
+                    "IsNullOrEmpty(bearerToken)) client.DefaultRequestHeaders.Authorization = new Aut" +
+                    "henticationHeaderValue(\"Bearer\", bearerToken);\r\n        }\r\n    }\r\n\r\n    #endregi" +
+                    "on\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

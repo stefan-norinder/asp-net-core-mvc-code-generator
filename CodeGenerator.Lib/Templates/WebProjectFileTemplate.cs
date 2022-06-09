@@ -37,7 +37,8 @@ namespace CodeGenerator.Lib.Templates
     <Description>Auto generated project</Description>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>  
+    <PackageReference Include=""AuthenticationLibrary"" Version=""1.0.*"" />
     <PackageReference Include=""AutoMapper"" Version=""11.0.1"" />
     <PackageReference Include=""NLog"" Version=""5.0.0"" />
     <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.0.0"" />
@@ -46,7 +47,7 @@ namespace CodeGenerator.Lib.Templates
   <ItemGroup>
     ");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
             
             #line default

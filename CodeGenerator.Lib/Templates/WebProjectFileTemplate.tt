@@ -12,7 +12,8 @@
     <Description>Auto generated project</Description>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>  
+    <PackageReference Include="AuthenticationLibrary" Version="1.0.*" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="NLog" Version="5.0.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
