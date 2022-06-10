@@ -3,15 +3,17 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenerator.Lib.Models" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using System;
+using eResources.Logic.Model;
 
 namespace <#= namespaceName #>.Web.ViewModel
 {
-    public class <#= Model.Name #>ViewModel
+    public class <#= Model.Name #>ViewModel : Entity
     {
-    <# foreach (var item in Model.Properties){ #>
+    <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
     public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
     <# } #>  
     }

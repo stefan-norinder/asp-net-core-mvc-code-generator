@@ -3,6 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenerator.Lib.Models" #>
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
@@ -23,7 +24,7 @@
 <table class="table data-table">
     <thead>
         <tr>
-<# foreach (var item in Model.Properties){ #>
+<# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
             <th>
                 @SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")
             </th>
@@ -34,7 +35,7 @@
     <tbody>
     @foreach (var item in Model) {
         <tr>
-<# foreach (var item in Model.Properties){ #>
+<# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
             <td>
                 @item.<#= item.Name #>
             </td>

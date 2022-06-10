@@ -96,4 +96,12 @@ namespace CodeGenerator.Lib.Models
             }
         }
     }
+
+    public static class PropretyExtension
+    {
+        public static IEnumerable<Proprety> GetAllPropertiesExceptId(this IEnumerable<Proprety> properties)
+        {
+            return properties.Where(x => !x.Name.Equals("Id", System.StringComparison.OrdinalIgnoreCase));
+        }
+    }
 }

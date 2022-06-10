@@ -3,6 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenerator.Lib.Models" #>
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
@@ -21,7 +22,7 @@
     <div class="col-md-4">
         <form method="post"  enctype="multipart/form-data" asp-controller="<#= Model.Name #>" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<# foreach(var item in Model.Properties.Where(x => x.Name.ToLower() != "id")) { #>
+<# foreach(var item in Model.Properties.GetAllPropertiesExceptId()) { #>
             <div class="form-group">
                 <label asp-for="<#= item.Name #>"></label>
                 <input asp-for="<#= item.Name #>" value="@Model.<#= item.Name #>" />

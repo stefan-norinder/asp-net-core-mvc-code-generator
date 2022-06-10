@@ -3,6 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="CodeGenerator.Lib.Models" #>
 @* --------------------------------------------------------------------*@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
@@ -21,7 +22,7 @@
     <hr />
     <dl class="row">
 
-<# foreach(var item in Model.Properties) { #>
+<# foreach(var item in Model.Properties.GetAllPropertiesExceptId()) { #>
         <dt class = "col-sm-2">
             <label asp-for="<#= item.Name #>" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")</label>
         </dt>

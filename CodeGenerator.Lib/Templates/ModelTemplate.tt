@@ -4,6 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+<#@ import namespace="CodeGenerator.Lib.Models" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using System;
@@ -12,7 +13,7 @@ namespace <#= namespaceName #>.Logic.Model
 {
     public class <#= Model.Name #> : Entity
     {
-    <# foreach (var item in Model.Properties.Where(x => x.Name.ToLower() != "id")){ #>
+    <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
         public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
     <# } #>  
     }
