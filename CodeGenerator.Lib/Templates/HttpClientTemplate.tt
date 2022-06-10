@@ -63,7 +63,7 @@ namespace <#= namespaceName #>.Logic.Http
 
         #region private
 
-        private async Task<HttpResponse> SendRequest(HttpMethod method, Uri url, string content = "")
+        private async Task<HttpResponse> SendRequest(HttpMethod method, Uri url, string requestContent = "")
         {
             logger.LogDebug($"Sending {method} request to {url}. Content: {requestContent}");
             var request = new HttpRequestMessage(method, url);
@@ -73,6 +73,7 @@ namespace <#= namespaceName #>.Logic.Http
             logger.LogDebug($"Response code {response.StatusCode}. Content: {responseContent}");
             return new HttpResponse(response.StatusCode, response.IsSuccessStatusCode, responseContent);
         }
+
 
         private async Task<HttpResponseMessage> Send(HttpRequestMessage request)
         {

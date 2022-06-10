@@ -78,46 +78,46 @@ namespace ");
                     "     public async Task<HttpResponse> Delete(Uri url)\r\n        {\r\n            ret" +
                     "urn await SendRequest(HttpMethod.Delete, url);\r\n        }\r\n\r\n        #region pri" +
                     "vate\r\n\r\n        private async Task<HttpResponse> SendRequest(HttpMethod method, " +
-                    "Uri url, string content = \"\")\r\n        {\r\n            logger.LogDebug($\"Sending " +
-                    "{method} request to {url}. Content: {requestContent}\");\r\n            var request" +
-                    " = new HttpRequestMessage(method, url);\r\n            if (!string.IsNullOrEmpty(r" +
-                    "equestContent)) request.Content = new StringContent(requestContent, Encoding.UTF" +
-                    "8, \"application/json\");\r\n            var response = await Send(request);\r\n      " +
-                    "      string responseContent = await GetContent(response);\r\n            logger.L" +
-                    "ogDebug($\"Response code {response.StatusCode}. Content: {responseContent}\");\r\n  " +
-                    "          return new HttpResponse(response.StatusCode, response.IsSuccessStatusC" +
-                    "ode, responseContent);\r\n        }\r\n\r\n        private async Task<HttpResponseMess" +
-                    "age> Send(HttpRequestMessage request)\r\n        {\r\n            var client = clien" +
-                    "tFactory.CreateClient();\r\n            client.SetBearerTokenIfExists(settings.Bea" +
-                    "rerToken);\r\n            return await client.SendAsync(request);        \r\n       " +
-                    " }\r\n\r\n        private static async Task<string> GetContent(HttpResponseMessage r" +
-                    "esponse)\r\n        {\r\n            try\r\n            {\r\n                var content" +
-                    "type = response.Content.Headers.FirstOrDefault(h => h.Key.Equals(\"Content-Type\")" +
-                    ");\r\n\r\n                var rawencoding = contenttype.Value.First();\r\n\r\n          " +
-                    "      if (rawencoding.Contains(\"utf8\") || rawencoding.Contains(\"UTF-8\"))\r\n      " +
-                    "          {\r\n                    var bytes = await response.Content.ReadAsByteAr" +
-                    "rayAsync();\r\n                    return Encoding.UTF8.GetString(bytes);\r\n       " +
-                    "         }\r\n                else\r\n                {\r\n                    return " +
-                    "await response.Content.ReadAsStringAsync();\r\n                }\r\n            }\r\n " +
-                    "           catch (Exception)\r\n            {\r\n                return await respon" +
-                    "se.Content.ReadAsStringAsync();\r\n            }\r\n        }\r\n\r\n        #endregion\r" +
-                    "\n    }\r\n\r\n    #region models \r\n\r\n    public class HttpResponse\r\n    {\r\n        p" +
-                    "ublic HttpResponse(HttpStatusCode statusCode, bool isSuccess) : this(statusCode," +
-                    "  isSuccess, string.Empty)\r\n        { }\r\n\r\n        public HttpResponse(HttpStatu" +
-                    "sCode statusCode, bool isSuccess, string content)\r\n        {\r\n            Status" +
-                    "Code = statusCode;\r\n            IsSuccess = isSuccess;\r\n            Content = co" +
-                    "ntent;\r\n        }\r\n\r\n        public string Content { get; private set; }\r\n      " +
-                    "  public HttpStatusCode StatusCode { get; private set; }\r\n        public bool Is" +
-                    "Success { get; set; }\r\n\r\n        /// <throws>HttpRequestException</throws>\r\n    " +
-                    "    public void CheckStatus()\r\n        {\r\n            if (!IsSuccess)\r\n         " +
-                    "   {\r\n                throw new HttpRequestException($\"Request failed ({StatusCo" +
-                    "de}). {Content}\",null, StatusCode);\r\n            }\r\n        }\r\n    }\r\n\r\n    #end" +
-                    "region\r\n\r\n    #region Extensions \r\n    \r\n    public static class HttpClientExten" +
-                    "sions\r\n    {\r\n        public static void SetBearerTokenIfExists(this System.Net." +
-                    "Http.HttpClient client, string bearerToken)\r\n        {\r\n            if (!string." +
-                    "IsNullOrEmpty(bearerToken)) client.DefaultRequestHeaders.Authorization = new Aut" +
-                    "henticationHeaderValue(\"Bearer\", bearerToken);\r\n        }\r\n    }\r\n\r\n    #endregi" +
-                    "on\r\n}\r\n");
+                    "Uri url, string requestContent = \"\")\r\n        {\r\n            logger.LogDebug($\"S" +
+                    "ending {method} request to {url}. Content: {requestContent}\");\r\n            var " +
+                    "request = new HttpRequestMessage(method, url);\r\n            if (!string.IsNullOr" +
+                    "Empty(requestContent)) request.Content = new StringContent(requestContent, Encod" +
+                    "ing.UTF8, \"application/json\");\r\n            var response = await Send(request);\r" +
+                    "\n            string responseContent = await GetContent(response);\r\n            l" +
+                    "ogger.LogDebug($\"Response code {response.StatusCode}. Content: {responseContent}" +
+                    "\");\r\n            return new HttpResponse(response.StatusCode, response.IsSuccess" +
+                    "StatusCode, responseContent);\r\n        }\r\n\r\n\r\n        private async Task<HttpRes" +
+                    "ponseMessage> Send(HttpRequestMessage request)\r\n        {\r\n            var clien" +
+                    "t = clientFactory.CreateClient();\r\n            client.SetBearerTokenIfExists(set" +
+                    "tings.BearerToken);\r\n            return await client.SendAsync(request);        " +
+                    "\r\n        }\r\n\r\n        private static async Task<string> GetContent(HttpResponse" +
+                    "Message response)\r\n        {\r\n            try\r\n            {\r\n                va" +
+                    "r contenttype = response.Content.Headers.FirstOrDefault(h => h.Key.Equals(\"Conte" +
+                    "nt-Type\"));\r\n\r\n                var rawencoding = contenttype.Value.First();\r\n\r\n " +
+                    "               if (rawencoding.Contains(\"utf8\") || rawencoding.Contains(\"UTF-8\")" +
+                    ")\r\n                {\r\n                    var bytes = await response.Content.Rea" +
+                    "dAsByteArrayAsync();\r\n                    return Encoding.UTF8.GetString(bytes);" +
+                    "\r\n                }\r\n                else\r\n                {\r\n                  " +
+                    "  return await response.Content.ReadAsStringAsync();\r\n                }\r\n       " +
+                    "     }\r\n            catch (Exception)\r\n            {\r\n                return awa" +
+                    "it response.Content.ReadAsStringAsync();\r\n            }\r\n        }\r\n\r\n        #e" +
+                    "ndregion\r\n    }\r\n\r\n    #region models \r\n\r\n    public class HttpResponse\r\n    {\r\n" +
+                    "        public HttpResponse(HttpStatusCode statusCode, bool isSuccess) : this(st" +
+                    "atusCode,  isSuccess, string.Empty)\r\n        { }\r\n\r\n        public HttpResponse(" +
+                    "HttpStatusCode statusCode, bool isSuccess, string content)\r\n        {\r\n         " +
+                    "   StatusCode = statusCode;\r\n            IsSuccess = isSuccess;\r\n            Con" +
+                    "tent = content;\r\n        }\r\n\r\n        public string Content { get; private set; " +
+                    "}\r\n        public HttpStatusCode StatusCode { get; private set; }\r\n        publi" +
+                    "c bool IsSuccess { get; set; }\r\n\r\n        /// <throws>HttpRequestException</thro" +
+                    "ws>\r\n        public void CheckStatus()\r\n        {\r\n            if (!IsSuccess)\r\n" +
+                    "            {\r\n                throw new HttpRequestException($\"Request failed (" +
+                    "{StatusCode}). {Content}\",null, StatusCode);\r\n            }\r\n        }\r\n    }\r\n\r" +
+                    "\n    #endregion\r\n\r\n    #region Extensions \r\n    \r\n    public static class HttpCl" +
+                    "ientExtensions\r\n    {\r\n        public static void SetBearerTokenIfExists(this Sy" +
+                    "stem.Net.Http.HttpClient client, string bearerToken)\r\n        {\r\n            if " +
+                    "(!string.IsNullOrEmpty(bearerToken)) client.DefaultRequestHeaders.Authorization " +
+                    "= new AuthenticationHeaderValue(\"Bearer\", bearerToken);\r\n        }\r\n    }\r\n\r\n   " +
+                    " #endregion\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
