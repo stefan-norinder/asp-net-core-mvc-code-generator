@@ -40,6 +40,7 @@ namespace CodeGenerator.Lib.Templates
   <ItemGroup>  
     <PackageReference Include=""AuthenticationLibrary"" Version=""1.0.*"" />
     <PackageReference Include=""AutoMapper"" Version=""11.0.1"" />
+    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Localization"" Version=""2.2.0"" />
     <PackageReference Include=""NLog"" Version=""5.0.0"" />
     <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.0.0"" />
   </ItemGroup>  
@@ -47,7 +48,7 @@ namespace CodeGenerator.Lib.Templates
   <ItemGroup>
     ");
             
-            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 24 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
             
             #line default
@@ -63,8 +64,7 @@ namespace CodeGenerator.Lib.Templates
     <None Include=""wwwroot\img\icon_language.png"">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  
+  </ItemGroup>  
   
   <ItemGroup>
     <Content Update=""nlog.config"">
@@ -75,6 +75,9 @@ namespace CodeGenerator.Lib.Templates
     </Content>
   </ItemGroup>
 
+  <Target Name=""PostBuild"" AfterTargets=""PostBuildEvent"">
+    <Exec Command=""echo  -------------------------------------------------------------------------------------------- &#xD;&#xA;echo  *** Start custom post build events *** &#xD;&#xA;echo  --------------------------------------------------------------------------------------------&#xD;&#xA;echo.&#xD;&#xA;echo  If you are making changes to files that are updated by the code generator application&#xD;&#xA;echo  it's a good idea to wite protect them here. E.g. attrib +r &quot;/{path}/Web.csproj&quot; &#xD;&#xA;echo.&#xD;&#xA;echo  -------------------------------------------------------------------------------------------- &#xD;&#xA;echo  *** End custom post build events *** &#xD;&#xA;echo  --------------------------------------------------------------------------------------------"" />
+  </Target>
 
 </Project>
 ");

@@ -100,30 +100,32 @@ namespace CodeGenerator.Lib.Templates
                     "rms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>\r\n" +
                     "  </resheader>\r\n  <resheader name=\"writer\">\r\n    <value>System.Resources.ResXRes" +
                     "ourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyTo" +
-                    "ken=b77a5c561934e089</value>\r\n  </resheader>\r\n  ");
+                    "ken=b77a5c561934e089</value>\r\n  </resheader>\r\n  <data name=\"TableLang\" xml:space" +
+                    "=\"preserve\">\r\n    <value>//cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json</v" +
+                    "alue>\r\n  </data>\r\n  ");
             
-            #line 125 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            #line 128 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
  foreach (var name in Model){ 
             
             #line default
             #line hidden
             this.Write("  <data name=\"");
             
-            #line 126 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            #line 129 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(name));
             
             #line default
             #line hidden
             this.Write("\" xml:space=\"preserve\">\r\n    <value>");
             
-            #line 127 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            #line 130 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(name));
             
             #line default
             #line hidden
             this.Write("</value>\r\n  </data>\r\n  ");
             
-            #line 129 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
+            #line 132 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ResourceTemplate.tt"
  } 
             
             #line default

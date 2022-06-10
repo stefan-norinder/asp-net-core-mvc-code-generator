@@ -122,6 +122,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TableLang" xml:space="preserve">
+    <value>//cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json</value>
+  </data>
   <# foreach (var name in Model){ #>
   <data name="<#= name #>" xml:space="preserve">
     <value><#= name #></value>

@@ -1,0 +1,66 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
+
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Mvc.Localization;
+using Localization;
+using System.Reflection;
+using Newtonsoft.Json;
+
+namespace Web.Controllers
+{
+    [Route("[controller]")]
+    [ApiController]
+    public partial class ResourcesController : ControllerBase
+    {
+        private readonly IStringLocalizer localizer;
+
+        public ResourcesController(IStringLocalizerFactory factory)
+        {
+            var type = typeof(SharedResource);
+            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+            localizer = factory.Create("SharedResource", assemblyName.Name);
+        }
+
+        [HttpGet()]
+        public IActionResult Get()
+        {
+            var locatedStrings = GetLocatedStrings();
+            string json = ConvertToSerializedJson(locatedStrings);
+            return Ok(json);
+
+        }
+
+        [HttpGet("{key}")]
+        public IActionResult Get(string key)
+        {
+            var locatedString = GetLocatedStrings(key);
+            string json = ConvertToSerializedJson(locatedString);
+            return Ok(json);
+
+        }
+
+        #region private 
+
+        private IEnumerable<KeyValuePair<string, string>> GetLocatedStrings(string key = "")
+        {
+            var allLocalizedStrings = localizer.GetAllStrings().Where(x => key == "" || x.Name.Equals(key,System.StringComparison.OrdinalIgnoreCase));
+            return allLocalizedStrings.Select(x => new KeyValuePair<string, string>(x.Name, x.Value));
+        }
+
+        private static string ConvertToSerializedJson(IEnumerable<KeyValuePair<string, string>> keyValuePairCollection)
+        {
+            var dictionary = new Dictionary<string, string>(keyValuePairCollection);
+            return JsonConvert.SerializeObject(dictionary);
+        }
+
+        #endregion
+    }
+}

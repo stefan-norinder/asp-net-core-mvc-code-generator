@@ -132,6 +132,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ProjectFileTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ResourcesControllerTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourcesControllerTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ResourceTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -203,6 +208,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\ResourcesControllerTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ResourcesControllerTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\ApiControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ApiControllerTemplate.cs</LastGenOutput>

@@ -40,34 +40,46 @@ namespace CodeGenerator.Lib.Templates
                     " charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, init" +
                     "ial-scale=1.0\" />\r\n    <title>@ViewData[\"Title\"]</title>\r\n    <link rel=\"stylesh" +
                     "eet\" href=\"~/lib/bootstrap/dist/css/bootstrap.min.css\" />\r\n    <link rel=\"styles" +
-                    "heet\" href=\"~/css/site.css\" />\r\n</head>\r\n<body>\r\n    <header>\r\n        <nav clas" +
-                    "s=\"navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bot" +
-                    "tom box-shadow mb-3\">\r\n            <div class=\"container\">\r\n                <a c" +
-                    "lass=\"navbar-brand\" asp-controller=\"Home\" asp-action=\"Index\">@SharedLocalizer.Ge" +
-                    "tLocalizedHtmlString(\"Home\")</a>\r\n                <button class=\"navbar-toggler\"" +
-                    " type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-contro" +
-                    "ls=\"navbarSupportedContent\"\r\n                        aria-expanded=\"false\" aria-" +
-                    "label=\"Toggle navigation\">\r\n                    <span class=\"navbar-toggler-icon" +
-                    "\"></span>\r\n                </button>\r\n                <div class=\"navbar-collaps" +
-                    "e collapse d-sm-inline-flex justify-content-between\">\r\n                    <ul c" +
-                    "lass=\"navbar-nav flex-grow-1\">\r\n                        <li class=\"nav-item\">\r\n " +
-                    "                           <a class=\"nav-link text-dark\" asp-area=\"\" asp-control" +
-                    "ler=\"Home\" asp-action=\"Index\">@SharedLocalizer.GetLocalizedHtmlString(\"Home\")</a" +
-                    ">\r\n                       </li>\r\n                    </ul>\r\n                </di" +
-                    "v>                \r\n                <div>\r\n                    <form id=\"changeL" +
-                    "anguageFormId\" asp-controller=\"Home\" asp-action=\"ToggleCulture\" method=\"post\">\r\n" +
-                    "                        <input type=\"hidden\" name=\"returnUrl\" value=\"@currentUrl" +
-                    "\">\r\n                        <img id=\"iconLanguageId\" src=\"~/img/icon_language.pn" +
-                    "g\" title=\"@SharedLocalizer.GetLocalizedHtmlString(\"Toggle language\")\" class=\"ico" +
-                    "n-language\" />\r\n                    </form>\r\n                </div>\r\n           " +
-                    " </div>\r\n        </nav>\r\n    </header>\r\n    <div class=\"container\">\r\n        <ma" +
-                    "in role=\"main\" class=\"pb-3\">\r\n            @RenderBody()\r\n        </main>\r\n    </" +
-                    "div>\r\n\r\n    <footer class=\"border-top footer text-muted\">\r\n        <div class=\"c" +
-                    "ontainer\">\r\n            &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script" +
-                    " src=\"~/lib/jquery/dist/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstr" +
-                    "ap/dist/js/bootstrap.bundle.min.js\"></script>\r\n    <script src=\"~/js/site.js\" as" +
-                    "p-append-version=\"true\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", requ" +
-                    "ired: false)\r\n</body>\r\n</html>\r\n\r\n");
+                    "heet\" href=\"~/css/site.css\" />\r\n    <link rel=\"stylesheet\" href=\"~/css/custom-si" +
+                    "te.css\" />\r\n    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.11.5/c" +
+                    "ss/jquery.dataTables.min.css\" type=\"text/css\" />\r\n    <link rel=\"stylesheet\" hre" +
+                    "f=\"https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css\" type" +
+                    "=\"text/css\" />\r\n</head>\r\n<body>\r\n    <header>\r\n        <nav class=\"navbar navbar" +
+                    "-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow m" +
+                    "b-3\">\r\n            <div class=\"container\">\r\n                <a class=\"navbar-bra" +
+                    "nd\" asp-controller=\"Home\" asp-action=\"Index\">@SharedLocalizer.GetLocalizedHtmlSt" +
+                    "ring(\"Home\")</a>\r\n                <button class=\"navbar-toggler\" type=\"button\" d" +
+                    "ata-toggle=\"collapse\" data-target=\".navbar-collapse\" aria-controls=\"navbarSuppor" +
+                    "tedContent\"\r\n                        aria-expanded=\"false\" aria-label=\"Toggle na" +
+                    "vigation\">\r\n                    <span class=\"navbar-toggler-icon\"></span>\r\n     " +
+                    "           </button>\r\n                <div class=\"navbar-collapse collapse d-sm-" +
+                    "inline-flex justify-content-between\">\r\n                    <ul class=\"navbar-nav" +
+                    " flex-grow-1\">\r\n                        <li class=\"nav-item\">\r\n                 " +
+                    "           <a class=\"nav-link text-dark\" asp-area=\"\" asp-controller=\"Home\" asp-a" +
+                    "ction=\"Index\">@SharedLocalizer.GetLocalizedHtmlString(\"Home\")</a>\r\n             " +
+                    "          </li>\r\n                    </ul>\r\n                </div>              " +
+                    "  \r\n                <div>\r\n                    <form id=\"changeLanguageFormId\" a" +
+                    "sp-controller=\"Home\" asp-action=\"ToggleCulture\" method=\"post\">\r\n                " +
+                    "        <input type=\"hidden\" name=\"returnUrl\" value=\"@currentUrl\">\r\n            " +
+                    "            <img id=\"iconLanguageId\" src=\"~/img/icon_language.png\" title=\"@Share" +
+                    "dLocalizer.GetLocalizedHtmlString(\"Toggle language\")\" class=\"icon-language\" />\r\n" +
+                    "                    </form>\r\n                </div>\r\n            </div>\r\n       " +
+                    " </nav>\r\n    </header>\r\n    <div class=\"container\">\r\n        <main role=\"main\" c" +
+                    "lass=\"pb-3\">\r\n            @RenderBody()\r\n        </main>\r\n    </div>\r\n\r\n    <foo" +
+                    "ter class=\"border-top footer text-muted\">\r\n        <div class=\"container\">\r\n    " +
+                    "        &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jque" +
+                    "ry/dist/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/boots" +
+                    "trap.bundle.min.js\"></script>\r\n     <script src=\"https://cdn.datatables.net/1.12" +
+                    ".0/js/jquery.dataTables.min.js\"></script>\r\n    <script src=\"https://cdn.datatabl" +
+                    "es.net/buttons/2.2.2/js/dataTables.buttons.min.js\"></script>\r\n    <script src=\"h" +
+                    "ttps://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js\"></script>\r\n    " +
+                    "<script src=\"https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js\">" +
+                    "</script>\r\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/j" +
+                    "szip.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2." +
+                    "3/js/buttons.print.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-" +
+                    "version=\"true\"></script>\r\n    <script src=\"~/js/custom-site.js\" asp-append-versi" +
+                    "on=\"true\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n" +
+                    "</body>\r\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
