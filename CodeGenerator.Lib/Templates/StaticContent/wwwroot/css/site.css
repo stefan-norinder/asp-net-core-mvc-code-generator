@@ -2,6 +2,10 @@
 Warning! This is an auto generated file. Changes may be overwritten 
 */
 
+button span.bi-plus-circle {
+    margin-right: 10px;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

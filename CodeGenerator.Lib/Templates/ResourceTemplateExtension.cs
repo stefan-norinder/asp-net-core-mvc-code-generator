@@ -31,13 +31,12 @@ namespace CodeGenerator.Lib.Templates
             var list = new List<string>(staticKeys);
             foreach (var @class in classes.Distinct())
             {
-                list.Add(@class.Name);
+                if (!list.Contains(@class.Name)) list.Add(@class.Name);
                 foreach (var prop in @class.Properties)
                 {
                     if (!list.Contains(prop.Name)) list.Add(prop.Name);
                 }
             }
-
             return list;
         }
 

@@ -62,15 +62,17 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("\")</h1>\r\n\r\n<p>\r\n    <a href=\"/");
+            this.Write("\")</h1>\r\n\r\n<a asp-controller=\"");
             
-            #line 20 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
+            #line 19 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("/create\">@SharedLocalizer.GetLocalizedHtmlString(\"Create New\")</a>\r\n</p>\r\n\r\n<tabl" +
-                    "e class=\"table data-table\">\r\n    <thead>\r\n        <tr>\r\n");
+            this.Write("\" asp-action=\"Create\">\r\n    <button type=\"button\" class=\"btn btn-info btn-lg\"><sp" +
+                    "an class=\"bi bi-plus-circle\"></span>@SharedLocalizer.GetLocalizedHtmlString(\"Cre" +
+                    "ate New\")</button>\r\n</a>\r\n\r\n<table class=\"table data-table\">\r\n    <thead>\r\n     " +
+                    "   <tr>\r\n");
             
             #line 26 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ListViewTemplate.tt"
  foreach (var item in Model.Properties){ 
