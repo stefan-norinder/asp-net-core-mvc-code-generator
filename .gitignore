@@ -3,6 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+/CodeGenerator.Console/code-generator
 **/appsettings.local.json
 **/nlog.local.config
 Canvas.Web/wwwroot/external-js/app.canvas.bundle.js.LICENSE.txt
