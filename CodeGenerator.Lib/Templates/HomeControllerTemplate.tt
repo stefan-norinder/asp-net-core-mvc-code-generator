@@ -37,6 +37,12 @@ namespace Web.Controllers
             SetCookie(culture);
 
             return Redirect(returnUrl);
+        }        
+
+        [HttpGet("error")]
+        public IActionResult Error()
+        {
+            return View();
         }
 
         #region private

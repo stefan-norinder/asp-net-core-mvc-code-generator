@@ -2,6 +2,10 @@
 Warning! This is an auto generated file. Changes may be overwritten 
 */
 
+body ul {
+    list-style-type: none;
+}
+
 a {
     color: #333;
 }

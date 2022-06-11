@@ -17,6 +17,8 @@ namespace CodeGenerator.Lib.Templates
                                                 "Home",
                                                 "List",
                                                 "Back to List",
+                                                "ErrorHeader",
+                                                "ErrorDescription",
                                                 "Are you sure you want to delete this?"
                                             };
 

@@ -72,6 +72,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>EditViewTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ErrorViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ErrorViewTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\HomeControllerTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -213,6 +218,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\ErrorViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ErrorViewTemplate.cs</LastGenOutput>
+    </None>
     <None Update="Templates\ResourcesControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ResourcesControllerTemplate.cs</LastGenOutput>

@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeControllerTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ErrorViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class HomeControllerTemplate : HomeControllerTemplateBase
+    public partial class ErrorViewTemplate : ErrorViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,40 +28,27 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            
-            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
-            
-            #line default
-            #line hidden
-            this.Write(" \r\n\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Http;\r\nusing" +
-                    " Microsoft.AspNetCore.Localization;\r\nusing Microsoft.AspNetCore.Mvc;\r\nusing Micr" +
-                    "osoft.Extensions.Options;\r\nusing System.Globalization;\r\nusing System.Linq;\r\nusin" +
-                    "g System.Threading;\r\n\r\nnamespace Web.Controllers\r\n{\r\n    public class HomeContro" +
-                    "ller : Controller\r\n    {\r\n        private readonly RequestLocalizationOptions lo" +
-                    "calizationOptions;\r\n\r\n        public HomeController(IOptions<RequestLocalization" +
-                    "Options> localizationOptions)\r\n        {\r\n            this.localizationOptions =" +
-                    " localizationOptions.Value;\r\n        }\r\n\r\n        public IActionResult Index()\r\n" +
-                    "        {\r\n            return View();\r\n        }\r\n\r\n        [HttpPost]\r\n        " +
-                    "public IActionResult ToggleCulture(string returnUrl)\r\n        {\r\n            var" +
-                    " culture = GetNextCultureFromSupportedCultures();\r\n            SetCookie(culture" +
-                    ");\r\n\r\n            return Redirect(returnUrl);\r\n        }        \r\n\r\n        [Htt" +
-                    "pGet(\"error\")]\r\n        public IActionResult Error()\r\n        {\r\n            ret" +
-                    "urn View();\r\n        }\r\n\r\n        #region private\r\n\r\n        private CultureInfo" +
-                    " GetNextCultureFromSupportedCultures()\r\n        {\r\n            var cultureInfo =" +
-                    " Thread.CurrentThread.CurrentCulture;\r\n            int index = default;\r\n       " +
-                    "     for (var i = 0; i < localizationOptions.SupportedCultures.Count(); i++)\r\n  " +
-                    "          {\r\n                if (localizationOptions.SupportedCultures[i].GetHas" +
-                    "hCode() == cultureInfo.GetHashCode())\r\n                {\r\n                    in" +
-                    "dex = i;\r\n                    break;\r\n                }\r\n            }\r\n        " +
-                    "    var culture = index < localizationOptions.SupportedCultures.Count() - 1 ? lo" +
-                    "calizationOptions.SupportedCultures[index + 1] : localizationOptions.SupportedCu" +
-                    "ltures[0];\r\n            return culture;\r\n        }\r\n\r\n        private void SetCo" +
-                    "okie(CultureInfo culture)\r\n        {\r\n            HttpContext.Response.Cookies.A" +
-                    "ppend(\r\n                            CookieRequestCultureProvider.DefaultCookieNa" +
-                    "me,\r\n                            CookieRequestCultureProvider.MakeCookieValue(ne" +
-                    "w RequestCulture(culture)),\r\n                            new CookieOptions { Pat" +
-                    "h = Url.Content(\"~/\") });\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+            this.Write(@"@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
+
+@{
+    ViewData[""Title""] = @$""{SharedLocalizer.GetLocalizedHtmlString(""ErrorHeader"")}"";
+}
+
+<h1>@SharedLocalizer.GetLocalizedHtmlString(""ErrorHeader"")</h1>
+<p>@SharedLocalizer.GetLocalizedHtmlString(""ErrorDescription"")</p>
+
+<div>
+    <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync(""_ValidationScriptsPartial"");}
+}
+");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -73,7 +60,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class HomeControllerTemplateBase
+    public class ErrorViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

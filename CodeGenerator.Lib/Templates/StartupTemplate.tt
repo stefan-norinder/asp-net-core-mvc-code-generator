@@ -68,29 +68,9 @@ namespace <#= namespaceName #>.Web
             app.UseStaticFiles();
             app.UseRouting();
             app.UseRequestLocalization();
+            ConfigureExceptionHandler(app);
             CustomConfiguration(app, env);
-
-            app.UseExceptionHandler(
-            builder =>
-            {
-                builder.Run(
-                    async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        context.Response.ContentType = "text/html";
-                        var e = context.Features.Get<IExceptionHandlerFeature>();
-                        if (e != null)
-                        {
-                            var factory = builder.ApplicationServices.GetService<ILoggerFactory>();
-                            var logger = factory.CreateLogger("ExceptionLogger");
-                            logger.LogError(e.Error, e.Error.Message);
-                            var err = $"Sorry, an error occurred.";
-                            await context.Response.WriteAsync(err).ConfigureAwait(false);
-                        }
-                    });
-            }
-        );
-
+                      
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -131,6 +111,24 @@ namespace <#= namespaceName #>.Web
             return new List<CultureInfo> {
                 new CultureInfo("en-gb")
             };
+        }
+
+        protected virtual void ConfigureExceptionHandler(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(builder =>
+            {
+                builder.Run(async context =>
+                {
+                    var e = context.Features.Get<IExceptionHandlerFeature>();
+                    if (e == null) return;
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.ContentType = "text/html";
+                    var factory = builder.ApplicationServices.GetService<ILoggerFactory>();
+                    var logger = factory.CreateLogger("ExceptionLogger");
+                    logger.LogError(e.Error, e.Error.Message);
+                    context.Response.Redirect("/error");
+                });
+            });
         }
 
         #region private
