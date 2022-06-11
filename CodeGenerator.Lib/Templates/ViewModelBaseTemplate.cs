@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\LayoutViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelBaseTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class LayoutViewTemplate : LayoutViewTemplateBase
+    public partial class ViewModelBaseTemplate : ViewModelBaseTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,59 +28,22 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
-                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
-                    "------------------------------------------------------------*@\r\n\r\n@using Microso" +
-                    "ft.AspNetCore.Localization\r\n@using Microsoft.AspNetCore.Http.Extensions\r\n@using " +
-                    "Localization\r\n@inject LocService SharedLocalizer\r\n\r\n@{\r\n    var httpContext = Vi" +
-                    "ewContext.HttpContext;\r\n    var currentCulture = httpContext.Features.Get<IReque" +
-                    "stCultureFeature>().RequestCulture.UICulture;\r\n    var currentUrl = UriHelper.Bu" +
-                    "ildRelative(httpContext.Request.PathBase, httpContext.Request.Path, httpContext." +
-                    "Request.QueryString);\r\n}\r\n\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta" +
-                    " charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, init" +
-                    "ial-scale=1.0\" />\r\n    <title>@ViewData[\"Title\"]</title>\r\n    <link rel=\"stylesh" +
-                    "eet\" href=\"~/lib/bootstrap/dist/css/bootstrap.min.css\" />\r\n    <link rel=\"styles" +
-                    "heet\" href=\"~/css/site.css\" />\r\n    <link rel=\"stylesheet\" href=\"~/css/custom-si" +
-                    "te.css\" />\r\n    <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.11.5/c" +
-                    "ss/jquery.dataTables.min.css\" type=\"text/css\" />\r\n    <link rel=\"stylesheet\" hre" +
-                    "f=\"https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css\" type" +
-                    "=\"text/css\" />\r\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bo" +
-                    "otstrap-icons@1.8.1/font/bootstrap-icons.css\" type=\"text/css\" />\r\n</head>\r\n<body" +
-                    ">\r\n    <header>\r\n        <nav class=\"navbar navbar-expand-sm navbar-toggleable-s" +
-                    "m navbar-light bg-white border-bottom box-shadow mb-3\">\r\n            <div class=" +
-                    "\"container\">\r\n                <a class=\"navbar-brand\" asp-controller=\"Home\" asp-" +
-                    "action=\"Index\"><span class=\"bi bi-gem\"></span></a>\r\n                <button clas" +
-                    "s=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\".navbar-col" +
-                    "lapse\" aria-controls=\"navbarSupportedContent\"\r\n                        aria-expa" +
-                    "nded=\"false\" aria-label=\"Toggle navigation\">\r\n                    <span class=\"n" +
-                    "avbar-toggler-icon\"></span>\r\n                </button>\r\n                <div cla" +
-                    "ss=\"navbar-collapse collapse d-sm-inline-flex justify-content-between\">\r\n       " +
-                    "             <ul class=\"navbar-nav flex-grow-1\">\r\n                        <li cl" +
-                    "ass=\"nav-item\">\r\n                            <a class=\"nav-link text-dark\" asp-a" +
-                    "rea=\"\" asp-controller=\"Home\" asp-action=\"Index\">@SharedLocalizer.GetLocalizedHtm" +
-                    "lString(\"ApplicationName\")</a>\r\n                       </li>\r\n                  " +
-                    "  </ul>\r\n                </div>                \r\n                <div>\r\n        " +
-                    "            <form id=\"changeLanguageFormId\" asp-controller=\"Home\" asp-action=\"To" +
-                    "ggleCulture\" method=\"post\">\r\n                        <input type=\"hidden\" name=\"" +
-                    "returnUrl\" value=\"@currentUrl\">\r\n                        <img id=\"iconLanguageId" +
-                    "\" src=\"~/img/icon_language.png\" title=\"@SharedLocalizer.GetLocalizedHtmlString(\"" +
-                    "Toggle language\")\" class=\"icon-language\" />\r\n                    </form>\r\n      " +
-                    "          </div>\r\n            </div>\r\n        </nav>\r\n    </header>\r\n    <div cl" +
-                    "ass=\"container\">\r\n        <main role=\"main\" class=\"pb-3\">\r\n            @RenderBo" +
-                    "dy()\r\n        </main>\r\n    </div>\r\n\r\n    <footer class=\"border-top footer text-m" +
-                    "uted\">\r\n        <div class=\"container\">\r\n            &copy; 2022 \r\n        </div" +
-                    ">\r\n    </footer>\r\n    <script src=\"~/lib/jquery/dist/jquery.min.js\"></script>\r\n " +
-                    "   <script src=\"~/lib/bootstrap/dist/js/bootstrap.bundle.min.js\"></script>\r\n    " +
-                    " <script src=\"https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js\"></s" +
-                    "cript>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2.2/js/dataTables." +
-                    "buttons.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2" +
-                    ".2.2/js/buttons.html5.min.js\"></script>\r\n    <script src=\"https://cdn.datatables" +
-                    ".net/buttons/2.2.2/js/buttons.colVis.min.js\"></script>\r\n    <script src=\"https:/" +
-                    "/cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"></script>\r\n    <script" +
-                    " src=\"https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js\"></script" +
-                    ">\r\n    <script src=\"~/js/site.js\" asp-append-version=\"true\"></script>\r\n    <scri" +
-                    "pt src=\"~/js/custom-site.js\" asp-append-version=\"true\"></script>\r\n    @await Ren" +
-                    "derSectionAsync(\"Scripts\", required: false)\r\n</body>\r\n</html>\r\n\r\n");
+            
+            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelBaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\r\nusing Newtonsoft.Json;\r\nusing System;\r\n\r\nnamespace ");
+            
+            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelBaseTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Web.ViewModel\r\n{\r\n    public class ViewModelBase\r\n    {\r\n        public virtual " +
+                    "int Id { get; set; }\r\n\r\n        public override string ToString()\r\n        {\r\n  " +
+                    "          return JsonConvert.SerializeObject(this);\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -92,7 +55,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class LayoutViewTemplateBase
+    public class ViewModelBaseTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

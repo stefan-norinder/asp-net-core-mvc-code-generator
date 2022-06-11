@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace foo --server .\\sqlexpress --datasource  bar --output ./../../../../../bar"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace KohaTexts --server .\\sqlexpress --datasource  minasidor --output ./../../../../../koha-texts"
     }
   }
 }

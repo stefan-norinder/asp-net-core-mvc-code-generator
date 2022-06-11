@@ -20,9 +20,9 @@ namespace CodeGenerator.Lib.Factories
 
         public ICodeGenerationModelFetcher CreateInstance()
         {
-            if (args.IsBasedOnDatasource()) return new GenerationModelFromDatabaseFetcher(dataAccess,args);
-            
-            return new GenerationModelFetcher(args);
+            ICodeGenerationModelFetcher generationModel = args.IsBasedOnDatasource() ? new GenerationModelFromDatabaseFetcher(dataAccess, args) : new GenerationModelFetcher(args);
+            if (generationModel.Namespace.Contains("-")) throw new System.Exception("Invalid namespace name, cannot contain \"-\".");
+            return generationModel;
         }
 
     }

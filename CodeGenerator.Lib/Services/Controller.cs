@@ -24,7 +24,8 @@ namespace CodeGenerator.Lib.Services
         public void Run(string[] args)
         {
             var generationFactory = new GenerationModelFetcherFactory(dataAccess, args);
-            var generationModelFetcher = generationFactory.CreateInstance();          
+            var generationModelFetcher = generationFactory.CreateInstance();
+
 
             foreach (var codeGenerator in factory.CreateInstances(generationModelFetcher.GeneratorTypes, generationModelFetcher))
             {

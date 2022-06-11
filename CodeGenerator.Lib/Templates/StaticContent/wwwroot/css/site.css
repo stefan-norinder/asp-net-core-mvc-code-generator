@@ -2,14 +2,30 @@
 Warning! This is an auto generated file. Changes may be overwritten 
 */
 
+a {
+    color: #333;
+}
+
+a.navbar-brand {
+    font-size: 55px;
+}
+
+.nav-item {
+    font-size: 1.5em;
+    font-weight: bold;
+    border-left: 2px solid #aaa;
+    padding-left: 10px;
+    margin-left: 10px;
+}
+
 button span.bi-plus-circle {
     margin-right: 10px;
 }
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */

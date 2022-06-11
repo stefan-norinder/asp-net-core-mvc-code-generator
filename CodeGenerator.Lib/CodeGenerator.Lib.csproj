@@ -195,6 +195,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TestUtilsTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ViewModelBaseTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ViewModelBaseTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ViewModelTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -455,6 +460,10 @@
     <None Update="Templates\TestUtilsTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>TestUtilsTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\ViewModelBaseTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModelBaseTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ViewModelTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
