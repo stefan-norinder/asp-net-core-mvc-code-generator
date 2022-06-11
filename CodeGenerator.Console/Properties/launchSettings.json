@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace MyApplication --server .\\sqlexpress --datasource  Funka --output ./myapp --generatorTypes DataAccess Services Models"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace MyApplication --server .\\sqlexpress --datasource  Funka --output ./myapp --generatorTypes DataAccess Service Model"
     }
   }
 }

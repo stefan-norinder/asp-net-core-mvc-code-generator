@@ -30,9 +30,9 @@ namespace CodeGenerator.Lib.Factories
             {
                 case CodeGeneratorTypes.DataAccess:
                     return new DataAccessGenerator(generationFetcher, output);
-                case CodeGeneratorTypes.Models:
+                case CodeGeneratorTypes.Model:
                     return new ModelGenerator(generationFetcher, output);
-                case CodeGeneratorTypes.Services:
+                case CodeGeneratorTypes.Service:
                     return new ServiceGenerator(generationFetcher, output);
                 case CodeGeneratorTypes.Api:
                     return new ApiControllerGenerator(generationFetcher, output);
