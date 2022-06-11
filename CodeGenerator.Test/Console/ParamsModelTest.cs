@@ -83,7 +83,8 @@ namespace CodeGenerator.Test
         {
             var args = new[] {
                     "--generatorTypes",
-                    "api controllers",
+                    "api",
+                    "controllers",
                     "--namespace",
                     "DatabaseTest",
                     "--server",
@@ -103,7 +104,7 @@ namespace CodeGenerator.Test
             Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Api));
             Assert.IsTrue(sut.GeneratorTypes.HasFlag(CodeGeneratorTypes.Controllers));
             Assert.AreEqual("test", model.MetaData.Datasource);
-            Assert.AreEqual("foo/bar/", model.MetaData.Datasource);
+            Assert.AreEqual("foo/bar/", model.MetaData.Output);
             Assert.AreEqual(".\\sqlexpress", model.MetaData.Server);
         }
     }
