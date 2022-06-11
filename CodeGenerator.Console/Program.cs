@@ -34,13 +34,13 @@ Help for dot-net-mvc-code-generator
 
 The following parameters can be pass to the application:
 
-    {ParamsConstants.Namespace}         Namespace of the code to generate
-    {ParamsConstants.Server}            Server that hosts the database of which your code should be based
+    {ParamsConstants.Namespace}         Namespace of the code to generate.
+    {ParamsConstants.Server}            Server that hosts the database of which your code should be based.
     {ParamsConstants.DataSource}        Database of which your code should be based. 
                         Note that all tables must contain a column named `Id` with datatype `int`. 
-                        It must not be a identity column
+                        It must not be a identity column.
 
-    {ParamsConstants.Output}            (optional) Destination of the generated code. 
+    {ParamsConstants.Output}            (optional) Destination of the generated code. Default folder is ./src.
     {ParamsConstants.GeneratorTypes}    (optional) Decides what should be generated. Provide one or more of the following values: 
                         {string.Join("\r\n\t\t\t", allCodeGeneratorTypes)} (default)
                                         

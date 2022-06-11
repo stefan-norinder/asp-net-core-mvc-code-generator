@@ -35,7 +35,7 @@ namespace CodeGenerator.Lib.CodeGenerators
         }
 
         private string baseFolder;
-        protected string BaseFolder { get { return string.IsNullOrEmpty(baseFolder) ? "./src/" : baseFolder; } set { baseFolder = value;  } }
+        protected string BaseFolder { get { return string.IsNullOrEmpty(baseFolder) || baseFolder == "/" ? "./src/" : baseFolder; } set { baseFolder = value;  } }
 
         protected abstract IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model);
 
