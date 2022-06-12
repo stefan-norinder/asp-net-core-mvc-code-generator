@@ -1,18 +1,22 @@
 ﻿using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Utils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using static CodeGenerator.Lib.Models.CodeGenerationModel;
 
 namespace CodeGenerator.Lib.DataAccess
 {
-    public class GenerationModelFetcher : ICodeGenerationModelFetcher
+    public class GenerationModelFetcher : CodeGenerationModelFetcherBase, ICodeGenerationModelFetcher
     {
         private CodeGenerationModel codeGenerationModel { get; set; }
 
         public GenerationModelFetcher(string[] args)
         {
-            codeGenerationModel = new CodeGenerationModel();
+            var @namespace = GetValueForArgument(ParamsConstants.Namespace, args);
+            var output = GetValueForArgument(ParamsConstants.Output, args);
+            codeGenerationModel = new CodeGenerationModel(@namespace, new CodeGenerationModelMetaData { Output = output });
+            var generatorTypes = GetValueForArgument(ParamsConstants.GeneratorTypes, args);
+            GeneratorTypes = ConvertToGeneratorTypes(generatorTypes);
             PopulateModelFromPassedArguments(args);
         }
 
@@ -50,7 +54,7 @@ namespace CodeGenerator.Lib.DataAccess
 
         public string Namespace => codeGenerationModel.Namespace;
 
-        public CodeGeneratorTypes GeneratorTypes => throw new NotImplementedException();
+        public CodeGeneratorTypes GeneratorTypes { get; private set; }
 
         public CodeGenerationModel Get()
         {

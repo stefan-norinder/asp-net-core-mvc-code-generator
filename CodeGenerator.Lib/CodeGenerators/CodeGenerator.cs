@@ -24,12 +24,12 @@ namespace CodeGenerator.Lib.CodeGenerators
 
             BaseFolder = model.MetaData.Output;
 
-            namespaceName = model.Namespace;
-
             var templates = GenerateTemplatesFromModel(model);
 
             foreach (var template in templates)
             {
+                namespaceName = model.Namespace;
+
                 output.Write(template.Folder, template.File, template.Content);
             }
         }

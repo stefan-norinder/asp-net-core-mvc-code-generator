@@ -6,11 +6,7 @@ namespace CodeGenerator.Lib.Models
 {
     public class CodeGenerationModel
     {
-        public CodeGenerationModel()
-        {
-        }
-
-        public CodeGenerationModel(string @namespace, CodeGenerationModel.CodeGenerationModelMetaData metaData)
+        public CodeGenerationModel(string @namespace, CodeGenerationModelMetaData metaData)
         {
             Namespace = @namespace;
             MetaData = metaData;

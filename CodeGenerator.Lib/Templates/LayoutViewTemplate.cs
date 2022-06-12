@@ -67,20 +67,21 @@ namespace CodeGenerator.Lib.Templates
                     "Toggle language\")\" class=\"icon-language\" />\r\n                    </form>\r\n      " +
                     "          </div>\r\n            </div>\r\n        </nav>\r\n    </header>\r\n    <div cl" +
                     "ass=\"container\">\r\n        <main role=\"main\" class=\"pb-3\">\r\n            @RenderBo" +
-                    "dy()\r\n        </main>\r\n    </div>\r\n\r\n    <footer class=\"border-top footer text-m" +
-                    "uted\">\r\n        <div class=\"container\">\r\n            &copy; 2022 \r\n        </div" +
-                    ">\r\n    </footer>\r\n    <script src=\"~/lib/jquery/dist/jquery.min.js\"></script>\r\n " +
-                    "   <script src=\"~/lib/bootstrap/dist/js/bootstrap.bundle.min.js\"></script>\r\n    " +
-                    " <script src=\"https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js\"></s" +
-                    "cript>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2.2/js/dataTables." +
-                    "buttons.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2" +
-                    ".2.2/js/buttons.html5.min.js\"></script>\r\n    <script src=\"https://cdn.datatables" +
-                    ".net/buttons/2.2.2/js/buttons.colVis.min.js\"></script>\r\n    <script src=\"https:/" +
-                    "/cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"></script>\r\n    <script" +
-                    " src=\"https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js\"></script" +
-                    ">\r\n    <script src=\"~/js/site.js\" asp-append-version=\"true\"></script>\r\n    <scri" +
-                    "pt src=\"~/js/custom-site.js\" asp-append-version=\"true\"></script>\r\n    @await Ren" +
-                    "derSectionAsync(\"Scripts\", required: false)\r\n</body>\r\n</html>\r\n\r\n");
+                    "dy()\r\n        </main>\r\n    </div>    \r\n    <div class=\"clear\"></div>\r\n    <foote" +
+                    "r class=\"border-top footer text-muted\">\r\n        <div class=\"container\">\r\n      " +
+                    "      &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jquery" +
+                    "/dist/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/bootstr" +
+                    "ap.bundle.min.js\"></script>\r\n     <script src=\"https://cdn.datatables.net/1.12.0" +
+                    "/js/jquery.dataTables.min.js\"></script>\r\n    <script src=\"https://cdn.datatables" +
+                    ".net/buttons/2.2.2/js/dataTables.buttons.min.js\"></script>\r\n    <script src=\"htt" +
+                    "ps://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js\"></script>\r\n    <s" +
+                    "cript src=\"https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js\"></" +
+                    "script>\r\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jsz" +
+                    "ip.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2.3/" +
+                    "js/buttons.print.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-ve" +
+                    "rsion=\"true\"></script>\r\n    <script src=\"~/js/custom-site.js\" asp-append-version" +
+                    "=\"true\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n</" +
+                    "body>\r\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
