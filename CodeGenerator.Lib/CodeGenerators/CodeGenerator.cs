@@ -21,6 +21,7 @@ namespace CodeGenerator.Lib.CodeGenerators
         public virtual void Invoke()
         {
             var model = codeGeneratorFetcher.Get();
+            namespaceName = model.Namespace;
 
             BaseFolder = model.MetaData.Output;
 

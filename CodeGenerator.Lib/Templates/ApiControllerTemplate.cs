@@ -110,7 +110,7 @@ namespace CodeGenerator.Lib.Templates
         public virtual async Task<IActionResult> Get()
         {
             var items = await service.GetAll();
-            if (!items.Any()) return NotFound();
+            if (!items.Any()) logger.LogInformation(""No content found."");
             return Ok(items);            
         }
 
