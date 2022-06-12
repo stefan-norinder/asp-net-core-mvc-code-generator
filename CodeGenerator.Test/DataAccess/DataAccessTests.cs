@@ -20,14 +20,14 @@ namespace CodeGenerator.Test
         {
 
             var result = dataAccess.GetTableNames();
-            Assert.AreEqual(11, result.Count());
+            Assert.AreEqual(10, result.Count());
         }
 
         [Test]
         public void GetColumnNamesAndDatatypesForTable()
         {
             var result = dataAccess.GetColumnsWithDatatypes("Admins");
-            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(3, result.Count());
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace CodeGenerator.Test
         {
             var result = dataAccess.GetTableNames();
             var hasIdentityColumn = dataAccess.HasIdentityColumn(result.First());
-            Assert.IsFalse(hasIdentityColumn);
+            Assert.IsTrue(hasIdentityColumn);
         }
     }
 }
