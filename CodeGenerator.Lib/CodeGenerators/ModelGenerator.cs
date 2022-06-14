@@ -4,6 +4,8 @@ using CodeGenerator.Lib.Templates;
 using CodeGenerator.Lib.Services;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
@@ -11,7 +13,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ModelGenerator : CodeGenerator
     {
         public ModelGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output,  ILogger<CodeGenerator> logger) : base(codeGenerationModelFetcher, output, logger)
         { }
 
         private string ProjectType = ProjectTypeConstant.Logic;

@@ -5,6 +5,7 @@ using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Linq;
@@ -55,17 +56,11 @@ Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {
                                     .AddLogging()
                                     .BuildServiceProvider();
 
-            try
-            {
-                var controller = serviceProvider.GetService<IController>();
-                controller.Run(args);
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine("Error running service: " + ex.Message);
-                throw;
-            }
+            var controller = serviceProvider.GetService<IController>();
+            controller.Run(args);
         }
+
+        #region private
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
@@ -81,7 +76,12 @@ Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {
             serviceCollection.AddTransient<ICodeGeneratorFactory, CodeGeneratorFactory>();
             serviceCollection.AddTransient<IOutputAdapter, FileWriterOutputAdapter>();
             serviceCollection.AddTransient<IDataAccess, DataAccess>();
+
+
+            serviceCollection.AddLogging(configure => configure.AddConsole());
         }
+
+        #endregion
     }
 
 }

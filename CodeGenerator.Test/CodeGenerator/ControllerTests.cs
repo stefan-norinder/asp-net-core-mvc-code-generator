@@ -3,6 +3,7 @@ using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using System.Globalization;
@@ -18,7 +19,8 @@ namespace CodeGenerator.Test
         {
             outputMock = new Mock<IOutputAdapter>();
             var dataAccessMock = new Mock<IDataAccess>();
-            var factory = new CodeGeneratorFactory(outputMock.Object);
+            var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
+            var factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object);
             controller = new Controller(factory, dataAccessMock.Object);
             args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person", ParamsConstants.GeneratorTypes, $"{CodeGeneratorTypes.DataAccess} {CodeGeneratorTypes.Model} {CodeGeneratorTypes.Service} {CodeGeneratorTypes.Controllers} {CodeGeneratorTypes.Api}" };
         }

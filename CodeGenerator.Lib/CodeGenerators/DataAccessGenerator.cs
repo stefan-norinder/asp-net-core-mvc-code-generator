@@ -3,13 +3,14 @@ using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
 using CodeGenerator.Lib.Services;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
     public class DataAccessGenerator : CodeGenerator
     {
         public DataAccessGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output,  ILogger<CodeGenerator> logger) : base(codeGenerationModelFetcher, output, logger)
         { }
 
         private string ProjectType => ProjectTypeConstant.Logic;

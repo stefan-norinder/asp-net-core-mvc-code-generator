@@ -1,6 +1,7 @@
 ﻿using CodeGenerator.Lib.DataAccess;
 using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Services;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace CodeGenerator.Lib.CodeGenerators
@@ -9,13 +10,15 @@ namespace CodeGenerator.Lib.CodeGenerators
     {
         protected readonly ICodeGenerationModelFetcher codeGeneratorFetcher;
         protected readonly IOutputAdapter output;
+        private readonly ILogger<CodeGenerator> logger;
         protected string namespaceName;
 
         public CodeGenerator(ICodeGenerationModelFetcher codeGeneratorFetcher,
-            IOutputAdapter output)
+            IOutputAdapter output,  ILogger<CodeGenerator> logger)
         {
             this.codeGeneratorFetcher = codeGeneratorFetcher;
             this.output = output;
+            this.logger = logger;
         }
 
         public virtual void Invoke()
@@ -32,6 +35,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 namespaceName = model.Namespace;
 
                 output.Write(template.Folder, template.File, template.Content);
+                logger.LogInformation($"output: {template.Folder}/{template.File}");
             }
         }
 

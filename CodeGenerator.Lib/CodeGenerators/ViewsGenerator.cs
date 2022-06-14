@@ -3,8 +3,7 @@ using CodeGenerator.Lib.Models;
 using CodeGenerator.Lib.Templates;
 using CodeGenerator.Lib.Services;
 using System.Collections.Generic;
-using System;
-using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace CodeGenerator.Lib.CodeGenerators
 {
@@ -12,7 +11,7 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ViewsGenerator : CodeGenerator
     {
         public ViewsGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            IOutputAdapter output) : base(codeGenerationModelFetcher, output)
+            IOutputAdapter output,  ILogger<CodeGenerator> logger) : base(codeGenerationModelFetcher, output, logger)
         { }
 
         private string ProjectType = ProjectTypeConstant.Web;

@@ -2,6 +2,7 @@ using CodeGenerator.Lib.CodeGenerators;
 using CodeGenerator.Lib.Factories;
 using CodeGenerator.Lib.Services;
 using CodeGenerator.Lib.Utils;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace CodeGenerator.Test
         public void Setup()
         {
             var outputMock = new Mock<FileWriterOutputAdapter>();
-            factory = new CodeGeneratorFactory(outputMock.Object);
+            var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
+            factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object);
         }
 
         [Test]
