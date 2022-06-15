@@ -12,10 +12,10 @@
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
-    ViewData["Title"] = "Edit <#= Model.Name #>";
+    ViewData["Title"] = @$"{SharedLocalizer.GetLocalizedHtmlString("Edit")} {SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}";
 }
 
-<h1>Edit <#= Model.Name #></h1>
+<h1>@($"{SharedLocalizer.GetLocalizedHtmlString("Edit")} {@SharedLocalizer.GetLocalizedHtmlString("<#= Model.Name #>")}")</h1>
 
 <hr />
 <div class="row">
@@ -24,21 +24,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <# foreach(var item in Model.Properties.GetAllPropertiesExceptId()) { #>
             <div class="form-group">
-                <label asp-for="<#= item.Name #>"></label>
+                <label asp-for="<#= item.Name #>" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("<#= item.Name #>")</label>
                 <input asp-for="<#= item.Name #>" value="@Model.<#= item.Name #>" />
                 <span asp-validation-for="<#= item.Name #>" class="text-danger"></span>
             </div>
 <# } #>
             <input type="hidden" asp-for="Id" value="@Model.Id" />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="@SharedLocalizer.GetLocalizedHtmlString("Edit")" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
 </div>
 
 @section Scripts {

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace <#= namespaceName #>.Logic.Model
+namespace <#= namespaceName #>.Logic.Services
 {
     public partial interface IService<TModel>
     {  

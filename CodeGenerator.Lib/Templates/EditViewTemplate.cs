@@ -48,22 +48,24 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = \"Edit ");
+            this.Write("ViewModel\r\n\r\n@{\r\n    ViewData[\"Title\"] = @$\"{SharedLocalizer.GetLocalizedHtmlStri" +
+                    "ng(\"Edit\")} {SharedLocalizer.GetLocalizedHtmlString(\"");
             
             #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("\";\r\n}\r\n\r\n<h1>Edit ");
+            this.Write("\")}\";\r\n}\r\n\r\n<h1>@($\"{SharedLocalizer.GetLocalizedHtmlString(\"Edit\")} {@SharedLoca" +
+                    "lizer.GetLocalizedHtmlString(\"");
             
             #line 18 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write("</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <form met" +
-                    "hod=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
+            this.Write("\")}\")</h1>\r\n\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        <for" +
+                    "m method=\"post\"  enctype=\"multipart/form-data\" asp-controller=\"");
             
             #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -85,7 +87,14 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("\"></label>\r\n                <input asp-for=\"");
+            this.Write("\" class=\"control-label\">@SharedLocalizer.GetLocalizedHtmlString(\"");
+            
+            #line 27 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\")</label>\r\n                <input asp-for=\"");
             
             #line 28 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
@@ -115,14 +124,14 @@ namespace CodeGenerator.Lib.Templates
             #line hidden
             this.Write(@"            <input type=""hidden"" asp-for=""Id"" value=""@Model.Id"" />
             <div class=""form-group"">
-                <input type=""submit"" value=""Save"" class=""btn btn-primary"" />
+                <input type=""submit"" value=""@SharedLocalizer.GetLocalizedHtmlString(""Edit"")"" class=""btn btn-primary"" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action=""Index"">Back to List</a>
+    <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
 </div>
 
 @section Scripts {
