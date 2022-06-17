@@ -23,6 +23,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 var template = new ControllerTemplate(model.Namespace, @class);
                 yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{projectType}/Controller", File = $"{@class}Controller.cs", Content = template.TransformText() };
             }
+            yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectTypeConstant.Web}/Controller", File = $"ResourcesController.cs", Content = new ResourcesControllerTemplate(namespaceName).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{projectType}/Controller", File = "HomeController.cs", Content = new HomeControllerTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{projectType}", File = $"{projectType}.csproj", Content = new WebProjectFileTemplate(namespaceName).TransformText() };
         }

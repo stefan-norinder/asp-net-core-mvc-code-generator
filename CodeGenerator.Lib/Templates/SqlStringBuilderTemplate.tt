@@ -22,29 +22,28 @@ namespace <#= namespaceName #>.Logic.DataAccess
             Update = 2
         }
 
-
-        public string GetInsertString(T entity)
+        public string GetInsertString(T entity, string table)
         {
-            return GetInsertString(entity, true, default(int));
+            return GetInsertString(entity, true, default(int), table);
         }
 
-        public string GetInsertString(T entity, int nextId)
+        public string GetInsertString(T entity, int nextId, string table)
         {
-            return GetInsertString(entity, false, nextId);
+            return GetInsertString(entity, false, nextId, table);
         }
 
-        private string GetInsertString(T entity, bool hasIdentityColumn, int nextId)
+        private string GetInsertString(T entity, bool hasIdentityColumn, int nextId, string table)
         {
             type = BuilderType.Insert;
             var dictionary = GetDictionary(entity);
-            return dictionary.CreateInsertString<T>(hasIdentityColumn, nextId);
+            return dictionary.CreateInsertString<T>(hasIdentityColumn, nextId, table);
         }
 
-        public string GetUpdateString(T entity)
+        public string GetUpdateString(T entity, string table)
         {
             type = BuilderType.Update;
             var dictionary = GetDictionary(entity);
-            return dictionary.CreateUpdateString<T>();
+            return dictionary.CreateUpdateString<T>(table);
         }
 
         #region private
@@ -68,6 +67,12 @@ namespace <#= namespaceName #>.Logic.DataAccess
                 {
                     var str = pi.GetValue(entity).ToString();
                     value = str.Replace("'", "''");
+                }
+                else if (pi.PropertyType == typeof(DateTime))
+                {
+                    var dateTime = (DateTime) pi.GetValue(entity);
+                    var formattedDateTimeString = dateTime.ToString("yyyy-MM-ddTHH:mm:ss");
+                    value = formattedDateTimeString.Replace("'", "''");
                 }
                 else
                 {
@@ -105,12 +110,12 @@ namespace <#= namespaceName #>.Logic.DataAccess
             return str.Remove(str.Length - numberOfCharactersToRemove);
         }
     }
-
+    
     public static partial class DictionaryExtentions
     {
-        public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int nextId)
+        public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int nextId, string table)
         {
-            var insertStringHead = $"insert into {typeof(T).Name} (";
+            var insertStringHead = $"insert into {table} (";
             var insertStringTail = " output inserted.[Id] values (";
             foreach (var item in dictionary)
             {
@@ -130,9 +135,9 @@ namespace <#= namespaceName #>.Logic.DataAccess
             return column == "Id" && nextId > 0;
         }
 
-        public static string CreateUpdateString<T>(this Dictionary<string, string> dictionary)
+        public static string CreateUpdateString<T>(this Dictionary<string, string> dictionary, string table)
         {
-            var updateString = $"update {typeof(T).Name} set ";
+            var updateString = $"update {table} set ";
             foreach (var item in dictionary.Where(x => x.Key.ToLower() != "id"))
             {
                 var value = dictionary[item.Key];

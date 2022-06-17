@@ -37,10 +37,10 @@ namespace <#= namespaceName #>.Logic.DataAccess
         }
 
         protected string Table { get; }
-
+        
         public async virtual Task<T> Insert(T model)
         {            
-            var sql = await HasIdentityColumn() ? sqlStringBuilder.GetInsertString(model) : sqlStringBuilder.GetInsertString(model, await GetNextId());
+            var sql = await HasIdentityColumn() ? sqlStringBuilder.GetInsertString(model,Table) : sqlStringBuilder.GetInsertString(model, await GetNextId(), Table);
 
             model.Id = await db.InsertData(sql, model);
 
@@ -49,7 +49,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
 
         public async virtual Task Update(T model)
         {
-            string sql = sqlStringBuilder.GetUpdateString(model);
+            string sql = sqlStringBuilder.GetUpdateString(model, Table);
 
             await db.UpdateData(sql, model);
         }

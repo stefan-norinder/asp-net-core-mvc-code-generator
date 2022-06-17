@@ -44,17 +44,18 @@ namespace CodeGenerator.Lib.Templates
             #line hidden
             this.Write(".Logic.DataAccess\r\n{\r\n       public class SqlStringBuilder<T>\r\n    {\r\n        pri" +
                     "vate BuilderType type;\r\n\r\n        private enum BuilderType\r\n        {\r\n         " +
-                    "   Insert = 1,\r\n            Update = 2\r\n        }\r\n\r\n\r\n        public string Get" +
-                    "InsertString(T entity)\r\n        {\r\n            return GetInsertString(entity, tr" +
-                    "ue, default(int));\r\n        }\r\n\r\n        public string GetInsertString(T entity," +
-                    " int nextId)\r\n        {\r\n            return GetInsertString(entity, false, nextI" +
-                    "d);\r\n        }\r\n\r\n        private string GetInsertString(T entity, bool hasIdent" +
-                    "ityColumn, int nextId)\r\n        {\r\n            type = BuilderType.Insert;\r\n     " +
-                    "       var dictionary = GetDictionary(entity);\r\n            return dictionary.Cr" +
-                    "eateInsertString<T>(hasIdentityColumn, nextId);\r\n        }\r\n\r\n        public str" +
-                    "ing GetUpdateString(T entity)\r\n        {\r\n            type = BuilderType.Update;" +
-                    "\r\n            var dictionary = GetDictionary(entity);\r\n            return dictio" +
-                    "nary.CreateUpdateString<T>();\r\n        }\r\n\r\n        #region private\r\n\r\n        p" +
+                    "   Insert = 1,\r\n            Update = 2\r\n        }\r\n\r\n        public string GetIn" +
+                    "sertString(T entity, string table)\r\n        {\r\n            return GetInsertStrin" +
+                    "g(entity, true, default(int), table);\r\n        }\r\n\r\n        public string GetIns" +
+                    "ertString(T entity, int nextId, string table)\r\n        {\r\n            return Get" +
+                    "InsertString(entity, false, nextId, table);\r\n        }\r\n\r\n        private string" +
+                    " GetInsertString(T entity, bool hasIdentityColumn, int nextId, string table)\r\n  " +
+                    "      {\r\n            type = BuilderType.Insert;\r\n            var dictionary = Ge" +
+                    "tDictionary(entity);\r\n            return dictionary.CreateInsertString<T>(hasIde" +
+                    "ntityColumn, nextId, table);\r\n        }\r\n\r\n        public string GetUpdateString" +
+                    "(T entity, string table)\r\n        {\r\n            type = BuilderType.Update;\r\n   " +
+                    "         var dictionary = GetDictionary(entity);\r\n            return dictionary." +
+                    "CreateUpdateString<T>(table);\r\n        }\r\n\r\n        #region private\r\n\r\n        p" +
                     "rivate Dictionary<string, string> GetDictionary(T entity)\r\n        {\r\n          " +
                     "  var dictionary = new Dictionary<string, string>();\r\n            foreach (Prope" +
                     "rtyInfo pi in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instanc" +
@@ -67,43 +68,47 @@ namespace CodeGenerator.Lib.Templates
                     "              {\r\n                    value = null;\r\n                }\r\n         " +
                     "       else if (pi.PropertyType == typeof(string))\r\n                {\r\n         " +
                     "           var str = pi.GetValue(entity).ToString();\r\n                    value " +
-                    "= str.Replace(\"\'\", \"\'\'\");\r\n                }\r\n                else\r\n            " +
-                    "    {\r\n                    value = pi.GetValue(entity).ToString();\r\n            " +
-                    "    }\r\n                dictionary.Add(pi.Name, value);\r\n            }\r\n\r\n       " +
-                    "     return dictionary;\r\n        }\r\n\r\n        private static bool PropertyIsDate" +
-                    "TimeNullRepresentation(T entity, PropertyInfo pi)\r\n        {\r\n            DateTi" +
-                    "me dateTime;\r\n            var entityAsString = pi.GetValue(entity).ToString();\r\n" +
-                    "            if (!DateTime.TryParse(entityAsString, out dateTime))\r\n            {" +
-                    "\r\n                return false;\r\n            }\r\n            return dateTime == D" +
-                    "ateTime.MinValue;\r\n        }\r\n\r\n        private static bool PropertyIsNull(T ent" +
-                    "ity, PropertyInfo pi)\r\n        {\r\n            return pi.GetValue(entity) == null" +
-                    ";\r\n        }\r\n\r\n        #endregion\r\n    }\r\n\r\n    public static partial class Str" +
-                    "ingExtentions\r\n    {\r\n        public static string RemoveLast(this string str, i" +
-                    "nt numberOfCharactersToRemove)\r\n        {\r\n            return str.Remove(str.Len" +
-                    "gth - numberOfCharactersToRemove);\r\n        }\r\n    }\r\n\r\n    public static partia" +
-                    "l class DictionaryExtentions\r\n    {\r\n        public static string CreateInsertSt" +
-                    "ring<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int " +
-                    "nextId)\r\n        {\r\n            var insertStringHead = $\"insert into {typeof(T)." +
-                    "Name} (\";\r\n            var insertStringTail = \" output inserted.[Id] values (\";\r" +
-                    "\n            foreach (var item in dictionary)\r\n            {\r\n                if" +
-                    " (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n                insertString" +
-                    "Head += $\"[{item.Key}], \";\r\n                var value = ColumnIsIdAndNextIdIsSet" +
-                    "(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];\r\n                " +
-                    "insertStringTail += value == null ? \"NULL, \" : \"\'\" + value + \"\', \";\r\n           " +
-                    " }\r\n            insertStringHead = insertStringHead.RemoveLast(2);\r\n            " +
-                    "insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n            return insertS" +
-                    "tringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r\n        private static " +
-                    "bool ColumnIsIdAndNextIdIsSet(int nextId, string column)\r\n        {\r\n           " +
-                    " return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n        public static string" +
-                    " CreateUpdateString<T>(this Dictionary<string, string> dictionary)\r\n        {\r\n " +
-                    "           var updateString = $\"update {typeof(T).Name} set \";\r\n            fore" +
-                    "ach (var item in dictionary.Where(x => x.Key.ToLower() != \"id\"))\r\n            {\r" +
-                    "\n                var value = dictionary[item.Key];\r\n\r\n                var valueS" +
-                    "tring = value == null ? \"NULL, \" : \"\'\" + value + \"\', \";\r\n\r\n                updat" +
-                    "eString += $\"[{item.Key}] = {valueString}\";\r\n\r\n            }\r\n            update" +
-                    "String = updateString.RemoveLast(2);\r\n\r\n            updateString += \" where Id =" +
-                    " \" + dictionary[\"Id\"];\r\n\r\n            return updateString;\r\n        }\r\n    }\r\n}\r" +
-                    "\n");
+                    "= str.Replace(\"\'\", \"\'\'\");\r\n                }\r\n                else if (pi.Proper" +
+                    "tyType == typeof(DateTime))\r\n                {\r\n                    var dateTime" +
+                    " = (DateTime) pi.GetValue(entity);\r\n                    var formattedDateTimeStr" +
+                    "ing = dateTime.ToString(\"yyyy-MM-ddTHH:mm:ss\");\r\n                    value = for" +
+                    "mattedDateTimeString.Replace(\"\'\", \"\'\'\");\r\n                }\r\n                els" +
+                    "e\r\n                {\r\n                    value = pi.GetValue(entity).ToString()" +
+                    ";\r\n                }\r\n                dictionary.Add(pi.Name, value);\r\n         " +
+                    "   }\r\n\r\n            return dictionary;\r\n        }\r\n\r\n        private static bool" +
+                    " PropertyIsDateTimeNullRepresentation(T entity, PropertyInfo pi)\r\n        {\r\n   " +
+                    "         DateTime dateTime;\r\n            var entityAsString = pi.GetValue(entity" +
+                    ").ToString();\r\n            if (!DateTime.TryParse(entityAsString, out dateTime))" +
+                    "\r\n            {\r\n                return false;\r\n            }\r\n            retur" +
+                    "n dateTime == DateTime.MinValue;\r\n        }\r\n\r\n        private static bool Prope" +
+                    "rtyIsNull(T entity, PropertyInfo pi)\r\n        {\r\n            return pi.GetValue(" +
+                    "entity) == null;\r\n        }\r\n\r\n        #endregion\r\n    }\r\n\r\n    public static pa" +
+                    "rtial class StringExtentions\r\n    {\r\n        public static string RemoveLast(thi" +
+                    "s string str, int numberOfCharactersToRemove)\r\n        {\r\n            return str" +
+                    ".Remove(str.Length - numberOfCharactersToRemove);\r\n        }\r\n    }\r\n    \r\n    p" +
+                    "ublic static partial class DictionaryExtentions\r\n    {\r\n        public static st" +
+                    "ring CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasI" +
+                    "dentityColumn, int nextId, string table)\r\n        {\r\n            var insertStrin" +
+                    "gHead = $\"insert into {table} (\";\r\n            var insertStringTail = \" output i" +
+                    "nserted.[Id] values (\";\r\n            foreach (var item in dictionary)\r\n         " +
+                    "   {\r\n                if (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n    " +
+                    "            insertStringHead += $\"[{item.Key}], \";\r\n                var value = " +
+                    "ColumnIsIdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item" +
+                    ".Key];\r\n                insertStringTail += value == null ? \"NULL, \" : \"\'\" + val" +
+                    "ue + \"\', \";\r\n            }\r\n            insertStringHead = insertStringHead.Remo" +
+                    "veLast(2);\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n  " +
+                    "          return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r" +
+                    "\n        private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)" +
+                    "\r\n        {\r\n            return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n    " +
+                    "    public static string CreateUpdateString<T>(this Dictionary<string, string> d" +
+                    "ictionary, string table)\r\n        {\r\n            var updateString = $\"update {ta" +
+                    "ble} set \";\r\n            foreach (var item in dictionary.Where(x => x.Key.ToLowe" +
+                    "r() != \"id\"))\r\n            {\r\n                var value = dictionary[item.Key];\r" +
+                    "\n\r\n                var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\'" +
+                    ", \";\r\n\r\n                updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n    " +
+                    "        }\r\n            updateString = updateString.RemoveLast(2);\r\n\r\n           " +
+                    " updateString += \" where Id = \" + dictionary[\"Id\"];\r\n\r\n            return update" +
+                    "String;\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
