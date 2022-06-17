@@ -100,19 +100,6 @@ namespace <#= namespaceName #>.Logic.DataAccess
                     newId = await connection.QuerySingleAsync<int>(sql, parameters);
                     return newId;
                 }
-                catch (SqlException e)
-                {
-                    if (e.Message.Contains("Violation of UNIQUE KEY constraint"))
-                    {
-                        logger.LogWarning(e.Message);
-                    }
-                    else
-                    {
-                        LogException(e);
-                        connection.Close();
-                        throw;
-                    }
-                }
                 catch (Exception e)
                 {
                     LogException(e);
@@ -131,19 +118,6 @@ namespace <#= namespaceName #>.Logic.DataAccess
                 try
                 {
                     await connection.ExecuteAsync(sql, parameters);
-                }
-                catch (SqlException e)
-                {
-                    if (e.Message.Contains("Violation of UNIQUE KEY constraint"))
-                    {
-                        logger.LogWarning(e.Message);
-                    }
-                    else
-                    {
-                        LogException(e);
-                        connection.Close();
-                        throw;
-                    }
                 }
                 catch (Exception e)
                 {

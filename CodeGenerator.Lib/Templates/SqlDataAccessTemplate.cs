@@ -79,31 +79,19 @@ namespace CodeGenerator.Lib.Templates
                     "ection connection = new SqlConnection(_connectionString))\r\n            {\r\n      " +
                     "          int newId = default;\r\n                try\r\n                {\r\n        " +
                     "            newId = await connection.QuerySingleAsync<int>(sql, parameters);\r\n  " +
-                    "                  return newId;\r\n                }\r\n                catch (SqlEx" +
-                    "ception e)\r\n                {\r\n                    if (e.Message.Contains(\"Viola" +
-                    "tion of UNIQUE KEY constraint\"))\r\n                    {\r\n                       " +
-                    " logger.LogWarning(e.Message);\r\n                    }\r\n                    else\r" +
-                    "\n                    {\r\n                        LogException(e);\r\n              " +
-                    "          connection.Close();\r\n                        throw;\r\n                 " +
-                    "   }\r\n                }\r\n                catch (Exception e)\r\n                {\r" +
-                    "\n                    LogException(e);\r\n                    connection.Close();\r\n" +
-                    "                    throw;\r\n                }\r\n                return newId;\r\n  " +
-                    "          }\r\n        }\r\n\r\n\r\n        public async Task UpdateData<T>(string sql, " +
-                    "T parameters)\r\n        {\r\n            using (IDbConnection connection = new SqlC" +
-                    "onnection(_connectionString))\r\n            {\r\n                try\r\n             " +
-                    "   {\r\n                    await connection.ExecuteAsync(sql, parameters);\r\n     " +
-                    "           }\r\n                catch (SqlException e)\r\n                {\r\n       " +
-                    "             if (e.Message.Contains(\"Violation of UNIQUE KEY constraint\"))\r\n    " +
-                    "                {\r\n                        logger.LogWarning(e.Message);\r\n      " +
-                    "              }\r\n                    else\r\n                    {\r\n              " +
-                    "          LogException(e);\r\n                        connection.Close();\r\n       " +
-                    "                 throw;\r\n                    }\r\n                }\r\n             " +
-                    "   catch (Exception e)\r\n                {\r\n                    LogException(e);\r" +
-                    "\n                    connection.Close();\r\n                    throw;\r\n          " +
-                    "      }\r\n            }\r\n        }\r\n\r\n        #region private \r\n\r\n        private" +
-                    " void LogException(Exception e)\r\n        {\r\n            logger.LogError(e, \"An e" +
-                    "rror occured when quering data from data source\");\r\n        }\r\n\r\n        #endreg" +
-                    "ion\r\n\r\n    }\r\n}");
+                    "                  return newId;\r\n                }\r\n                catch (Excep" +
+                    "tion e)\r\n                {\r\n                    LogException(e);\r\n              " +
+                    "      connection.Close();\r\n                    throw;\r\n                }\r\n      " +
+                    "          return newId;\r\n            }\r\n        }\r\n\r\n\r\n        public async Task" +
+                    " UpdateData<T>(string sql, T parameters)\r\n        {\r\n            using (IDbConne" +
+                    "ction connection = new SqlConnection(_connectionString))\r\n            {\r\n       " +
+                    "         try\r\n                {\r\n                    await connection.ExecuteAsy" +
+                    "nc(sql, parameters);\r\n                }\r\n                catch (Exception e)\r\n  " +
+                    "              {\r\n                    LogException(e);\r\n                    conne" +
+                    "ction.Close();\r\n                    throw;\r\n                }\r\n            }\r\n  " +
+                    "      }\r\n\r\n        #region private \r\n\r\n        private void LogException(Excepti" +
+                    "on e)\r\n        {\r\n            logger.LogError(e, \"An error occured when quering " +
+                    "data from data source\");\r\n        }\r\n\r\n        #endregion\r\n\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
