@@ -8,6 +8,7 @@
 **/nlog.local.config
 Canvas.Web/wwwroot/external-js/app.canvas.bundle.js.LICENSE.txt
 Canvas.Web/wwwroot/external-js/index.html
+LOCAL.md
 
 # User-specific files
 *.rsuser
