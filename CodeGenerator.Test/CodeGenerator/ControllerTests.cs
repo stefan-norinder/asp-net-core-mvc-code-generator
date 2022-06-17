@@ -21,7 +21,8 @@ namespace CodeGenerator.Test
             var dataAccessMock = new Mock<IDataAccess>();
             var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
             var factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object);
-            controller = new Controller(factory, dataAccessMock.Object);
+            var controllerLoggerMock = new Mock<ILogger<Controller>>();
+            controller = new Controller(factory, dataAccessMock.Object, controllerLoggerMock.Object);
             args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person", ParamsConstants.GeneratorTypes, $"{CodeGeneratorTypes.DataAccess} {CodeGeneratorTypes.Model} {CodeGeneratorTypes.Service} {CodeGeneratorTypes.Controllers} {CodeGeneratorTypes.Api}" };
         }
         [Test]

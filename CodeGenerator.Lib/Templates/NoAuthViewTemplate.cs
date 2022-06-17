@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeControllerTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\NoAuthViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class HomeControllerTemplate : HomeControllerTemplateBase
+    public partial class NoAuthViewTemplate : NoAuthViewTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,41 +28,6 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            
-            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeControllerTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
-            
-            #line default
-            #line hidden
-            this.Write(" \r\n\r\nusing AuthenticationLibrary;\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Mic" +
-                    "rosoft.AspNetCore.Http;\r\nusing Microsoft.AspNetCore.Localization;\r\nusing Microso" +
-                    "ft.AspNetCore.Mvc;\r\nusing Microsoft.Extensions.Options;\r\nusing System.Globalizat" +
-                    "ion;\r\nusing System.Linq;\r\nusing System.Threading;\r\n\r\nnamespace Web.Controllers\r\n" +
-                    "{\r\n    public class HomeController : Controller\r\n    {\r\n        private readonly" +
-                    " RequestLocalizationOptions localizationOptions;\r\n\r\n        public HomeControlle" +
-                    "r(IOptions<RequestLocalizationOptions> localizationOptions)\r\n        {\r\n        " +
-                    "    this.localizationOptions = localizationOptions.Value;\r\n        }\r\n\r\n        " +
-                    "public IActionResult Index()\r\n        {\r\n            return View();\r\n        }\r\n" +
-                    "\r\n        [HttpPost]\r\n        public IActionResult ToggleCulture(string returnUr" +
-                    "l)\r\n        {\r\n            var culture = GetNextCultureFromSupportedCultures();\r" +
-                    "\n            SetCookie(culture);\r\n\r\n            return Redirect(returnUrl);\r\n   " +
-                    "     }        \r\n\r\n        [HttpGet(\"error\")]\r\n        [NoLibraryAuth]\r\n        p" +
-                    "ublic IActionResult Error()\r\n        {\r\n            return View();\r\n        }\r\n\r" +
-                    "\n        #region private\r\n\r\n        private CultureInfo GetNextCultureFromSuppor" +
-                    "tedCultures()\r\n        {\r\n            var cultureInfo = Thread.CurrentThread.Cur" +
-                    "rentCulture;\r\n            int index = default;\r\n            for (var i = 0; i < " +
-                    "localizationOptions.SupportedCultures.Count(); i++)\r\n            {\r\n            " +
-                    "    if (localizationOptions.SupportedCultures[i].GetHashCode() == cultureInfo.Ge" +
-                    "tHashCode())\r\n                {\r\n                    index = i;\r\n               " +
-                    "     break;\r\n                }\r\n            }\r\n            var culture = index <" +
-                    " localizationOptions.SupportedCultures.Count() - 1 ? localizationOptions.Support" +
-                    "edCultures[index + 1] : localizationOptions.SupportedCultures[0];\r\n            r" +
-                    "eturn culture;\r\n        }\r\n\r\n        private void SetCookie(CultureInfo culture)" +
-                    "\r\n        {\r\n            HttpContext.Response.Cookies.Append(\r\n                 " +
-                    "           CookieRequestCultureProvider.DefaultCookieName,\r\n                    " +
-                    "        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)" +
-                    "),\r\n                            new CookieOptions { Path = Url.Content(\"~/\") });" +
-                    "\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -74,7 +39,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class HomeControllerTemplateBase
+    public class NoAuthViewTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

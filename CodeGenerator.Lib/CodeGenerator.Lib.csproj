@@ -128,6 +128,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTestsTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\NoAuthViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NoAuthViewTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\ProgramTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -222,6 +227,10 @@
     <None Update="Templates\ErrorViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ErrorViewTemplate.cs</LastGenOutput>
+    </None>
+    <None Update="Templates\NoAuthViewTemplate.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>NoAuthViewTemplate.cs</LastGenOutput>
     </None>
     <None Update="Templates\ResourcesControllerTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>

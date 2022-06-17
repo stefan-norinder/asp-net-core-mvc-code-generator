@@ -5,6 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
+using AuthenticationLibrary;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
@@ -40,6 +41,7 @@ namespace Web.Controllers
         }        
 
         [HttpGet("error")]
+        [NoLibraryAuth]
         public IActionResult Error()
         {
             return View();

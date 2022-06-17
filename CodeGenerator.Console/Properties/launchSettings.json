@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace AuthService --server .\\sqlexpress --datasource  dev-AuthService "
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace xxx --server .\\sqlexpress --datasource  xxx"
     }
   }
 }

@@ -30,6 +30,7 @@ namespace CodeGenerator.Lib.CodeGenerators
             }
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views/Home", File = "Index.cshtml", Content = new HomeViewTemplate(namespaceName, model.Classes).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views/Home", File = "Error.cshtml", Content = new ErrorViewTemplate(namespaceName).TransformText() };
+            yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views/Home", File = "NoAuth.cshtml", Content = new NoAuthViewTemplate(namespaceName).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views/Shared", File = "_Layout.cshtml", Content = new LayoutViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewImports.cshtml", Content = new ImportsViewTemplate().TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Views", File = "_ViewStart.cshtml", Content = new StartViewTemplate().TransformText() };
