@@ -28,6 +28,27 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
+            this.Write(@"@* --------------------------------------------------------------------*@
+@* Warning! This is an auto generated file. Changes may be overwritten *@
+@* --------------------------------------------------------------------*@
+@using Localization
+@inject LocService SharedLocalizer
+
+@{
+    ViewData[""Title""] = @$""{SharedLocalizer.GetLocalizedHtmlString(""AccessDenied"")}"";
+}
+
+<h1>@SharedLocalizer.GetLocalizedHtmlString(""AccessDenied"")</h1>
+<p>@SharedLocalizer.GetLocalizedHtmlString(""AccessDeniedMessage"")</p>
+
+<div>
+    <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync(""_ValidationScriptsPartial"");}
+}
+");
             return this.GenerationEnvironment.ToString();
         }
     }

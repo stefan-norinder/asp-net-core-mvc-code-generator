@@ -3,10 +3,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#= CodeGeneratorHelper.GetTemplateHeaderText($"The point of using `I{Model.Name}HttpService` instead of `I{Model.Name}Service` is just to show an example of how to use `I{Model.Name}HttpService`.") #> 
 
 using AutoMapper;
-using <#= namespaceName #>.Logic.Http;
 using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
 using <#= namespaceName #>.Web.ViewModel;
@@ -15,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 
 namespace <#= namespaceName #>.Web.Controllers
 {
@@ -23,26 +20,20 @@ namespace <#= namespaceName #>.Web.Controllers
     {
         private readonly ILogger<<#= Model.Name #>Controller> logger;
         private readonly I<#= Model.Name #>Service service;
-        private readonly I<#= Model.Name #>HttpService httpService;
         private readonly IMapper mapper;
-        private readonly string apiBaseUrl;
 
         public <#= Model.Name #>Controller(ILogger<<#= Model.Name #>Controller> logger, 
         I<#= Model.Name #>Service service, 
-        IMapper mapper, 
-        I<#= Model.Name #>HttpService httpService, 
-        IHttpContextAccessor httpContextAccessor)
+        IMapper mapper)
         {
             this.logger = logger;
             this.service = service;
             this.mapper = mapper;
-            this.httpService = httpService;
-            apiBaseUrl = GetApiBaseUrl(httpContextAccessor);
         }
 
         public virtual async Task<IActionResult> Index()
         {
-            var list = await httpService.Get(apiBaseUrl);
+            var list = await service.GetAll();
             var viewModels = mapper.Map<IEnumerable<<#= Model.Name #>ViewModel>>(list);
             return View(viewModels);
         }
@@ -56,13 +47,13 @@ namespace <#= namespaceName #>.Web.Controllers
         public virtual async Task<ActionResult> Create([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
-            await httpService.Post(apiBaseUrl, model);
+            await service.Insert(model);
             return RedirectToAction(nameof(Index));
         }
 
         public virtual async Task<ActionResult> Edit(int id)
         {
-            var entity = await httpService.Get(apiBaseUrl,id.ToString());
+            var entity = await service.Get(id);
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
         }
 
@@ -71,13 +62,13 @@ namespace <#= namespaceName #>.Web.Controllers
         public virtual async Task<ActionResult> Edit([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
-            await httpService.Put(apiBaseUrl, viewModel.Id.ToString(), model);
+            await service.Update(model);
             return RedirectToAction(nameof(Index));         
         }
 
         public virtual async Task<ActionResult> Remove(int id)
         {
-            var entity = await httpService.Get(apiBaseUrl, id.ToString());
+            var entity = await service.Get(id);
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));        
         }
 
@@ -85,20 +76,8 @@ namespace <#= namespaceName #>.Web.Controllers
         public virtual async Task<ActionResult> Remove([FromForm]<#= Model.Name #>ViewModel viewModel)
         {
             var model = mapper.Map<<#= Model.Name #>>(viewModel);
-            await httpService.Delete(apiBaseUrl, viewModel.Id.ToString());
+            await service.Delete(viewModel.Id);
             return RedirectToAction(nameof(Index));         
         }
-
-        #region private 
-
-        private string GetApiBaseUrl(IHttpContextAccessor httpContextAccessor)
-        {
-            var schema = httpContextAccessor.HttpContext.Request.Scheme;
-            var host = httpContextAccessor.HttpContext.Request.Host.Value;
-            var path = "/<#= Model.Name.ToLower() #>";
-            return $"{schema}://{host}/api/v1{path}s";
-        }
-
-        #endregion
     }
 }

@@ -73,42 +73,49 @@ namespace CodeGenerator.Lib.Templates
                     " = (DateTime) pi.GetValue(entity);\r\n                    var formattedDateTimeStr" +
                     "ing = dateTime.ToString(\"yyyy-MM-ddTHH:mm:ss\");\r\n                    value = for" +
                     "mattedDateTimeString.Replace(\"\'\", \"\'\'\");\r\n                }\r\n                els" +
-                    "e\r\n                {\r\n                    value = pi.GetValue(entity).ToString()" +
-                    ";\r\n                }\r\n                dictionary.Add(pi.Name, value);\r\n         " +
-                    "   }\r\n\r\n            return dictionary;\r\n        }\r\n\r\n        private static bool" +
-                    " PropertyIsDateTimeNullRepresentation(T entity, PropertyInfo pi)\r\n        {\r\n   " +
-                    "         DateTime dateTime;\r\n            var entityAsString = pi.GetValue(entity" +
-                    ").ToString();\r\n            if (!DateTime.TryParse(entityAsString, out dateTime))" +
-                    "\r\n            {\r\n                return false;\r\n            }\r\n            retur" +
-                    "n dateTime == DateTime.MinValue;\r\n        }\r\n\r\n        private static bool Prope" +
-                    "rtyIsNull(T entity, PropertyInfo pi)\r\n        {\r\n            return pi.GetValue(" +
-                    "entity) == null;\r\n        }\r\n\r\n        #endregion\r\n    }\r\n\r\n    public static pa" +
-                    "rtial class StringExtentions\r\n    {\r\n        public static string RemoveLast(thi" +
-                    "s string str, int numberOfCharactersToRemove)\r\n        {\r\n            return str" +
-                    ".Remove(str.Length - numberOfCharactersToRemove);\r\n        }\r\n    }\r\n    \r\n    p" +
-                    "ublic static partial class DictionaryExtentions\r\n    {\r\n        public static st" +
-                    "ring CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasI" +
-                    "dentityColumn, int nextId, string table)\r\n        {\r\n            var insertStrin" +
-                    "gHead = $\"insert into {table} (\";\r\n            var insertStringTail = \" output i" +
-                    "nserted.[Id] values (\";\r\n            foreach (var item in dictionary)\r\n         " +
-                    "   {\r\n                if (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n    " +
-                    "            insertStringHead += $\"[{item.Key}], \";\r\n                var value = " +
-                    "ColumnIsIdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item" +
-                    ".Key];\r\n                insertStringTail += value == null ? \"NULL, \" : \"\'\" + val" +
-                    "ue + \"\', \";\r\n            }\r\n            insertStringHead = insertStringHead.Remo" +
-                    "veLast(2);\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n  " +
-                    "          return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r" +
-                    "\n        private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)" +
-                    "\r\n        {\r\n            return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n    " +
-                    "    public static string CreateUpdateString<T>(this Dictionary<string, string> d" +
-                    "ictionary, string table)\r\n        {\r\n            var updateString = $\"update {ta" +
-                    "ble} set \";\r\n            foreach (var item in dictionary.Where(x => x.Key.ToLowe" +
-                    "r() != \"id\"))\r\n            {\r\n                var value = dictionary[item.Key];\r" +
-                    "\n\r\n                var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\'" +
-                    ", \";\r\n\r\n                updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n    " +
-                    "        }\r\n            updateString = updateString.RemoveLast(2);\r\n\r\n           " +
-                    " updateString += \" where Id = \" + dictionary[\"Id\"];\r\n\r\n            return update" +
-                    "String;\r\n        }\r\n    }\r\n}\r\n");
+                    "e if (pi.PropertyType == typeof(DateTime?))\r\n                {\r\n                " +
+                    "    var dateTime = (DateTime?) pi.GetValue(entity);\r\n                   if(!date" +
+                    "Time.HasValue) \r\n                    {\r\n                        value = null;\r\n " +
+                    "                   }\r\n                    else\r\n                    {\r\n         " +
+                    "               var formattedDateTimeString = dateTime.Value.ToString(\"yyyy-MM-dd" +
+                    "THH:mm:ss\");\r\n                        value = formattedDateTimeString.Replace(\"\'" +
+                    "\", \"\'\'\");\r\n                    }\r\n                }\r\n                else\r\n     " +
+                    "           {\r\n                    value = pi.GetValue(entity).ToString();\r\n     " +
+                    "           }\r\n                dictionary.Add(pi.Name, value);\r\n            }\r\n\r\n" +
+                    "            return dictionary;\r\n        }\r\n\r\n        private static bool Propert" +
+                    "yIsDateTimeNullRepresentation(T entity, PropertyInfo pi)\r\n        {\r\n           " +
+                    " DateTime dateTime;\r\n            var entityAsString = pi.GetValue(entity).ToStri" +
+                    "ng();\r\n            if (!DateTime.TryParse(entityAsString, out dateTime))\r\n      " +
+                    "      {\r\n                return false;\r\n            }\r\n            return dateTi" +
+                    "me == DateTime.MinValue;\r\n        }\r\n\r\n        private static bool PropertyIsNul" +
+                    "l(T entity, PropertyInfo pi)\r\n        {\r\n            return pi.GetValue(entity) " +
+                    "== null;\r\n        }\r\n\r\n        #endregion\r\n    }\r\n\r\n    public static partial cl" +
+                    "ass StringExtentions\r\n    {\r\n        public static string RemoveLast(this string" +
+                    " str, int numberOfCharactersToRemove)\r\n        {\r\n            return str.Remove(" +
+                    "str.Length - numberOfCharactersToRemove);\r\n        }\r\n    }\r\n    \r\n    public st" +
+                    "atic partial class DictionaryExtentions\r\n    {\r\n        public static string Cre" +
+                    "ateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityC" +
+                    "olumn, int nextId, string table)\r\n        {\r\n            var insertStringHead = " +
+                    "$\"insert into {table} (\";\r\n            var insertStringTail = \" output inserted." +
+                    "[Id] values (\";\r\n            foreach (var item in dictionary)\r\n            {\r\n  " +
+                    "              if (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n            " +
+                    "    insertStringHead += $\"[{item.Key}], \";\r\n                var value = ColumnIs" +
+                    "IdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];\r\n" +
+                    "                insertStringTail += value == null ? \"NULL, \" : \"\'\" + value + \"\'," +
+                    " \";\r\n            }\r\n            insertStringHead = insertStringHead.RemoveLast(2" +
+                    ");\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n          " +
+                    "  return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r\n       " +
+                    " private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)\r\n      " +
+                    "  {\r\n            return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n        publ" +
+                    "ic static string CreateUpdateString<T>(this Dictionary<string, string> dictionar" +
+                    "y, string table)\r\n        {\r\n            var updateString = $\"update {table} set" +
+                    " \";\r\n            foreach (var item in dictionary.Where(x => x.Key.ToLower() != \"" +
+                    "id\"))\r\n            {\r\n                var value = dictionary[item.Key];\r\n\r\n     " +
+                    "           var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\', \";\r\n\r\n" +
+                    "                updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n            " +
+                    "}\r\n            updateString = updateString.RemoveLast(2);\r\n\r\n            updateS" +
+                    "tring += \" where Id = \" + dictionary[\"Id\"];\r\n\r\n            return updateString;\r" +
+                    "\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

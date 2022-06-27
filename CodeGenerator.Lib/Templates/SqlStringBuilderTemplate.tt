@@ -74,6 +74,19 @@ namespace <#= namespaceName #>.Logic.DataAccess
                     var formattedDateTimeString = dateTime.ToString("yyyy-MM-ddTHH:mm:ss");
                     value = formattedDateTimeString.Replace("'", "''");
                 }
+                else if (pi.PropertyType == typeof(DateTime?))
+                {
+                    var dateTime = (DateTime?) pi.GetValue(entity);
+                   if(!dateTime.HasValue) 
+                    {
+                        value = null;
+                    }
+                    else
+                    {
+                        var formattedDateTimeString = dateTime.Value.ToString("yyyy-MM-ddTHH:mm:ss");
+                        value = formattedDateTimeString.Replace("'", "''");
+                    }
+                }
                 else
                 {
                     value = pi.GetValue(entity).ToString();

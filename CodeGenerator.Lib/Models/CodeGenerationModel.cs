@@ -81,7 +81,8 @@ namespace CodeGenerator.Lib.Models
                 if (DataType.ToLower().Trim().Contains("int")) return "int";
                 if (DataType.ToLower().Trim().StartsWith("varchar")) return "string";
                 if (DataType.ToLower().Trim() == "bit") return "bool";
-                if (DataType.ToLower().Trim().Contains("date")) return "DateTime";
+                if (DataType.ToLower().Trim().Contains("date")) return "DateTime?";
+                if (DataType.ToLower().Trim().Contains("time")) return "TimeSpan";
                 if (DataType.ToLower().Trim().Contains("binary")) return "byte[]";
                 if (DataType.ToLower().Trim().Contains("text")) return "string";
                 if (DataType.ToLower().Trim() == "numeric") return "decimal";

@@ -13,7 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>  
-    <PackageReference Include="AuthenticationLibrary" Version="1.0.*" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
     <PackageReference Include="NLog" Version="5.0.0" />
