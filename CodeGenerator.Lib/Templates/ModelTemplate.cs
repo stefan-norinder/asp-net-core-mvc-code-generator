@@ -42,7 +42,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Logic.Model\r\n{\r\n    public class ");
+            this.Write(".Logic.Model\r\n{\r\n    public partial class ");
             
             #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
@@ -56,7 +56,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("        public ");
+            this.Write("    public virtual ");
             
             #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));

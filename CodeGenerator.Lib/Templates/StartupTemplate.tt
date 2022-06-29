@@ -130,9 +130,7 @@ namespace <#= namespaceName #>.Web
             });
         }
 
-        #region private
-
-        private IMapper GetMapper()
+        protected virtual IMapper GetMapper()
         {
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -141,8 +139,6 @@ namespace <#= namespaceName #>.Web
 
             return mapperConfig.CreateMapper();
         }
-
-        #endregion
     }
         public class MappingConfiguration : Profile
         {

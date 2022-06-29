@@ -221,50 +221,49 @@ namespace ");
                     "ilder.ApplicationServices.GetService<ILoggerFactory>();\r\n                    var" +
                     " logger = factory.CreateLogger(\"ExceptionLogger\");\r\n                    logger.L" +
                     "ogError(e.Error, e.Error.Message);\r\n                    context.Response.Redirec" +
-                    "t(\"/error\");\r\n                });\r\n            });\r\n        }\r\n\r\n        #region" +
-                    " private\r\n\r\n        private IMapper GetMapper()\r\n        {\r\n            var mapp" +
-                    "erConfig = new MapperConfiguration(mc =>\r\n            {\r\n                mc.AddP" +
-                    "rofile(new MappingConfiguration());\r\n            });\r\n\r\n            return mappe" +
-                    "rConfig.CreateMapper();\r\n        }\r\n\r\n        #endregion\r\n    }\r\n        public " +
-                    "class MappingConfiguration : Profile\r\n        {\r\n            public MappingConfi" +
-                    "guration()\r\n            {\r\n        \r\n");
+                    "t(\"/error\");\r\n                });\r\n            });\r\n        }\r\n\r\n        protect" +
+                    "ed virtual IMapper GetMapper()\r\n        {\r\n            var mapperConfig = new Ma" +
+                    "pperConfiguration(mc =>\r\n            {\r\n                mc.AddProfile(new Mappin" +
+                    "gConfiguration());\r\n            });\r\n\r\n            return mapperConfig.CreateMap" +
+                    "per();\r\n        }\r\n    }\r\n        public class MappingConfiguration : Profile\r\n " +
+                    "       {\r\n            public MappingConfiguration()\r\n            {\r\n        \r\n");
             
-            #line 152 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 148 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  foreach(var item in Model) { 
             
             #line default
             #line hidden
             this.Write("                CreateMap<");
             
-            #line 153 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 149 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 153 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 149 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel>();\r\n\r\n                CreateMap<");
             
-            #line 155 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 151 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel, ");
             
-            #line 155 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 151 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(">();\r\n        \r\n");
             
-            #line 157 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 153 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
             
             #line default

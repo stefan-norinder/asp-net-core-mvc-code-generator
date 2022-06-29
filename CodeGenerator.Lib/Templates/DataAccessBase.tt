@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace <#= namespaceName #>.Logic.DataAccess
 {
-    public interface IDataAccess<T>
+    public partial interface IDataAccess<T>
     {
         Task<T> Get(int id);
         Task<IEnumerable<T>> GetAll();
@@ -23,7 +23,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
         Task DeleteAll();
     }
 
-    public class BaseDataAccess<T> : IDataAccess<T> where T : Entity
+    public partial class BaseDataAccess<T> : IDataAccess<T> where T : Entity
     {
         protected readonly ISqlDataAccess db;
         private readonly SqlStringBuilder<T> sqlStringBuilder;

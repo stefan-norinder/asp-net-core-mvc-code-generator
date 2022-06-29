@@ -3,6 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#= CodeGeneratorHelper.GetTemplateHeaderText() #>
 
 using AutoMapper;
 using <#= namespaceName #>.Logic.Model;

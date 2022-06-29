@@ -10,7 +10,7 @@ using System;
 
 namespace <#= namespaceName #>.Web.ViewModel
 {
-    public class <#= Model.Name #>ViewModel : ViewModelBase
+    public partial class <#= Model.Name #>ViewModel : ViewModelBase
     {
     <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
     public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}

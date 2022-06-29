@@ -11,10 +11,10 @@ using System;
 
 namespace <#= namespaceName #>.Logic.Model
 {
-    public class <#= Model.Name #> : Entity
+    public partial class <#= Model.Name #> : Entity
     {
     <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
-        public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
+    public virtual <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
     <# } #>  
     }
 } 

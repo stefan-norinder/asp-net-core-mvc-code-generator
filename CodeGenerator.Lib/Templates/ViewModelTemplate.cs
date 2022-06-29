@@ -42,7 +42,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Web.ViewModel\r\n{\r\n    public class ");
+            this.Write(".Web.ViewModel\r\n{\r\n    public partial class ");
             
             #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
