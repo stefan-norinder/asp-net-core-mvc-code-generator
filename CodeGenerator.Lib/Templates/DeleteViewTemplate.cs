@@ -111,7 +111,7 @@ namespace CodeGenerator.Lib.Templates
             this.Write(@""" asp-action=""Remove"">    
         @Html.HiddenFor(x => x.Id)
         <input type=""submit"" value=""@SharedLocalizer.GetLocalizedHtmlString(""Delete"")"" class=""btn btn-danger"" /> |
-        <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
+        <a href=""@Model.GetBackToListLink()"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
     </form>
     </div>
 

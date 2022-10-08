@@ -41,8 +41,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Logic.Setting\r\n{\r\n    public class AuthenticationSettings\r\n    {\r\n        public" +
-                    " string BearerToken { get; set; }\r\n    }\r\n}\r\n");
+            this.Write(".Logic.Settings\r\n{\r\n    public class AuthenticationSettings\r\n    {\r\n        publi" +
+                    "c string BearerToken { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -49,14 +49,75 @@ namespace Example.Logic.DataAccess
         [Test]
         public void CreateModelFromTemplate_ShouldBeCorrectContent()
         {
-            var expected = @"using System;
-                            namespace Example.Logic.Model
-                            {
-                                public class Person : Entity
-                                {
-      
-                                }
-                            } ";
+            var expected = @"using Example.Logic.Model;
+using Example.Logic.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
+
+namespace Example.Web.ApiController
+{ 
+    [Route(""api/v1/[controller]s"")]
+    [ApiController]
+    public partial class PersonController: ControllerBase
+    {
+        protected readonly ILogger<PersonController> logger;
+        protected readonly IPersonService service;
+
+        public PersonController(ILogger<PersonController> logger, IPersonService service)
+        {
+            this.logger = logger;
+            this.service = service;
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> Get()
+        {
+            var items = await service.GetAll();
+            if (!items.Any()) logger.LogInformation(""No content found."");
+            return Ok(items);            
+        }
+
+        [HttpGet(""{id}"")]
+        public virtual async Task<IActionResult> Get(int id)
+        {
+            
+            var item = await service.Get(id);
+            if (item == null) return NotFound();
+            return Ok(item);            
+        }
+
+        [HttpPost]
+        public virtual async Task<IActionResult> Post([FromBody] dynamic value)
+        {
+            var item = JsonConvert.DeserializeObject<Person>(value.ToString());
+            var newItem = await service.Insert(item);
+            return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
+        }
+
+        [HttpPut(""{id}"")]
+        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        {
+            if (!await service.Exists(id)) return NotFound();
+            var item = JsonConvert.DeserializeObject<Person>(value.ToString());
+            item.Id = id;
+            await service.Update(item);
+            return StatusCode(StatusCodes.Status204NoContent);
+        }
+
+        [HttpDelete(""{id}"")]
+        public virtual async Task<IActionResult> Delete(int id)
+        {
+            if (!await service.Exists(id)) return NotFound();
+            await service.Delete(id);
+            return StatusCode(StatusCodes.Status204NoContent);
+        }
+    }
+} ";
             controller.Run(args);
             outputMock.Verify(x => x.Write(It.IsAny<string>(), It.Is<string>(x => x.Contains("Person")), It.Is<string>(template => Assert(expected, template))));
         }
@@ -118,7 +179,7 @@ namespace Example.Web.ApiController
         public virtual async Task<IActionResult> Get()
         {
             var items = await service.GetAll();
-            if (!items.Any()) return NotFound();
+            if (!items.Any()) logger.LogInformation(""No content found."");
             return Ok(items);            
         }
 
@@ -193,7 +254,7 @@ namespace Example.Web.ApiController
         public virtual async Task<IActionResult> Get()
         {
             var items = await service.GetAll();
-            if (!items.Any()) return NotFound();
+            if (!items.Any()) logger.LogInformation(""No content found."");
             return Ok(items);            
         }
 

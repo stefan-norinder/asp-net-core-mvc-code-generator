@@ -62,26 +62,26 @@ namespace CodeGenerator.Lib.Templates
                     "  </ul>\r\n                </div>                \r\n                <div>\r\n        " +
                     "            <form id=\"changeLanguageFormId\" asp-controller=\"Home\" asp-action=\"To" +
                     "ggleCulture\" method=\"post\">\r\n                        <input type=\"hidden\" name=\"" +
-                    "returnUrl\" value=\"@currentUrl\">\r\n                        <img id=\"iconLanguageId" +
-                    "\" src=\"~/img/icon_language.png\" title=\"@SharedLocalizer.GetLocalizedHtmlString(\"" +
-                    "Toggle language\")\" class=\"icon-language\" />\r\n                    </form>\r\n      " +
-                    "          </div>\r\n            </div>\r\n        </nav>\r\n    </header>\r\n    <div cl" +
-                    "ass=\"container\">\r\n        <main role=\"main\" class=\"pb-3\">\r\n            @RenderBo" +
-                    "dy()\r\n        </main>\r\n    </div>    \r\n    <div class=\"clear\"></div>\r\n    <foote" +
-                    "r class=\"border-top footer text-muted\">\r\n        <div class=\"container\">\r\n      " +
-                    "      &copy; 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jquery" +
-                    "/dist/jquery.min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/bootstr" +
-                    "ap.bundle.min.js\"></script>\r\n     <script src=\"https://cdn.datatables.net/1.12.0" +
-                    "/js/jquery.dataTables.min.js\"></script>\r\n    <script src=\"https://cdn.datatables" +
-                    ".net/buttons/2.2.2/js/dataTables.buttons.min.js\"></script>\r\n    <script src=\"htt" +
-                    "ps://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js\"></script>\r\n    <s" +
-                    "cript src=\"https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js\"></" +
-                    "script>\r\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jsz" +
-                    "ip.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2.3/" +
-                    "js/buttons.print.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-ve" +
-                    "rsion=\"true\"></script>\r\n    <script src=\"~/js/custom-site.js\" asp-append-version" +
-                    "=\"true\"></script>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n</" +
-                    "body>\r\n</html>\r\n\r\n");
+                    "returnUrl\" value=\"@currentUrl\">\r\n                        <span id=\"iconLanguageI" +
+                    "d\" class=\"bi bi-gem icon-language\" title=\"@SharedLocalizer.GetLocalizedHtmlStrin" +
+                    "g(\"Toggle language\")\"  ></span>\r\n                    </form>\r\n                </" +
+                    "div>\r\n            </div>\r\n        </nav>\r\n    </header>\r\n    <div class=\"contain" +
+                    "er\">\r\n        <main role=\"main\" class=\"pb-3\">\r\n            @RenderBody()\r\n      " +
+                    "  </main>\r\n    </div>    \r\n    <div class=\"clear\"></div>\r\n    <footer class=\"bor" +
+                    "der-top footer text-muted\">\r\n        <div class=\"container\">\r\n            &copy;" +
+                    " 2022 \r\n        </div>\r\n    </footer>\r\n    <script src=\"~/lib/jquery/dist/jquery" +
+                    ".min.js\"></script>\r\n    <script src=\"~/lib/bootstrap/dist/js/bootstrap.bundle.mi" +
+                    "n.js\"></script>\r\n     <script src=\"https://cdn.datatables.net/1.12.0/js/jquery.d" +
+                    "ataTables.min.js\"></script>\r\n    <script src=\"https://cdn.datatables.net/buttons" +
+                    "/2.2.2/js/dataTables.buttons.min.js\"></script>\r\n    <script src=\"https://cdn.dat" +
+                    "atables.net/buttons/2.2.2/js/buttons.html5.min.js\"></script>\r\n    <script src=\"h" +
+                    "ttps://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js\"></script>\r\n   " +
+                    " <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"><" +
+                    "/script>\r\n    <script src=\"https://cdn.datatables.net/buttons/2.2.3/js/buttons.p" +
+                    "rint.min.js\"></script>\r\n    <script src=\"~/js/site.js\" asp-append-version=\"true\"" +
+                    "></script>\r\n    <script src=\"~/js/custom-site.js\" asp-append-version=\"true\"></sc" +
+                    "ript>\r\n    @await RenderSectionAsync(\"Scripts\", required: false)\r\n</body>\r\n</htm" +
+                    "l>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

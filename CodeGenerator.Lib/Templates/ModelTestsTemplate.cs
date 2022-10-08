@@ -48,7 +48,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Test\r\n{    \r\n    public class ");
+            this.Write(".Test\r\n{    \r\n    public partial class ");
             
             #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

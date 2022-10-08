@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
-using <#= namespaceName #>.Logic.Setting;
+using <#= namespaceName #>.Logic.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;

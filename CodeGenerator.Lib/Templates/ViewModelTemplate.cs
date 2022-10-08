@@ -35,49 +35,61 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" \r\n\r\nusing System;\r\n\r\nnamespace ");
+            this.Write(" \r\n\r\nusing System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
             
-            #line 11 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Web.ViewModel\r\n{\r\n    public partial class ");
             
-            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("ViewModel : ViewModelBase\r\n    {\r\n    ");
             
-            #line 15 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
- foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ 
+            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+ 
+    
+    foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ 
+    if(item.ConventionalDatatype == "DateTime?"){
+    
             
             #line default
             #line hidden
-            this.Write("    public ");
+            this.Write("    [DataType(DataType.Text)]\r\n    ");
             
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("    public virtual ");
+            
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
-            this.Write(" {get;set;}\r\n    ");
+            this.Write(" {get;set;}\r\n\r\n    ");
             
-            #line 17 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("  \r\n    }\r\n} ");
+            this.Write("    public virtual string GetBackToListLink() => $\"/{GetType().Name.Replace(\"View" +
+                    "Model\",\"\")}\";\r\n    }\r\n} ");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -10,7 +10,7 @@ using <#= namespaceName #>.Logic.DataAccess;
 using <#= namespaceName #>.Logic.Http;
 using <#= namespaceName #>.Logic.Model;
 using <#= namespaceName #>.Logic.Services;
-using <#= namespaceName #>.Logic.Setting;
+using <#= namespaceName #>.Logic.Settings;
 using <#= namespaceName #>.Web.ViewModel;
 using Localization;
 using Microsoft.AspNetCore.Builder;
@@ -88,13 +88,13 @@ namespace <#= namespaceName #>.Web
             //override for custom behaviour
         }
         
-        protected void ConfigureLocalization(IServiceCollection services)
+         protected void ConfigureLocalization(IServiceCollection services)
         {
             var supportedCultures = GetSupportedLanguages();
 
-            services.Configure<RequestLocalizationOptions>(options =>
+            services.Configure((Action<RequestLocalizationOptions>)(options =>
             {
-                options.DefaultRequestCulture = new RequestCulture("en-gb");
+                options.DefaultRequestCulture = GetDefaultCulture();
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
                 options.RequestCultureProviders = new List<IRequestCultureProvider>
@@ -102,8 +102,10 @@ namespace <#= namespaceName #>.Web
                   new QueryStringRequestCultureProvider(),
                   new CookieRequestCultureProvider()
                 };
-            });
+            }));
         }
+
+        protected virtual RequestCulture GetDefaultCulture() => new RequestCulture("en-gb");
 
         protected virtual IList<CultureInfo> GetSupportedLanguages()
         {
@@ -130,7 +132,7 @@ namespace <#= namespaceName #>.Web
             });
         }
 
-        protected virtual IMapper GetMapper()
+        public virtual IMapper GetMapper()
         {
             var mapperConfig = new MapperConfiguration(mc =>
             {

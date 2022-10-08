@@ -5,7 +5,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
-namespace <#= namespaceName #>.Logic.Setting
+namespace <#= namespaceName #>.Logic.Settings
 {
     public class AuthenticationSettings
     {

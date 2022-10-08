@@ -125,9 +125,15 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write("ViewModel>>(list);\r\n            return View(viewModels);\r\n        }\r\n        \r\n  " +
-                    "      public ActionResult Create()\r\n        {\r\n            return View();\r\n     " +
-                    "   }\r\n\r\n        [HttpPost]\r\n        public virtual async Task<ActionResult> Crea" +
-                    "te([FromForm]");
+                    "      public ActionResult Create()\r\n        {\r\n            return View(new ");
+            
+            #line 44 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ViewModel());\r\n        }\r\n\r\n        [HttpPost]\r\n        public virtual async Task" +
+                    "<ActionResult> Create([FromForm]");
             
             #line 48 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));

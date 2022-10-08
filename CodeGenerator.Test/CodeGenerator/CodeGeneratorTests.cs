@@ -34,8 +34,8 @@ namespace CodeGenerator.Test
         [TestCase("string", "nvarchar(255)")]
         [TestCase("bool", "bit")]
         [TestCase("int", "int")]
-        [TestCase("DateTime", "DateTime")]
-        [TestCase("DateTime", "Date")]
+        [TestCase("DateTime?", "DateTime?")]
+        [TestCase("DateTime?", "Date")]
         public void SqlDatatypeToConventionalDatatype(string result, string sqlDatatype)
         {
             var sut = new Proprety { DataType = sqlDatatype };

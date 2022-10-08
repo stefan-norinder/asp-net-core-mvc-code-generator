@@ -130,7 +130,7 @@ namespace CodeGenerator.Lib.Templates
 </div>
 
 <div>
-    <a asp-action=""Index"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
+    <a href=""@Model.GetBackToListLink()"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
 </div>
 
 @section Scripts {

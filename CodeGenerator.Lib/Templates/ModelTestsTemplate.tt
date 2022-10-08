@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace <#= namespaceName #>.Test
 {    
-    public class <#= Model.Name #>ModelTests
+    public partial class <#= Model.Name #>ModelTests
     {
          [Test]
         public void Initiate_SholdNotBeNull()

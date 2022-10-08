@@ -41,7 +41,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(@".Logic.Setting;
+            this.Write(@".Logic.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;

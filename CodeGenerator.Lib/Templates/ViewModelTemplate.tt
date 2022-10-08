@@ -7,13 +7,22 @@
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace <#= namespaceName #>.Web.ViewModel
 {
     public partial class <#= Model.Name #>ViewModel : ViewModelBase
     {
-    <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
-    public <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
-    <# } #>  
+    <# 
+    
+    foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ 
+    if(item.ConventionalDatatype == "DateTime?"){
+    #>
+    [DataType(DataType.Text)]
+    <# } #>
+    public virtual <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
+
+    <# } #>
+    public virtual string GetBackToListLink() => $"/{GetType().Name.Replace("ViewModel","")}";
     }
 } 

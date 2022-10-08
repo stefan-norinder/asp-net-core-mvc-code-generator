@@ -41,7 +41,7 @@ namespace <#= namespaceName #>.Web.Controllers
         
         public ActionResult Create()
         {
-            return View();
+            return View(new <#= Model.Name #>ViewModel());
         }
 
         [HttpPost]

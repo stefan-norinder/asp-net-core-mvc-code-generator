@@ -382,9 +382,6 @@
     <None Update="Templates\StaticContent\wwwroot\js\site.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\StaticContent\wwwroot\img\icon_language.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Templates\StaticContent\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

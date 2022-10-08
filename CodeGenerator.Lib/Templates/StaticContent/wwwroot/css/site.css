@@ -10,6 +10,12 @@ a {
     color: #333;
 }
 
+
+input[type="checkbox"] {
+    width: 40px;
+    transform: scale(2);
+}
+
 a.navbar-brand {
     font-size: 55px;
 }
@@ -49,8 +55,8 @@ a {
   border-color: #1861ac;
 }
 
-img.icon-language {
-    height: 25px;
+.icon-language {
+    font-size: 25px;
     cursor: pointer;
 }
 
@@ -92,6 +98,12 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+.clear {
+    clear: both;
+    margin-bottom: 150px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
