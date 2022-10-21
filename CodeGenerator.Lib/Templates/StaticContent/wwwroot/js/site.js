@@ -16,6 +16,7 @@ $(document).ready(function () {
                 'url': data.TableLang
             },
             "paging": false,
+            "order": [],
             dom: 'Bfrtip',
             buttons: [
                 { extend: 'copy',  className: 'btn btn-secondary btn-sm table-button' },
