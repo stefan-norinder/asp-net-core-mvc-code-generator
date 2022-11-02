@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class HomeViewTemplate : HomeViewTemplateBase
     {
@@ -28,36 +28,42 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"@* --------------------------------------------------------------------*@
-@* Warning! This is an auto generated file. Changes may be overwritten *@
-@* --------------------------------------------------------------------*@
-@using Localization
-@inject LocService SharedLocalizer
-<ul>
-");
+            this.Write("@* --------------------------------------------------------------------*@\r\n@* War" +
+                    "ning! This is an auto generated file. Changes may be overwritten *@\r\n@* --------" +
+                    "------------------------------------------------------------*@\r\n@using Localizat" +
+                    "ion\r\n@using ");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+            #line 10 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Setting\r\n@using Microsoft.Extensions.Options\r\n@inject IOptions<Application" +
+                    "Settings> settings\r\n@inject LocService SharedLocalizer\r\n@{\r\n    var pathBase = s" +
+                    "ettings.Value != null ? settings.Value.PathBase : string.Empty;\r\n}\r\n<ul>\r\n");
+            
+            #line 18 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
  foreach (var item in Model){ 
             
             #line default
             #line hidden
-            this.Write("    <li><a href=\"");
+            this.Write("    <li><a href=\"@pathBase/");
             
-            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+            #line 19 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\">");
             
-            #line 13 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+            #line 19 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("</a></li>\r\n");
             
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
+            #line 20 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
  } 
             
             #line default

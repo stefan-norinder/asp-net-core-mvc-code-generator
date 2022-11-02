@@ -28,10 +28,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\AuthenticationSettingsTemplate.cs">
+    <Compile Update="Templates\AuthenticationSettingsTemplate - Copy.cs">
+      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\BaseEntityTemplate.cs">
       <DesignTime>True</DesignTime>

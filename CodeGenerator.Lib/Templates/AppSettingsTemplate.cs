@@ -18,7 +18,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class AppSettingsTemplate : AppSettingsTemplateBase
     {
@@ -29,29 +29,41 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             
-            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            #line 6 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n  \"ConnectionStrings\": {\r\n    \"Default\": \"Data Source=");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            #line 9 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(server));
             
             #line default
             #line hidden
             this.Write(";Initial Catalog=");
             
-            #line 9 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
+            #line 9 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AppSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(datasource));
             
             #line default
             #line hidden
-            this.Write(";Trusted_Connection=True;\"\r\n  },\r\n  \"Logging\": {\r\n    \"LogLevel\": {\r\n      \"Defau" +
-                    "lt\": \"Information\",\r\n      \"Microsoft\": \"Information\",\r\n      \"Microsoft.Hosting" +
-                    ".Lifetime\": \"Information\"\r\n    }\r\n  },\r\n  \"Authentication\": {\r\n    \"BearerToken\"" +
-                    ": \"\"\r\n  }\r\n}");
+            this.Write(@";Trusted_Connection=True;""
+  },
+  ""Logging"": {
+    ""LogLevel"": {
+      ""Default"": ""Information"",
+      ""Microsoft"": ""Information"",
+      ""Microsoft.Hosting.Lifetime"": ""Information""
+    }
+  },
+  ""Authentication"": {
+    ""BearerToken"": """"
+  },
+  ""Application"": {
+    ""Name"": """"
+  }
+}");
             return this.GenerationEnvironment.ToString();
         }
     }
