@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AuthenticationSettingsTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApplicationSettingsTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public partial class AuthenticationSettingsTemplate : AuthenticationSettingsTemplateBase
+    public partial class ApplicationSettingsTemplate : ApplicationSettingsTemplateBase
     {
 #line hidden
         /// <summary>
@@ -29,20 +29,20 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             
-            #line 6 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AuthenticationSettingsTemplate.tt"
+            #line 6 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApplicationSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
             
             #line default
             #line hidden
             this.Write(" \r\n\r\nnamespace ");
             
-            #line 8 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\AuthenticationSettingsTemplate.tt"
+            #line 8 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApplicationSettingsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(".Logic.Settings\r\n{\r\n    public class AuthenticationSettings\r\n    {\r\n        publi" +
-                    "c string BearerToken { get; set; }\r\n    }\r\n}\r\n");
+            this.Write(".Logic.Settings\r\n{\r\n    public class ApplicationSettings\r\n    {\r\n        public s" +
+                    "tring Name { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -54,7 +54,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
-    public class AuthenticationSettingsTemplateBase
+    public class ApplicationSettingsTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

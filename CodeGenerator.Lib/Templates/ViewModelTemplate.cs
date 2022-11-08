@@ -19,7 +19,7 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+    #line 1 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ViewModelTemplate : ViewModelTemplateBase
     {
@@ -30,28 +30,28 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             
-            #line 7 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 7 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
             
             #line default
             #line hidden
             this.Write(" \r\n\r\nusing System;\r\nusing System.ComponentModel.DataAnnotations;\r\n\r\nnamespace ");
             
-            #line 12 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 12 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
             this.Write(".Web.ViewModel\r\n{\r\n    public partial class ");
             
-            #line 14 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 14 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
             this.Write("ViewModel : ViewModelBase\r\n    {\r\n    ");
             
-            #line 16 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 16 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
  
     
     foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ 
@@ -62,34 +62,34 @@ namespace CodeGenerator.Lib.Templates
             #line hidden
             this.Write("    [DataType(DataType.Text)]\r\n    ");
             
-            #line 22 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 22 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
  } 
             
             #line default
             #line hidden
             this.Write("    public virtual ");
             
-            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.ConventionalDatatype));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 23 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 23 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write(" {get;set;}\r\n\r\n    ");
             
-            #line 25 "C:\Users\Stefan Adm\code\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
+            #line 25 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ViewModelTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("    public virtual string GetBackToListLink() => $\"/{GetType().Name.Replace(\"View" +
-                    "Model\",\"\")}\";\r\n    }\r\n} ");
+            this.Write("    public virtual string GetBackToListLink(string applicationName) => $\"/{applic" +
+                    "ationName}/{GetType().Name.Replace(\"ViewModel\",\"\")}\";\r\n    }\r\n} ");
             return this.GenerationEnvironment.ToString();
         }
     }

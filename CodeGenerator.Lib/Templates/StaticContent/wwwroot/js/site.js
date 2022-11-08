@@ -1,15 +1,29 @@
-﻿$(document).ready(function () {
-    $('#iconLanguageId').on('click', function () {
-        $('#changeLanguageFormId').submit();
-    })
-});
+﻿function getBaseUrl() {
+    let url = new URL(window.location.href);
+    let pathname = getPathName(url);
+    url = `${url.protocol}//${url.host}${pathname}`;
+    if (url.substring(url.length - 1) === "/") {
+        url = url.slice(0, -1);
+    }
+    url += "/resources/tablelang";
+    return url;
+}
+
+function getPathName(url) {
+    let pathName = url.pathname;
+    let pathNames = pathName.split('/');
+    if (pathNames.length > 2) {
+        pathName = '/' + pathNames[1];
+    }
+    return pathName;
+};
 
 $(document).ready(function () {
     $('#iconLanguageId').on('click', function () {
         $('#changeLanguageFormId').submit();
     })
-
-    $.get("resources/tablelang", function (json) {
+    let url = getBaseUrl();
+    $.get(url, function (json) {
         let data = JSON.parse(json);
         $('.data-table').DataTable({
             'language': {

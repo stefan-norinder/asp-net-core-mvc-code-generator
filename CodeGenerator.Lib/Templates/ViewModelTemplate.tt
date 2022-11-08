@@ -23,6 +23,6 @@ namespace <#= namespaceName #>.Web.ViewModel
     public virtual <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
 
     <# } #>
-    public virtual string GetBackToListLink() => $"/{GetType().Name.Replace("ViewModel","")}";
+    public virtual string GetBackToListLink(string applicationName) => $"/{applicationName}/{GetType().Name.Replace("ViewModel","")}";
     }
 } 

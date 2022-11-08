@@ -7,15 +7,15 @@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
 @using Localization
-@using <#= namespaceName #>.Logic.Setting
+@using <#= namespaceName #>.Logic.Settings
 @using Microsoft.Extensions.Options
 @inject IOptions<ApplicationSettings> settings
 @inject LocService SharedLocalizer
 @{
-    var pathBase = settings.Value != null ? settings.Value.PathBase : string.Empty;
+    var applicationName = settings.Value != null ? settings.Value.Name : string.Empty;
 }
 <ul>
 <# foreach (var item in Model){ #>
-    <li><a href="@pathBase/<#= item.Name#>"><#= item.Name#></a></li>
+    <li><a href="@applicationName/<#= item.Name#>"><#= item.Name#></a></li>
 <# } #>  
 </ul>

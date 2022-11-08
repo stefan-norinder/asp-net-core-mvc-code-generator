@@ -53,6 +53,7 @@ namespace <#= namespaceName #>.Web
             services.AddSingleton<LocService>();
             services.AddTransient<IHttpClient, HttpClient>();
             services.Configure<AuthenticationSettings>(Configuration.GetSection("Authentication"));
+            services.Configure<ApplicationSettings>(Configuration.GetSection("Application"));
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             
             services.AddHttpClient();

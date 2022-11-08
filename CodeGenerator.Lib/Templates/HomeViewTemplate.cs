@@ -38,16 +38,16 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(".Logic.Setting\r\n@using Microsoft.Extensions.Options\r\n@inject IOptions<Application" +
-                    "Settings> settings\r\n@inject LocService SharedLocalizer\r\n@{\r\n    var pathBase = s" +
-                    "ettings.Value != null ? settings.Value.PathBase : string.Empty;\r\n}\r\n<ul>\r\n");
+            this.Write(".Logic.Settings\r\n@using Microsoft.Extensions.Options\r\n@inject IOptions<Applicatio" +
+                    "nSettings> settings\r\n@inject LocService SharedLocalizer\r\n@{\r\n    var application" +
+                    "Name = settings.Value != null ? settings.Value.Name : string.Empty;\r\n}\r\n<ul>\r\n");
             
             #line 18 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
  foreach (var item in Model){ 
             
             #line default
             #line hidden
-            this.Write("    <li><a href=\"@pathBase/");
+            this.Write("    <li><a href=\"@applicationName/");
             
             #line 19 "C:\Users\Stefan Adm\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\HomeViewTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
