@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Version>0.0.1</Version>
     <Description>Det här är ett exempelprojekt som visar hur output från CodeGenerator ska se ut.</Description>
   </PropertyGroup>

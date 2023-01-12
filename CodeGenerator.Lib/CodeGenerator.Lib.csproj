@@ -23,15 +23,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\ApplicationSettingsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ApplicationSettingsTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Update="Templates\AppSettingsTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\AuthenticationSettingsTemplate.cs">
+    <Compile Update="Templates\AuthenticationSettingsTemplate - Copy.cs">
+      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\BaseEntityTemplate.cs">
       <DesignTime>True</DesignTime>
@@ -224,6 +229,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\ApplicationSettingsTemplate.tt">
+      <LastGenOutput>ApplicationSettingsTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
     <None Update="Templates\ErrorViewTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ErrorViewTemplate.cs</LastGenOutput>

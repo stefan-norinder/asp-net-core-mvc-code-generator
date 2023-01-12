@@ -7,9 +7,12 @@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
 @using Localization
+@using <#= namespaceName #>.Logic.Settings
+@using Microsoft.Extensions.Options
+@inject IOptions<ApplicationSettings> settings
 @inject LocService SharedLocalizer
 <ul>
 <# foreach (var item in Model){ #>
-    <li><a href="<#= item.Name#>"><#= item.Name#></a></li>
+    <li><a asp-controller="<#= item.Name #>" asp-action="Index"><#= item.Name #></a></li>
 <# } #>  
 </ul>

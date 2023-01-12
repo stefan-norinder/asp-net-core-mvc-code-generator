@@ -8,7 +8,10 @@
 @* Warning! This is an auto generated file. Changes may be overwritten *@
 @* --------------------------------------------------------------------*@
 @using Localization
+@using Microsoft.Extensions.Options
+@using <#= namespaceName #>.Logic.Settings
 @inject LocService SharedLocalizer
+@inject IOptions<ApplicationSettings> applicationSettingsOptions
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
@@ -19,7 +22,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md">
         <form method="post"  enctype="multipart/form-data" asp-controller="<#= Model.Name #>" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <# foreach(var item in Model.Properties.GetAllPropertiesExceptId()) { #>
@@ -38,7 +41,7 @@
 </div>
 
 <div>
-    <a href="@Model.GetBackToListLink()">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
+    <a href="@Model.GetBackToListLink(applicationSettingsOptions.Value.Name)">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
 </div>
 
 @section Scripts {

@@ -41,8 +41,8 @@
             </td>
 <# } #>  
             <td>
-                <a href="/<#= Model.Name #>/edit/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> | 
-                <a href="/<#= Model.Name #>/remove/@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> 
+                <a asp-controller="<#= Model.Name #>" asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> | 
+                <a asp-controller="<#= Model.Name #>" asp-action="Remove" asp-route-id="@item.Id">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> 
             </td>
         </tr>
 }

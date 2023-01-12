@@ -27,6 +27,7 @@ namespace CodeGenerator.Lib.CodeGenerators
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Http", File = $"HttpClient.cs", Content = new HttpClientTemplate(namespaceName).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Http", File = $"HttpService.cs", Content = new HttpServiceBaseTemplate(namespaceName).TransformText() };
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Setting", File = $"AuthenticationSettings.cs", Content = new AuthenticationSettingsTemplate(namespaceName).TransformText() };
+            yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Setting", File = $"ApplicationSettings.cs", Content = new ApplicationSettingsTemplate(namespaceName).TransformText() };
         }
 
     }

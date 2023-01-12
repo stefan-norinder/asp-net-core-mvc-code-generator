@@ -20,9 +20,9 @@ namespace <#= namespaceName #>.Web.ViewModel
     #>
     [DataType(DataType.Text)]
     <# } #>
-    public virtual <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;}
+    public virtual <#= item.ConventionalDatatype #> <#= item.Name #> {get;set;} <#  if(item.ConventionalDatatype == "string") { #> = ""; <# } #>
 
     <# } #>
-    public virtual string GetBackToListLink() => $"/{GetType().Name.Replace("ViewModel","")}";
+    public virtual string GetBackToListLink(string applicationName) => $"/{applicationName}/{GetType().Name.Replace("ViewModel","")}";
     }
 } 

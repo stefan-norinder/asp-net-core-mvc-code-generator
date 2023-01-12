@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace Booking --server .\\sqlexpress --datasource  dev-bookings --output ./../../../../../../Bookings/"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace Texts --server .\\sqlexpress --datasource  dev-Texts --output ./../../../../../../Texts/"
     }
   }
 }

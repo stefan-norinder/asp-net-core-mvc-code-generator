@@ -17,5 +17,8 @@
   },
   "Authentication": {
     "BearerToken": ""
+  },
+  "Application": {
+    "Name": ""
   }
 }
