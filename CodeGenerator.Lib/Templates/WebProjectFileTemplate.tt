@@ -13,10 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>  
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="DotNet.NLog.NetCore" Version="7.0.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
-    <PackageReference Include="NLog" Version="5.0.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+    <PackageReference Include="NLog" Version="5.1.1" />
+    <PackageReference Include="NLog.Database" Version="5.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>  
   
   <ItemGroup>

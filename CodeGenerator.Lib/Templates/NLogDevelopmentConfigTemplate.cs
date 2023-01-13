@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+    #line 1 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\NLogDevelopmentConfigTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class WebProjectFileTemplate : WebProjectFileTemplateBase
+    public partial class NLogDevelopmentConfigTemplate : NLogDevelopmentConfigTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,55 +28,58 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
-<Project Sdk=""Microsoft.NET.Sdk.Web"">
+            this.Write(@"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<nlog xmlns=""http://www.nlog-project.org/schemas/NLog.xsd""
+      xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""
+      autoReload=""true""
+      throwConfigExceptions=""true""
+      internalLogLevel=""info""
+      internalLogFile="".\logs\internal.log"">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework> 
-    <Version>0.0.1</Version>
-    <Description>Auto generated project</Description>
-  </PropertyGroup>
+  <extensions>
+    <add assembly=""NLog.Web.AspNetCore""/>
+  </extensions>
 
-  <ItemGroup>  
-    <PackageReference Include=""DotNet.NLog.NetCore"" Version=""7.0.0"" />
-    <PackageReference Include=""AutoMapper"" Version=""12.0.0"" />
-    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Localization"" Version=""2.2.0"" />
-    <PackageReference Include=""Microsoft.Data.SqlClient"" Version=""5.0.1"" />
-    <PackageReference Include=""NLog"" Version=""5.1.1"" />
-    <PackageReference Include=""NLog.Database"" Version=""5.1.1"" />
-    <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.2.1"" />
-    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.5"" />
-  </ItemGroup>  
-  
-  <ItemGroup>
-    ");
+  <targets>
+    <target xsi:type=""File"" name=""ownFile-web"" fileName="".\logs\${shortdate}.log""
+            layout=""${longdate}|${event-properties:item=EventId_Id:whenEmpty=0}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}|"" />
+
+    <target type=""Database"" name=""database"" connectionstring=""Data Source=");
             
-            #line 27 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
+            #line 22 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\NLogDevelopmentConfigTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Server));
             
             #line default
             #line hidden
-            this.Write(@"    
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include=""logs\"" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Content Update=""nlog.config"">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update=""nlog.Development.config"">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+            this.Write(";Initial Catalog=");
+            
+            #line 22 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\NLogDevelopmentConfigTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Datasource));
+            
+            #line default
+            #line hidden
+            this.Write(@";Integrated Security=True;TrustServerCertificate=True;"">
+      <commandText>
+        INSERT INTO Log ([Origin], [Message], [LogLevel],[CreatedOn]) VALUES (@Origin,@Message,@LogLevel,@Date);
+      </commandText>
+      <parameter name=""@Date"" layout=""${date}"" dbType=""DbType.DateTime""/>
+      <parameter name=""@Origin"" layout=""${callsite}""/>
+      <parameter name=""@LogLevel"" layout=""${level}""/>
+      <parameter name=""@message"" layout=""${message}""/>
+    </target>
+  </targets>
 
-  <Target Name=""PostBuild"" AfterTargets=""PostBuildEvent"">
-    <Exec Command=""echo  -------------------------------------------------------------------------------------------- &#xD;&#xA;echo  *** Start custom post build events *** &#xD;&#xA;echo  --------------------------------------------------------------------------------------------&#xD;&#xA;echo.&#xD;&#xA;echo  If you are making changes to files that are updated by the code generator application&#xD;&#xA;echo  it's a good idea to wite protect them here. E.g. attrib +r &quot;/{path}/Web.csproj&quot; &#xD;&#xA;echo.&#xD;&#xA;echo  -------------------------------------------------------------------------------------------- &#xD;&#xA;echo  *** End custom post build events *** &#xD;&#xA;echo  --------------------------------------------------------------------------------------------"" />
-  </Target>
+  <rules>
+    
+    <logger name=""Microsoft.Hosting.Lifetime"" minlevel=""Info"" writeTo=""database"" final=""true"" />
 
-</Project>
+    <logger name=""Microsoft.Hosting.Lifetime"" minlevel=""Info"" writeTo=""ownFile-web"" final=""true"" />
+
+    <logger name=""Microsoft.*"" maxlevel=""Info"" final=""true"" />
+
+    <logger name=""*"" minlevel=""Info"" writeTo=""ownFile-web"" />
+  </rules>
+</nlog>
 ");
             return this.GenerationEnvironment.ToString();
         }
@@ -89,7 +92,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public class WebProjectFileTemplateBase
+    public class NLogDevelopmentConfigTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

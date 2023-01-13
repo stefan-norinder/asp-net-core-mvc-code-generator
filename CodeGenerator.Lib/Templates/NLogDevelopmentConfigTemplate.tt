@@ -1,0 +1,43 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      autoReload="true"
+      throwConfigExceptions="true"
+      internalLogLevel="info"
+      internalLogFile=".\logs\internal.log">
+
+  <extensions>
+    <add assembly="NLog.Web.AspNetCore"/>
+  </extensions>
+
+  <targets>
+    <target xsi:type="File" name="ownFile-web" fileName=".\logs\${shortdate}.log"
+            layout="${longdate}|${event-properties:item=EventId_Id:whenEmpty=0}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}|" />
+
+    <target type="Database" name="database" connectionstring="Data Source=<#= Server #>;Initial Catalog=<#= Datasource #>;Integrated Security=True;TrustServerCertificate=True;">
+      <commandText>
+        INSERT INTO Log ([Origin], [Message], [LogLevel],[CreatedOn]) VALUES (@Origin,@Message,@LogLevel,@Date);
+      </commandText>
+      <parameter name="@Date" layout="${date}" dbType="DbType.DateTime"/>
+      <parameter name="@Origin" layout="${callsite}"/>
+      <parameter name="@LogLevel" layout="${level}"/>
+      <parameter name="@message" layout="${message}"/>
+    </target>
+  </targets>
+
+  <rules>
+    
+    <logger name="Microsoft.Hosting.Lifetime" minlevel="Info" writeTo="database" final="true" />
+
+    <logger name="Microsoft.Hosting.Lifetime" minlevel="Info" writeTo="ownFile-web" final="true" />
+
+    <logger name="Microsoft.*" maxlevel="Info" final="true" />
+
+    <logger name="*" minlevel="Info" writeTo="ownFile-web" />
+  </rules>
+</nlog>

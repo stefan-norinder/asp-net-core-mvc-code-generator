@@ -27,6 +27,8 @@ namespace CodeGenerator.Lib.CodeGenerators
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "Program.cs", Content =  new ProgramTemplate(model.Namespace).TransformText()},
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "appsettings.json", Content =  new AppSettingsTemplate(model.MetaData.EscapedServerString, model.MetaData.Datasource).TransformText()},
                 new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = $"{ProjectTypeConstant.Web}.csproj", Content =  webProjectFileContent},
+                new TemplateModel { Folder = $"{ProjectFolderPath}.{ProjectTypeConstant.Web}", File = "nlog.Development.config", Content =  new NLogDevelopmentConfigTemplate(model.MetaData.EscapedServerString, model.MetaData.Datasource).TransformText()},
+
             };
         }
         private void GenerateStaticContent(string basePath)
