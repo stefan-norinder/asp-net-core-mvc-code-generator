@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Templates\StaticContent\wwwroot\img\**" />
+    <EmbeddedResource Remove="Templates\StaticContent\wwwroot\img\**" />
+    <None Remove="Templates\StaticContent\wwwroot\img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="System.CodeDom" Version="5.0.0" />
@@ -498,10 +504,6 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>WebProjectFileTemplate.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Templates\StaticContent\wwwroot\img\" />
   </ItemGroup>
 
 </Project>

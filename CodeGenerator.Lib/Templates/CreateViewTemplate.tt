@@ -9,9 +9,7 @@
 @* --------------------------------------------------------------------*@
 @using Localization
 @using Microsoft.Extensions.Options
-@using <#= namespaceName #>.Logic.Settings
 @inject LocService SharedLocalizer
-@inject IOptions<ApplicationSettings> applicationSettingsOptions
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
@@ -40,7 +38,7 @@
 </div>
 
 <div>
-    <a href="@Model.GetBackToListLink(applicationSettingsOptions.Value.Name))">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
+    <a asp-controller="<#= Model.Name #>" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
 </div>
 
 @section Scripts {

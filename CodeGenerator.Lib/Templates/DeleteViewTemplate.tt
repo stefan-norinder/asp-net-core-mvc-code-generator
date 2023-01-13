@@ -9,9 +9,7 @@
 @* --------------------------------------------------------------------*@
 @using Localization
 @using Microsoft.Extensions.Options
-@using <#= namespaceName #>.Logic.Settings
 @inject LocService SharedLocalizer
-@inject IOptions<ApplicationSettings> applicationSettingsOptions
 @model <#= namespaceName #>.Web.ViewModel.<#= Model.Name #>ViewModel
 
 @{
@@ -37,7 +35,7 @@
     <form method="post"  enctype="multipart/form-data" asp-controller="<#= Model.Name #>" asp-action="Remove">    
         @Html.HiddenFor(x => x.Id)
         <input type="submit" value="@SharedLocalizer.GetLocalizedHtmlString("Delete")" class="btn btn-danger" /> |
-        <a href="@Model.GetBackToListLink(applicationSettingsOptions.Value.Name)">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
+        <a asp-controller="<#= Model.Name #>" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("Back to List")</a>
     </form>
     </div>
 

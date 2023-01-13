@@ -139,13 +139,16 @@ namespace CodeGenerator.Lib.Templates
 </div>
 
 <div>
-    <a href=""@Model.GetBackToListLink(applicationSettingsOptions.Value.Name)"">@SharedLocalizer.GetLocalizedHtmlString(""Back to List"")</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync(""_ValidationScriptsPartial"");}
-}
-");
+        <a asp-controller=""");
+            
+            #line 44 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\EditViewTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\" asp-action=\"Index\">@SharedLocalizer.GetLocalizedHtmlString(\"Back to List\")</a>\r" +
+                    "\n</div>\r\n\r\n@section Scripts {\r\n    @{await Html.RenderPartialAsync(\"_ValidationS" +
+                    "criptsPartial\");}\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
