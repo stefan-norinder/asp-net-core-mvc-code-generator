@@ -6,25 +6,28 @@
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using AutoMapper;
-using <#= namespaceName #>.Logic.DataAccess;
-using <#= namespaceName #>.Logic.Http;
-using <#= namespaceName #>.Logic.Model;
-using <#= namespaceName #>.Logic.Services;
-using <#= namespaceName #>.Logic.Settings;
-using <#= namespaceName #>.Web.ViewModel;
 using Localization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Globalization;
-using Microsoft.AspNetCore.Diagnostics;
-using System.Net;
-using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Root.Logic.DataAccess;
+using Root.Logic.Http;
+using Root.Logic.Model;
+using Root.Logic.Services;
+using Root.Logic.Settings;
+using Root.Web.ViewModel;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net;
+using System.Threading.Tasks;
+using System;
 
 namespace <#= namespaceName #>.Web
 {
@@ -51,7 +54,7 @@ namespace <#= namespaceName #>.Web
 
 <# } #>
             services.AddSingleton<LocService>();
-            services.AddTransient<IHttpClient, HttpClient>();
+            services.AddTransient<IHttpClient, Logic.Http.HttpClient>();
             services.Configure<AuthenticationSettings>(Configuration.GetSection("Authentication"));
             services.Configure<ApplicationSettings>(Configuration.GetSection("Application"));
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
@@ -72,8 +75,9 @@ namespace <#= namespaceName #>.Web
             app.UseRouting();
             app.UseRequestLocalization();
             ConfigureExceptionHandler(app);
-            CustomConfiguration(app, env);
-                      
+            CustomConfiguration(app, env);            
+            app.UseMiddleware<RedirectTablelang>();    
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -158,6 +162,33 @@ namespace <#= namespaceName #>.Web
         
 <# } #>
     
+            }
+        }
+
+        public class RedirectTablelang
+        {
+            private readonly RequestDelegate next;
+            private readonly ApplicationSettings applicationSettings;
+
+            public RedirectTablelang(RequestDelegate next, IOptions<ApplicationSettings> options)
+            {
+                this.next = next;
+                applicationSettings = options.Value;
+            }
+
+            public async Task InvokeAsync(HttpContext context)
+            {
+                var applicationName = applicationSettings.Name;
+                var path = context.Request.Path;
+                var tableLangPath = $"{applicationName}/resources/tablelang";
+                if (path.Value.EndsWith("resources/tablelang", StringComparison.InvariantCultureIgnoreCase) &&
+                !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    context.Response.StatusCode = 302;
+                    context.Response.Headers["Location"] = tableLangPath;
+                    return;
+                }
+                await next.Invoke(context);
             }
         }
 }
