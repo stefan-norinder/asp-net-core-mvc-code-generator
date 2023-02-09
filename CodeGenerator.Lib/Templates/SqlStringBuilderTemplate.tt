@@ -128,7 +128,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
     {
         public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int nextId, string table)
         {
-            var insertStringHead = $"insert into [{table}] (";
+            var insertStringHead = $"insert into {table} (";
             var insertStringTail = " output inserted.[Id] values (";
             foreach (var item in dictionary)
             {
@@ -150,7 +150,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
 
         public static string CreateUpdateString<T>(this Dictionary<string, string> dictionary, string table)
         {
-            var updateString = $"update [{table}] set ";
+            var updateString = $"update {table} set ";
             foreach (var item in dictionary.Where(x => x.Key.ToLower() != "id"))
             {
                 var value = dictionary[item.Key];

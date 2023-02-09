@@ -96,26 +96,26 @@ namespace CodeGenerator.Lib.Templates
                     "atic partial class DictionaryExtentions\r\n    {\r\n        public static string Cre" +
                     "ateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityC" +
                     "olumn, int nextId, string table)\r\n        {\r\n            var insertStringHead = " +
-                    "$\"insert into [{table}] (\";\r\n            var insertStringTail = \" output inserte" +
-                    "d.[Id] values (\";\r\n            foreach (var item in dictionary)\r\n            {\r\n" +
-                    "                if (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n          " +
-                    "      insertStringHead += $\"[{item.Key}], \";\r\n                var value = Column" +
-                    "IsIdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];" +
-                    "\r\n                insertStringTail += value == null ? \"NULL, \" : \"\'\" + value + \"" +
-                    "\', \";\r\n            }\r\n            insertStringHead = insertStringHead.RemoveLast" +
-                    "(2);\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n        " +
-                    "    return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r\n     " +
-                    "   private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)\r\n    " +
-                    "    {\r\n            return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n        pu" +
-                    "blic static string CreateUpdateString<T>(this Dictionary<string, string> diction" +
-                    "ary, string table)\r\n        {\r\n            var updateString = $\"update [{table}]" +
-                    " set \";\r\n            foreach (var item in dictionary.Where(x => x.Key.ToLower() " +
-                    "!= \"id\"))\r\n            {\r\n                var value = dictionary[item.Key];\r\n\r\n " +
-                    "               var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\', \";" +
-                    "\r\n\r\n                updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n        " +
-                    "    }\r\n            updateString = updateString.RemoveLast(2);\r\n\r\n            upd" +
-                    "ateString += \" where Id = \" + dictionary[\"Id\"];\r\n\r\n            return updateStri" +
-                    "ng;\r\n        }\r\n    }\r\n}\r\n");
+                    "$\"insert into {table} (\";\r\n            var insertStringTail = \" output inserted." +
+                    "[Id] values (\";\r\n            foreach (var item in dictionary)\r\n            {\r\n  " +
+                    "              if (item.Key == \"Id\" && hasIdentityColumn) continue;\r\n            " +
+                    "    insertStringHead += $\"[{item.Key}], \";\r\n                var value = ColumnIs" +
+                    "IdAndNextIdIsSet(nextId, item.Key) ? nextId.ToString() : dictionary[item.Key];\r\n" +
+                    "                insertStringTail += value == null ? \"NULL, \" : \"\'\" + value + \"\'," +
+                    " \";\r\n            }\r\n            insertStringHead = insertStringHead.RemoveLast(2" +
+                    ");\r\n            insertStringTail = insertStringTail.RemoveLast(2);\r\n\r\n          " +
+                    "  return insertStringHead + \") \" + insertStringTail + \")\";\r\n        }\r\n\r\n       " +
+                    " private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)\r\n      " +
+                    "  {\r\n            return column == \"Id\" && nextId > 0;\r\n        }\r\n\r\n        publ" +
+                    "ic static string CreateUpdateString<T>(this Dictionary<string, string> dictionar" +
+                    "y, string table)\r\n        {\r\n            var updateString = $\"update {table} set" +
+                    " \";\r\n            foreach (var item in dictionary.Where(x => x.Key.ToLower() != \"" +
+                    "id\"))\r\n            {\r\n                var value = dictionary[item.Key];\r\n\r\n     " +
+                    "           var valueString = value == null ? \"NULL, \" : \"\'\" + value + \"\', \";\r\n\r\n" +
+                    "                updateString += $\"[{item.Key}] = {valueString}\";\r\n\r\n            " +
+                    "}\r\n            updateString = updateString.RemoveLast(2);\r\n\r\n            updateS" +
+                    "tring += \" where Id = \" + dictionary[\"Id\"];\r\n\r\n            return updateString;\r" +
+                    "\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

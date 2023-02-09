@@ -5,7 +5,7 @@
     if (url.substring(url.length - 1) === "/") {
         url = url.slice(0, -1);
     }
-    url += "/resources/tablelang";
+    url += "/resources";
     return url;
 }
 

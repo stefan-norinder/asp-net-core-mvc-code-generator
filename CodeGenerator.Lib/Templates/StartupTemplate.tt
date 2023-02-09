@@ -17,12 +17,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Root.Logic.DataAccess;
-using Root.Logic.Http;
-using Root.Logic.Model;
-using Root.Logic.Services;
-using Root.Logic.Settings;
-using Root.Web.ViewModel;
+using <#= namespaceName #>.Logic.DataAccess;
+using <#= namespaceName #>.Logic.Http;
+using <#= namespaceName #>.Logic.Model;
+using <#= namespaceName #>.Logic.Services;
+using <#= namespaceName #>.Logic.Settings;
+using <#= namespaceName #>.Web.ViewModel;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
@@ -75,7 +75,8 @@ namespace <#= namespaceName #>.Web
             app.UseRouting();
             app.UseRequestLocalization();
             ConfigureExceptionHandler(app);
-            CustomConfiguration(app, env);            
+            CustomConfiguration(app, env);   
+            app.UseMiddleware<RedirectNotFound>();         
             app.UseMiddleware<RedirectTablelang>();    
 
             app.UseEndpoints(endpoints =>
@@ -150,10 +151,11 @@ namespace <#= namespaceName #>.Web
             return mapperConfig.CreateMapper();
         }
     }
-        public class MappingConfiguration : Profile
+
+    public class MappingConfiguration : Profile
+    {
+        public MappingConfiguration()
         {
-            public MappingConfiguration()
-            {
         
 <# foreach(var item in Model) { #>
                 CreateMap<<#= item #>, <#= item #>ViewModel>();
@@ -162,33 +164,61 @@ namespace <#= namespaceName #>.Web
         
 <# } #>
     
-            }
         }
+    }
 
-        public class RedirectTablelang
+    #region middleware
+
+    public class RedirectNotFound
+    {
+        private readonly RequestDelegate next;
+        private readonly ApplicationSettings applicationSettings;
+
+        public RedirectNotFound(RequestDelegate next, IOptions<ApplicationSettings> options)
         {
-            private readonly RequestDelegate next;
-            private readonly ApplicationSettings applicationSettings;
+            this.next = next;
+            applicationSettings = options.Value;
+        }
 
-            public RedirectTablelang(RequestDelegate next, IOptions<ApplicationSettings> options)
-            {
-                this.next = next;
-                applicationSettings = options.Value;
-            }
+        public async Task InvokeAsync(HttpContext context)
+        {
+            await next.Invoke(context);
 
-            public async Task InvokeAsync(HttpContext context)
+            if (context.Response.StatusCode == 404 && !context.Response.HasStarted)
             {
-                var applicationName = applicationSettings.Name;
-                var path = context.Request.Path;
-                var tableLangPath = $"{applicationName}/resources/tablelang";
-                if (path.Value.EndsWith("resources/tablelang", StringComparison.InvariantCultureIgnoreCase) &&
-                !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    context.Response.StatusCode = 302;
-                    context.Response.Headers["Location"] = tableLangPath;
-                    return;
-                }
-                await next.Invoke(context);
+                context.Response.Redirect($"/notfound?page={context.Request.Path}");
             }
         }
+    }
+
+    public class RedirectTablelang
+    {
+        private readonly RequestDelegate next;
+        private readonly ApplicationSettings applicationSettings;
+
+        public RedirectTablelang(RequestDelegate next, IOptions<ApplicationSettings> options)
+        {
+            this.next = next;
+            applicationSettings = options.Value;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            const string resourceBase = "/resources/tablelang";
+            var applicationName = applicationSettings.Name;
+            var path = context.Request.Path;
+            var tableLangPath = $"{applicationName}{resourceBase}";
+            if (path.Value.EndsWith(resourceBase, StringComparison.InvariantCultureIgnoreCase) &&
+                !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIgnoreCase) &&
+                !path.Value.Equals(resourceBase, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Response.StatusCode = 302;
+                context.Response.Headers["Location"] = tableLangPath;
+                return;
+            }
+            await next.Invoke(context);
+        }
+    }
+
+    #endregion
 }

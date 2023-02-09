@@ -48,19 +48,50 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Root.Logic.DataAccess;
-using Root.Logic.Http;
-using Root.Logic.Model;
-using Root.Logic.Services;
-using Root.Logic.Settings;
-using Root.Web.ViewModel;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net;
-using System.Threading.Tasks;
-using System;
-
-namespace ");
+using ");
+            
+            #line 20 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.DataAccess;\r\nusing ");
+            
+            #line 21 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Http;\r\nusing ");
+            
+            #line 22 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Model;\r\nusing ");
+            
+            #line 23 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Services;\r\nusing ");
+            
+            #line 24 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Settings;\r\nusing ");
+            
+            #line 25 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Web.ViewModel;\r\nusing System.Collections.Generic;\r\nusing System.Globalization;\r\n" +
+                    "using System.Net;\r\nusing System.Threading.Tasks;\r\nusing System;\r\n\r\nnamespace ");
             
             #line 32 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
@@ -165,117 +196,110 @@ namespace ");
                     "cationBuilder app, IWebHostEnvironment env)\r\n        {\r\n            app.UseHttps" +
                     "Redirection();\r\n            app.UseStaticFiles();\r\n            app.UseRouting();" +
                     "\r\n            app.UseRequestLocalization();\r\n            ConfigureExceptionHandl" +
-                    "er(app);\r\n            CustomConfiguration(app, env);            \r\n            ap" +
-                    "p.UseMiddleware<RedirectTablelang>();    \r\n\r\n            app.UseEndpoints(endpoi" +
-                    "nts =>\r\n            {\r\n                endpoints.MapControllerRoute(\r\n          " +
-                    "          name: \"default\",\r\n                    pattern: \"{controller=Home}/{act" +
-                    "ion=Index}/{id?}\");\r\n            });\r\n        }\r\n\r\n        protected virtual voi" +
-                    "d CustomServiceConfiguration(IServiceCollection services)\r\n        {\r\n          " +
-                    "  //override for custom behaviour\r\n        }\r\n\r\n        protected virtual void C" +
-                    "ustomConfiguration(IApplicationBuilder app, IWebHostEnvironment env)\r\n        {\r" +
-                    "\n            //override for custom behaviour\r\n        }\r\n        \r\n         prot" +
-                    "ected void ConfigureLocalization(IServiceCollection services)\r\n        {\r\n      " +
-                    "      var supportedCultures = GetSupportedLanguages();\r\n\r\n            services.C" +
-                    "onfigure((Action<RequestLocalizationOptions>)(options =>\r\n            {\r\n       " +
-                    "         options.DefaultRequestCulture = GetDefaultCulture();\r\n                o" +
-                    "ptions.SupportedCultures = supportedCultures;\r\n                options.Supported" +
-                    "UICultures = supportedCultures;\r\n                options.RequestCultureProviders" +
-                    " = new List<IRequestCultureProvider>\r\n                {\r\n                  new Q" +
-                    "ueryStringRequestCultureProvider(),\r\n                  new CookieRequestCultureP" +
-                    "rovider()\r\n                };\r\n            }));\r\n        }\r\n\r\n        protected " +
-                    "virtual RequestCulture GetDefaultCulture() => new RequestCulture(\"en-gb\");\r\n\r\n  " +
-                    "      protected virtual IList<CultureInfo> GetSupportedLanguages()\r\n        {\r\n " +
-                    "           return new List<CultureInfo> {\r\n                new CultureInfo(\"en-g" +
-                    "b\")\r\n            };\r\n        }\r\n\r\n        protected virtual void ConfigureExcept" +
-                    "ionHandler(IApplicationBuilder app)\r\n        {\r\n            app.UseExceptionHand" +
-                    "ler(builder =>\r\n            {\r\n                builder.Run(async context =>\r\n   " +
-                    "             {\r\n                    var e = context.Features.Get<IExceptionHandl" +
-                    "erFeature>();\r\n                    if (e == null) return;\r\n                    c" +
-                    "ontext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;\r\n         " +
-                    "           context.Response.ContentType = \"text/html\";\r\n                    var " +
-                    "factory = builder.ApplicationServices.GetService<ILoggerFactory>();\r\n           " +
-                    "         var logger = factory.CreateLogger(\"ExceptionLogger\");\r\n                " +
-                    "    logger.LogError(e.Error, e.Error.Message);\r\n                    context.Resp" +
-                    "onse.Redirect(\"/error\");\r\n                });\r\n            });\r\n        }\r\n\r\n   " +
-                    "     public virtual IMapper GetMapper()\r\n        {\r\n            var mapperConfig" +
-                    " = new MapperConfiguration(mc =>\r\n            {\r\n                mc.AddProfile(n" +
-                    "ew MappingConfiguration());\r\n            });\r\n\r\n            return mapperConfig." +
-                    "CreateMapper();\r\n        }\r\n    }\r\n        public class MappingConfiguration : P" +
-                    "rofile\r\n        {\r\n            public MappingConfiguration()\r\n            {\r\n   " +
-                    "     \r\n");
+                    "er(app);\r\n            CustomConfiguration(app, env);   \r\n            app.UseMidd" +
+                    "leware<RedirectNotFound>();         \r\n            app.UseMiddleware<RedirectTabl" +
+                    "elang>();    \r\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n     " +
+                    "           endpoints.MapControllerRoute(\r\n                    name: \"default\",\r\n" +
+                    "                    pattern: \"{controller=Home}/{action=Index}/{id?}\");\r\n       " +
+                    "     });\r\n        }\r\n\r\n        protected virtual void CustomServiceConfiguration" +
+                    "(IServiceCollection services)\r\n        {\r\n            //override for custom beha" +
+                    "viour\r\n        }\r\n\r\n        protected virtual void CustomConfiguration(IApplicat" +
+                    "ionBuilder app, IWebHostEnvironment env)\r\n        {\r\n            //override for " +
+                    "custom behaviour\r\n        }\r\n        \r\n         protected void ConfigureLocaliza" +
+                    "tion(IServiceCollection services)\r\n        {\r\n            var supportedCultures " +
+                    "= GetSupportedLanguages();\r\n\r\n            services.Configure((Action<RequestLoca" +
+                    "lizationOptions>)(options =>\r\n            {\r\n                options.DefaultRequ" +
+                    "estCulture = GetDefaultCulture();\r\n                options.SupportedCultures = s" +
+                    "upportedCultures;\r\n                options.SupportedUICultures = supportedCultur" +
+                    "es;\r\n                options.RequestCultureProviders = new List<IRequestCultureP" +
+                    "rovider>\r\n                {\r\n                  new QueryStringRequestCultureProv" +
+                    "ider(),\r\n                  new CookieRequestCultureProvider()\r\n                }" +
+                    ";\r\n            }));\r\n        }\r\n\r\n        protected virtual RequestCulture GetDe" +
+                    "faultCulture() => new RequestCulture(\"en-gb\");\r\n\r\n        protected virtual ILis" +
+                    "t<CultureInfo> GetSupportedLanguages()\r\n        {\r\n            return new List<C" +
+                    "ultureInfo> {\r\n                new CultureInfo(\"en-gb\")\r\n            };\r\n       " +
+                    " }\r\n\r\n        protected virtual void ConfigureExceptionHandler(IApplicationBuild" +
+                    "er app)\r\n        {\r\n            app.UseExceptionHandler(builder =>\r\n            " +
+                    "{\r\n                builder.Run(async context =>\r\n                {\r\n            " +
+                    "        var e = context.Features.Get<IExceptionHandlerFeature>();\r\n             " +
+                    "       if (e == null) return;\r\n                    context.Response.StatusCode =" +
+                    " (int)HttpStatusCode.InternalServerError;\r\n                    context.Response." +
+                    "ContentType = \"text/html\";\r\n                    var factory = builder.Applicatio" +
+                    "nServices.GetService<ILoggerFactory>();\r\n                    var logger = factor" +
+                    "y.CreateLogger(\"ExceptionLogger\");\r\n                    logger.LogError(e.Error," +
+                    " e.Error.Message);\r\n                    context.Response.Redirect(\"/error\");\r\n  " +
+                    "              });\r\n            });\r\n        }\r\n\r\n        public virtual IMapper " +
+                    "GetMapper()\r\n        {\r\n            var mapperConfig = new MapperConfiguration(m" +
+                    "c =>\r\n            {\r\n                mc.AddProfile(new MappingConfiguration());\r" +
+                    "\n            });\r\n\r\n            return mapperConfig.CreateMapper();\r\n        }\r\n" +
+                    "    }\r\n\r\n    public class MappingConfiguration : Profile\r\n    {\r\n        public " +
+                    "MappingConfiguration()\r\n        {\r\n        \r\n");
             
-            #line 158 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 160 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  foreach(var item in Model) { 
             
             #line default
             #line hidden
             this.Write("                CreateMap<");
             
-            #line 159 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 161 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 159 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 161 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel>();\r\n\r\n                CreateMap<");
             
-            #line 161 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 163 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel, ");
             
-            #line 161 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 163 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(">();\r\n        \r\n");
             
-            #line 163 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 165 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write(@"    
-            }
-        }
-
-        public class RedirectTablelang
-        {
-            private readonly RequestDelegate next;
-            private readonly ApplicationSettings applicationSettings;
-
-            public RedirectTablelang(RequestDelegate next, IOptions<ApplicationSettings> options)
-            {
-                this.next = next;
-                applicationSettings = options.Value;
-            }
-
-            public async Task InvokeAsync(HttpContext context)
-            {
-                var applicationName = applicationSettings.Name;
-                var path = context.Request.Path;
-                var tableLangPath = $""{applicationName}/resources/tablelang"";
-                if (path.Value.EndsWith(""resources/tablelang"", StringComparison.InvariantCultureIgnoreCase) &&
-                !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    context.Response.StatusCode = 302;
-                    context.Response.Headers[""Location""] = tableLangPath;
-                    return;
-                }
-                await next.Invoke(context);
-            }
-        }
-}
-");
+            this.Write("    \r\n        }\r\n    }\r\n\r\n    #region middleware\r\n\r\n    public class RedirectNotF" +
+                    "ound\r\n    {\r\n        private readonly RequestDelegate next;\r\n        private rea" +
+                    "donly ApplicationSettings applicationSettings;\r\n\r\n        public RedirectNotFoun" +
+                    "d(RequestDelegate next, IOptions<ApplicationSettings> options)\r\n        {\r\n     " +
+                    "       this.next = next;\r\n            applicationSettings = options.Value;\r\n    " +
+                    "    }\r\n\r\n        public async Task InvokeAsync(HttpContext context)\r\n        {\r\n" +
+                    "            await next.Invoke(context);\r\n\r\n            if (context.Response.Stat" +
+                    "usCode == 404 && !context.Response.HasStarted)\r\n            {\r\n                c" +
+                    "ontext.Response.Redirect($\"/notfound?page={context.Request.Path}\");\r\n           " +
+                    " }\r\n        }\r\n    }\r\n\r\n    public class RedirectTablelang\r\n    {\r\n        priva" +
+                    "te readonly RequestDelegate next;\r\n        private readonly ApplicationSettings " +
+                    "applicationSettings;\r\n\r\n        public RedirectTablelang(RequestDelegate next, I" +
+                    "Options<ApplicationSettings> options)\r\n        {\r\n            this.next = next;\r" +
+                    "\n            applicationSettings = options.Value;\r\n        }\r\n\r\n        public a" +
+                    "sync Task InvokeAsync(HttpContext context)\r\n        {\r\n            const string " +
+                    "resourceBase = \"/resources/tablelang\";\r\n            var applicationName = applic" +
+                    "ationSettings.Name;\r\n            var path = context.Request.Path;\r\n            v" +
+                    "ar tableLangPath = $\"{applicationName}{resourceBase}\";\r\n            if (path.Val" +
+                    "ue.EndsWith(resourceBase, StringComparison.InvariantCultureIgnoreCase) &&\r\n     " +
+                    "           !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIg" +
+                    "noreCase) &&\r\n                !path.Value.Equals(resourceBase, StringComparison." +
+                    "InvariantCultureIgnoreCase))\r\n            {\r\n                context.Response.St" +
+                    "atusCode = 302;\r\n                context.Response.Headers[\"Location\"] = tableLan" +
+                    "gPath;\r\n                return;\r\n            }\r\n            await next.Invoke(co" +
+                    "ntext);\r\n        }\r\n    }\r\n\r\n    #endregion\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

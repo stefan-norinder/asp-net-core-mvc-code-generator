@@ -2,14 +2,46 @@
 Warning! This is an auto generated file. Changes may be overwritten 
 */
 
+/*
+
+    COLORS:
+
+    Orange: #F18825
+    Light Orange: #FCCB8D
+    Red: #940C3B
+    Light Red: #C56480
+    Blue: #28487D
+    Light Blue: #7090B4
+    Purple: #5F2176
+    Light Purple: #9B7DB6
+    Green: #006A52
+    Light Green: #7F9F92
+
+*/
+
 body ul {
     list-style-type: none;
+}
+
+h1 {
+    color: #2c2f34d9;
+    font-family: Bodoni,sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    letter-spacing: -.6px;
+    line-height: 1.02;
+}
+
+p {
+    font-family: roboto,sans-serif;
+    color: #2c2f34;
+    font-size: 21px;
+    line-height: 1.62;
 }
 
 a {
     color: #333;
 }
-
 
 input[type="checkbox"] {
     width: 40px;
