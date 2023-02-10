@@ -10,5 +10,6 @@ namespace <#= namespaceName #>.Logic.Settings
     public class ApplicationSettings
     {
         public string Name { get; set; }
+        public int KeepLogsInDays { get; set; }
     }
 }

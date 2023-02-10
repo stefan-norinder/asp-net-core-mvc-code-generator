@@ -42,7 +42,8 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(".Logic.Settings\r\n{\r\n    public class ApplicationSettings\r\n    {\r\n        public s" +
-                    "tring Name { get; set; }\r\n    }\r\n}\r\n");
+                    "tring Name { get; set; }\r\n        public int KeepLogsInDays { get; set; }\r\n    }" +
+                    "\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -28,6 +28,8 @@ using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 using System;
+using System.IO;
+using Microsoft.CodeAnalysis;
 
 namespace <#= namespaceName #>.Web
 {
@@ -76,8 +78,7 @@ namespace <#= namespaceName #>.Web
             app.UseRequestLocalization();
             ConfigureExceptionHandler(app);
             CustomConfiguration(app, env);   
-            app.UseMiddleware<RedirectNotFound>();         
-            app.UseMiddleware<RedirectTablelang>();    
+            RegisterMiddleware(app);
 
             app.UseEndpoints(endpoints =>
             {
@@ -95,6 +96,13 @@ namespace <#= namespaceName #>.Web
         protected virtual void CustomConfiguration(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //override for custom behaviour
+        }
+
+        protected virtual void RegisterMiddleware(IApplicationBuilder app)
+        {
+            app.UseMiddleware<CleanUp>();
+            app.UseMiddleware<RedirectNotFound>();
+            app.UseMiddleware<RedirectTablelang>();
         }
         
          protected void ConfigureLocalization(IServiceCollection services)
@@ -204,7 +212,7 @@ namespace <#= namespaceName #>.Web
 
         public async Task InvokeAsync(HttpContext context)
         {
-            const string resourceBase = "/resources/tablelang";
+            const string resourceBase = "/resources";
             var applicationName = applicationSettings.Name;
             var path = context.Request.Path;
             var tableLangPath = $"{applicationName}{resourceBase}";
@@ -217,6 +225,46 @@ namespace <#= namespaceName #>.Web
                 return;
             }
             await next.Invoke(context);
+        }
+    }
+        public class CleanUp
+    {
+        private readonly RequestDelegate next;
+        protected readonly ApplicationSettings applicationSettings;
+
+        public CleanUp(RequestDelegate next, IOptions<ApplicationSettings> options)
+        {
+            this.next = next;
+            applicationSettings = options.Value;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            if (context.Request.Path.Value.EndsWith("clean-up", StringComparison.InvariantCultureIgnoreCase))
+            {
+                await ProcessCleanUp();
+                context.Response.StatusCode = StatusCodes.Status200OK;
+                await context.Response.WriteAsync("Clean-up ok.");
+            }
+            else
+            {
+                await next.Invoke(context);
+            }
+        }
+
+        public virtual async Task ProcessCleanUp()
+        {
+            string path = Path.Combine(AppContext.BaseDirectory, "logs");
+
+            var directory = new DirectoryInfo(path);
+
+            foreach (var file in directory.GetFiles())
+            {
+                if (file.LastAccessTime < DateTime.Today.AddDays(-applicationSettings.KeepLogsInDays))
+                {
+                    await Task.Run(() => file.Delete());
+                }
+            }
         }
     }
 

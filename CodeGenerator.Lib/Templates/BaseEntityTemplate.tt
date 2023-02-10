@@ -7,6 +7,8 @@
 
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace <#= namespaceName #>.Logic.Model
 {
@@ -35,6 +37,21 @@ namespace <#= namespaceName #>.Logic.Model
         private bool BothEntitiesAreNew(Entity castedObj)
         {
             return Id == 0 && castedObj.Id == 0;
+        }
+    }
+
+    public class EntityComparer : IEqualityComparer<Entity>
+    {
+        public bool Equals(Entity x, Entity y) => x.Id == y.Id;
+
+        public int GetHashCode(Entity obj) => obj.Id.GetHashCode();
+    }
+
+    public static class EnityComparerExtensions
+    {
+        public static IEnumerable<T> ExceptFor<T>(this IEnumerable<T> list, IEnumerable<Entity> compareList) where T : Entity
+        { 
+            return list.Except(compareList, new EntityComparer()).Cast<T>();
         }
     }
 }

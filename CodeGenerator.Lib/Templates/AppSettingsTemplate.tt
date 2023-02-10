@@ -19,6 +19,7 @@
     "BearerToken": ""
   },
   "Application": {
-    "Name": ""
+    "Name": "",
+    "KeepLogsInDays": 30
   }
 }
