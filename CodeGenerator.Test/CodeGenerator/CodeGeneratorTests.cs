@@ -36,6 +36,7 @@ namespace CodeGenerator.Test
         [TestCase("int", "int")]
         [TestCase("DateTime?", "DateTime?")]
         [TestCase("DateTime?", "Date")]
+        [TestCase("Guid", "UNIQUEIDENTIFIER")]
         public void SqlDatatypeToConventionalDatatype(string result, string sqlDatatype)
         {
             var sut = new Proprety { DataType = sqlDatatype };

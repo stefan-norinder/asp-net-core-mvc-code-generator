@@ -89,6 +89,7 @@ namespace CodeGenerator.Lib.Models
                 if (DataType.ToLower().Trim() == "money") return "decimal";
                 if (DataType.ToLower().Trim() == "float") return "string";
                 if (DataType.ToLower().Trim() == "nchar") return "string";
+                if (DataType.ToLower().Trim() == "uniqueidentifier") return "Guid";
                 return DataType;
             }
         }

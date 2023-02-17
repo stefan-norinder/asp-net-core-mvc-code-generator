@@ -284,42 +284,43 @@ using ");
                     "d(RequestDelegate next, IOptions<ApplicationSettings> options)\r\n        {\r\n     " +
                     "       this.next = next;\r\n            applicationSettings = options.Value;\r\n    " +
                     "    }\r\n\r\n        public async Task InvokeAsync(HttpContext context)\r\n        {\r\n" +
-                    "            await next.Invoke(context);\r\n\r\n            if (context.Response.Stat" +
-                    "usCode == 404 && !context.Response.HasStarted)\r\n            {\r\n                c" +
-                    "ontext.Response.Redirect($\"/notfound?page={context.Request.Path}\");\r\n           " +
-                    " }\r\n        }\r\n    }\r\n\r\n    public class RedirectTablelang\r\n    {\r\n        priva" +
-                    "te readonly RequestDelegate next;\r\n        private readonly ApplicationSettings " +
-                    "applicationSettings;\r\n\r\n        public RedirectTablelang(RequestDelegate next, I" +
-                    "Options<ApplicationSettings> options)\r\n        {\r\n            this.next = next;\r" +
-                    "\n            applicationSettings = options.Value;\r\n        }\r\n\r\n        public a" +
-                    "sync Task InvokeAsync(HttpContext context)\r\n        {\r\n            const string " +
-                    "resourceBase = \"/resources\";\r\n            var applicationName = applicationSetti" +
-                    "ngs.Name;\r\n            var path = context.Request.Path;\r\n            var tableLa" +
-                    "ngPath = $\"{applicationName}{resourceBase}\";\r\n            if (path.Value.EndsWit" +
-                    "h(resourceBase, StringComparison.InvariantCultureIgnoreCase) &&\r\n               " +
-                    " !path.Value.Equals(tableLangPath, StringComparison.InvariantCultureIgnoreCase) " +
-                    "&&\r\n                !path.Value.Equals(resourceBase, StringComparison.InvariantC" +
-                    "ultureIgnoreCase))\r\n            {\r\n                context.Response.StatusCode =" +
-                    " 302;\r\n                context.Response.Headers[\"Location\"] = tableLangPath;\r\n  " +
-                    "              return;\r\n            }\r\n            await next.Invoke(context);\r\n " +
-                    "       }\r\n    }\r\n        public class CleanUp\r\n    {\r\n        private readonly R" +
-                    "equestDelegate next;\r\n        protected readonly ApplicationSettings application" +
-                    "Settings;\r\n\r\n        public CleanUp(RequestDelegate next, IOptions<ApplicationSe" +
-                    "ttings> options)\r\n        {\r\n            this.next = next;\r\n            applicat" +
-                    "ionSettings = options.Value;\r\n        }\r\n\r\n        public async Task InvokeAsync" +
-                    "(HttpContext context)\r\n        {\r\n            if (context.Request.Path.Value.End" +
-                    "sWith(\"clean-up\", StringComparison.InvariantCultureIgnoreCase))\r\n            {\r\n" +
-                    "                await ProcessCleanUp();\r\n                context.Response.Status" +
-                    "Code = StatusCodes.Status200OK;\r\n                await context.Response.WriteAsy" +
-                    "nc(\"Clean-up ok.\");\r\n            }\r\n            else\r\n            {\r\n           " +
-                    "     await next.Invoke(context);\r\n            }\r\n        }\r\n\r\n        public vir" +
-                    "tual async Task ProcessCleanUp()\r\n        {\r\n            string path = Path.Comb" +
-                    "ine(AppContext.BaseDirectory, \"logs\");\r\n\r\n            var directory = new Direct" +
-                    "oryInfo(path);\r\n\r\n            foreach (var file in directory.GetFiles())\r\n      " +
-                    "      {\r\n                if (file.LastAccessTime < DateTime.Today.AddDays(-appli" +
-                    "cationSettings.KeepLogsInDays))\r\n                {\r\n                    await Ta" +
-                    "sk.Run(() => file.Delete());\r\n                }\r\n            }\r\n        }\r\n    }" +
-                    "\r\n\r\n    #endregion\r\n}\r\n");
+                    "            await next.Invoke(context);\r\n            \r\n            if (context.R" +
+                    "esponse.StatusCode == 404 && !context.Response.HasStarted && !context.Request.Pa" +
+                    "th.Value.Contains(\"notfound\"))\r\n            {\r\n                context.Response." +
+                    "Redirect($\"/notfound?page={context.Request.Path}\");\r\n            }\r\n        }\r\n " +
+                    "   }\r\n\r\n    public class RedirectTablelang\r\n    {\r\n        private readonly Requ" +
+                    "estDelegate next;\r\n        private readonly ApplicationSettings applicationSetti" +
+                    "ngs;\r\n\r\n        public RedirectTablelang(RequestDelegate next, IOptions<Applicat" +
+                    "ionSettings> options)\r\n        {\r\n            this.next = next;\r\n            app" +
+                    "licationSettings = options.Value;\r\n        }\r\n\r\n        public async Task Invoke" +
+                    "Async(HttpContext context)\r\n        {\r\n            const string resourceBase = \"" +
+                    "/resources\";\r\n            var applicationName = applicationSettings.Name;\r\n     " +
+                    "       var path = context.Request.Path;\r\n            var tableLangPath = $\"{appl" +
+                    "icationName}{resourceBase}\";\r\n            if (path.Value.EndsWith(resourceBase, " +
+                    "StringComparison.InvariantCultureIgnoreCase) &&\r\n                !path.Value.Equ" +
+                    "als(tableLangPath, StringComparison.InvariantCultureIgnoreCase) &&\r\n            " +
+                    "    !path.Value.Equals(resourceBase, StringComparison.InvariantCultureIgnoreCase" +
+                    "))\r\n            {\r\n                context.Response.StatusCode = 302;\r\n         " +
+                    "       context.Response.Headers[\"Location\"] = tableLangPath;\r\n                re" +
+                    "turn;\r\n            }\r\n            await next.Invoke(context);\r\n        }\r\n    }\r" +
+                    "\n        public class CleanUp\r\n    {\r\n        private readonly RequestDelegate n" +
+                    "ext;\r\n        protected readonly ApplicationSettings applicationSettings;\r\n\r\n   " +
+                    "     public CleanUp(RequestDelegate next, IOptions<ApplicationSettings> options)" +
+                    "\r\n        {\r\n            this.next = next;\r\n            applicationSettings = op" +
+                    "tions.Value;\r\n        }\r\n\r\n        public async Task InvokeAsync(HttpContext con" +
+                    "text)\r\n        {\r\n            if (context.Request.Path.Value.EndsWith(\"clean-up\"" +
+                    ", StringComparison.InvariantCultureIgnoreCase))\r\n            {\r\n                " +
+                    "await ProcessCleanUp();\r\n                context.Response.StatusCode = StatusCod" +
+                    "es.Status200OK;\r\n                await context.Response.WriteAsync(\"Clean-up ok." +
+                    "\");\r\n            }\r\n            else\r\n            {\r\n                await next." +
+                    "Invoke(context);\r\n            }\r\n        }\r\n\r\n        public virtual async Task " +
+                    "ProcessCleanUp()\r\n        {\r\n            string path = Path.Combine(AppContext.B" +
+                    "aseDirectory, \"logs\");\r\n\r\n            var directory = new DirectoryInfo(path);\r\n" +
+                    "\r\n            foreach (var file in directory.GetFiles())\r\n            {\r\n       " +
+                    "         if (file.LastAccessTime < DateTime.Today.AddDays(-applicationSettings.K" +
+                    "eepLogsInDays))\r\n                {\r\n                    await Task.Run(() => fil" +
+                    "e.Delete());\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    #endregi" +
+                    "on\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

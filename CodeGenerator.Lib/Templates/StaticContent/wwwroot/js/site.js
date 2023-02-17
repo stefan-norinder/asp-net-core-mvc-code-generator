@@ -19,6 +19,8 @@ function getPathName(url) {
 };
 
 $(document).ready(function () {
+    $('.tooltip-r').tooltip();   
+
     $('#iconLanguageId').on('click', function () {
         $('#changeLanguageFormId').submit();
     })

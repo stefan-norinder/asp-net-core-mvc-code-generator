@@ -36,7 +36,7 @@
     @foreach (var item in Model) {
         <tr>
 <# foreach (var item in Model.Properties.GetAllPropertiesExceptId()){ #>
-            <td>
+            <td class="tooltip-r" data-toggle="tooltip" data-placement="left" title="@item.<#= item.Name #>">
                 @item.<#= item.Name #>
             </td>
 <# } #>  
