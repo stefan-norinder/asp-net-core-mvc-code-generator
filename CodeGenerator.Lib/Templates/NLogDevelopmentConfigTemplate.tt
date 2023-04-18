@@ -31,8 +31,8 @@
   </targets>
 
   <rules>
-    <logger name="*" minlevel="Info" writeTo="database" />
+    <logger name="Microsoft.Hosting.Lifetime" minlevel="Info" writeTo="database" final="true" />
     <logger name="Microsoft.*" maxlevel="Info" final="true" />
-    <logger name="*" minlevel="Info" writeTo="ownFile-web" />
+    <logger name="*" minlevel="Info" writeTo="database" />
   </rules>
 </nlog>

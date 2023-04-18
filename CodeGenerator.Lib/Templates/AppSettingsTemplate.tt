@@ -20,6 +20,7 @@
   },
   "Application": {
     "Name": "",
-    "KeepLogsInDays": 30
+    "KeepLogsInDays": 30,
+    "KeysFolder": "C:\\temp\\keys"
   }
 }

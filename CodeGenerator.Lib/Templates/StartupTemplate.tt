@@ -29,7 +29,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System;
 using System.IO;
-using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace <#= namespaceName #>.Web
 {
@@ -172,6 +173,23 @@ namespace <#= namespaceName #>.Web
         
 <# } #>
     
+        }
+    }
+
+    public static class CustomHtmlHelpers
+    {
+        public static async Task<IHtmlContent> GetExternalHtmlAsync(this IHtmlHelper helper, string url)
+        {
+            try
+            {
+                using var httpClient = new System.Net.Http.HttpClient();
+                var html = await httpClient.GetStringAsync(url);
+                return new HtmlString(html);
+            }
+            catch
+            {
+                return new HtmlString("<!-- Error loading external HTML -->");
+            }
         }
     }
 
