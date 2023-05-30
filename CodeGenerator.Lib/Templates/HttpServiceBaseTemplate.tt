@@ -20,10 +20,11 @@ namespace <#= namespaceName #>.Logic.Http
         Task<T> Post(string url, T model);
         Task Put(string url, string id, T model);
         Task Delete(string url, string id);
+        void OverrideDefaultBearerToken(string token);
     }
     public class HttpService<T> : IHttpService<T>
     {
-        protected readonly IHttpClient client;
+        protected IHttpClient client;
         protected readonly ILogger logger;
 
         public HttpService(IHttpClient client,
@@ -114,6 +115,11 @@ namespace <#= namespaceName #>.Logic.Http
                 logger.LogError(e, e.Message);
                 throw;
             }
+        }
+
+        public void OverrideDefaultBearerToken(string token)
+        {
+            client.SetBearerToken(token);
         }
 
         #region

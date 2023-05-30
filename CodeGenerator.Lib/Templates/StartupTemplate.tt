@@ -31,6 +31,11 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Reflection;
+using System.Linq;
+using Newtonsoft.Json;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace <#= namespaceName #>.Web
 {
@@ -56,6 +61,11 @@ namespace <#= namespaceName #>.Web
             #endregion
 
 <# } #>
+            #region register Middleware services
+            services.AddTransient<ICleanUpService, CleanUpService>();
+            services.AddTransient<IVersionInfoService, VersionInfoService>();
+            #endregion
+
             services.AddSingleton<LocService>();
             services.AddTransient<IHttpClient, Logic.Http.HttpClient>();
             services.Configure<AuthenticationSettings>(Configuration.GetSection("Authentication"));
@@ -76,10 +86,10 @@ namespace <#= namespaceName #>.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseRequestLocalization();
-            ConfigureExceptionHandler(app);
-            CustomConfiguration(app, env);   
+            app.UseRequestLocalization();  
             RegisterMiddleware(app);
+            ConfigureExceptionHandler(app);
+            CustomConfiguration(app, env); 
 
             app.UseEndpoints(endpoints =>
             {
@@ -101,6 +111,7 @@ namespace <#= namespaceName #>.Web
 
         protected virtual void RegisterMiddleware(IApplicationBuilder app)
         {
+            app.UseMiddleware<Version>();
             app.UseMiddleware<CleanUp>();
             app.UseMiddleware<RedirectNotFound>();
             app.UseMiddleware<RedirectTablelang>();
@@ -245,22 +256,31 @@ namespace <#= namespaceName #>.Web
             await next.Invoke(context);
         }
     }
-        public class CleanUp
+
+    
+
+    #region clean-up
+    public interface ICleanUp
+    {
+        Task InvokeAsync(HttpContext context);
+    }
+
+    public class CleanUp : ICleanUp
     {
         private readonly RequestDelegate next;
-        protected readonly ApplicationSettings applicationSettings;
+        private readonly ICleanUpService cleanUpService;
 
-        public CleanUp(RequestDelegate next, IOptions<ApplicationSettings> options)
+        public CleanUp(RequestDelegate next, ICleanUpService cleanUpService)
         {
             this.next = next;
-            applicationSettings = options.Value;
+            this.cleanUpService = cleanUpService;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
             if (context.Request.Path.Value.EndsWith("clean-up", StringComparison.InvariantCultureIgnoreCase))
             {
-                await ProcessCleanUp();
+                await cleanUpService.ProcessCleanUp();
                 context.Response.StatusCode = StatusCodes.Status200OK;
                 await context.Response.WriteAsync("Clean-up ok.");
             }
@@ -268,6 +288,19 @@ namespace <#= namespaceName #>.Web
             {
                 await next.Invoke(context);
             }
+        }
+    }
+    public interface ICleanUpService
+    {
+        Task ProcessCleanUp();
+    }
+    public class CleanUpService : ICleanUpService
+    {
+        private readonly ApplicationSettings applicationSettings;
+
+        public CleanUpService(IOptions<ApplicationSettings> options)
+        {
+            this.applicationSettings = options.Value;
         }
 
         public virtual async Task ProcessCleanUp()
@@ -284,7 +317,115 @@ namespace <#= namespaceName #>.Web
                 }
             }
         }
+
     }
+
+    #endregion
+    
+    #region version middleware
+
+
+    public class Version
+    {
+        private readonly RequestDelegate next;
+        private readonly IVersionInfoService versionInfoService;
+
+        public Version(RequestDelegate next,
+            IVersionInfoService versionInfoService)
+        {
+            this.next = next;
+            this.versionInfoService = versionInfoService;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            if (context.Request.Path.Value.EndsWith("version", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var versionInformation = await versionInfoService.GetVersionInformation();
+                context.Response.StatusCode = StatusCodes.Status200OK;
+                await context.Response.WriteAsync(versionInformation);
+            }
+            else
+            {
+                await next.Invoke(context);
+            }
+        }
+
+
+    }
+
+    public interface IVersionInfoService
+    {
+        Task<string> GetVersionInformation();
+    }
+
+    public class VersionInfoService : IVersionInfoService
+    {
+        private readonly IMigrationDataAccess migrationDataAccess;
+        protected readonly ApplicationSettings applicationSettings;
+
+        public VersionInfoService(IOptions<ApplicationSettings> options,
+            IMigrationDataAccess migrationDataAccess)
+        {
+            this.migrationDataAccess = migrationDataAccess;
+            applicationSettings = options.Value;
+        }
+
+        public virtual async Task<string> GetVersionInformation()
+        {
+            var assembly = Assembly.GetEntryAssembly();
+            var version = assembly.GetName().Version.ToString();
+
+            var versionInfo = new VersionInfo
+            {
+                ServiceName = applicationSettings.Name
+            };
+
+            var migration = (await migrationDataAccess.GetAll()).OrderByDescending(x => x.CreatedOn).FirstOrDefault();
+            if (migration != null)
+            {
+                versionInfo.ClientVersion = migration.ClientVersion;
+                versionInfo.DatabaseVersion = migration.DatabaseVersion;
+            }
+
+            versionInfo.Assemblies.Add(new AssemblyInfo
+            {
+                Name = assembly.GetName().Name,
+                Version = version
+            });
+
+            var referencedAssemblies = assembly.GetReferencedAssemblies();
+            foreach (var referencedAssembly in referencedAssemblies)
+            {
+                if (referencedAssembly.Name.StartsWith("Sh.Library.") || referencedAssembly.Name.StartsWith("Logic"))
+                {
+                    versionInfo.Assemblies.Add(new AssemblyInfo
+                    {
+                        Name = referencedAssembly.Name,
+                        Version = referencedAssembly.Version.ToString()
+                    });
+                }
+            }
+            var settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+            return JsonConvert.SerializeObject(versionInfo, settings);
+        }
+    }
+
+    public class VersionInfo
+    {
+        public string ServiceName { get; set; }
+        public string ClientVersion { get; set; }
+        public string DatabaseVersion { get; set; }
+        public List<AssemblyInfo> Assemblies { get; set; } = new List<AssemblyInfo>();
+    }
+
+    public class AssemblyInfo
+    {
+        public string Name { get; set; }
+        public string Version { get; set; }
+    }
+
+    #endregion
 
     #endregion
 }

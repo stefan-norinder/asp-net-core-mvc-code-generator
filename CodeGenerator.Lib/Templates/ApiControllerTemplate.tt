@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace <#= namespaceName #>.Web.ApiController
 { 
@@ -46,6 +48,24 @@ namespace <#= namespaceName #>.Web.ApiController
             var item = await service.Get(id);
             if (item == null) return NotFound();
             return Ok(item);            
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Get([FromQuery] Dictionary<string, string> filters)
+        {
+            if (filters == null) throw new ArgumentNullException(nameof(filters));
+
+            var modelType = typeof(<#= Model.Name #>);
+            foreach (var key in filters.Keys)
+            {
+                var propertyInfo = modelType.GetProperty(key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                if (propertyInfo == null) throw new ArgumentException($"Invalid filter parameter: {key}");
+            }
+
+            var items = await service.Get(filters);
+            if (!items.Any()) return NotFound();
+            return Ok(items);
         }
 
         [HttpPost]

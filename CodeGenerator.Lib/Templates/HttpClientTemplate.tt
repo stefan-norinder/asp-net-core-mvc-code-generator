@@ -24,13 +24,14 @@ namespace <#= namespaceName #>.Logic.Http
         Task<HttpResponse> Post(Uri url, string content);
         Task<HttpResponse> Put(Uri url, string content);
         Task<HttpResponse> Delete(Uri url);
+        void SetBearerToken(string token);
     }
 
     public class HttpClient : IHttpClient
     {
         protected readonly IHttpClientFactory clientFactory;
         protected readonly ILogger<HttpClient> logger;
-        protected readonly AuthenticationSettings settings;
+        protected AuthenticationSettings settings;
 
         public HttpClient(IHttpClientFactory clientFactory,
             ILogger<HttpClient> logger,
@@ -59,6 +60,11 @@ namespace <#= namespaceName #>.Logic.Http
         public async Task<HttpResponse> Delete(Uri url)
         {
             return await SendRequest(HttpMethod.Delete, url);
+        }
+
+        public void SetBearerToken(string token)
+        {
+            settings.BearerToken = token;
         }
 
         #region private

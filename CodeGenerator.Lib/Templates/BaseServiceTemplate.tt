@@ -10,12 +10,16 @@ using <#= namespaceName #>.Logic.DataAccess;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Reflection;
+using System;
 
 namespace <#= namespaceName #>.Logic.Services
 {
     public partial interface IService<TModel>
     {  
         Task<TModel> Get(int id);
+        Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters);
         Task<bool> Exists(int id);
         Task<IEnumerable<TModel>> GetAll();
         Task<TModel> Insert(TModel model);
@@ -39,6 +43,31 @@ namespace <#= namespaceName #>.Logic.Services
         {
             logger.LogInformation($"Fetching entity with id {id} from data source.");
             return await dataAccess.Get(id);
+        }
+
+        public async Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters)
+        {
+            var all = await GetAll();
+            var filtered = all.AsQueryable();
+
+            foreach (var filter in filters)
+            {
+                var propertyInfo = typeof(TModel).GetProperty(filter.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                if (propertyInfo != null)
+                {
+                    filtered = filtered.Where(x =>
+                        (propertyInfo.GetValue(x) == null && filter.Value == null) ||
+                        (propertyInfo.GetValue(x) != null && propertyInfo.GetValue(x).ToString().ToLowerInvariant() == filter.Value.ToLowerInvariant())
+                    );
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid filter parameter: {filter.Key}");
+                }
+            }
+
+            return filtered;
         }
 
         public virtual async Task<bool> Exists(int id)
