@@ -66,32 +66,32 @@ namespace CodeGenerator.Lib.Templates
                     "ublic async virtual Task Update(T model)\r\n        {\r\n            string sql = sq" +
                     "lStringBuilder.GetUpdateString(model, Table);\r\n\r\n            await db.UpdateData" +
                     "(sql, model);\r\n        }\r\n\r\n        public virtual async Task<IEnumerable<T>> Ge" +
-                    "tAll()\r\n        {\r\n            string sql = $\"SELECT * FROM {Table} \";\r\n        " +
-                    "    return await ExecuteSelectMany(sql);\r\n        }\r\n        \r\n        public vi" +
-                    "rtual async Task<T> Get(int id)\r\n        {\r\n            string sql = $\"SELECT * " +
-                    "FROM {Table} Where Id = @id\";\r\n            return await db.LoadSingularData<T, d" +
-                    "ynamic>(sql, new { Id = id });\r\n        }\r\n\r\n        public async Task DeleteAll" +
-                    "()\r\n        {\r\n            string sql = $\"DELETE FROM {Table} \";\r\n            aw" +
-                    "ait db.UpdateData(sql, new { });\r\n        }\r\n\r\n        public async Task Delete(" +
-                    "int id)\r\n        {\r\n            string sql = $\"DELETE FROM {Table} WHERE Id = @i" +
-                    "d\";\r\n            await db.UpdateData(sql, new { Id = id });\r\n        }\r\n\r\n      " +
-                    "  protected async Task<T> ExecuteSelectSingle(string sql, int id)\r\n        {\r\n  " +
-                    "          return await db.LoadSingularData<T, dynamic>(sql, new { Id = id });\r\n " +
-                    "       }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(string sql)\r\n   " +
-                    "     {\r\n            return await db.LoadSingularData<T, dynamic>(sql, new { });\r" +
-                    "\n        }\r\n\r\n        protected async Task<List<T>> ExecuteSelectMany(string sql" +
-                    ")\r\n        {\r\n            return await db.LoadData<T, dynamic>(sql, new { });\r\n " +
-                    "       }\r\n\r\n        #region private\r\n\r\n        private async Task<bool> HasIdent" +
-                    "ityColumn()\r\n        {\r\n            var sql = @$\"select b.name as IdentityColumn" +
-                    " \r\n                        from sysobjects a inner join syscolumns b on a.id = b" +
-                    ".id \r\n                       where a.name = \'{Table}\' and    \r\n                 " +
-                    "           columnproperty(a.id, b.name, \'isIdentity\') = 1 and \r\n                " +
-                    "            objectproperty(a.id, \'isTable\') = 1\";\r\n            var result = awai" +
-                    "t ExecuteSelectMany(sql);\r\n            return result.Any();\r\n        }\r\n\r\n      " +
-                    "  private async Task<int> GetNextId()\r\n        {\r\n            var sql = @$\"selec" +
-                    "t top 1 id from {Table} order by 1 desc\";\r\n            var currentId = await db." +
-                    "LoadSingularData<int, dynamic>(sql, new { });\r\n            return currentId + 1;" +
-                    "\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
+                    "tAll()\r\n        {\r\n            string sql = $\"SELECT * FROM [{Table}] \"; \r\n     " +
+                    "       return await ExecuteSelectMany(sql);\r\n        }\r\n        \r\n        public" +
+                    " virtual async Task<T> Get(int id)\r\n        {\r\n            string sql = $\"SELECT" +
+                    " * FROM [{Table}] Where Id = @id\";\r\n            return await db.LoadSingularData" +
+                    "<T, dynamic>(sql, new { Id = id });\r\n        }\r\n\r\n        public async Task Dele" +
+                    "teAll()\r\n        {\r\n            string sql = $\"DELETE FROM [{Table}] \";\r\n       " +
+                    "     await db.UpdateData(sql, new { });\r\n        }\r\n\r\n        public async Task " +
+                    "Delete(int id)\r\n        {\r\n            string sql = $\"DELETE FROM [{Table}] WHER" +
+                    "E Id = @id\";\r\n            await db.UpdateData(sql, new { Id = id });\r\n        }\r" +
+                    "\n\r\n        protected async Task<T> ExecuteSelectSingle(string sql, int id)\r\n    " +
+                    "    {\r\n            return await db.LoadSingularData<T, dynamic>(sql, new { Id = " +
+                    "id });\r\n        }\r\n\r\n        protected async Task<T> ExecuteSelectSingle(string " +
+                    "sql)\r\n        {\r\n            return await db.LoadSingularData<T, dynamic>(sql, n" +
+                    "ew { });\r\n        }\r\n\r\n        protected async Task<List<T>> ExecuteSelectMany(s" +
+                    "tring sql)\r\n        {\r\n            return await db.LoadData<T, dynamic>(sql, new" +
+                    " { });\r\n        }\r\n\r\n        #region private\r\n\r\n        private async Task<bool>" +
+                    " HasIdentityColumn()\r\n        {\r\n            var sql = @$\"select b.name as Ident" +
+                    "ityColumn \r\n                        from sysobjects a inner join syscolumns b on" +
+                    " a.id = b.id \r\n                       where a.name = \'{Table}\' and    \r\n        " +
+                    "                    columnproperty(a.id, b.name, \'isIdentity\') = 1 and \r\n       " +
+                    "                     objectproperty(a.id, \'isTable\') = 1\";\r\n            var resu" +
+                    "lt = await ExecuteSelectMany(sql);\r\n            return result.Any();\r\n        }\r" +
+                    "\n\r\n        private async Task<int> GetNextId()\r\n        {\r\n            var sql =" +
+                    " @$\"select top 1 id from [{Table}] order by 1 desc\";\r\n            var currentId " +
+                    "= await db.LoadSingularData<int, dynamic>(sql, new { });\r\n            return cur" +
+                    "rentId + 1;\r\n        }\r\n\r\n        #endregion\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }

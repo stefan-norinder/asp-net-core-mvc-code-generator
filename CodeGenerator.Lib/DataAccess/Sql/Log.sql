@@ -23,3 +23,29 @@ BEGIN
 	) ON [PRIMARY]
 END
 GO
+
+
+/**
+
+Here's for keeping track of deployed database updates 
+
+*/
+
+IF NOT EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Migration')
+BEGIN
+	CREATE TABLE [dbo].[Migration](
+		[Id] [int] IDENTITY(1,1) NOT NULL,
+		[ClientVersion] [nvarchar](200) NULL, 
+		[DatabaseVersion] [nvarchar](200) NULL, 
+		[CreatedOn] DateTime NULL
+	 CONSTRAINT [PK_Migration] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	)
+	) ON [PRIMARY]
+
+	
+	Insert into Migration (ClientVersion, DatabaseVersion, CreatedOn) values  ('1.0.0','1.0.0', GETDATE())
+
+END
+GO

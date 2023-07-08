@@ -48,7 +48,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(@";Trusted_Connection=True;""
+            this.Write(@";Trusted_Connection=True;TrustServerCertificate=True;""
   },
   ""Logging"": {
     ""LogLevel"": {
@@ -62,7 +62,8 @@ namespace CodeGenerator.Lib.Templates
   },
   ""Application"": {
     ""Name"": """",
-    ""KeepLogsInDays"": 30
+    ""KeepLogsInDays"": 30,
+    ""KeysFolder"": ""C:\\temp\\keys""
   }
 }");
             return this.GenerationEnvironment.ToString();
