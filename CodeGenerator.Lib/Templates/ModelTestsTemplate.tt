@@ -1,11 +1,13 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ import namespace="CodeGenerator.Lib.Services" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#= CodeGeneratorHelper.GetTemplateHeaderText() #> 
 
 using <#= namespaceName #>.Logic.Model;
+using System;
 using NUnit.Framework;
 
 namespace <#= namespaceName #>.Test
@@ -14,15 +16,25 @@ namespace <#= namespaceName #>.Test
     {
          [Test]
         public void Initiate_SholdNotBeNull()
-        {
-            var sut = new <#= Model.Name #> { Id = 1 };
+        { 
+        <# if(identifierType == IdentifierTypes.Integer) { #>        
+        var id = 1;
+        <# } else { #>     
+        var id = Guid.NewGuid();
+        <# } #>
+            var sut = new <#= Model.Name #> { Id = id };
             Assert.IsNotNull(sut);
-            Assert.AreEqual(1, sut.Id);
+            Assert.AreEqual(id, sut.Id);
         }
-
+        
+        <# if(identifierType == IdentifierTypes.Integer) { #>        
         [TestCase(18, 18, true)]
         [TestCase(18, 28, false)]
-        public void CompairTwoEntities(int id, int compairId, bool result)
+        <# } else { #>                  
+        [TestCase("9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", "9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", true)]
+        [TestCase("9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", "80922D2E-11E8-4BE0-8089-190406156CF6", false)]
+        <# } #>
+        public void CompairTwoEntities(<#= identifierType #> id, <#= identifierType #> compairId, bool result)
         {
             var sut = new <#= Model.Name #> { Id = id };
             var compair = new <#= Model.Name #> { Id = compairId };

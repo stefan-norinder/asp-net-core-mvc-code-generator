@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace UserProductList --server .\\sqlexpress --datasource  user-product-list --output ./../../../../../../user-product-list/"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace CourseLiterature --server .\\sqlexpress --datasource  klf --output ./../../../../../../CourseLiterture3/ --identifier-type Guid"
     }
   }
 }

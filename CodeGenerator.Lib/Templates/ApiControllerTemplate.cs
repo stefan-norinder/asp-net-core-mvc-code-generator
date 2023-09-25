@@ -124,7 +124,14 @@ namespace ");
         }
 
         [HttpGet(""{id}"")]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(");
+            
+            #line 45 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(@" id)
         {
             
             var item = await service.Get(id);
@@ -167,37 +174,37 @@ namespace ");
             
             #line default
             #line hidden
-            this.Write(@">(value.ToString());
-            var newItem = await service.Insert(item);
-            return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);
-        }
-
-        [HttpPut(""{id}"")]
-        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
-        {
-            if (!await service.Exists(id)) return NotFound();
-            var item = JsonConvert.DeserializeObject<");
+            this.Write(">(value.ToString());\r\n            var newItem = await service.Insert(item);\r\n    " +
+                    "        return CreatedAtAction(nameof(Post), new {id = newItem.Id }, newItem);\r\n" +
+                    "        }\r\n\r\n        [HttpPut(\"{id}\")]\r\n        public virtual async Task<IActio" +
+                    "nResult> Put(");
+            
+            #line 80 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(" id, [FromBody] dynamic value)\r\n        {\r\n            if (!await service.Exists(" +
+                    "id)) return NotFound();\r\n            var item = JsonConvert.DeserializeObject<");
             
             #line 83 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Name));
             
             #line default
             #line hidden
-            this.Write(@">(value.ToString());
-            item.Id = id;
-            await service.Update(item);
-            return StatusCode(StatusCodes.Status204NoContent);
-        }
-
-        [HttpDelete(""{id}"")]
-        public virtual async Task<IActionResult> Delete(int id)
-        {
-            if (!await service.Exists(id)) return NotFound();
-            await service.Delete(id);
-            return StatusCode(StatusCodes.Status204NoContent);
-        }
-    }
-}");
+            this.Write(">(value.ToString());\r\n            item.Id = id;\r\n            await service.Update" +
+                    "(item);\r\n            return StatusCode(StatusCodes.Status204NoContent);\r\n       " +
+                    " }\r\n\r\n        [HttpDelete(\"{id}\")]\r\n        public virtual async Task<IActionRes" +
+                    "ult> Delete(");
+            
+            #line 90 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ApiControllerTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(" id)\r\n        {\r\n            if (!await service.Exists(id)) return NotFound();\r\n " +
+                    "           await service.Delete(id);\r\n            return StatusCode(StatusCodes." +
+                    "Status204NoContent);\r\n        }\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -1,5 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ import namespace="CodeGenerator.Lib.Services" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -14,7 +15,7 @@ namespace <#= namespaceName #>.Logic.Model
 {
     public class Entity
     {
-        public virtual int Id { get; set; }
+        public virtual <#= identifierType #> Id { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -26,7 +27,11 @@ namespace <#= namespaceName #>.Logic.Model
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id);
+        <# if(identifierType == IdentifierTypes.Integer) { #>
+        return HashCode.Combine(Id);
+        <# } else { #>        
+          return Id.GetHashCode();
+        <# } #>
         }        
 
         public override string ToString()
@@ -36,7 +41,12 @@ namespace <#= namespaceName #>.Logic.Model
 
         private bool BothEntitiesAreNew(Entity castedObj)
         {
-            return Id == 0 && castedObj.Id == 0;
+        <# if(identifierType == IdentifierTypes.Integer) { #>
+        return Id == 0 && castedObj.Id == 0;
+        <# } else { #>        
+          return Id == Guid.Empty && castedObj.Id == Guid.Empty;
+        <# } #>
+            
         }
     }
 

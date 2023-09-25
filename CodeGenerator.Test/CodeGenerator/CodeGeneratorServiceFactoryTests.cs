@@ -18,7 +18,8 @@ namespace CodeGenerator.Test
         {
             var outputMock = new Mock<FileWriterOutputAdapter>();
             var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
-            factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object);
+            var identifierTypeServiceMock = new Mock<IdentifierTypeService>();
+            factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object, identifierTypeServiceMock.Object);
         }
 
         [Test]

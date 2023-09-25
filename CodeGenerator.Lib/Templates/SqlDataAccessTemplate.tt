@@ -1,5 +1,6 @@
 ﻿<#@ template language="C#" #>
 <#@ assembly name="System.Core" #>
+<#@ import namespace="CodeGenerator.Lib.Services" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
@@ -21,7 +22,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
     {
         Task<T> LoadSingularData<T, U>(string sql, U parameters);
         Task<List<T>> LoadData<T, U>(string sql, U parameters);
-        Task<int> InsertData<T>(string sql, T parameters);
+        Task<<#= identifierType #>> InsertData<T>(string sql, T parameters);
         Task UpdateData<T>(string sql, T parameters);
         T LoadSingularDataSynchronous<T, U>(string sql, U parameters);
     }
@@ -90,14 +91,19 @@ namespace <#= namespaceName #>.Logic.DataAccess
             }
         }
 
-        public async Task<int> InsertData<T>(string sql, T parameters)
+        public async Task<<#= identifierType #>> InsertData<T>(string sql, T parameters)
         {
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
-                int newId = default;
+            <# if(identifierType == IdentifierTypes.Integer) { #>        
+            int newId = default;
+        <# } else { #>                  
+                Guid newId = default;
+        <# } #>
+                
                 try
                 {
-                    newId = await connection.QuerySingleAsync<int>(sql, parameters);
+                    newId = await connection.QuerySingleAsync<<#= identifierType #>>(sql, parameters);
                     return newId;
                 }
                 catch (Exception e)

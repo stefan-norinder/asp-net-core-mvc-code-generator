@@ -35,7 +35,8 @@ namespace CodeGenerator.Test
             });
             outputMock = new Mock<FileWriterOutputAdapter>();
             var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
-            service = new DataAccessGenerator(mock.Object, outputMock.Object, loggerMock.Object);
+            var identifierTypeServiceMock = new Mock<IdentifierTypeService>();
+            service = new DataAccessGenerator(mock.Object, outputMock.Object, loggerMock.Object, identifierTypeServiceMock.Object);
         }
 
         [Test]
@@ -49,7 +50,8 @@ namespace CodeGenerator.Test
         {
             var args = new[] { ParamsConstants.Namespace, "Databases", ParamsConstants.Server, ".\\sqlexpress", ParamsConstants.DataSource, "Databases" };
             var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
-            var databaseService = new DataAccessGenerator(new GenerationModelFromDatabaseFetcher(new DataAccess(),args), outputMock.Object, loggerMock.Object);
+            var identifierTypeServiceMock = new Mock<IdentifierTypeService>();
+            var databaseService = new DataAccessGenerator(new GenerationModelFromDatabaseFetcher(new DataAccess(),args), outputMock.Object, loggerMock.Object, identifierTypeServiceMock.Object);
             databaseService.Invoke();
         }
 

@@ -58,43 +58,123 @@ namespace CodeGenerator.Lib.Templates
             #line default
             #line hidden
             this.Write(".Logic.Services\r\n{\r\n    public partial interface IService<TModel>\r\n    {  \r\n     " +
-                    "   Task<TModel> Get(int id);\r\n        Task<IEnumerable<TModel>> Get(Dictionary<s" +
-                    "tring, string> filters);\r\n        Task<bool> Exists(int id);\r\n        Task<IEnum" +
-                    "erable<TModel>> GetAll();\r\n        Task<TModel> Insert(TModel model);\r\n        T" +
-                    "ask Update(TModel model);\r\n        Task Delete(int id);\r\n    }\r\n\r\n    public par" +
-                    "tial class Service<TModel> : IService<TModel> where TModel : Entity\r\n    {\r\n    " +
-                    "    protected readonly ILogger<Service<TModel>> logger;\r\n        protected reado" +
-                    "nly IDataAccess<TModel> dataAccess;\r\n\r\n        public Service(ILogger<Service<TM" +
-                    "odel>> logger,\r\n            IDataAccess<TModel> dataAccess)\r\n        {\r\n        " +
-                    "    this.logger = logger;\r\n            this.dataAccess = dataAccess;\r\n        } " +
-                    "       \r\n\r\n        public virtual async Task<TModel> Get(int id)\r\n        {\r\n   " +
-                    "         logger.LogInformation($\"Fetching entity with id {id} from data source.\"" +
-                    ");\r\n            return await dataAccess.Get(id);\r\n        }\r\n\r\n        public as" +
-                    "ync Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters)\r\n        {" +
-                    "\r\n            var all = await GetAll();\r\n            var filtered = all.AsQuerya" +
-                    "ble();\r\n\r\n            foreach (var filter in filters)\r\n            {\r\n          " +
-                    "      var propertyInfo = typeof(TModel).GetProperty(filter.Key, BindingFlags.Ign" +
-                    "oreCase | BindingFlags.Public | BindingFlags.Instance);\r\n\r\n                if (p" +
-                    "ropertyInfo != null)\r\n                {\r\n                    filtered = filtered" +
-                    ".Where(x =>\r\n                        (propertyInfo.GetValue(x) == null && filter" +
-                    ".Value == null) ||\r\n                        (propertyInfo.GetValue(x) != null &&" +
-                    " propertyInfo.GetValue(x).ToString().ToLowerInvariant() == filter.Value.ToLowerI" +
-                    "nvariant())\r\n                    );\r\n                }\r\n                else\r\n  " +
-                    "              {\r\n                    throw new ArgumentException($\"Invalid filte" +
-                    "r parameter: {filter.Key}\");\r\n                }\r\n            }\r\n\r\n            re" +
-                    "turn filtered;\r\n        }\r\n\r\n        public virtual async Task<bool> Exists(int " +
-                    "id)\r\n        {\r\n            var item = await Get(id);\r\n            return item !" +
-                    "= null;\r\n        }\r\n\r\n        public virtual async Task<IEnumerable<TModel>> Get" +
-                    "All()\r\n        {\r\n            logger.LogInformation($\"Fetching all entities from" +
-                    " data source.\");\r\n            return await dataAccess.GetAll();\r\n        }\r\n    " +
-                    "    \r\n        public virtual async Task<TModel> Insert(TModel model)\r\n        {\r" +
-                    "\n            logger.LogInformation($\"Saving entity {model} to data source.\");\r\n " +
-                    "           return await dataAccess.Insert(model);\r\n        }\r\n\r\n        public v" +
-                    "irtual async Task Update(TModel model)\r\n        {\r\n            logger.LogInforma" +
-                    "tion($\"Update entity {model} in data source.\");\r\n            await dataAccess.Up" +
-                    "date(model);\r\n        }\r\n\r\n        public virtual async Task Delete(int id)\r\n   " +
-                    "     {\r\n            logger.LogInformation($\"Deleting entity with id {id} from da" +
-                    "ta source.\");\r\n            await dataAccess.Delete(id);\r\n        }\r\n    }\r\n}");
+                    "   Task<TModel> Get(");
+            
+            #line 21 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(" id);\r\n        Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters);" +
+                    "\r\n        Task<bool> Exists(");
+            
+            #line 23 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(" id);\r\n        Task<IEnumerable<TModel>> GetAll();\r\n        Task<TModel> Insert(T" +
+                    "Model model);\r\n        Task Update(TModel model);\r\n        Task Delete(");
+            
+            #line 27 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(@" id);
+    }
+
+    public partial class Service<TModel> : IService<TModel> where TModel : Entity
+    {
+        protected readonly ILogger<Service<TModel>> logger;
+        protected readonly IDataAccess<TModel> dataAccess;
+
+        public Service(ILogger<Service<TModel>> logger,
+            IDataAccess<TModel> dataAccess)
+        {
+            this.logger = logger;
+            this.dataAccess = dataAccess;
+        }        
+
+        public virtual async Task<TModel> Get(");
+            
+            #line 42 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(@" id)
+        {
+            logger.LogInformation($""Fetching entity with id {id} from data source."");
+            return await dataAccess.Get(id);
+        }
+
+        public async Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters)
+        {
+            var all = await GetAll();
+            var filtered = all.AsQueryable();
+
+            foreach (var filter in filters)
+            {
+                var propertyInfo = typeof(TModel).GetProperty(filter.Key, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
+
+                if (propertyInfo != null)
+                {
+                    filtered = filtered.Where(x =>
+                        (propertyInfo.GetValue(x) == null && filter.Value == null) ||
+                        (propertyInfo.GetValue(x) != null && propertyInfo.GetValue(x).ToString().ToLowerInvariant() == filter.Value.ToLowerInvariant())
+                    );
+                }
+                else
+                {
+                    throw new ArgumentException($""Invalid filter parameter: {filter.Key}"");
+                }
+            }
+
+            return filtered;
+        }
+
+        public virtual async Task<bool> Exists(");
+            
+            #line 73 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(@" id)
+        {
+            var item = await Get(id);
+            return item != null;
+        }
+
+        public virtual async Task<IEnumerable<TModel>> GetAll()
+        {
+            logger.LogInformation($""Fetching all entities from data source."");
+            return await dataAccess.GetAll();
+        }
+        
+        public virtual async Task<TModel> Insert(TModel model)
+        {
+            logger.LogInformation($""Saving entity {model} to data source."");
+            return await dataAccess.Insert(model);
+        }
+
+        public virtual async Task Update(TModel model)
+        {
+            logger.LogInformation($""Update entity {model} in data source."");
+            await dataAccess.Update(model);
+        }
+
+        public virtual async Task Delete(");
+            
+            #line 97 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseServiceTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(" id)\r\n        {\r\n            logger.LogInformation($\"Deleting entity with id {id}" +
+                    " from data source.\");\r\n            await dataAccess.Delete(id);\r\n        }\r\n    " +
+                    "}\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }

@@ -11,16 +11,19 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ControllerGenerator : CodeGenerator
     {
         public ControllerGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            IOutputAdapter output,  ILogger<CodeGenerator> logger) : base(codeGenerationModelFetcher, output, logger)
-        { }
+            IOutputAdapter output,  ILogger<CodeGenerator> logger, IdentifierTypeService identifierTypeService) : base(codeGenerationModelFetcher, output, logger)
+        {
+            this.identifierTypeService = identifierTypeService;
+        }
 
         private string projectType = ProjectTypeConstant.Web;
+        private readonly IdentifierTypeService identifierTypeService;
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
             foreach (var @class in model.Classes)
             {
-                var template = new ControllerTemplate(model.Namespace, @class);
+                var template = new ControllerTemplate(model.Namespace, @class, identifierTypeService.IdentifierType);
                 yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{projectType}/Controller", File = $"{@class}Controller.cs", Content = template.TransformText() };
             }
             yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectTypeConstant.Web}/Controller", File = $"ResourcesController.cs", Content = new ResourcesControllerTemplate(namespaceName).TransformText() };

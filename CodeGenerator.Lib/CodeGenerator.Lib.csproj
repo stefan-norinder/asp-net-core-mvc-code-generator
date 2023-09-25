@@ -34,21 +34,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApplicationSettingsTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\NLogDevelopmentConfigTemplate.cs">
-      <DependentUpon>NLogDevelopmentConfigTemplate.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Templates\AppSettingsTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\AuthenticationSettingsTemplate - Copy.cs">
-      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="Templates\BaseEntityTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -64,15 +49,35 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ControllerTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Update="Templates\CreateViewTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CreateViewTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Update="Templates\DataAccessBase.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>DataAccessBase.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\ModelTestsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModelTestsTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\NLogDevelopmentConfigTemplate.cs">
+      <DependentUpon>NLogDevelopmentConfigTemplate.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Templates\AppSettingsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettingsTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Templates\AuthenticationSettingsTemplate - Copy.cs">
+      <DependentUpon>AuthenticationSettingsTemplate.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Templates\CreateViewTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CreateViewTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\DataAccessTemplate.cs">
       <DesignTime>True</DesignTime>
@@ -138,11 +143,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Templates\ModelTestsTemplate.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ModelTestsTemplate.tt</DependentUpon>
     </Compile>
     <Compile Update="Templates\NoAuthViewTemplate.cs">
       <DesignTime>True</DesignTime>

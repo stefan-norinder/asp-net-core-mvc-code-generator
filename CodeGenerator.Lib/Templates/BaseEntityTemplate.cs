@@ -9,6 +9,7 @@
 // ------------------------------------------------------------------------------
 namespace CodeGenerator.Lib.Templates
 {
+    using CodeGenerator.Lib.Services;
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace CodeGenerator.Lib.Templates
         public virtual string TransformText()
         {
             
-            #line 6 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+            #line 7 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
             
             #line default
@@ -37,16 +38,19 @@ namespace CodeGenerator.Lib.Templates
             this.Write(" \r\n\r\nusing Newtonsoft.Json;\r\nusing System;\r\nusing System.Collections.Generic;\r\nus" +
                     "ing System.Linq;\r\n\r\nnamespace ");
             
-            #line 13 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+            #line 14 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
             
             #line default
             #line hidden
-            this.Write(@".Logic.Model
-{
-    public class Entity
-    {
-        public virtual int Id { get; set; }
+            this.Write(".Logic.Model\r\n{\r\n    public class Entity\r\n    {\r\n        public virtual ");
+            
+            #line 18 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(identifierType));
+            
+            #line default
+            #line hidden
+            this.Write(@" Id { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -58,17 +62,52 @@ namespace CodeGenerator.Lib.Templates
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id);
-        }        
-
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
-
-        private bool BothEntitiesAreNew(Entity castedObj)
-        {
-            return Id == 0 && castedObj.Id == 0;
+        ");
+            
+            #line 30 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ if(identifierType == IdentifierTypes.Integer) { 
+            
+            #line default
+            #line hidden
+            this.Write("        return HashCode.Combine(Id);\r\n        ");
+            
+            #line 32 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("        \r\n          return Id.GetHashCode();\r\n        ");
+            
+            #line 34 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("        }        \r\n\r\n        public override string ToString()\r\n        {\r\n      " +
+                    "      return JsonConvert.SerializeObject(this);\r\n        }\r\n\r\n        private bo" +
+                    "ol BothEntitiesAreNew(Entity castedObj)\r\n        {\r\n        ");
+            
+            #line 44 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ if(identifierType == IdentifierTypes.Integer) { 
+            
+            #line default
+            #line hidden
+            this.Write("        return Id == 0 && castedObj.Id == 0;\r\n        ");
+            
+            #line 46 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ } else { 
+            
+            #line default
+            #line hidden
+            this.Write("        \r\n          return Id == Guid.Empty && castedObj.Id == Guid.Empty;\r\n     " +
+                    "   ");
+            
+            #line 48 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write(@"            
         }
     }
 

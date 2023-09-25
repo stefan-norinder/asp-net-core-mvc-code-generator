@@ -10,6 +10,7 @@
         public static string Server = "--server";
         public static string DataSource = "--datasource";
         public static string Output = "--output";
+        public static string IdentifierType = "--identifier-type";
         public static string UserId = "--userId";
         public static string Password = "--password";
     }

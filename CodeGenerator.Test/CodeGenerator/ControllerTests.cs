@@ -20,7 +20,8 @@ namespace CodeGenerator.Test
             outputMock = new Mock<IOutputAdapter>();
             var dataAccessMock = new Mock<IDataAccess>();
             var loggerMock = new Mock<ILogger<Lib.CodeGenerators.CodeGenerator>>();
-            var factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object);
+            var identifierTypeServiceMock = new Mock<IdentifierTypeService>();
+            var factory = new CodeGeneratorFactory(outputMock.Object, loggerMock.Object, identifierTypeServiceMock.Object);
             var controllerLoggerMock = new Mock<ILogger<Controller>>();
             controller = new Controller(factory, dataAccessMock.Object, controllerLoggerMock.Object);
             args = new[] { ParamsConstants.Namespace, "Example", ParamsConstants.Class, "Person", ParamsConstants.GeneratorTypes, $"{CodeGeneratorTypes.DataAccess} {CodeGeneratorTypes.Model} {CodeGeneratorTypes.Service} {CodeGeneratorTypes.Controllers} {CodeGeneratorTypes.Api}" };
@@ -83,7 +84,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpGet(""{id}"")]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(<#= identifierType #> id)
         {
             
             var item = await service.Get(id);
@@ -100,7 +101,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpPut(""{id}"")]
-        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        public virtual async Task<IActionResult> Put(<#= identifierType #> id, [FromBody] dynamic value)
         {
             if (!await service.Exists(id)) return NotFound();
             var item = JsonConvert.DeserializeObject<Person>(value.ToString());
@@ -110,7 +111,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpDelete(""{id}"")]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(<#= identifierType #> id)
         {
             if (!await service.Exists(id)) return NotFound();
             await service.Delete(id);
@@ -184,7 +185,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpGet(""{id}"")]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(<#= identifierType #> id)
         {
             
             var item = await service.Get(id);
@@ -201,7 +202,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpPut(""{id}"")]
-        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        public virtual async Task<IActionResult> Put(<#= identifierType #> id, [FromBody] dynamic value)
         {
             if (!await service.Exists(id)) return NotFound();
             var item = JsonConvert.DeserializeObject<Person>(value.ToString());
@@ -211,7 +212,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpDelete(""{id}"")]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(<#= identifierType #> id)
         {
             if (!await service.Exists(id)) return NotFound();
             await service.Delete(id);
@@ -259,7 +260,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpGet(""{id}"")]
-        public virtual async Task<IActionResult> Get(int id)
+        public virtual async Task<IActionResult> Get(<#= identifierType #> id)
         {
             
             var item = await service.Get(id);
@@ -276,7 +277,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpPut(""{id}"")]
-        public virtual async Task<IActionResult> Put(int id, [FromBody] dynamic value)
+        public virtual async Task<IActionResult> Put(<#= identifierType #> id, [FromBody] dynamic value)
         {
             if (!await service.Exists(id)) return NotFound();
             var item = JsonConvert.DeserializeObject<Person>(value.ToString());
@@ -286,7 +287,7 @@ namespace Example.Web.ApiController
         }
 
         [HttpDelete(""{id}"")]
-        public virtual async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(<#= identifierType #> id)
         {
             if (!await service.Exists(id)) return NotFound();
             await service.Delete(id);

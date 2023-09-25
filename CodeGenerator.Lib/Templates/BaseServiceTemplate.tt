@@ -18,13 +18,13 @@ namespace <#= namespaceName #>.Logic.Services
 {
     public partial interface IService<TModel>
     {  
-        Task<TModel> Get(int id);
+        Task<TModel> Get(<#= identifierType #> id);
         Task<IEnumerable<TModel>> Get(Dictionary<string, string> filters);
-        Task<bool> Exists(int id);
+        Task<bool> Exists(<#= identifierType #> id);
         Task<IEnumerable<TModel>> GetAll();
         Task<TModel> Insert(TModel model);
         Task Update(TModel model);
-        Task Delete(int id);
+        Task Delete(<#= identifierType #> id);
     }
 
     public partial class Service<TModel> : IService<TModel> where TModel : Entity
@@ -39,7 +39,7 @@ namespace <#= namespaceName #>.Logic.Services
             this.dataAccess = dataAccess;
         }        
 
-        public virtual async Task<TModel> Get(int id)
+        public virtual async Task<TModel> Get(<#= identifierType #> id)
         {
             logger.LogInformation($"Fetching entity with id {id} from data source.");
             return await dataAccess.Get(id);
@@ -70,7 +70,7 @@ namespace <#= namespaceName #>.Logic.Services
             return filtered;
         }
 
-        public virtual async Task<bool> Exists(int id)
+        public virtual async Task<bool> Exists(<#= identifierType #> id)
         {
             var item = await Get(id);
             return item != null;
@@ -94,7 +94,7 @@ namespace <#= namespaceName #>.Logic.Services
             await dataAccess.Update(model);
         }
 
-        public virtual async Task Delete(int id)
+        public virtual async Task Delete(<#= identifierType #> id)
         {
             logger.LogInformation($"Deleting entity with id {id} from data source.");
             await dataAccess.Delete(id);

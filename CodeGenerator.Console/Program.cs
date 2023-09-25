@@ -6,9 +6,6 @@ using CodeGenerator.Lib.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace CodeGenerator.Console
 {
@@ -41,6 +38,7 @@ The following parameters can be pass to the application:
                         Note that all tables must contain a column named `Id` with datatype `int`. 
                         It must not be a identity column.
 
+    {ParamsConstants.IdentifierType}            (optional) `Integer` (default) or `Guid`
     {ParamsConstants.Output}            (optional) Destination of the generated code. Default folder is ./src.
     {ParamsConstants.GeneratorTypes}    (optional) Decides what should be generated. Provide one or more of the following values: 
                         {string.Join("\r\n\t\t\t", allCodeGeneratorTypes)} (default)
@@ -49,8 +47,10 @@ Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {
 ");
                 return;
             }
+            var identifierType = "Integer";
+            if(args.Length > 10) identifierType = args[10];
 
-            ConfigureServices(serviceCollection);
+            ConfigureServices(serviceCollection, identifierType);
 
             var serviceProvider = serviceCollection
                                     .AddLogging()
@@ -62,7 +62,7 @@ Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {
 
         #region private
 
-        private static void ConfigureServices(IServiceCollection serviceCollection)
+        private static void ConfigureServices(IServiceCollection serviceCollection, string identifierType)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
             System.Console.WriteLine("Initiating with ASPNETCORE_ENVIRONMENT " + environment);
@@ -76,7 +76,7 @@ Example: .\CodeGenerator.Console.exe {ParamsConstants.Namespace} MyApplication {
             serviceCollection.AddTransient<ICodeGeneratorFactory, CodeGeneratorFactory>();
             serviceCollection.AddTransient<IOutputAdapter, FileWriterOutputAdapter>();
             serviceCollection.AddTransient<IDataAccess, DataAccess>();
-
+            serviceCollection.AddSingleton(new IdentifierTypeService(identifierType));
 
             serviceCollection.AddLogging(configure => configure.AddConsole());
         }

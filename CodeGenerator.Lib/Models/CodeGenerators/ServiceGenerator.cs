@@ -11,10 +11,13 @@ namespace CodeGenerator.Lib.CodeGenerators
     public class ServiceGenerator : CodeGenerator
     {
         public ServiceGenerator(ICodeGenerationModelFetcher codeGenerationModelFetcher,
-            IOutputAdapter output,  ILogger<CodeGenerator> logger) : base(codeGenerationModelFetcher, output, logger)
-        { }
+            IOutputAdapter output,  ILogger<CodeGenerator> logger, IdentifierTypeService identifierTypeService) : base(codeGenerationModelFetcher, output, logger)
+        {
+            this.identifierTypeService = identifierTypeService;
+        }
 
         private string ProjectType = ProjectTypeConstant.Logic;
+        private readonly IdentifierTypeService identifierTypeService;
 
         protected override IEnumerable<TemplateModel> GenerateTemplatesFromModel(CodeGenerationModel model)
         {
@@ -24,7 +27,7 @@ namespace CodeGenerator.Lib.CodeGenerators
                 yield return new TemplateModel { Folder = $"{BaseFolder}{model.Namespace}.{ProjectType}/Service", File = $"{@class}Service.cs", Content = template.TransformText() };
             }
             yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}", File = $"{ProjectType}.csproj", Content = new ProjectFileTemplate().TransformText() };
-            yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Service", File = $"Service.cs", Content = new BaseServiceTemplate(namespaceName).TransformText() };
+            yield return new TemplateModel { Folder = $"{BaseFolder}{namespaceName}.{ProjectType}/Service", File = $"Service.cs", Content = new BaseServiceTemplate(namespaceName, identifierTypeService.IdentifierType).TransformText() };
         }
 
     }

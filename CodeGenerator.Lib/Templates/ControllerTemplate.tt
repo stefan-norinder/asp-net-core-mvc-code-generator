@@ -53,7 +53,7 @@ namespace <#= namespaceName #>.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public virtual async Task<ActionResult> Edit(int id)
+        public virtual async Task<ActionResult> Edit(<#= identifierType #> id)
         {
             var entity = await service.Get(id);
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));
@@ -68,7 +68,7 @@ namespace <#= namespaceName #>.Web.Controllers
             return RedirectToAction(nameof(Index));         
         }
 
-        public virtual async Task<ActionResult> Remove(int id)
+        public virtual async Task<ActionResult> Remove(<#= identifierType #> id)
         {
             var entity = await service.Get(id);
             return View(mapper.Map<<#= Model.Name #>ViewModel>(entity));        

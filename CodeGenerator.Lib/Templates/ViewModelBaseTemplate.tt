@@ -12,7 +12,7 @@ namespace <#= namespaceName #>.Web.ViewModel
 {
     public class ViewModelBase
     {
-        public virtual int Id { get; set; }
+        public virtual <#= identifierType #>  Id { get; set; }
 
         public override string ToString()
         {

@@ -19,11 +19,13 @@ namespace CodeGenerator.Lib.Factories
     {
         private readonly IOutputAdapter output;
         private readonly ILogger<CodeGenerators.CodeGenerator> logger;
+        private readonly IdentifierTypeService identifierTypeService;
 
-        public CodeGeneratorFactory(IOutputAdapter output, ILogger<CodeGenerators.CodeGenerator> logger)
+        public CodeGeneratorFactory(IOutputAdapter output, ILogger<CodeGenerators.CodeGenerator> logger, IdentifierTypeService identifierTypeService)
         {
             this.output = output;
             this.logger = logger;
+            this.identifierTypeService = identifierTypeService;
         }
 
         public ICodeGenerator CreateInstance(CodeGeneratorTypes type,
@@ -32,25 +34,25 @@ namespace CodeGenerator.Lib.Factories
             switch (type)
             {
                 case CodeGeneratorTypes.DataAccess:
-                    return new DataAccessGenerator(generationFetcher, output, logger);
+                    return new DataAccessGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.Model:
-                    return new ModelGenerator(generationFetcher, output, logger);
+                    return new ModelGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.Service:
-                    return new ServiceGenerator(generationFetcher, output, logger);
+                    return new ServiceGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.Api:
-                    return new ApiControllerGenerator(generationFetcher, output, logger);
+                    return new ApiControllerGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.Controllers:
-                    return new ControllerGenerator(generationFetcher, output, logger);
+                    return new ControllerGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.WebRoot:
                     return new WebRootGenerator(generationFetcher, output, logger);
                 case CodeGeneratorTypes.SolutionRoot:
                     return new SolutionRootGenerator(generationFetcher, output, logger);
                 case CodeGeneratorTypes.ViewModels:
-                    return new ViewModelGenerator(generationFetcher, output, logger);
+                    return new ViewModelGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.Views:
                     return new ViewsGenerator(generationFetcher, output, logger);
                 case CodeGeneratorTypes.Test:
-                    return new TestsGenerator(generationFetcher, output, logger);
+                    return new TestsGenerator(generationFetcher, output, logger, identifierTypeService);
                 case CodeGeneratorTypes.HttpService:
                     return new HttpServiceGenerator(generationFetcher, output, logger);
                 case CodeGeneratorTypes.None:

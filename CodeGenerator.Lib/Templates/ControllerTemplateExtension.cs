@@ -5,11 +5,13 @@ namespace CodeGenerator.Lib.Templates
     partial class ControllerTemplate
     {
         public readonly string namespaceName;
+        public readonly string identifierType;
 
-        public ControllerTemplate(string namespaceName, Class @class)
+        public ControllerTemplate(string namespaceName, Class @class, string identifierType)
         {
             this.namespaceName = namespaceName;
             Model = @class;
+            this.identifierType = identifierType;
         }
 
         public Class Model { get; }

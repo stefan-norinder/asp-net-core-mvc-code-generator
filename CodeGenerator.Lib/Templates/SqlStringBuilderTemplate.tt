@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace <#= namespaceName #>.Logic.DataAccess
 {
-       public class SqlStringBuilder<T>
+    public class SqlStringBuilder<T>
     {
         private BuilderType type;
 
@@ -24,15 +24,21 @@ namespace <#= namespaceName #>.Logic.DataAccess
 
         public string GetInsertString(T entity, string table)
         {
-            return GetInsertString(entity, true, default(int), table);
+        
+        <# if(identifierType == IdentifierTypes.Integer) { #>
+        var identifier = default(int);
+        <# } else { #>        
+        var identifier = Guid.Empty();
+        <# } #>
+            return GetInsertString(entity, true, identifier, table);
         }
 
-        public string GetInsertString(T entity, int nextId, string table)
+        public string GetInsertString(T entity, <#= identifierType #> nextId, string table)
         {
             return GetInsertString(entity, false, nextId, table);
         }
 
-        private string GetInsertString(T entity, bool hasIdentityColumn, int nextId, string table)
+        private string GetInsertString(T entity, bool hasIdentityColumn, <#= identifierType #> nextId, string table)
         {
             type = BuilderType.Insert;
             var dictionary = GetDictionary(entity);
@@ -126,7 +132,7 @@ namespace <#= namespaceName #>.Logic.DataAccess
     
     public static partial class DictionaryExtentions
     {
-        public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, int nextId, string table)
+        public static string CreateInsertString<T>(this Dictionary<string, string> dictionary, bool hasIdentityColumn, <#= identifierType #> nextId, string table)
         {
             var insertStringHead = $"insert into {table} (";
             var insertStringTail = " output inserted.[Id] values (";
@@ -143,9 +149,13 @@ namespace <#= namespaceName #>.Logic.DataAccess
             return insertStringHead + ") " + insertStringTail + ")";
         }
 
-        private static bool ColumnIsIdAndNextIdIsSet(int nextId, string column)
+        private static bool ColumnIsIdAndNextIdIsSet(<#= identifierType #>  nextId, string column)
         {
+             <# if(identifierType == IdentifierTypes.Integer) { #>
             return column == "Id" && nextId > 0;
+            <# } else { #>        
+            return column == "Id" && nextId != Guid.Empty();
+            <# } #>
         }
 
         public static string CreateUpdateString<T>(this Dictionary<string, string> dictionary, string table)
