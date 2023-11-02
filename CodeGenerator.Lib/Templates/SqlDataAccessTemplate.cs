@@ -94,18 +94,18 @@ namespace CodeGenerator.Lib.Templates
                     "     ");
             
             #line 98 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n            int newId = default;\r\n        ");
+            this.Write("           \r\n                Guid newId = default;\r\n        ");
             
             #line 100 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("                  \r\n                Guid newId = default;\r\n        ");
+            this.Write("               \r\n                int newId = default;\r\n        ");
             
             #line 102 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\SqlDataAccessTemplate.tt"
  } 

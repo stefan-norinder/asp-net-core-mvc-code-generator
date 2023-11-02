@@ -32,7 +32,7 @@ namespace <#= namespaceName #>.Logic.Model
         <# } else { #>        
           return Id.GetHashCode();
         <# } #>
-        }        
+}        
 
         public override string ToString()
         {
@@ -41,10 +41,10 @@ namespace <#= namespaceName #>.Logic.Model
 
         private bool BothEntitiesAreNew(Entity castedObj)
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>
-        return Id == 0 && castedObj.Id == 0;
-        <# } else { #>        
+        <# if(identifierType == IdentifierTypes.Guid) { #>
           return Id == Guid.Empty && castedObj.Id == Guid.Empty;
+        <# } else { #>        
+            return Id == 0 && castedObj.Id == 0;
         <# } #>
             
         }

@@ -95,10 +95,10 @@ namespace <#= namespaceName #>.Logic.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(_connectionString))
             {
-            <# if(identifierType == IdentifierTypes.Integer) { #>        
-            int newId = default;
-        <# } else { #>                  
+            <# if(identifierType == IdentifierTypes.Guid) { #>           
                 Guid newId = default;
+        <# } else { #>               
+                int newId = default;
         <# } #>
                 
                 try

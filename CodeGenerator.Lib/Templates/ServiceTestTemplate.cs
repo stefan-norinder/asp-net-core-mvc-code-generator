@@ -120,7 +120,7 @@ namespace CodeGenerator.Lib.Templates
             this.Write("_SholdNotBeNull()\r\n        {\r\n        ");
             
             #line 44 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
@@ -131,7 +131,7 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id3 = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id3 = 3;x\r\n        ");
             
             #line 48 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } 
@@ -177,20 +177,20 @@ namespace CodeGenerator.Lib.Templates
             this.Write("s_SholdContainEntities()\r\n        {\r\n        ");
             
             #line 60 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id1 = 1;\r\n        var id2 = 2;\r\n        var id3 = 3;\r\n     " +
-                    "   ");
+            this.Write("        \r\n        var id1 = Guid.NewGuid();\r\n        var id2 = Guid.NewGuid();\r\n " +
+                    "       var id3 = Guid.NewGuid();\r\n        ");
             
             #line 64 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id1 = Guid.NewGuid();\r\n        var id2 = Guid.NewGuid();\r\n    " +
-                    "    var id3 = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id1 = 1;\r\n        var id2 = 2;\r\n        var id3 = 3;\r\n        " +
+                    "");
             
             #line 68 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } 
@@ -252,18 +252,18 @@ namespace CodeGenerator.Lib.Templates
             this.Write("_VerifyInsertIsCalled()\r\n        {\r\n        ");
             
             #line 87 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id1 = 1;\r\n        ");
+            this.Write("        \r\n        var id1 = Guid.NewGuid();\r\n        ");
             
             #line 89 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id1 = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id1 = 1;\r\n        ");
             
             #line 91 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } 
@@ -304,18 +304,18 @@ namespace CodeGenerator.Lib.Templates
             this.Write("_VerifyUpdateIsCalled()\r\n        {\r\n        ");
             
             #line 101 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id1 = 1;\r\n        ");
+            this.Write("        \r\n        var id1 = Guid.NewGuid();\r\n        ");
             
             #line 103 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id1 = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id1 = 1;\r\n        ");
             
             #line 105 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } 
@@ -356,18 +356,18 @@ namespace CodeGenerator.Lib.Templates
             this.Write("_VerifyDeleteIsCalled()\r\n        {\r\n        ");
             
             #line 115 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id1 = 1;\r\n        ");
+            this.Write("        \r\n        var id1 = Guid.NewGuid();\r\n        ");
             
             #line 117 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id1 = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id1 = 1;\r\n        ");
             
             #line 119 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ServiceTestTemplate.tt"
  } 

@@ -83,24 +83,23 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("        }        \r\n\r\n        public override string ToString()\r\n        {\r\n      " +
-                    "      return JsonConvert.SerializeObject(this);\r\n        }\r\n\r\n        private bo" +
-                    "ol BothEntitiesAreNew(Entity castedObj)\r\n        {\r\n        ");
+            this.Write("}        \r\n\r\n        public override string ToString()\r\n        {\r\n            re" +
+                    "turn JsonConvert.SerializeObject(this);\r\n        }\r\n\r\n        private bool BothE" +
+                    "ntitiesAreNew(Entity castedObj)\r\n        {\r\n        ");
             
             #line 44 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        return Id == 0 && castedObj.Id == 0;\r\n        ");
+            this.Write("          return Id == Guid.Empty && castedObj.Id == Guid.Empty;\r\n        ");
             
             #line 46 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("        \r\n          return Id == Guid.Empty && castedObj.Id == Guid.Empty;\r\n     " +
-                    "   ");
+            this.Write("        \r\n            return Id == 0 && castedObj.Id == 0;\r\n        ");
             
             #line 48 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\BaseEntityTemplate.tt"
  } 

@@ -41,10 +41,10 @@ namespace <#= namespaceName #>.Test
         [Test]
         public async Task Get<#= Model.Name #>_SholdNotBeNull()
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id3 = 3;
         <# } else { #>     
-        var id3 = Guid.NewGuid();
+        var id3 = 3;x
         <# } #>
             dataAccessMock.Setup(x => x.Get(It.IsAny<<#= identifierType #>>())).Returns(Task.FromResult(new <#= Model.Name #> { Id = id3 }));
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
@@ -57,14 +57,14 @@ namespace <#= namespaceName #>.Test
         [Test]
         public async Task GetAll<#= Model.Name #>s_SholdContainEntities()
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        var id1 = 1;
-        var id2 = 2;
-        var id3 = 3;
-        <# } else { #>     
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id1 = Guid.NewGuid();
         var id2 = Guid.NewGuid();
         var id3 = Guid.NewGuid();
+        <# } else { #>     
+        var id1 = 1;
+        var id2 = 2;
+        var id3 = 3;
         <# } #>
             var testData = new List<<#= Model.Name #>>
             {
@@ -84,10 +84,10 @@ namespace <#= namespaceName #>.Test
         [Test]
         public async Task Insert<#= Model.Name #>_VerifyInsertIsCalled()
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        var id1 = 1;
-        <# } else { #>     
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id1 = Guid.NewGuid();
+        <# } else { #>     
+        var id1 = 1;
         <# } #>
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Insert(new <#= Model.Name #> { Id = id1 });
@@ -98,10 +98,10 @@ namespace <#= namespaceName #>.Test
         [Test]
         public async Task Update<#= Model.Name #>_VerifyUpdateIsCalled()
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        var id1 = 1;
-        <# } else { #>     
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id1 = Guid.NewGuid();
+        <# } else { #>     
+        var id1 = 1;
         <# } #>
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Update(new <#= Model.Name #> { Id = id1 });
@@ -112,10 +112,10 @@ namespace <#= namespaceName #>.Test
         [Test]
         public async Task Delete<#= Model.Name #>_VerifyDeleteIsCalled()
         {
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        var id1 = 1;
-        <# } else { #>     
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id1 = Guid.NewGuid();
+        <# } else { #>     
+        var id1 = 1;
         <# } #>
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Delete(id1);

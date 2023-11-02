@@ -60,18 +60,18 @@ namespace CodeGenerator.Lib.Templates
                     "\r\n        { \r\n        ");
             
             #line 20 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id = 1;\r\n        ");
+            this.Write("        \r\n        var id = Guid.NewGuid();\r\n        ");
             
             #line 22 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id = Guid.NewGuid();\r\n        ");
+            this.Write("     \r\n        var id = 1;\r\n        ");
             
             #line 24 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } 
@@ -89,22 +89,21 @@ namespace CodeGenerator.Lib.Templates
                     ", sut.Id);\r\n        }\r\n        \r\n        ");
             
             #line 30 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
- if(identifierType == IdentifierTypes.Integer) { 
+ if(identifierType == IdentifierTypes.Guid) { 
             
             #line default
             #line hidden
-            this.Write("        \r\n        [TestCase(18, 18, true)]\r\n        [TestCase(18, 28, false)]\r\n  " +
-                    "      ");
+            this.Write("        \r\n        [TestCase(\"9843BCE8-D2C3-44BC-B6B5-1CDCFE414725\", \"9843BCE8-D2C" +
+                    "3-44BC-B6B5-1CDCFE414725\", true)]\r\n        [TestCase(\"9843BCE8-D2C3-44BC-B6B5-1C" +
+                    "DCFE414725\", \"80922D2E-11E8-4BE0-8089-190406156CF6\", false)]\r\n        ");
             
             #line 33 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("                  \r\n        [TestCase(\"9843BCE8-D2C3-44BC-B6B5-1CDCFE414725\", \"98" +
-                    "43BCE8-D2C3-44BC-B6B5-1CDCFE414725\", true)]\r\n        [TestCase(\"9843BCE8-D2C3-44" +
-                    "BC-B6B5-1CDCFE414725\", \"80922D2E-11E8-4BE0-8089-190406156CF6\", false)]\r\n        " +
-                    "");
+            this.Write("                  \r\n        [TestCase(18, 18, true)]\r\n        [TestCase(18, 28, f" +
+                    "alse)]\r\n        ");
             
             #line 36 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } 

@@ -17,22 +17,22 @@ namespace <#= namespaceName #>.Test
          [Test]
         public void Initiate_SholdNotBeNull()
         { 
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        var id = 1;
-        <# } else { #>     
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id = Guid.NewGuid();
+        <# } else { #>     
+        var id = 1;
         <# } #>
             var sut = new <#= Model.Name #> { Id = id };
             Assert.IsNotNull(sut);
             Assert.AreEqual(id, sut.Id);
         }
         
-        <# if(identifierType == IdentifierTypes.Integer) { #>        
-        [TestCase(18, 18, true)]
-        [TestCase(18, 28, false)]
-        <# } else { #>                  
+        <# if(identifierType == IdentifierTypes.Guid) { #>        
         [TestCase("9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", "9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", true)]
         [TestCase("9843BCE8-D2C3-44BC-B6B5-1CDCFE414725", "80922D2E-11E8-4BE0-8089-190406156CF6", false)]
+        <# } else { #>                  
+        [TestCase(18, 18, true)]
+        [TestCase(18, 28, false)]
         <# } #>
         public void CompairTwoEntities(<#= identifierType #> id, <#= identifierType #> compairId, bool result)
         {
