@@ -71,6 +71,7 @@ namespace <#= namespaceName #>.Web
             services.Configure<AuthenticationSettings>(Configuration.GetSection("Authentication"));
             services.Configure<ApplicationSettings>(Configuration.GetSection("Application"));
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.Configure<IpBlockerSettings>(Configuration.GetSection("IPBlockOptions"));
             
             services.AddHttpClient();
             services.AddSingleton(GetMapper());
@@ -83,6 +84,7 @@ namespace <#= namespaceName #>.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseIPBlock();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -426,6 +428,69 @@ namespace <#= namespaceName #>.Web
     }
 
     #endregion
+
+    #region ip-blocker middleware
+
+    
+
+    public class IPBlockMiddleware
+    {
+        private readonly RequestDelegate next;
+        private readonly ILogger<IPBlockMiddleware> logger;
+        private readonly IpBlockerSettings ipBlockerSettings;
+
+        public IPBlockMiddleware(RequestDelegate next, ILogger<IPBlockMiddleware> logger, IOptions<IpBlockerSettings> ipBlockerSettings)
+        {
+            this.next = next;
+            this.logger = logger;
+            this.ipBlockerSettings = ipBlockerSettings.Value;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            var requestIP = context.Connection.RemoteIpAddress;
+
+            if (requestIP != null && IsIPBlocked(requestIP))
+            {
+                logger.LogWarning($"Blocked request from IP: {requestIP}");
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return;
+            }
+
+            await next(context);
+        }
+
+        private bool IsIPBlocked(IPAddress requestIP)
+        {
+            if (ipBlockerSettings?.BlockedIPs == null) return false;
+
+            foreach (var blockedIP in ipBlockerSettings.BlockedIPs)
+            {
+                if (blockedIP.EndsWith("*"))
+                {
+                    var prefix = blockedIP.TrimEnd('*');
+                    if (requestIP.ToString().StartsWith(prefix))
+                        return true;
+                }
+                else if (requestIP.Equals(IPAddress.Parse(blockedIP)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+
+    public static class IPBlockMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseIPBlock(this IApplicationBuilder builder, params string[] blockedIPs)
+        {
+            return builder.UseMiddleware<IPBlockMiddleware>(blockedIPs);
+        }
+    }
+
+    #endregion 
 
     #endregion
 }

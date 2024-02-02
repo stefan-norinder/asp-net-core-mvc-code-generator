@@ -64,14 +64,14 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write("        \r\n        var id = Guid.NewGuid();\r\n        ");
+            this.Write("        \r\n        var id = Guid.NewGuid();\r\n    ");
             
             #line 22 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } else { 
             
             #line default
             #line hidden
-            this.Write("     \r\n        var id = 1;\r\n        ");
+            this.Write("        var id = 1;\r\n        ");
             
             #line 24 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  } 
@@ -85,8 +85,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" { Id = id };\r\n            Assert.IsNotNull(sut);\r\n            Assert.AreEqual(id" +
-                    ", sut.Id);\r\n        }\r\n        \r\n        ");
+            this.Write(" { Id = id };            \r\n            Assert.That(sut,!Is.Null);\r\n            As" +
+                    "sert.That(id, Is.EqualTo(sut.Id));\r\n        }\r\n        \r\n        ");
             
             #line 30 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ModelTestsTemplate.tt"
  if(identifierType == IdentifierTypes.Guid) { 
@@ -138,8 +138,8 @@ namespace CodeGenerator.Lib.Templates
             
             #line default
             #line hidden
-            this.Write(" { Id = compairId };\r\n            Assert.AreEqual(result, sut.Equals(compair));\r\n" +
-                    "        }\r\n    }\r\n}\r\n");
+            this.Write(" { Id = compairId };\r\n            Assert.That(result, Is.EqualTo(sut.Equals(compa" +
+                    "ir)));\r\n        }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -165,7 +165,7 @@ namespace CodeGenerator.Lib.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

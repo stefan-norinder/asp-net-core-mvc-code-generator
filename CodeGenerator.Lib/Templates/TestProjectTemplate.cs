@@ -32,17 +32,17 @@ namespace CodeGenerator.Lib.Templates
 <Project Sdk=""Microsoft.NET.Sdk"">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""17.4.1"" />
-    <PackageReference Include=""Moq"" Version=""4.18.4"" />
-    <PackageReference Include=""NUnit"" Version=""3.13.3"" />
-    <PackageReference Include=""NUnit3TestAdapter"" Version=""4.3.1"" />
-    <PackageReference Include=""coverlet.collector"" Version=""3.2.0"" />
+  <ItemGroup>    
+    <PackageReference Include=""Microsoft.NET.Test.Sdk"" Version=""17.8.0"" />
+    <PackageReference Include=""Moq"" Version=""4.20.70"" />
+    <PackageReference Include=""NUnit"" Version=""4.0.1"" />
+    <PackageReference Include=""NUnit3TestAdapter"" Version=""4.5.0"" />
+    <PackageReference Include=""coverlet.collector"" Version=""6.0.0"" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,7 +86,7 @@ namespace CodeGenerator.Lib.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

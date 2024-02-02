@@ -19,12 +19,12 @@ namespace <#= namespaceName #>.Test
         { 
         <# if(identifierType == IdentifierTypes.Guid) { #>        
         var id = Guid.NewGuid();
-        <# } else { #>     
+    <# } else { #>
         var id = 1;
         <# } #>
-            var sut = new <#= Model.Name #> { Id = id };
-            Assert.IsNotNull(sut);
-            Assert.AreEqual(id, sut.Id);
+            var sut = new <#= Model.Name #> { Id = id };            
+            Assert.That(sut,!Is.Null);
+            Assert.That(id, Is.EqualTo(sut.Id));
         }
         
         <# if(identifierType == IdentifierTypes.Guid) { #>        
@@ -38,7 +38,7 @@ namespace <#= namespaceName #>.Test
         {
             var sut = new <#= Model.Name #> { Id = id };
             var compair = new <#= Model.Name #> { Id = compairId };
-            Assert.AreEqual(result, sut.Equals(compair));
+            Assert.That(result, Is.EqualTo(sut.Equals(compair)));
         }
     }
 }

@@ -16,7 +16,7 @@ using System.Threading;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public partial class HomeController : Controller
     {
         private readonly RequestLocalizationOptions localizationOptions;
 

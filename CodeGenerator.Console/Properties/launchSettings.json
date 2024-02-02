@@ -2,7 +2,7 @@
   "profiles": {
     "CodeGenerator.Console": {
       "commandName": "Project",
-      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace Common --server .\\sqlexpress --datasource  dev-Common --output ./../../../../../../Common/ --identifier-type int"
+      "commandLineArgs": ".\\CodeGenerator.Console.exe --namespace eResources --server .\\sqlexpress --datasource  dev-eResources --output ./../../../../../../eResources/ --identifier-type int"
     }
   }
 }

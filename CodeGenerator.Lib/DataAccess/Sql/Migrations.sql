@@ -24,4 +24,13 @@ Insert into Migrations (ClientVersion, DatabaseVersion, CreatedOn) values  ('1.0
 
 GO
 
+IF NOT EXISTS (SELECT 1 FROM Migration WHERE ClientVersion = '2.3.0' AND DatabaseVersion = '2.3.0')
+BEGIN
 
+ALTER TABLE dbo.Job ADD
+	Name nvarchar(512) NULL,
+	Active bit NOT NULL CONSTRAINT DF_Job_Active DEFAULT 1
+
+	Insert into Migration (ClientVersion, DatabaseVersion, CreatedOn) values  ('2.3.0','2.3.0', GETDATE())
+
+END

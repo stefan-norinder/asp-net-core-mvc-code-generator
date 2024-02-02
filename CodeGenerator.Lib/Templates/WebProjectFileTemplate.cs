@@ -32,26 +32,29 @@ namespace CodeGenerator.Lib.Templates
 <Project Sdk=""Microsoft.NET.Sdk.Web"">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework> 
+    <TargetFramework>net8.0</TargetFramework> 
     <Version>0.0.1</Version>
     <Description>Auto generated project</Description>
   </PropertyGroup>
 
   <ItemGroup>  
+    
     <PackageReference Include=""DotNet.NLog.NetCore"" Version=""7.0.0"" />
-    <PackageReference Include=""AutoMapper"" Version=""12.0.0"" />
+    <PackageReference Include=""AutoMapper"" Version=""12.0.1"" />
     <PackageReference Include=""Microsoft.AspNetCore.Mvc.Localization"" Version=""2.2.0"" />
-    <PackageReference Include=""Microsoft.Data.SqlClient"" Version=""5.0.1"" />
-    <PackageReference Include=""NLog"" Version=""5.1.1"" />
-    <PackageReference Include=""NLog.Database"" Version=""5.1.1"" />
-    <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.2.1"" />
-    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.5"" />
+     <PackageReference Include=""Microsoft.Data.SqlClient"" Version=""5.1.4"" />
+    <PackageReference Include=""NLog"" Version=""5.2.8"" />
+    <PackageReference Include=""NLog.Database"" Version=""5.2.8"" />
+    <PackageReference Include=""NLog.Web.AspNetCore"" Version=""5.3.8"" />
+    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.6"" />
+
+    
   </ItemGroup>  
   
   <ItemGroup>
     ");
             
-            #line 27 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
+            #line 30 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\WebProjectFileTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture($"<ProjectReference Include=\"..\\{namespaceName}.Logic\\Logic.csproj\" />"));
             
             #line default
@@ -103,7 +106,7 @@ namespace CodeGenerator.Lib.Templates
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

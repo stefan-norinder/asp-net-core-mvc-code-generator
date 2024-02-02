@@ -29,6 +29,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApiControllerTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Update="Templates\IpBlockerSettingsTemplate.cs">
+      <DependentUpon>IpBlockerSettingsTemplate.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Templates\ApplicationSettingsTemplate.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -240,6 +245,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Templates\IpBlockerSettingsTemplate.tt">
+      <LastGenOutput>IpBlockerSettingsTemplate.cs</LastGenOutput>
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+    </None>
     <None Update="Templates\ApplicationSettingsTemplate.tt">
       <LastGenOutput>ApplicationSettingsTemplate.cs</LastGenOutput>
       <Generator>TextTemplatingFilePreprocessor</Generator>

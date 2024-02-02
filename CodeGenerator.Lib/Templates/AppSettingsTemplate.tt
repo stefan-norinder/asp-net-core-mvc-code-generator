@@ -22,5 +22,8 @@
     "Name": "",
     "KeepLogsInDays": 30,
     "KeysFolder": "C:\\temp\\keys"
+  },
+  "IPBlockOptions": {
+    "BlockedIPs": [ ]
   }
 }

@@ -35,22 +35,22 @@ namespace <#= namespaceName #>.Test
         public void Initiate_SholdNotBeNull()
         {
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
-            Assert.IsNotNull(sut);
+            Assert.That(sut,!Is.Null);
         }
         
         [Test]
         public async Task Get<#= Model.Name #>_SholdNotBeNull()
         {
         <# if(identifierType == IdentifierTypes.Guid) { #>        
-        var id3 = 3;
+            var id3 = 3;
         <# } else { #>     
-        var id3 = 3;x
+        var id3 = 3;
         <# } #>
-            dataAccessMock.Setup(x => x.Get(It.IsAny<<#= identifierType #>>())).Returns(Task.FromResult(new <#= Model.Name #> { Id = id3 }));
+    dataAccessMock.Setup(x => x.Get(It.IsAny<<#= identifierType #>>())).Returns(Task.FromResult(new <#= Model.Name #> { Id = id3 }));
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             var result = await sut.Get(id3);
-            Assert.NotNull(result);
-            Assert.AreEqual(id3, result.Id);
+            Assert.That(sut, !Is.Null);
+            Assert.That(id3, Is.EqualTo( result.Id));
             loggerMock.VerifyLoggingExact(LogLevel.Information, $"Fetching entity with id {id3} from data source.");
         }
 
@@ -62,11 +62,11 @@ namespace <#= namespaceName #>.Test
         var id2 = Guid.NewGuid();
         var id3 = Guid.NewGuid();
         <# } else { #>     
-        var id1 = 1;
-        var id2 = 2;
-        var id3 = 3;
+            var id1 = 1;
+            var id2 = 2;
+            var id3 = 3;
         <# } #>
-            var testData = new List<<#= Model.Name #>>
+    var testData = new List<<#= Model.Name #>>
             {
                 new <#= Model.Name #>{ Id = id1 },
                 new <#= Model.Name #>{ Id = id2 },
@@ -75,9 +75,9 @@ namespace <#= namespaceName #>.Test
             dataAccessMock.Setup(x => x.GetAll()).Returns(Task.FromResult(testData.AsEnumerable()));
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             var result = await sut.GetAll();
-            Assert.AreEqual(3, result.Count());
-            Assert.AreEqual(id1, result.First().Id);
-            Assert.AreEqual(id3, result.Last().Id);
+            Assert.That(3, Is.EqualTo( result.Count()));
+            Assert.That(id1, Is.EqualTo(result.First().Id));
+            Assert.That(id3, Is.EqualTo(result.Last().Id));
             loggerMock.VerifyLoggingExact(LogLevel.Information, "Fetching all entities from data source.");
         }
 
@@ -85,9 +85,9 @@ namespace <#= namespaceName #>.Test
         public async Task Insert<#= Model.Name #>_VerifyInsertIsCalled()
         {
         <# if(identifierType == IdentifierTypes.Guid) { #>        
-        var id1 = Guid.NewGuid();
+            var id1 = Guid.NewGuid();
         <# } else { #>     
-        var id1 = 1;
+            var id1 = 1;
         <# } #>
             var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Insert(new <#= Model.Name #> { Id = id1 });
@@ -103,7 +103,7 @@ namespace <#= namespaceName #>.Test
         <# } else { #>     
         var id1 = 1;
         <# } #>
-            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+    var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Update(new <#= Model.Name #> { Id = id1 });
             dataAccessMock.Verify(x => x.Update(It.Is<<#= Model.Name #>>(y => y.Id == id1)));
             loggerMock.VerifyLoggingContains(LogLevel.Information, "Update entity");
@@ -113,11 +113,11 @@ namespace <#= namespaceName #>.Test
         public async Task Delete<#= Model.Name #>_VerifyDeleteIsCalled()
         {
         <# if(identifierType == IdentifierTypes.Guid) { #>        
-        var id1 = Guid.NewGuid();
+            var id1 = Guid.NewGuid();
         <# } else { #>     
-        var id1 = 1;
+            var id1 = 1;
         <# } #>
-            var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
+    var sut = new <#= Model.Name #>Service(loggerMock.Object, dataAccessMock.Object);
             await sut.Delete(id1);
             dataAccessMock.Verify(x => x.Delete(It.Is<<#= identifierType #>>(y => y == id1)));
             loggerMock.VerifyLoggingExact(LogLevel.Information, $"Deleting entity with id {id1} from data source.");

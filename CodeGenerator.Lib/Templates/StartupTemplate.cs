@@ -204,93 +204,94 @@ namespace ");
                     ", Logic.Http.HttpClient>();\r\n            services.Configure<AuthenticationSettin" +
                     "gs>(Configuration.GetSection(\"Authentication\"));\r\n            services.Configure" +
                     "<ApplicationSettings>(Configuration.GetSection(\"Application\"));\r\n            ser" +
-                    "vices.AddTransient<ISqlDataAccess, SqlDataAccess>();\r\n            \r\n            " +
-                    "services.AddHttpClient();\r\n            services.AddSingleton(GetMapper());\r\n    " +
-                    "        ConfigureLocalization(services);\r\n            services.AddLocalization(x" +
-                    " => x.ResourcesPath = \"Resources\");\r\n            CustomServiceConfiguration(serv" +
-                    "ices);\r\n            services.AddControllersWithViews()\r\n                .AddView" +
-                    "Localization();\r\n        }\r\n\r\n        public void Configure(IApplicationBuilder " +
-                    "app, IWebHostEnvironment env)\r\n        {\r\n            app.UseHttpsRedirection();" +
-                    "\r\n            app.UseStaticFiles();\r\n            app.UseRouting();\r\n            " +
-                    "app.UseRequestLocalization();  \r\n            RegisterMiddleware(app);\r\n         " +
-                    "   ConfigureExceptionHandler(app);\r\n            CustomConfiguration(app, env); \r" +
-                    "\n\r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                end" +
-                    "points.MapControllerRoute(\r\n                    name: \"default\",\r\n              " +
-                    "      pattern: \"{controller=Home}/{action=Index}/{id?}\");\r\n            });\r\n    " +
-                    "    }\r\n\r\n        protected virtual void CustomServiceConfiguration(IServiceColle" +
-                    "ction services)\r\n        {\r\n            //override for custom behaviour\r\n       " +
-                    " }\r\n\r\n        protected virtual void CustomConfiguration(IApplicationBuilder app" +
-                    ", IWebHostEnvironment env)\r\n        {\r\n            //override for custom behavio" +
-                    "ur\r\n        }\r\n\r\n        protected virtual void RegisterMiddleware(IApplicationB" +
-                    "uilder app)\r\n        {\r\n            app.UseMiddleware<Version>();\r\n            a" +
-                    "pp.UseMiddleware<CleanUp>();\r\n            app.UseMiddleware<RedirectNotFound>();" +
-                    "\r\n            app.UseMiddleware<RedirectTablelang>();\r\n        }\r\n        \r\n    " +
-                    "     protected void ConfigureLocalization(IServiceCollection services)\r\n        " +
-                    "{\r\n            var supportedCultures = GetSupportedLanguages();\r\n\r\n            s" +
-                    "ervices.Configure((Action<RequestLocalizationOptions>)(options =>\r\n            {" +
-                    "\r\n                options.DefaultRequestCulture = GetDefaultCulture();\r\n        " +
-                    "        options.SupportedCultures = supportedCultures;\r\n                options." +
-                    "SupportedUICultures = supportedCultures;\r\n                options.RequestCulture" +
-                    "Providers = new List<IRequestCultureProvider>\r\n                {\r\n              " +
-                    "    new QueryStringRequestCultureProvider(),\r\n                  new CookieReques" +
-                    "tCultureProvider()\r\n                };\r\n            }));\r\n        }\r\n\r\n        p" +
-                    "rotected virtual RequestCulture GetDefaultCulture() => new RequestCulture(\"en-gb" +
-                    "\");\r\n\r\n        protected virtual IList<CultureInfo> GetSupportedLanguages()\r\n   " +
-                    "     {\r\n            return new List<CultureInfo> {\r\n                new CultureI" +
-                    "nfo(\"en-gb\")\r\n            };\r\n        }\r\n\r\n        protected virtual void Config" +
-                    "ureExceptionHandler(IApplicationBuilder app)\r\n        {\r\n            app.UseExce" +
-                    "ptionHandler(builder =>\r\n            {\r\n                builder.Run(async contex" +
-                    "t =>\r\n                {\r\n                    var e = context.Features.Get<IExcep" +
-                    "tionHandlerFeature>();\r\n                    if (e == null) return;\r\n            " +
-                    "        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;\r\n" +
-                    "                    context.Response.ContentType = \"text/html\";\r\n               " +
-                    "     var factory = builder.ApplicationServices.GetService<ILoggerFactory>();\r\n  " +
-                    "                  var logger = factory.CreateLogger(\"ExceptionLogger\");\r\n       " +
-                    "             logger.LogError(e.Error, e.Error.Message);\r\n                    con" +
-                    "text.Response.Redirect(\"/error\");\r\n                });\r\n            });\r\n       " +
-                    " }\r\n\r\n        public virtual IMapper GetMapper()\r\n        {\r\n            var map" +
-                    "perConfig = new MapperConfiguration(mc =>\r\n            {\r\n                mc.Add" +
-                    "Profile(new MappingConfiguration());\r\n            });\r\n\r\n            return mapp" +
-                    "erConfig.CreateMapper();\r\n        }\r\n    }\r\n\r\n    public class MappingConfigurat" +
-                    "ion : Profile\r\n    {\r\n        public MappingConfiguration()\r\n        {\r\n        " +
-                    "\r\n");
+                    "vices.AddTransient<ISqlDataAccess, SqlDataAccess>();\r\n            services.Confi" +
+                    "gure<IpBlockerSettings>(Configuration.GetSection(\"IPBlockOptions\"));\r\n          " +
+                    "  \r\n            services.AddHttpClient();\r\n            services.AddSingleton(Get" +
+                    "Mapper());\r\n            ConfigureLocalization(services);\r\n            services.A" +
+                    "ddLocalization(x => x.ResourcesPath = \"Resources\");\r\n            CustomServiceCo" +
+                    "nfiguration(services);\r\n            services.AddControllersWithViews()\r\n        " +
+                    "        .AddViewLocalization();\r\n        }\r\n\r\n        public void Configure(IApp" +
+                    "licationBuilder app, IWebHostEnvironment env)\r\n        {\r\n            app.UseIPB" +
+                    "lock();\r\n            app.UseHttpsRedirection();\r\n            app.UseStaticFiles(" +
+                    ");\r\n            app.UseRouting();\r\n            app.UseRequestLocalization();  \r\n" +
+                    "            RegisterMiddleware(app);\r\n            ConfigureExceptionHandler(app)" +
+                    ";\r\n            CustomConfiguration(app, env); \r\n\r\n            app.UseEndpoints(e" +
+                    "ndpoints =>\r\n            {\r\n                endpoints.MapControllerRoute(\r\n     " +
+                    "               name: \"default\",\r\n                    pattern: \"{controller=Home}" +
+                    "/{action=Index}/{id?}\");\r\n            });\r\n        }\r\n\r\n        protected virtua" +
+                    "l void CustomServiceConfiguration(IServiceCollection services)\r\n        {\r\n     " +
+                    "       //override for custom behaviour\r\n        }\r\n\r\n        protected virtual v" +
+                    "oid CustomConfiguration(IApplicationBuilder app, IWebHostEnvironment env)\r\n     " +
+                    "   {\r\n            //override for custom behaviour\r\n        }\r\n\r\n        protecte" +
+                    "d virtual void RegisterMiddleware(IApplicationBuilder app)\r\n        {\r\n         " +
+                    "   app.UseMiddleware<Version>();\r\n            app.UseMiddleware<CleanUp>();\r\n   " +
+                    "         app.UseMiddleware<RedirectNotFound>();\r\n            app.UseMiddleware<R" +
+                    "edirectTablelang>();\r\n        }\r\n        \r\n         protected void ConfigureLoca" +
+                    "lization(IServiceCollection services)\r\n        {\r\n            var supportedCultu" +
+                    "res = GetSupportedLanguages();\r\n\r\n            services.Configure((Action<Request" +
+                    "LocalizationOptions>)(options =>\r\n            {\r\n                options.Default" +
+                    "RequestCulture = GetDefaultCulture();\r\n                options.SupportedCultures" +
+                    " = supportedCultures;\r\n                options.SupportedUICultures = supportedCu" +
+                    "ltures;\r\n                options.RequestCultureProviders = new List<IRequestCult" +
+                    "ureProvider>\r\n                {\r\n                  new QueryStringRequestCulture" +
+                    "Provider(),\r\n                  new CookieRequestCultureProvider()\r\n             " +
+                    "   };\r\n            }));\r\n        }\r\n\r\n        protected virtual RequestCulture G" +
+                    "etDefaultCulture() => new RequestCulture(\"en-gb\");\r\n\r\n        protected virtual " +
+                    "IList<CultureInfo> GetSupportedLanguages()\r\n        {\r\n            return new Li" +
+                    "st<CultureInfo> {\r\n                new CultureInfo(\"en-gb\")\r\n            };\r\n   " +
+                    "     }\r\n\r\n        protected virtual void ConfigureExceptionHandler(IApplicationB" +
+                    "uilder app)\r\n        {\r\n            app.UseExceptionHandler(builder =>\r\n        " +
+                    "    {\r\n                builder.Run(async context =>\r\n                {\r\n        " +
+                    "            var e = context.Features.Get<IExceptionHandlerFeature>();\r\n         " +
+                    "           if (e == null) return;\r\n                    context.Response.StatusCo" +
+                    "de = (int)HttpStatusCode.InternalServerError;\r\n                    context.Respo" +
+                    "nse.ContentType = \"text/html\";\r\n                    var factory = builder.Applic" +
+                    "ationServices.GetService<ILoggerFactory>();\r\n                    var logger = fa" +
+                    "ctory.CreateLogger(\"ExceptionLogger\");\r\n                    logger.LogError(e.Er" +
+                    "ror, e.Error.Message);\r\n                    context.Response.Redirect(\"/error\");" +
+                    "\r\n                });\r\n            });\r\n        }\r\n\r\n        public virtual IMap" +
+                    "per GetMapper()\r\n        {\r\n            var mapperConfig = new MapperConfigurati" +
+                    "on(mc =>\r\n            {\r\n                mc.AddProfile(new MappingConfiguration(" +
+                    "));\r\n            });\r\n\r\n            return mapperConfig.CreateMapper();\r\n       " +
+                    " }\r\n    }\r\n\r\n    public class MappingConfiguration : Profile\r\n    {\r\n        pub" +
+                    "lic MappingConfiguration()\r\n        {\r\n        \r\n");
             
-            #line 180 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 182 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  foreach(var item in Model) { 
             
             #line default
             #line hidden
             this.Write("                CreateMap<");
             
-            #line 181 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 183 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 181 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 183 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel>();\r\n\r\n                CreateMap<");
             
-            #line 183 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 185 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write("ViewModel, ");
             
-            #line 183 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 185 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item));
             
             #line default
             #line hidden
             this.Write(">();\r\n        \r\n");
             
-            #line 185 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
+            #line 187 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\StartupTemplate.tt"
  } 
             
             #line default
@@ -395,7 +396,32 @@ namespace ");
                     "ublic List<AssemblyInfo> Assemblies { get; set; } = new List<AssemblyInfo>();\r\n " +
                     "   }\r\n\r\n    public class AssemblyInfo\r\n    {\r\n        public string Name { get; " +
                     "set; }\r\n        public string Version { get; set; }\r\n    }\r\n\r\n    #endregion\r\n\r\n" +
-                    "    #endregion\r\n}\r\n");
+                    "    #region ip-blocker middleware\r\n\r\n    \r\n\r\n    public class IPBlockMiddleware\r" +
+                    "\n    {\r\n        private readonly RequestDelegate next;\r\n        private readonly" +
+                    " ILogger<IPBlockMiddleware> logger;\r\n        private readonly IpBlockerSettings " +
+                    "ipBlockerSettings;\r\n\r\n        public IPBlockMiddleware(RequestDelegate next, ILo" +
+                    "gger<IPBlockMiddleware> logger, IOptions<IpBlockerSettings> ipBlockerSettings)\r\n" +
+                    "        {\r\n            this.next = next;\r\n            this.logger = logger;\r\n   " +
+                    "         this.ipBlockerSettings = ipBlockerSettings.Value;\r\n        }\r\n\r\n       " +
+                    " public async Task InvokeAsync(HttpContext context)\r\n        {\r\n            var " +
+                    "requestIP = context.Connection.RemoteIpAddress;\r\n\r\n            if (requestIP != " +
+                    "null && IsIPBlocked(requestIP))\r\n            {\r\n                logger.LogWarnin" +
+                    "g($\"Blocked request from IP: {requestIP}\");\r\n                context.Response.St" +
+                    "atusCode = StatusCodes.Status403Forbidden;\r\n                return;\r\n           " +
+                    " }\r\n\r\n            await next(context);\r\n        }\r\n\r\n        private bool IsIPBl" +
+                    "ocked(IPAddress requestIP)\r\n        {\r\n            if (ipBlockerSettings?.Blocke" +
+                    "dIPs == null) return false;\r\n\r\n            foreach (var blockedIP in ipBlockerSe" +
+                    "ttings.BlockedIPs)\r\n            {\r\n                if (blockedIP.EndsWith(\"*\"))\r" +
+                    "\n                {\r\n                    var prefix = blockedIP.TrimEnd(\'*\');\r\n  " +
+                    "                  if (requestIP.ToString().StartsWith(prefix))\r\n                " +
+                    "        return true;\r\n                }\r\n                else if (requestIP.Equa" +
+                    "ls(IPAddress.Parse(blockedIP)))\r\n                {\r\n                    return t" +
+                    "rue;\r\n                }\r\n            }\r\n            return false;\r\n        }\r\n  " +
+                    "  }\r\n\r\n\r\n    public static class IPBlockMiddlewareExtensions\r\n    {\r\n        pub" +
+                    "lic static IApplicationBuilder UseIPBlock(this IApplicationBuilder builder, para" +
+                    "ms string[] blockedIPs)\r\n        {\r\n            return builder.UseMiddleware<IPB" +
+                    "lockMiddleware>(blockedIPs);\r\n        }\r\n    }\r\n\r\n    #endregion \r\n\r\n    #endreg" +
+                    "ion\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -421,7 +447,7 @@ namespace ");
         /// <summary>
         /// The string builder that generation-time code is using to assemble generated output
         /// </summary>
-        protected System.Text.StringBuilder GenerationEnvironment
+        public System.Text.StringBuilder GenerationEnvironment
         {
             get
             {

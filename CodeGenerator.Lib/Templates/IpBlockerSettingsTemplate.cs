@@ -18,9 +18,9 @@ namespace CodeGenerator.Lib.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\ProjectFileTemplate.tt"
+    #line 1 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\IpBlockerSettingsTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public partial class ProjectFileTemplate : ProjectFileTemplateBase
+    public partial class IpBlockerSettingsTemplate : IpBlockerSettingsTemplateBase
     {
 #line hidden
         /// <summary>
@@ -28,27 +28,21 @@ namespace CodeGenerator.Lib.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(@"<!-- Warning! This is an auto generated file. Changes may be overwritten -->
-<Project Sdk=""Microsoft.NET.Sdk"">
-
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Version>0.0.1</Version>
-    <Description>Auto generated project</Description>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include=""AutoMapper"" Version=""12.0.0"" />
-    <PackageReference Include=""Dapper"" Version=""2.0.123"" />
-    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Core"" Version=""2.2.5"" />
-    <PackageReference Include=""Microsoft.Extensions.Configuration.Abstractions"" Version=""7.0.0"" />
-    <PackageReference Include=""Microsoft.Extensions.Http"" Version=""7.0.0"" />
-    <PackageReference Include=""Microsoft.Extensions.Localization.Abstractions"" Version=""7.0.2"" />
-    <PackageReference Include=""Microsoft.Extensions.Logging.Abstractions"" Version=""7.0.0"" />
-    <PackageReference Include=""System.Data.SqlClient"" Version=""4.8.5"" />
-    <PackageReference Include=""Microsoft.AspNetCore.Mvc.Localization"" Version=""2.2.0"" />
-  </ItemGroup>
-</Project>");
+            
+            #line 6 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\IpBlockerSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(CodeGeneratorHelper.GetTemplateHeaderText()));
+            
+            #line default
+            #line hidden
+            this.Write(" \r\n\r\nnamespace ");
+            
+            #line 8 "C:\Users\StefanAdmin\code2\asp-net-core-mvc-code-generator\CodeGenerator.Lib\Templates\IpBlockerSettingsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(namespaceName));
+            
+            #line default
+            #line hidden
+            this.Write(".Logic.Settings\r\n{\r\n    public class IpBlockerSettings\r\n    {\r\n        public str" +
+                    "ing[] BlockedIPs { get; set; }\r\n    }\r\n}\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
@@ -60,7 +54,7 @@ namespace CodeGenerator.Lib.Templates
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
-    public class ProjectFileTemplateBase
+    public class IpBlockerSettingsTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
